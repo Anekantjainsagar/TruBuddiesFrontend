@@ -1,3 +1,4 @@
+import Footer from "./Components/Utils/Footer";
 import Navbar from "./Components/Utils/Navbar";
 import { maliFont } from "./Components/Utils/font";
 import "./globals.css";
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body className={`${maliFont.className}`}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -4,6 +4,8 @@ import HowItWorks from "./Components/Sub-Components/HowItWorks";
 import OurTrubuddies from "./Components/Sub-Components/OurTrubuddies";
 import OurServices from "./Components/Sub-Components/OurServices";
 import LearnInspire from "./Components/Sub-Components/LearnInspire";
+import FAQs from "./Components/Sub-Components/FAQs";
+import OurTeam from "./Components/Sub-Components/OurTeam";
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
       <OurTrubuddies />
       <OurServices />
       <LearnInspire />
+      <FAQs />
+      <OurTeam/>
     </div>
   );
 };
