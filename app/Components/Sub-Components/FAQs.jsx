@@ -13,7 +13,7 @@ const FAQs = () => {
         <h1
           className={`uppercase text-center w-fit mx-auto text-4xl mb-[2vw] text-newBlue font-extrabold ${noto_sans.className}`}
         >
-          FAQ's
+          FAQ&apos;s
         </h1>
         <Image src={faq} className="w-[28vw]" alt="FAQ" x />
       </div>
