@@ -9,10 +9,11 @@ import img2 from "@/app/Assets/Home/Images/Friends.png";
 import img3 from "@/app/Assets/Home/Images/Red Gold.png";
 import img4 from "@/app/Assets/Home/Images/Yellow Gold.png";
 import Image from "next/image";
+import BlueEffect from "../Elements/BlueEffect";
 
 const ThingsLikeAboutUs = () => {
   return (
-    <div className="py-[4vw] px-[3vw]">
+    <div className="py-[4vw] px-[3vw] relative overflow-hidden">
       <h1
         className={`text-newTomato ${noto_sans.className} w-fit mx-auto text-2xl text-center font-extrabold relative`}
       >

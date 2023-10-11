@@ -19,6 +19,8 @@ module.exports = {
         newDarkBlue: "#407BFF",
         newTomato: "#FF725E",
         newOrange: "#FF5656",
+        newDarkNavyGrey: "#263238",
+        newYellow: "#FFDA56",
       },
     },
   },

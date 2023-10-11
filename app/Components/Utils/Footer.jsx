@@ -16,7 +16,7 @@ import call from "@/app/Assets/Home/icons/Call.png";
 const Footer = () => {
   return (
     <div
-      className={`bg-newBlue py-[3vw] text-white px-[2vw] ${noto_sans.className}`}
+      className={`bg-newBlue py-[2.5vw] text-white px-[2vw] flex justify-between items-center ${noto_sans.className}`}
     >
       <div className="w-8/12">
         <div className="flex items-center justify-between w-full">
@@ -56,8 +56,42 @@ const Footer = () => {
             <Image src={whatsapp} alt="Icons" className="w-[2.2vw]" />
           </div>
         </div>
+        <p className="my-2">
+          Lorem ipsum dolor sit amet consectetur. Mattis turpis cras vivamus
+          nulla consectetur a libero. Porta sit.
+        </p>
+        <p className="text-sm opacity-75 mt-2">
+          © 2023 TruBuddy . All Rights Reserved.
+        </p>
       </div>
-      <div className="w-4/12"></div>
+      <div className="w-[26%] bg-newLightBlue py-[1.5vw] px-[1.5vw] rounded-3xl">
+        <h1 className="text-center text-xl font-semibold">
+          Send us Your Enquiry
+        </h1>
+        <input
+          type="text"
+          placeholder="First Name"
+          className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-5 placeholder-slate-200"
+        />
+        <input
+          type="text"
+          placeholder="Email Address"
+          className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-4 placeholder-slate-200"
+        />
+        <input
+          type="text"
+          placeholder="Contact Number"
+          className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-4 placeholder-slate-200"
+        />
+        <input
+          type="text"
+          placeholder="Message"
+          className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-4 placeholder-slate-200"
+        />
+        <button className="bg-newBlue px-6 py-1 rounded-xl mt-4 block mx-auto">
+          Submit
+        </button>
+      </div>
     </div>
   );
 };
