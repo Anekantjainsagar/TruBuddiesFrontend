@@ -5,7 +5,7 @@ const BlueEffect = () => {
     <svg
       width="734"
       height="734"
-      className="absolute -right-[25vw]"
+      className="absolute left-10 md:left-[76vw]"
       viewBox="0 0 934 934"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -21,9 +21,9 @@ const BlueEffect = () => {
           width="934"
           height="934"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

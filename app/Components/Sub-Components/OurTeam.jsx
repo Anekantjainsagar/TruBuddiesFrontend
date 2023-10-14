@@ -10,13 +10,13 @@ import Image from "next/image";
 
 const OurTeam = () => {
   return (
-    <div className="py-[3vw] bg-white">
+    <div className="py-[7vw] md:py-[3vw] bg-white">
       <h1
-        className={`text-center w-fit mx-auto text-3xl text-newTomato font-extrabold ${noto_sans.className}`}
+        className={`text-center w-fit mx-auto text-2xl md:text-3xl text-newTomato font-extrabold ${noto_sans.className}`}
       >
         Our Team
       </h1>
-      <div className="relative mt-[3vw]">
+      <div className="relative mt-[5vw] md:mt-[3vw]">
         <div className="flex items-center justify-evenly">
           {[
             { image: client1, name: "Shubham", title: "Founder" },
@@ -26,7 +26,7 @@ const OurTeam = () => {
             return <Block key={i} data={e} />;
           })}
         </div>
-        <div className="flex items-center justify-evenly px-[10vw] -mt-16">
+        <div className="flex items-center justify-evenly px-[10vw] -mt-0 md:-mt-16">
           {[
             { image: client4, name: "Shubham", title: "Founder" },
             { image: client5, name: "Shubham", title: "Founder" },
@@ -42,9 +42,11 @@ const OurTeam = () => {
 const Block = ({ data }) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      <Image src={data?.image} alt="Image" className="w-[13vw]" />
-      <h1 className="text-xl font-semibold mt-2">{data?.name}</h1>
-      <p>{data?.title}</p>
+      <Image src={data?.image} alt="Image" className="w-[20vw] md:w-[13vw]" />
+      <h1 className="text-lg md:text-xl font-semibold mt-2 mb-0">
+        {data?.name}
+      </h1>
+      <p className="text-sm md:text-base">{data?.title}</p>
     </div>
   );
 };

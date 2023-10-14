@@ -22,6 +22,9 @@ module.exports = {
         newDarkNavyGrey: "#263238",
         newYellow: "#FFDA56",
       },
+      screens: {
+        mobile: "340px",
+      },
     },
   },
   plugins: [],

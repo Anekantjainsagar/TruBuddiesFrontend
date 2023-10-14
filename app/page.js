@@ -21,7 +21,7 @@ const App = () => {
         <div className="flex items-end h-full justify-center">
           <Image src={girl} alt="Girl" className="w-9/12" />
         </div>
-        <div
+        {/* <div
           className={`flex flex-col items-end w-6/12 pr-[4vw] ${noto_sans.className}`}
         >
           <h1
@@ -55,7 +55,7 @@ const App = () => {
               Chat With Buddy
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <BlueEffect />
       <ThingsLikeAboutUs />

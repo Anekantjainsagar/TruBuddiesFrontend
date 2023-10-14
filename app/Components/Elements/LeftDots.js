@@ -3,7 +3,7 @@ import React from "react";
 const LeftDots = () => {
   return (
     <svg
-      className="absolute -left-4 bottom-10"
+      className="absolute -left-4 bottom-10 md:block hidden"
       width="175"
       height="54"
       viewBox="0 0 215 84"
