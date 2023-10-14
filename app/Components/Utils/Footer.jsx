@@ -16,9 +16,9 @@ import call from "@/app/Assets/Home/icons/Call.png";
 const Footer = () => {
   return (
     <div
-      className={`bg-newBlue py-[2.5vw] text-white px-[2vw] flex justify-between items-center ${noto_sans.className}`}
+      className={`bg-newBlue py-[5vw] md:py-[2.5vw] text-white px-[2vw] flex justify-between items-center ${noto_sans.className}`}
     >
-      <div className="w-8/12">
+      <div className="w-full md:w-8/12">
         <div className="flex items-center justify-between w-full">
           {[
             { name: "About", route: "" },
@@ -64,7 +64,7 @@ const Footer = () => {
           © 2023 TruBuddy . All Rights Reserved.
         </p>
       </div>
-      <div className="w-[26%] bg-newLightBlue py-[1.5vw] px-[1.5vw] rounded-3xl">
+      <div className="md:block hidden w-[26%] bg-newLightBlue py-[1.5vw] px-[1.5vw] rounded-3xl">
         <h1 className="text-center text-xl font-semibold">
           Send us Your Enquiry
         </h1>
