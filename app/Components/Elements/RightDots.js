@@ -3,7 +3,7 @@ import React from "react";
 const RightDots = () => {
   return (
     <svg
-      className="absolute top-[93%] md:-top-6 -right-3 md:right-0"
+      className="absolute top-[91%] md:top-2 -right-3 md:-right-12"
       width="175"
       height="54"
       viewBox="0 0 234 84"

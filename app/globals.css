@@ -5,7 +5,6 @@
 .homeBg{
     background-image: url('./Assets/Home/Rectangle\ 1.png');
     background-size: cover;
-    height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -26,4 +25,42 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #b30000;
+}
+@keyframes animateGirl {
+    0% {
+        top: 0px;
+        animation-timing-function: linear;
+    }
+    
+    25%{
+        top: 4px;
+        animation-timing-function: linear;
+    }
+    
+    40%{
+        top: 2px;
+        animation-timing-function: linear;
+    }
+    
+    60%{
+        animation-timing-function: linear;
+        top: 2px;
+    }
+    
+    75%{
+        top: -6px;
+        animation-timing-function: linear;
+    }
+    
+    100%{
+        top: 0px;
+        animation-timing-function: linear;
+    }
+}
+
+.floatGirl{
+    animation-name: animateGirl;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
 }

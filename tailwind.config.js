@@ -13,7 +13,7 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        newBlue: "#1052FF",
+        newBlue: "#407BFF",
         newVeryLightBlue: "#eff3ff",
         newLightBlue: "#56A4FF",
         newDarkBlue: "#407BFF",
@@ -21,6 +21,9 @@ module.exports = {
         newOrange: "#FF5656",
         newDarkNavyGrey: "#263238",
         newYellow: "#FFDA56",
+        newOcean: "#1DFBEE",
+        newOceanGreen: "#92E3A9",
+        newDarkGreen: "#077825",
       },
       screens: {
         mobile: "340px",

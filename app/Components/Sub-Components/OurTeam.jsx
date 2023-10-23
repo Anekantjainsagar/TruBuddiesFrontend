@@ -6,13 +6,22 @@ import client2 from "@/app/Assets/Home/team/client  (2).png";
 import client3 from "@/app/Assets/Home/team/client  (3).png";
 import client4 from "@/app/Assets/Home/team/client  (4).png";
 import client5 from "@/app/Assets/Home/team/client  (5).png";
+
+import bg from "@/app/Assets/Home/team/Our team bg.png";
+
 import Image from "next/image";
 
 const OurTeam = () => {
   return (
-    <div className="py-[7vw] md:py-[3vw] bg-white">
+    <div className="py-[7vw] md:py-[3vw] bg-white relative overflow-hidden">
+      <Image
+        src={bg}
+        alt="Background"
+        className="absolute top-0 left-0 h-full"
+      />
       <h1
-        className={`text-center w-fit mx-auto text-2xl md:text-3xl text-newTomato font-extrabold ${noto_sans.className}`}
+        className={`text-center w-fit mx-auto text-2xl md:text-3xl text-newDarkNavyGrey drop-shadow-4xl font-extrabold ${noto_sans.className}`}
+        style={{ textShadow: "2px 2px 8px #b8baba" }}
       >
         Our Team
       </h1>
@@ -42,7 +51,9 @@ const OurTeam = () => {
 const Block = ({ data }) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      <Image src={data?.image} alt="Image" className="w-[20vw] md:w-[13vw]" />
+      <div className="rounded-full bg-gradient-to-t from-newBlue shadow-lg shadow-black to-newOceanGreen p-0.5 md:p-1">
+        <Image src={data?.image} alt="Image" className="w-[20vw] md:w-[12vw]" />
+      </div>
       <h1 className="text-lg md:text-xl font-semibold mt-2 mb-0">
         {data?.name}
       </h1>

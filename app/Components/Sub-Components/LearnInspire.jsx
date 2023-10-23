@@ -40,7 +40,7 @@ const LearnInspire = () => {
 
   return (
     <div
-      className={`h-[80vh] bg-gradient-to-tr from-newLightBlue to-newDarkBlue py-[4vw] ${noto_sans.className}`}
+      className={`h-[80vh] bg-gradient-to-br from-newLightBlue from-30% to-newOcean py-[4vw] ${noto_sans.className}`}
     >
       <h1
         className={`uppercase text-center w-fit mx-auto text-2xl md:text-3xl mt-2 text-white font-extrabold relative`}
@@ -58,7 +58,7 @@ const LearnInspire = () => {
         <Image
           src={text}
           alt="Text"
-          className="w-[10vw] absolute right-8 bottom-3 -z-0"
+          className="w-[10vw] absolute right-8 bottom-3 -z-0 md:block hidden"
         />
         {/* Blocks */}
         <div className="md:grid hidden grid-cols-3 gap-x-6 px-[10vw]">

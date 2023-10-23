@@ -7,7 +7,6 @@ import Image from "next/image";
 import youtube from "@/app/Assets/Home/icons/YouTube.png";
 import whatsapp from "@/app/Assets/Home/icons/whatsapp.png";
 import twitter from "@/app/Assets/Home/icons/Twitter.png";
-import message from "@/app/Assets/Home/icons/Message.png";
 import linkedin from "@/app/Assets/Home/icons/LinkedIn.png";
 import instagram from "@/app/Assets/Home/icons/Instagram.png";
 import facebook from "@/app/Assets/Home/icons/Facebook.png";
@@ -16,10 +15,14 @@ import call from "@/app/Assets/Home/icons/Call.png";
 const Footer = () => {
   return (
     <div
-      className={`bg-newBlue py-[5vw] md:py-[2.5vw] text-white px-[2vw] flex justify-between items-center ${noto_sans.className}`}
+      className={`py-[5vw] bg-gradient-to-br from-newBlue from-40% to-newOcean md:py-[2.5vw] text-white px-[2vw] flex justify-between items-center ${noto_sans.className}`}
     >
-      <div className="w-full md:w-8/12">
-        <div className="flex items-center justify-between w-full">
+      <div className="w-full md:w-7/12 md:block flex flex-col">
+        <div className="md:hidden flex items-center mx-auto md:mx-0 pt-[2vw] pb-3">
+          <Image src={logo} alt="Logo" className="mr-2" />
+          <p className="text-2xl font-bold">TruBuddy</p>
+        </div>
+        <div className="flex items-center justify-between w-11/12 mx-auto md:w-full">
           {[
             { name: "About", route: "" },
             { name: "Products", route: "" },
@@ -28,35 +31,67 @@ const Footer = () => {
             { name: "Terms of Use", route: "" },
           ].map((e, i) => {
             return (
-              <p key={i} className="font-medium">
+              <p
+                key={i}
+                className="font-medium md:text-base text-xs cursor-pointer"
+              >
                 {e?.name}
               </p>
             );
           })}
         </div>
-        <div className="flex items-center py-[2vw]">
+        <div className="md:flex hidden items-center mx-auto md:mx-0 pt-[2vw] pb-3">
           <Image src={logo} alt="Logo" className="mr-2" />
           <p className="text-2xl font-bold">TruBuddy</p>
         </div>
-        <div className="flex items-end">
-          <p className="mb-2">Follow us</p>
-          <div className="flex items-center ml-3">
-            <Image src={facebook} alt="Icons" className="w-[3.5vw]" />
-            <Image src={twitter} alt="Icons" className="w-[3.5vw]" />
-            <Image src={instagram} alt="Icons" className="w-[3.5vw]" />
-            <Image src={linkedin} alt="Icons" className="w-[3.5vw]" />
-            <Image src={youtube} alt="Icons" className="w-[3.5vw]" />
-            <Image src={message} alt="Icons" className="w-[3.5vw]" />
+        <div className="flex items-end md:justify-start justify-center">
+          <p className="mb-2 md:block hidden">Follow us</p>
+          <div className="flex items-center ml-3 md:w-fit w-full">
+            <Image
+              src={facebook}
+              alt="Icons"
+              className="w-[10vw] md:w-[3vw] cursor-pointer"
+            />
+            <Image
+              src={twitter}
+              alt="Icons"
+              className="w-[10vw] md:w-[3vw] cursor-pointer"
+            />
+            <Image
+              src={instagram}
+              alt="Icons"
+              className="w-[10vw] md:w-[3vw] cursor-pointer"
+            />
+            <Image
+              src={linkedin}
+              alt="Icons"
+              className="w-[10vw] md:w-[3vw] cursor-pointer"
+            />
+            <Image
+              src={youtube}
+              alt="Icons"
+              className="w-[10vw] md:w-[3vw] cursor-pointer"
+            />
           </div>
         </div>
-        <div className="flex items-end">
-          <p className="mb-1 font-light">Contact us directly:</p>
+        <div className="flex items-end mt-2">
+          <p className="mb-1 font-light md:block hidden">
+            Contact us directly:
+          </p>
           <div className="flex items-center ml-1">
-            <Image src={call} alt="Icons" className="w-[2.2vw]" />
-            <Image src={whatsapp} alt="Icons" className="w-[2.2vw]" />
+            <Image
+              src={call}
+              alt="Icons"
+              className="w-[10vw] md:w-[2.2vw] mx-1 md:mx-2"
+            />
+            <Image
+              src={whatsapp}
+              alt="Icons"
+              className="w-[10vw] md:w-[2.2vw]"
+            />
           </div>
         </div>
-        <p className="my-2">
+        <p className="my-2 md:mr-0 mr-16">
           Lorem ipsum dolor sit amet consectetur. Mattis turpis cras vivamus
           nulla consectetur a libero. Porta sit.
         </p>
@@ -71,7 +106,7 @@ const Footer = () => {
         <input
           type="text"
           placeholder="First Name"
-          className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-5 placeholder-slate-200"
+          className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-3 placeholder-slate-200"
         />
         <input
           type="text"
