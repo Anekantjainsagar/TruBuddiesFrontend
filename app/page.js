@@ -94,13 +94,13 @@ const App = () => {
           className={`flex flex-col items-end w-full md:w-6/12 pr-[4vw] ${noto_sans.className} z-40`}
         >
           <h1
-            className="text-4xl md:text-7xl font-bold text-center md:text-end text-newDarkNavyGrey relative md:leading-[90px]"
+            className="text-4xl md:text-7xl font-bold text-end text-newDarkNavyGrey relative md:leading-[90px]"
             style={{ textShadow: "0px 5px 3px rgba(56, 56, 56,0.5)" }}
           >
             <Image
               src={redCircle}
               alt="Red circle"
-              className="top-0 right-5 md:right-0 absolute w-[30vw] md:w-[15vw]"
+              className="top-0 right-5 md:-right-5 md:block hidden absolute w-[30vw] md:w-[15vw]"
             />
             KEEP YOUR <span className="text-white">MIND</span> HEALTHY
           </h1>

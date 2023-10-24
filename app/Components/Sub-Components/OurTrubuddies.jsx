@@ -17,6 +17,7 @@ import bg from "@/app/Assets/Home/trubuddies bg.png";
 
 import male from "@/app/Assets/Home/icons/male.png";
 import female from "@/app/Assets/Home/icons/female.png";
+import { useRouter } from "next/navigation";
 
 const OurTrubuddies = () => {
   let data = [{ image: client1 }, { image: client2 }, { image: client3 }];
@@ -62,9 +63,20 @@ const OurTrubuddies = () => {
 };
 
 export const Block = ({ data }) => {
+  const history = useRouter();
+
   return (
-    <div className="bg-white rounded-3xl mb-10 border md:mx-0 mx-auto w-[80%] md:w-[22vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative">
-      <Image src={bg} alt="Background" className="absolute top-0 left-0 z-10" />
+    <div
+      onClick={(e) => {
+        history.push(`/trubuddies/${"anekant"}`);
+      }}
+      className="bg-white cursor-pointer rounded-3xl mb-10 border md:mx-0 mx-auto w-[80%] md:w-[22vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative"
+    >
+      <Image
+        src={bg}
+        alt="Background"
+        className="absolute top-0 left-0 z-10 h-[45vh] opacity-50"
+      />
       <div className="w-full h-full">
         <div className="flex items-center w-full justify-start z-30">
           <Image
@@ -97,9 +109,9 @@ export const Block = ({ data }) => {
             })}
           </div>
         </div>
-        <div className={`${noto_sans.className} px-1`}>
+        <div className={`${noto_sans.className} px-1 z-40`}>
           <h1 className="text-xl mt-2 md:mt-3 mb-0">About</h1>
-          <p className="text-gray-400 text-[16px]">
+          <p className="text-gray-400 text-[16px] z-40">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto
             volup
           </p>
