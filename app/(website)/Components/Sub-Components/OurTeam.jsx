@@ -1,13 +1,13 @@
 import React from "react";
 import { noto_sans } from "../Utils/font";
 
-import client1 from "@/app/Assets/Home/team/client  (1).png";
-import client2 from "@/app/Assets/Home/team/client  (2).png";
-import client3 from "@/app/Assets/Home/team/client  (3).png";
-import client4 from "@/app/Assets/Home/team/client  (4).png";
-import client5 from "@/app/Assets/Home/team/client  (5).png";
+import client1 from "../../Assets/Home/team/client  (1).png";
+import client2 from "../../Assets/Home/team/client  (2).png";
+import client3 from "../../Assets/Home/team/client  (3).png";
+import client4 from "../../Assets/Home/team/client  (4).png";
+import client5 from "../../Assets/Home/team/client  (5).png";
 
-import bg from "@/app/Assets/Home/team/Our team bg.png";
+import bg from "../../Assets/Home/team/Our team bg.png";
 
 import Image from "next/image";
 
@@ -20,7 +20,7 @@ const OurTeam = () => {
         className="absolute top-0 left-0 h-full"
       />
       <h1
-        className={`text-center w-fit mx-auto text-2xl md:text-3xl text-newDarkNavyGrey drop-shadow-4xl font-extrabold ${noto_sans.className}`}
+        className={`text-center w-fit mx-auto text-2xl md:text-3xl text-newDarkNavyGrey drop-shadow-4xl font-bold ${noto_sans.className}`}
         style={{ textShadow: "2px 2px 8px #b8baba" }}
       >
         Our Team

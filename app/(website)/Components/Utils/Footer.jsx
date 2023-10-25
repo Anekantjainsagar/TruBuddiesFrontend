@@ -1,16 +1,16 @@
 import React from "react";
 import { noto_sans } from "./font";
 
-import logo from "@/app/Assets/Home/Logo Image.png";
+import logo from "../../Assets/Home/Logo Image.png";
 import Image from "next/image";
 
-import youtube from "@/app/Assets/Home/icons/YouTube.png";
-import whatsapp from "@/app/Assets/Home/icons/whatsapp.png";
-import twitter from "@/app/Assets/Home/icons/Twitter.png";
-import linkedin from "@/app/Assets/Home/icons/LinkedIn.png";
-import instagram from "@/app/Assets/Home/icons/Instagram.png";
-import facebook from "@/app/Assets/Home/icons/Facebook.png";
-import call from "@/app/Assets/Home/icons/Call.png";
+import youtube from "../../Assets/Home/icons/YouTube.png";
+import whatsapp from "../../Assets/Home/icons/whatsapp.png";
+import twitter from "../../Assets/Home/icons/Twitter.png";
+import linkedin from "../../Assets/Home/icons/LinkedIn.png";
+import instagram from "../../Assets/Home/icons/Instagram.png";
+import facebook from "../../Assets/Home/icons/Facebook.png";
+import call from "../../Assets/Home/icons/Call.png";
 
 const Footer = () => {
   return (

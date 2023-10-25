@@ -3,7 +3,7 @@ import React from "react";
 const Network = () => {
   return (
     <svg
-      className="absolute left-[3.7vw] md:left-[6.8vw] md:top-0 top-3"
+      className="absolute left-[3vw] md:left-[6.8vw] md:-top-4 -top-4"
       width="44"
       height="41"
       viewBox="0 0 74 71"

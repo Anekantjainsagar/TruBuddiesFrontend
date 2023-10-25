@@ -1,16 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import image from "@/app/Assets/Home/Images/services.png";
+import image from "../../Assets/Home/Images/services.png";
 import Image from "next/image";
 import { noto_sans } from "../Utils/font";
 
-import bg from "@/app/Assets/Home/Services bg.png";
+import bg from "../../Assets/Home/Services bg.png";
 
-import meditation from "@/app/Assets/Home/services/meditation.png";
-import animation1 from "@/app/Assets/Home/services/animation1.png";
-import animation2 from "@/app/Assets/Home/services/animation2.png";
-import animation3 from "@/app/Assets/Home/services/animation3.png";
-import animation4 from "@/app/Assets/Home/services/animation4.png";
+import meditation from "../../Assets/Home/services/meditation.png";
+import animation1 from "../../Assets/Home/services/animation1.png";
+import animation2 from "../../Assets/Home/services/animation2.png";
+import animation3 from "../../Assets/Home/services/animation3.png";
+import animation4 from "../../Assets/Home/services/animation4.png";
 
 import gsap from "gsap";
 import { useEffect } from "react";
@@ -32,7 +32,7 @@ const OurServices = () => {
         <div>
           <Image src={image} alt="Services" className="w-[35vw]" />
           <h1
-            className={`uppercase text-center w-fit mx-auto text-3xl mt-2 text-newBlue font-extrabold ${noto_sans.className}`}
+            className={`uppercase text-center w-fit mx-auto text-3xl mt-2 text-newBlue font-bold ${noto_sans.className}`}
           >
             Our Services
           </h1>

@@ -1,26 +1,50 @@
 "use client";
 import React, { useState } from "react";
 import { maliFont, noto_sans } from "../Utils/font";
-import logo from "@/app/Assets/Home/Logo Image.png";
+import logo from "../../Assets/Home/Logo Image.png";
 import Image from "next/image";
 import LeftDots from "../Elements/LeftDots";
 
-import { Carousel } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import { Carousel } from "react-bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
-import client1 from "@/app/Assets/Home/Images/Client 1.png";
-import client2 from "@/app/Assets/Home/Images/Client 2.png";
-import client3 from "@/app/Assets/Home/Images/Client 3.png";
+import client1 from "../../Assets/Home/Images/Client 1.png";
+import client2 from "../../Assets/Home/Images/Client 2.png";
+import client3 from "../../Assets/Home/Images/Client 3.png";
 import RightDots from "../Elements/RightDots";
 
-import bg from "@/app/Assets/Home/trubuddies bg.png";
+import bg from "../../Assets/Home/trubuddies bg.png";
 
-import male from "@/app/Assets/Home/icons/male.png";
-import female from "@/app/Assets/Home/icons/female.png";
+import male from "../../Assets/Home/icons/male.png";
+import female from "../../Assets/Home/icons/female.png";
 import { useRouter } from "next/navigation";
 
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
 const OurTrubuddies = () => {
-  let data = [{ image: client1 }, { image: client2 }, { image: client3 }];
+  let data = [
+    { image: client1 },
+    { image: client2 },
+    { image: client3 },
+    { image: client3 },
+  ];
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -30,7 +54,7 @@ const OurTrubuddies = () => {
   return (
     <div className="pt-[3vw]">
       <h1
-        className={`uppercase text-center w-fit mx-auto text-2xl text-newTomato font-extrabold ${noto_sans.className} flex items-center`}
+        className={`uppercase text-center w-fit mx-auto text-2xl text-newTomato font-bold ${noto_sans.className} flex items-center`}
       >
         Our{" "}
         <Image
@@ -40,21 +64,33 @@ const OurTrubuddies = () => {
         />{" "}
         Trubuddies
       </h1>
-      <div className="w-full flex justify-between items-center relative bg-gradient-to-r from-newBlue to-newOcean md:px-[12vw] md:py-[3vw] py-[10vw] mt-[3vw] md:mt-[2vw]">
+      <div className="w-full flex justify-between items-center relative bg-gradient-to-r from-newBlue to-newOcean md:px-[12vw] md:pt-[2vw] pt-[10vw] mt-[3vw] md:mt-[1vw]">
         <LeftDots />
-        <div className="md:flex hidden justify-between items-center w-full">
-          {data.map((e, i) => {
-            return <Block data={e} key={i} />;
-          })}
-        </div>
-        <div className="block md:hidden">
-          <Carousel activeIndex={index} onSelect={handleSelect}>
-            {data?.map((item, i) => (
-              <Carousel.Item key={i} interval={5000}>
-                <Block data={item} />
-              </Carousel.Item>
-            ))}
-          </Carousel>
+        <div className="flex justify-between items-center w-full">
+          <Swiper
+            slidesPerView={
+              typeof window != "undefined"
+                ? window.innerWidth < 500
+                  ? 1
+                  : 3
+                : 1
+            }
+            modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+            pagination={{ clickable: true }}
+            loop={true}
+            autoplay={{
+              interval: 3000,
+              disableOnInteraction: false,
+            }}
+          >
+            {data.map((e, i) => {
+              return (
+                <SwiperSlide key={i}>
+                  <Block data={e} />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
         <RightDots />
       </div>
@@ -62,7 +98,7 @@ const OurTrubuddies = () => {
   );
 };
 
-export const Block = ({ data }) => {
+export const Block = ({ data, big }) => {
   const history = useRouter();
 
   return (
@@ -70,7 +106,11 @@ export const Block = ({ data }) => {
       onClick={(e) => {
         history.push(`/trubuddies/${"anekant"}`);
       }}
-      className="bg-white cursor-pointer rounded-3xl mb-10 border md:mx-0 mx-auto w-[80%] md:w-[22vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative"
+      className={`bg-white cursor-pointer rounded-3xl ${
+        big ? "mb-5" : "mb-9"
+      } border md:mx-0 mx-auto ${
+        big ? "w-[95%] md:w-[21.5vw]" : "w-[80%] md:w-[23vw]"
+      } py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative`}
     >
       <Image
         src={bg}

@@ -10,18 +10,18 @@ import OurTeam from "./Components/Sub-Components/OurTeam";
 import BlueEffect from "./Components/Elements/BlueEffect";
 import { noto_sans } from "./Components/Utils/font";
 
-import redCircle from "@/app/Assets/Home/red circle.png";
+import redCircle from "./Assets/Home/red circle.png";
 import Image from "next/image";
-import girl from "@/app/Assets/Home/Images/Frame.png";
-import logo from "@/app/Assets/Home/Logo Image.png";
+import girl from "./Assets/Home/Images/Frame.png";
+import logo from "./Assets/Home/Logo Image.png";
 import LeftBlueLight from "./Components/Sub-Components/LeftBlueLight";
 import RightDotsHome from "./Components/Sub-Components/rightDotsHome";
 
-import bg from "@/app/Assets/Home/Home bg.png";
-import mobileBg from "@/app/Assets/Home/Home mobile bg.png";
+import bg from "./Assets/Home/Home bg.png";
+import mobileBg from "./Assets/Home/Home mobile bg.png";
 
-import cloud from "@/app/Assets/Home/cloud.png";
-import lightCloud from "@/app/Assets/Home/image 16.png";
+import cloud from "./Assets/Home/cloud.png";
+import lightCloud from "./Assets/Home/image 16.png";
 import gsap from "gsap";
 import { Power2 } from "gsap/all";
 
@@ -80,7 +80,7 @@ const App = () => {
         className="absolute z-10 top-0 h-[100vh]"
       />
       <div
-        className={`homeBg relative h-fit md:h-[100vh] md:py-0 py-[5vw] flex md:flex-row flex-col justify-between items-center`}
+        className={`homeBg relative h-fit md:h-[100vh] md:py-[6vw] py-[5vw] flex md:flex-row flex-col justify-between items-center`}
       >
         <RightDotsHome />
         <div className="flex h-[70vh] md:h-full relative justify-center md:mt-0 mt-[5vw] items-center w-full md:w-6/12 z-20">

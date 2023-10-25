@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import logo from "@/app/Assets/Home/Logo Image.png";
+import logo from "../../Assets/Home/Logo Image.png";
 import Image from "next/image";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import gsap, { Power2 } from "gsap";
@@ -34,7 +34,7 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`flex items-center justify-between md:px-[2vw] md:py-1 z-50 w-full fixed top-0 left-0 ${
+        className={`flex items-center justify-between md:px-[2vw] py-1.5 z-50 w-full fixed top-0 left-0 ${
           pathname.includes("trubuddies")
             ? "bg-gradient-to-b from-newBlue to-newOcean text-white"
             : "bg-transparent"
@@ -52,7 +52,7 @@ const Navbar = () => {
               pathname.includes("trubuddies")
                 ? "md:text-white"
                 : "md:text-black"
-            } text-[#002689] ml-2 md:ml-4 mt-3 md:mt-2.5`}
+            } text-[#002689] ml-2 md:ml-4 mt-1 md:mt-1`}
           >
             TruBuddies
           </p>

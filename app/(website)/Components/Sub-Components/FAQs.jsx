@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import faq from "@/app/Assets/Home/Images/FAQs.png";
+import faq from "../../Assets/Home/Images/FAQs.png";
 import Image from "next/image";
 import { noto_sans } from "../Utils/font";
 
-import bg from "@/app/Assets/Home/Faq bg.png";
+import bg from "../../Assets/Home/Faq bg.png";
 
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 
@@ -14,7 +14,7 @@ const FAQs = () => {
       <Image src={bg} alt="Background" className="absolute left-0 h-full" />
       <div className="flex flex-col items-center">
         <h1
-          className={`uppercase text-center w-fit mx-auto text-2xl md:text-4xl mb-[4vw] md:mb-[2vw] text-newBlue font-extrabold ${noto_sans.className}`}
+          className={`uppercase text-center w-fit mx-auto text-2xl md:text-4xl mb-[4vw] md:mb-[2vw] text-newBlue font-bold ${noto_sans.className}`}
         >
           FAQ&apos;s
         </h1>

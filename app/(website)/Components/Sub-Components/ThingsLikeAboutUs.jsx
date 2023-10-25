@@ -1,20 +1,20 @@
-import { noto_sans } from "@/app/Components/Utils/font";
+import { noto_sans } from "../Utils/font";
 import React from "react";
 import HeadingCurvedLine from "../Elements/HeadingCurvedLine";
 import Flower1 from "../Elements/Flower1";
 import Flower2 from "../Elements/Flower2";
 
-import img1 from "@/app/Assets/Home/Images/pana.png";
-import img2 from "@/app/Assets/Home/Images/bro.png";
-import img3 from "@/app/Assets/Home/Images/amico.png";
-import img4 from "@/app/Assets/Home/Images/rafiki.png";
+import img1 from "../../Assets/Home/Images/pana.png";
+import img2 from "../../Assets/Home/Images/bro.png";
+import img3 from "../../Assets/Home/Images/amico.png";
+import img4 from "../../Assets/Home/Images/rafiki.png";
 import Image from "next/image";
 
 const ThingsLikeAboutUs = () => {
   return (
     <div className="py-[14vw] md:py-[4vw] px-[3vw] relative overflow-hidden">
       <h1
-        className={`text-newDarkGreen ${noto_sans.className} w-fit mx-auto text-xl md:text-2xl text-center font-extrabold relative`}
+        className={`text-newDarkGreen ${noto_sans.className} w-fit mx-auto text-xl md:text-2xl text-center font-bold relative`}
       >
         THINGS YOU LIKE ABOUT US
         <HeadingCurvedLine />
