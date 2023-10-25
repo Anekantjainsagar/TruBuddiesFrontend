@@ -19,9 +19,6 @@ import male from "../../Assets/Home/icons/male.png";
 import female from "../../Assets/Home/icons/female.png";
 import { useRouter } from "next/navigation";
 
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
-
 import {
   Navigation,
   Pagination,
@@ -37,6 +34,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import {
+  AiOutlineDoubleRight,
+  AiOutlineRight,
+  AiOutlineRightSquare,
+} from "react-icons/ai";
 
 const OurTrubuddies = () => {
   let data = [
@@ -45,11 +47,7 @@ const OurTrubuddies = () => {
     { image: client3 },
     { image: client3 },
   ];
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
+  const history = useRouter();
 
   return (
     <div className="pt-[3vw]">
@@ -90,6 +88,28 @@ const OurTrubuddies = () => {
                 </SwiperSlide>
               );
             })}
+            <SwiperSlide>
+              <div
+                onClick={(e) => {
+                  history.push("/trubuddies");
+                }}
+                className={`bg-white cursor-pointer rounded-3xl mb-9 border md:mx-0 mx-auto w-[80%] h-[46.5vh] md:w-[23vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative`}
+              >
+                <Image
+                  src={bg}
+                  alt="Background"
+                  className="absolute top-0 left-0 z-10 h-[45vh] opacity-50"
+                />
+                <div className="w-full h-full flex items-center justify-center hover:scale-110 transition-all z-30">
+                  <div className="flex flex-col items-center justify-center">
+                    <AiOutlineRight size={100} className="text-gray-600" />
+                    <h1 className="text-2xl text-gray-600">
+                      More TruBuddies...
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
           </Swiper>
         </div>
         <RightDots />
