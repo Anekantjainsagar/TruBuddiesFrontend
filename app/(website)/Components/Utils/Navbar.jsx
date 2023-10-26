@@ -1,12 +1,14 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../Assets/Home/Logo Image.png";
 import Image from "next/image";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import gsap, { Power2 } from "gsap";
 import { usePathname, useRouter } from "next/navigation";
+import LoginModal from "../login";
 
 const Navbar = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const history = useRouter();
   let routes = [
@@ -33,6 +35,7 @@ const Navbar = () => {
 
   return (
     <>
+      <LoginModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
       <div
         className={`flex items-center justify-between md:px-[2vw] py-1.5 z-50 w-full fixed top-0 left-0 ${
           pathname.includes("trubuddies")
@@ -70,7 +73,13 @@ const Navbar = () => {
           })}
         </div>
         <div className="hidden md:flex items-center">
-          <button className="font-semibold px-4 bg-white mr-3 text-newBlue py-1 rounded-md">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setIsOpen(!modalIsOpen);
+            }}
+            className="font-semibold px-4 bg-white mr-3 text-newBlue py-1 rounded-md"
+          >
             Login
           </button>
           <button className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md">
@@ -86,7 +95,7 @@ const Navbar = () => {
         />
         <div
           id="navbar"
-          className="absolute p-3 flex flex-col items-center justify-center -top-[100vh] left-0 backdrop-blur-md md:hidden w-[100vw] h-[100vh] z-40"
+          className="absolute p-3 flex flex-col items-center justify-center -top-[100vh] left-0 backdrop-blur-md md:hidden w-[100vw] h-[100vh] z-50"
         >
           <div className="absolute top-5 right-5">
             <AiOutlineClose
@@ -109,7 +118,13 @@ const Navbar = () => {
               );
             })}
             <div className="flex flex-col items-center">
-              <button className="font-semibold px-4 bg-white mb-4 text-newBlue py-1 rounded-md">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(!modalIsOpen);
+                }}
+                className="font-semibold px-4 bg-white mb-4 text-newBlue py-1 rounded-md"
+              >
                 Login
               </button>
               <button className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md">

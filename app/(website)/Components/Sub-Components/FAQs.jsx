@@ -20,7 +20,7 @@ const FAQs = () => {
         </h1>
         <Image src={faq} className="w-[28vw] md:block hidden" alt="FAQ" />
       </div>
-      <div className="w-full md:w-[36vw] z-10 flex flex-col items-center justify-start border-black h-[57vh] md:h-[80vh] overflow-y-scroll">
+      <div className="w-full md:w-[36vw] flex flex-col items-center justify-start border-black h-[57vh] md:h-[80vh] overflow-y-scroll">
         <Block />
         <Block />
         <Block />

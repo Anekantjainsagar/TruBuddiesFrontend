@@ -32,6 +32,24 @@
   background-position: center;
 }
 
+.serviceBg {
+  background-image: url("./(website)/Assets/Home/Services\ bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.trubuddiesBg {
+  background-image: url("./(website)/Assets/Home/trubuddies\ bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.loginBg {
+  background-image: url("./(website)/Assets/Login/bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

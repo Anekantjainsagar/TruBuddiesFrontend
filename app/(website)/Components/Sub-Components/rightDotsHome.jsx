@@ -8,7 +8,7 @@ const RightDotsHome = () => {
       viewBox="0 0 247 84"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute -right-6 z-10 bottom-5 md:block hidden"
+      className="absolute -right-6 bottom-5 md:block hidden"
     >
       <circle cx="5.71782" cy="5.71782" r="5.71782" fill="#FDFDFD" />
       <circle cx="77.7623" cy="5.71782" r="5.71782" fill="#FDFDFD" />

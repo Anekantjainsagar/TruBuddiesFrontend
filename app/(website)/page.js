@@ -187,7 +187,7 @@ const App = () => {
           className="absolute z-10 bottom-0 -right-[16vw] w-[35vw] md:block hidden"
         />
       </div>
-      <div className="z-40">
+      <div>
         <LeftBlueLight />
         <BlueEffect />
         <ThingsLikeAboutUs />

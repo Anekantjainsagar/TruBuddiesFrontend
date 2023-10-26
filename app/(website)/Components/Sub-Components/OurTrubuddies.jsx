@@ -98,9 +98,9 @@ const OurTrubuddies = () => {
                 <Image
                   src={bg}
                   alt="Background"
-                  className="absolute top-0 left-0 z-10 h-[45vh] opacity-50"
+                  className="absolute top-0 left-0 h-[45vh] opacity-50"
                 />
-                <div className="w-full h-full flex items-center justify-center hover:scale-110 transition-all z-30">
+                <div className="w-full h-full flex items-center justify-center hover:scale-110 transition-all">
                   <div className="flex flex-col items-center justify-center">
                     <AiOutlineRight size={100} className="text-gray-600" />
                     <h1 className="text-2xl text-gray-600">
@@ -130,15 +130,10 @@ export const Block = ({ data, big }) => {
         big ? "mb-5" : "mb-9"
       } border md:mx-0 mx-auto ${
         big ? "w-[95%] md:w-[21.5vw]" : "w-[80%] md:w-[23vw]"
-      } py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative`}
+      } py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative trubuddiesBg`}
     >
-      <Image
-        src={bg}
-        alt="Background"
-        className="absolute top-0 left-0 z-10 h-[45vh] opacity-50"
-      />
       <div className="w-full h-full">
-        <div className="flex items-center w-full justify-start z-30">
+        <div className="flex items-center w-full justify-start">
           <Image
             src={data?.image}
             alt="Image"
@@ -169,15 +164,15 @@ export const Block = ({ data, big }) => {
             })}
           </div>
         </div>
-        <div className={`${noto_sans.className} px-1 z-40`}>
+        <div className={`${noto_sans.className} px-1`}>
           <h1 className="text-xl mt-2 md:mt-3 mb-0">About</h1>
-          <p className="text-gray-400 text-[16px] z-40">
+          <p className="text-gray-400 text-[16px]">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto
             volup
           </p>
         </div>
       </div>
-      <button className="bg-newBlue w-full z-40 cursor-pointer text-white py-1 rounded-full mt-0 md:mt-5">
+      <button className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-0 md:mt-5">
         Start Chat
       </button>
     </div>

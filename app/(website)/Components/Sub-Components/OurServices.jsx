@@ -26,9 +26,8 @@ const OurServices = () => {
   // });
 
   return (
-    <div className="h-[100vh] flex items-center relative overflow-hidden justify-center">
-      <Image src={bg} alt="Background" className="absolute top-0 left-0 z-10" />
-      <div className="z-30 flex items-center">
+    <div className="h-[100vh] flex items-center relative overflow-hidden justify-center serviceBg">
+      <div className="flex items-center">
         <div>
           <Image src={image} alt="Services" className="w-[35vw]" />
           <h1

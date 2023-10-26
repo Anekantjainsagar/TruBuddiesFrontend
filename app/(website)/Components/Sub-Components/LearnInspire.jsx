@@ -74,7 +74,7 @@ const LearnInspire = () => {
         <Image
           src={text}
           alt="Text"
-          className="w-[10vw] absolute right-8 bottom-3 -z-0 md:block hidden"
+          className="w-[10vw] absolute right-8 bottom-3 -md:block hidden"
         />
         {/* Blocks */}
         <div className="md:grid hidden grid-cols-3 gap-x-6">
@@ -107,7 +107,7 @@ const LearnInspire = () => {
 
 const Block = ({ data }) => {
   return (
-    <div className="bg-white flex flex-col mb-10 md:mx-0 mx-[12vw] md:p-4 p-3 rounded-2xl z-0 shadow-lg shadow-gray-400">
+    <div className="bg-white flex flex-col mb-10 md:mx-0 mx-[12vw] md:p-4 p-3 rounded-2xl shadow-lg shadow-gray-400">
       <Image src={data?.image} alt="Image" />
       <h1 className="text-xl font-semibold pt-2 pl-2">{data?.title}</h1>
       <p className="px-2 mb-0 text-sm font-light">{data?.text}</p>
