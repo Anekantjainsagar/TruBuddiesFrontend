@@ -8,6 +8,7 @@ import LearnInspire from "./Components/Sub-Components/LearnInspire";
 import FAQs from "./Components/Sub-Components/FAQs";
 import OurTeam from "./Components/Sub-Components/OurTeam";
 import BlueEffect from "./Components/Elements/BlueEffect";
+import SocialMedia from "./Components/Sub-Components/SocialMedia";
 import { noto_sans } from "./Components/Utils/font";
 
 import redCircle from "./Assets/Home/red circle.png";
@@ -196,6 +197,7 @@ const App = () => {
         <LearnInspire />
         <FAQs />
         <OurTeam />
+        <SocialMedia />
       </div>
     </div>
   );

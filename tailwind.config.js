@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         newBlue: "#407BFF",
+        newChatBlue: "rgba(64, 123, 255, 0.9)",
         newVeryLightBlue: "#eff3ff",
         newLightBlue: "#56A4FF",
         newDarkBlue: "#407BFF",

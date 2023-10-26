@@ -8,6 +8,16 @@
   box-sizing: border-box;
 }
 
+.communityBg {
+  background-image: url("./(website)/Assets/Chats/community\ bg.png");
+  background-size: cover;
+}
+
+.chatBg {
+  background-image: url("./(website)/Assets/Chats/chat\ bg.png");
+  background-size: cover;
+}
+
 .homeBg {
   background-image: url("./(website)/Assets/Home/Rectangle\ 1.png");
   background-size: cover;
