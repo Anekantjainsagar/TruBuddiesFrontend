@@ -10,6 +10,8 @@ import { maliFont, noto_sans } from "../../(website)/Components/Utils/font";
 import picture from "../../(website)/Assets/Chats/picture.png";
 import { useRouter } from "next/navigation";
 
+import communityBg from "../../(website)/Assets/Chats/community bg.png";
+
 const page = () => {
   const history = useRouter();
 
@@ -103,7 +105,21 @@ const page = () => {
           </div>
         </div>
         <div className="border w-full p-[2px] h-[48%] bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
-          <div className="w-full h-full rounded-3xl bg-white"></div>
+          <div className="w-full h-full rounded-3xl bg-white relative py-5">
+            <h1
+              className={`text-2xl z-50 font-semibold text-center ${maliFont.className}`}
+            >
+              Community
+            </h1>
+            <div className="z-50 py-5 px-8">
+              <div className="bg-gradient-to-br rounded-xl shadow-md z-50 shadow-gray-500 cursor-pointer from-newBlue to-newOcean w-full h-[10vh]"></div>
+            </div>
+            <Image
+              src={communityBg}
+              alt="Community bg"
+              className="z-0 absolute top-0 left-0 opacity-60"
+            />
+          </div>
         </div>
       </div>
     </div>
