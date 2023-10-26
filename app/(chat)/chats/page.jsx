@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import male from "../../(website)/Assets/Home/icons/male white.png";
 import female from "../../(website)/Assets/Home/icons/female.png";
 
-const page = () => {
+const Chats = () => {
   const history = useRouter();
 
   return (
@@ -211,4 +211,4 @@ const ChatBlock = ({ me }) => {
   );
 };
 
-export default page;
+export default Chats;
