@@ -1,14 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../../Assets/Home/Logo Image.png";
 import Image from "next/image";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import gsap, { Power2 } from "gsap";
 import { usePathname, useRouter } from "next/navigation";
 import LoginModal from "../login";
+import Context from "../../../Context/Context";
+import { getCookie, getCookies } from "cookies-next";
+import profile from "../../Assets/Chats/picture.png";
 
 const Navbar = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const { modalIsOpen, setIsOpen } = useContext(Context);
   const pathname = usePathname();
   const history = useRouter();
   let routes = [
@@ -35,7 +38,7 @@ const Navbar = () => {
 
   return (
     <>
-      <LoginModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
+      <LoginModal />
       <div
         className={`flex items-center justify-between md:px-[2vw] py-1.5 z-50 w-full fixed top-0 left-0 ${
           pathname.includes("trubuddies")
@@ -72,20 +75,30 @@ const Navbar = () => {
             );
           })}
         </div>
-        <div className="hidden md:flex items-center">
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setIsOpen(!modalIsOpen);
-            }}
-            className="font-semibold px-4 bg-white mr-3 text-newBlue py-1 rounded-md"
-          >
-            Login
-          </button>
-          <button className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md">
-            Get Started
-          </button>
-        </div>
+        {getCookie("token")?.length > 0 ? (
+          <div>
+            <Image
+              src={profile}
+              alt="Profile"
+              className="w-[75%] cursor-pointer shadow-md shadow-gray-500 rounded-full"
+            />
+          </div>
+        ) : (
+          <div className="hidden md:flex items-center">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setIsOpen(!modalIsOpen);
+              }}
+              className="font-semibold px-4 bg-white mr-3 text-newBlue py-1 rounded-md"
+            >
+              Login
+            </button>
+            <button className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md">
+              Get Started
+            </button>
+          </div>
+        )}
         <AiOutlineMenu
           size={22}
           className="text-[#002689] md:hidden block mr-4"

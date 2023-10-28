@@ -1,5 +1,6 @@
 import "./globals.css";
 import { maliFont } from "./(website)/Components/Utils/font";
+import Head from "next/head";
 
 export const metadata = {
   title: "TruBuddies",
