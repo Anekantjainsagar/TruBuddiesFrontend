@@ -58,7 +58,7 @@ const LearnInspire = () => {
     <div
       className={`bg-gradient-to-br from-newLightBlue from-30% to-newOcean py-[2vw] ${noto_sans.className}`}
     >
-      <h1
+      <div
         className={`uppercase text-center w-fit mx-auto text-2xl md:text-3xl mt-2 text-white font-bold relative`}
       >
         Learn & Inspire
@@ -68,7 +68,7 @@ const LearnInspire = () => {
           alt="Chat box"
           className="w-[9vw] md:w-[4vw] absolute -top-1 md:-top-3 -right-12 md:-right-20"
         />
-      </h1>
+      </div>
       <div className="relative md:mt-0 mt-[6vw] px-0 md:px-[10vw] pt-[2vw]">
         <Network />
         <Image

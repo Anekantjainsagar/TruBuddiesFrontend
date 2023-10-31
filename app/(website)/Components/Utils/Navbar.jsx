@@ -79,6 +79,9 @@ const Navbar = () => {
           <div>
             <Image
               src={profile}
+              onClick={(e) => {
+                history.push("/user/dashboard");
+              }}
               alt="Profile"
               className="w-[75%] cursor-pointer shadow-md shadow-gray-500 rounded-full"
             />

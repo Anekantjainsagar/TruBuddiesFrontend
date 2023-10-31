@@ -1,12 +1,16 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import profile from "../../(website)/Assets/Chats/profile.png";
 import { AiFillMessage, AiOutlinePlus } from "react-icons/ai";
 import { IoIosPeople, IoMdSend } from "react-icons/io";
 import { BiExit } from "react-icons/bi";
 import { maliFont, noto_sans } from "../../(website)/Components/Utils/font";
-import ScrollToBottom from "react-scroll-to-bottom";
+import { io } from "socket.io-client";
+import { format } from "timeago.js";
+import { URL } from "../../(website)/Components/Utils/url";
+
+import Context from "../../Context/Context";
 
 import picture from "../../(website)/Assets/Chats/picture.png";
 import { useRouter } from "next/navigation";
@@ -15,7 +19,57 @@ import male from "../../(website)/Assets/Home/icons/male white.png";
 import female from "../../(website)/Assets/Home/icons/female.png";
 
 const Chats = () => {
+  const context = React.useContext(Context);
+  const { login } = React.useContext(Context);
+  const socket = io(URL);
   const history = useRouter();
+  const chatContainerRef = useRef();
+  const [messages, setMessages] = useState([]);
+  const [messageInput, setMessageInput] = useState("");
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [context?.messages, messages]);
+
+  useEffect(() => {
+    socket.emit("connection");
+    socket.emit("join", { userId: context?.login?._id });
+  }, [context?.user]);
+
+  const handleMessageSubmit = (e) => {
+    if (messageInput.trim() === "") {
+      return;
+    }
+    //send message to the server
+    if (context?.login?._id && messageInput && context?.clickedUser?._id) {
+      setMessageInput("");
+      socket.emit("message", {
+        from: context?.login?._id,
+        message: messageInput,
+        to: context?.clickedUser?._id,
+      });
+    } else {
+      alert("Internal server error");
+    }
+  };
+
+  useEffect(() => {
+    if (context?.clickedUser?._id) {
+      context.getMessages(context?.clickedUser?._id);
+    }
+  }, [context?.clickedUser]);
+
+  useEffect(() => {
+    socket.on("message", (saveMessage) => {
+      setMessages((prevMessage) => [...prevMessage, saveMessage]);
+    });
+    return () => {
+      socket.off("message");
+    };
+  }, []);
 
   return (
     <div
@@ -48,30 +102,59 @@ const Chats = () => {
             <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
           </div>
           <div className="h-[90%] chatBg">
-            <ScrollToBottom className="px-6 h-[90%] pt-3 overflow-y-scroll">
-              <ChatBlock />
-              <ChatBlock me={true} />
-              <ChatBlock />
-              <ChatBlock me={true} />
-              <ChatBlock />
-              <ChatBlock me={true} />
-              <ChatBlock />
-              <ChatBlock me={true} />
-              <ChatBlock />
-              <ChatBlock me={true} />
-              <ChatBlock />
-              <ChatBlock me={true} />
-              <ChatBlock />
-              <ChatBlock me={true} />
-            </ScrollToBottom>
+            <div
+              ref={chatContainerRef}
+              className="px-6 h-[90%] pt-3 overflow-y-scroll"
+            >
+              {context?.messages
+                ?.filter((e) => {
+                  return (
+                    (e.sender === context?.login?._id &&
+                      e.receiver === context?.clickedUser?._id) ||
+                    (e.receiver === context?.login?._id &&
+                      e.sender === context?.clickedUser?._id)
+                  );
+                })
+                .map((e) => {
+                  return <ChatBlock data={e} me={login?._id == e?.sender} />;
+                })}
+              {messages
+                ?.filter((e) => {
+                  return (
+                    (e.sender === context?.login?._id &&
+                      e.receiver === context?.clickedUser?._id) ||
+                    (e.receiver === context?.login?._id &&
+                      e.sender === context?.clickedUser?._id)
+                  );
+                })
+                .map((e) => {
+                  return <ChatBlock data={e} me={login?._id == e?.sender} />;
+                })}
+            </div>
             <div className="h-[10%] flex items-center justify-center">
               <div className="flex items-center w-full h-[65%] px-4">
                 <input
                   type="text"
+                  value={messageInput}
+                  onKeyDown={(e) => {
+                    if (e.key == "Enter") {
+                      handleMessageSubmit();
+                      setMessageInput("");
+                    }
+                  }}
+                  onChange={(e) => {
+                    setMessageInput(e.target.value);
+                  }}
                   placeholder="Type Your Message Here"
                   className="border-[3px] w-[95%] h-full px-4 rounded-s-2xl border-newBlue outline-none"
                 />
-                <div className="bg-newBlue w-[5%] h-full rounded-e-2xl flex items-center justify-center">
+                <div
+                  onClick={(e) => {
+                    handleMessageSubmit(e);
+                    setMessageInput("");
+                  }}
+                  className="bg-newBlue w-[5%] cursor-pointer h-full rounded-e-2xl flex items-center justify-center"
+                >
                   <IoMdSend className="text-white" size={30} />
                 </div>
               </div>
@@ -194,20 +277,29 @@ const Chats = () => {
   );
 };
 
-const ChatBlock = ({ me }) => {
+const ChatBlock = ({ me, data }) => {
   return (
-    <>
+    <div className="mb-4">
       <div
         className={`${
-          me
-            ? "text-newBlue bg-transparent border-newBlue float-right"
-            : "text-white bg-newChatBlue border-white float-left"
-        } mb-3 w-fit px-5 py-1 rounded-lg border-2`}
+          me ? "float-right" : "float-left"
+        } flex flex-col items-end`}
       >
-        Hello world
+        <div
+          className={`${
+            me
+              ? "text-newBlue bg-transparent border-newBlue"
+              : "text-white bg-newChatBlue border-white"
+          } w-fit px-5 py-1 rounded-lg border-2`}
+        >
+          {data?.message}
+        </div>
+        <p className="text-gray-400 text-sm text-end mr-1">
+          {format(data?.time)}
+        </p>
       </div>
       <div className="clear-both"></div>
-    </>
+    </div>
   );
 };
 
