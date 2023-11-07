@@ -34,12 +34,13 @@ const AdminUser = () => {
         </div>
       </div>
       <div className="mt-3 h-[80vh] overflow-scroll">
-        {admin?.adminUsers?.map((e) => {
+        {admin?.adminUsers?.map((e, i) => {
           console.log(e);
           return (
             <div
               className="grid py-1 mb-1"
               style={{ gridTemplateColumns: "20% 20% 20% 15% 12% 13%" }}
+              key={i}
             >
               <p className="text-center">Name</p>
               <p className="text-center">Email Id</p>
