@@ -12,7 +12,7 @@ module.exports = {
         newChatBlue: "rgba(64, 123, 255, 0.9)",
         newVeryLightBlue: "#eff3ff",
         newLightBlue: "#56A4FF",
-        newDarkBlue: "#407BFF",
+        newDarkBlue: "#1052FF",
         newTomato: "#FF725E",
         newOrange: "#FF5656",
         newDarkNavyGrey: "#263238",

@@ -51,7 +51,7 @@ const OurTrubuddies = () => {
 
   return (
     <div className="pt-[3vw]">
-      <h1
+      <div
         className={`uppercase text-center w-fit mx-auto text-2xl text-newTomato font-bold ${noto_sans.className} flex items-center`}
       >
         Our{" "}
@@ -61,7 +61,7 @@ const OurTrubuddies = () => {
           className="w-[9vw] md:w-[2.5vw] mx-2"
         />{" "}
         Trubuddies
-      </h1>
+      </div>
       <div className="w-full flex justify-between items-center relative bg-gradient-to-r from-newBlue to-newOcean md:px-[12vw] md:pt-[2vw] pt-[10vw] mt-[3vw] md:mt-[1vw]">
         <LeftDots />
         <div className="flex justify-between items-center w-full">

@@ -8,13 +8,18 @@ import { getCookie } from "cookies-next";
 
 const B2BState = (props) => {
   const [loginModal, setLoginModal] = useState(false);
-  const [login, setLogin] = useState({ _id: "653ba550d4139488f6ec3cd4" });
+  const [login, setLogin] = useState();
   const [messages, setMessages] = useState([]);
+  const [groupMessages, setGroupMessages] = useState([]);
   const [clickedUser, setClickedUser] = useState({
     _id: "653e7db453ca29141ac51c15",
   });
+  const [showEditProfile, setShowEditProfile] = useState(false);
 
-  useEffect(() => {
+  // Admin states
+  const [adminUsers, setAdminUsers] = useState([]);
+
+  const getUser = () => {
     axios
       .post(`${BASE_URL}/login/get-user`, { token: getCookie("token") })
       .then((response) => {
@@ -23,6 +28,10 @@ const B2BState = (props) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    getUser();
   }, [getCookie("token")]);
 
   const getMessages = () => {
@@ -31,13 +40,42 @@ const B2BState = (props) => {
         token: getCookie("token"),
       })
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         setMessages(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const getGroupChats = (id) => {
+    axios
+      .post(`${BASE_URL}/chat/getGroupChats/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        setGroupMessages(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getAllUsers = () => {
+    axios
+      .get(`${BASE_URL}/admin/get-users`, (res) => {
+        console.log(res);
+        setAdminUsers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  const admin = { getAllUsers, adminUsers };
 
   return (
     <Context.Provider
@@ -49,6 +87,13 @@ const B2BState = (props) => {
         getMessages,
         messages,
         login,
+        setLogin,
+        getGroupChats,
+        groupMessages,
+        showEditProfile,
+        getUser,
+        setShowEditProfile,
+        admin,
       }}
     >
       {props.children}

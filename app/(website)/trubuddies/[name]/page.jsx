@@ -33,10 +33,10 @@ const SeprateTrubuddy = () => {
         >
           Ayush Srivastava
         </h1>
-        <p className="border-2 px-2 md:px-4 py-0.5 flex items-center rounded-lg text-sm bg-white border-newBlue w-fit mt-1">
+        <div className="border-2 px-2 md:px-4 py-0.5 flex items-center rounded-lg text-sm bg-white border-newBlue w-fit mt-1">
           <Image src={male} alt="Male" className="mr-1.5 md:mr-2 md:w-[1vw]" />
           Male
-        </p>
+        </div>
         <div className="mt-2 flex items-center">
           <BiSolidUserVoice size={25} />
           {["Hindi", "English"].map((e) => {
@@ -50,14 +50,14 @@ const SeprateTrubuddy = () => {
             );
           })}
         </div>
-        <p className="text-center w-10/12 md:w-8/12 mx-auto pt-4 pb-1 md:text-xl relative">
+        <div className="text-center w-10/12 md:w-8/12 mx-auto pt-4 pb-1 md:text-xl relative">
           <Image
             alt="Backtick"
             src={backtick}
             className="absolute left-[-2vw]"
           />
           The Buddy You Need The Most.
-        </p>
+        </div>
         <button
           className={`bg-newBlue text-white ${noto_sans.className} md:mb-0 -mb-6 mt-0 md:mt-4 px-5 md:text-lg py-0.5 md:py-1 rounded-full font-medium`}
         >
@@ -84,10 +84,10 @@ const SeprateTrubuddy = () => {
                   <h1 className="mb-0 text-lg font-semibold">
                     Ayush Srivastava
                   </h1>
-                  <p className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
+                  <div className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
                     <Image src={male} alt="Male" className="mr-1" />
                     Male
-                  </p>
+                  </div>
                 </div>
               </div>
               <div className={`${noto_sans.className}`}>

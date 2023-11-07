@@ -25,8 +25,10 @@ import cloud from "./Assets/Home/cloud.png";
 import lightCloud from "./Assets/Home/image 16.png";
 import gsap from "gsap";
 import { Power2 } from "gsap/all";
+import { useRouter } from "next/navigation";
 
 const App = () => {
+  const history = useRouter();
   const animateLeftRight = (e) => {
     let timeline = gsap.timeline({ repeat: Infinity });
 
@@ -88,14 +90,14 @@ const App = () => {
           <Image
             src={girl}
             alt="Girl"
-            className="floatGirl absolute w-11/12 md:w-8/12 md:mt-0 mt-5"
+            className="floatGirl absolute w-11/12 md:w-7/12 md:mt-0 mt-5"
           />
         </div>
         <div
           className={`flex flex-col items-end w-full md:w-6/12 pr-[4vw] ${noto_sans.className} z-40`}
         >
           <div
-            className="text-4xl md:text-7xl font-bold text-end text-newDarkNavyGrey md:leading-[90px]"
+            className="text-4xl md:text-7xl font-bold text-center md:text-end text-newDarkNavyGrey leading-[45px] md:leading-[90px]"
             style={{ textShadow: "0px 5px 3px rgba(56, 56, 56,0.5)" }}
           >
             KEEP YOUR{" "}
@@ -124,6 +126,9 @@ const App = () => {
               <Image src={logo} alt="Logo" className="w-7/12" />
             </div>
             <div
+              onClick={(e) => {
+                history.push("/chats");
+              }}
               className="bg-newYellow h-[9.5vw] md:h-[3vw] w-[55vw] md:w-[15vw] rounded-xl -ml-7 pl-3 flex justify-center items-center  text-lg md:text-xl font-bold"
               style={{ textShadow: "0px 3px 3px rgba(56, 56, 56,0.5)" }}
             >
@@ -201,8 +206,8 @@ const App = () => {
         <OurServices />
         <LearnInspire />
         <FAQs />
-        <OurTeam />
-        <SocialMedia />
+        {/* <OurTeam /> */}
+        {/* <SocialMedia /> */}
       </div>
     </div>
   );

@@ -19,6 +19,18 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.completeBg {
+  background-image: url("./\(website)/Assets/User/complete\ profile\ bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.faqBg {
+  background-image: url("./(website)/Assets/Home/Faq bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
 .dotsBg {
   background-image: url("./(website)/Assets/Home/icons/bg.png");
   background-size: cover;
@@ -160,4 +172,8 @@ input[type="number"] {
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.active {
+  background-color: green;
 }

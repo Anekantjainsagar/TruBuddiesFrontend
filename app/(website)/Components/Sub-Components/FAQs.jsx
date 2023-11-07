@@ -10,8 +10,7 @@ import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 
 const FAQs = () => {
   return (
-    <div className="flex md:flex-row flex-col items-center overflow-hidden relative justify-evenly py-[8vw] md:py-[3vw] px-[5vw]">
-      <Image src={bg} alt="Background" className="absolute left-0 h-full" />
+    <div className="flex md:flex-row faqBg flex-col items-center overflow-hidden relative justify-evenly py-[8vw] md:py-[3vw] px-[5vw]">
       <div className="flex flex-col items-center">
         <h1
           className={`uppercase text-center w-fit mx-auto text-2xl md:text-4xl mb-[4vw] md:mb-[2vw] text-newBlue font-bold ${noto_sans.className}`}
