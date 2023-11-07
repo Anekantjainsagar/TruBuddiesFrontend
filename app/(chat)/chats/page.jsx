@@ -149,11 +149,23 @@ const Chats = () => {
             >
               {isGroupChat ? (
                 <>
-                  {context?.groupMessages.map((e) => {
-                    return <ChatBlock data={e} me={login?._id == e?.sender} />;
+                  {context?.groupMessages.map((e, i) => {
+                    return (
+                      <ChatBlock
+                        key={i}
+                        data={e}
+                        me={login?._id == e?.sender}
+                      />
+                    );
                   })}
-                  {groupMessages.map((e) => {
-                    return <ChatBlock data={e} me={login?._id == e?.sender} />;
+                  {groupMessages.map((e, i) => {
+                    return (
+                      <ChatBlock
+                        key={i}
+                        data={e}
+                        me={login?._id == e?.sender}
+                      />
+                    );
                   })}
                 </>
               ) : (
@@ -167,9 +179,13 @@ const Chats = () => {
                           e.sender === context?.clickedUser?._id)
                       );
                     })
-                    .map((e) => {
+                    .map((e, i) => {
                       return (
-                        <ChatBlock data={e} me={login?._id == e?.sender} />
+                        <ChatBlock
+                          key={i}
+                          data={e}
+                          me={login?._id == e?.sender}
+                        />
                       );
                     })}
                   {messages
@@ -181,9 +197,13 @@ const Chats = () => {
                           e.sender === context?.clickedUser?._id)
                       );
                     })
-                    .map((e) => {
+                    .map((e, i) => {
                       return (
-                        <ChatBlock data={e} me={login?._id == e?.sender} />
+                        <ChatBlock
+                          key={i}
+                          data={e}
+                          me={login?._id == e?.sender}
+                        />
                       );
                     })}
                 </>
