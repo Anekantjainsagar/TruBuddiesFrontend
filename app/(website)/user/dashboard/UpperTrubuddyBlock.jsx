@@ -23,16 +23,18 @@ const UpperTrubuddyBlock = ({ id }) => {
   }, [id]);
 
   return (
-    <div className="md:border-0 border-b flex md:p-0 p-1">
+    <div
+      className="md:border-0 border-b flex md:p-0 p-1"
+      onClick={(e) => {
+        setClickedUser(user);
+        if (typeof window != "undefined" && window.innerWidth < 550) {
+          history.push(`/chats/${id}`);
+        } else {
+          history.push("/chats");
+        }
+      }}
+    >
       <Image
-        onClick={(e) => {
-          setClickedUser(user);
-          if (typeof window != "undefined" && window.innerWidth < 550) {
-            history.push(`/chats/${id}`);
-          } else {
-            history.push("/chats");
-          }
-        }}
         src={user?.profile}
         width={100}
         height={100}

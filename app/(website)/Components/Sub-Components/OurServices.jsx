@@ -14,19 +14,42 @@ const OurServices = () => {
   const [rotation, setRotation] = useState(-45);
 
   return (
-    <div className="h-[100vh] flex items-center relative overflow-hidden justify-center serviceBg">
-      <div className="flex items-center">
+    <div className="h-fit md:py-0 py-5 md:h-[100vh] flex items-center relative overflow-hidden justify-center serviceBg">
+      <div className="flex md:flex-row flex-col items-center">
         <div>
-          <Image src={image} alt="Services" className="w-[25vw]" />
+          <Image
+            src={image}
+            alt="Services"
+            className="w-[25vw] md:block hidden"
+          />
           <h1
             className={`uppercase text-center w-fit mx-auto text-3xl mt-2 text-newBlue font-bold ${noto_sans.className}`}
           >
             Our Services
           </h1>
         </div>
+        <div className="grid grid-cols-2 md:hidden h-[80vh] w-[90vw] md:mt-0 mt-[5vw]">
+          <div className="flex flex-col items-center justify-between h-full">
+            {[
+              { image: meditation, title: "Yoga & Meditation" },
+              { image: animation3, title: "Library" },
+              { image: animation4, title: "Chat & Call Based Conversations" },
+            ].map((e) => {
+              return <Block key={e?.title} data={e} />;
+            })}
+          </div>
+          <div className="flex flex-col items-center justify-evenly">
+            {[
+              { image: animation1, title: "Social Support" },
+              { image: animation2, title: "Routine Improvement" },
+            ].map((e) => {
+              return <Block key={e?.title} data={e} />;
+            })}
+          </div>
+        </div>
         <div
           id="circle"
-          className="w-[45vw] h-[40vw] rounded-full relative flex items-center justify-center right-[-44%]"
+          className="w-[45vw] md:flex hidden h-[40vw] rounded-full relative items-center justify-center right-[-44%]"
         >
           <p
             className={`text-3xl font-semibold mr-[6vw] rotate-[${
@@ -109,6 +132,24 @@ const OurServices = () => {
           />
         </div>
       </div>
+    </div>
+  );
+};
+
+const Block = ({data}) => {
+  return (
+    <div className="flex flex-col items-center">
+      {" "}
+      <div className="bg-gradient-to-br from-newBlue via-newOceanGreen to-newOrange rounded-full p-1">
+        <div className="bg-white rounded-full">
+          <Image
+            src={data?.image}
+            alt="Meditation"
+            className={`w-[30vw]`}
+          />
+        </div>
+      </div>
+      <p className="text-lg text-center font-semibold">{data?.title}</p>
     </div>
   );
 };

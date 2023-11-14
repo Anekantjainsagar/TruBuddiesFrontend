@@ -91,11 +91,11 @@ const Footer = () => {
             />
           </div>
         </div>
-        <p className="my-2 md:mr-0 mr-16">
+        <p className="my-2 md:ml-0 ml-3 md:mr-0 mr-16">
           Lorem ipsum dolor sit amet consectetur. Mattis turpis cras vivamus
           nulla consectetur a libero. Porta sit.
         </p>
-        <p className="text-sm opacity-75 mt-2">
+        <p className="text-sm md:ml-0 ml-3 opacity-75 mt-2">
           © 2023 TruBuddy . All Rights Reserved.
         </p>
       </div>
