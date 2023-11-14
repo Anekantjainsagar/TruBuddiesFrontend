@@ -107,7 +107,7 @@ const LearnInspire = () => {
 
 const Block = ({ data }) => {
   return (
-    <div className="bg-white flex flex-col mb-10 md:mx-0 mx-[12vw] md:p-4 p-3 rounded-2xl shadow-lg shadow-gray-400">
+    <div className="bg-white flex flex-col mb-10 md:mx-0 mx-[12vw] md:p-4 p-3 rounded-2xl shadow-lg shadow-gray-400 hover:scale-105 transition-all cursor-pointer">
       <Image src={data?.image} alt="Image" />
       <h1 className="text-xl font-semibold pt-2 pl-2">{data?.title}</h1>
       <p className="px-2 mb-0 text-sm font-light">{data?.text}</p>

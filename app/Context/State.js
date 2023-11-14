@@ -11,36 +11,59 @@ const B2BState = (props) => {
   const [login, setLogin] = useState();
   const [messages, setMessages] = useState([]);
   const [groupMessages, setGroupMessages] = useState([]);
-  const [clickedUser, setClickedUser] = useState({
-    _id: "653e7db453ca29141ac51c15",
-  });
+  const [clickedUser, setClickedUser] = useState({});
   const [showEditProfile, setShowEditProfile] = useState(false);
+
+  const [trubuddy, setTrubuddy] = useState();
+  const [showTrubuddyEdit, setShowTrubuddyEdit] = useState(false);
+  const [clickedBuddy, setClickedBuddy] = useState({
+    _id: "653ba550d4139488f6ec3cd4",
+  });
 
   // Admin states
   const [adminUsers, setAdminUsers] = useState([]);
+  const [adminUserConfig, setAdminUserConfig] = useState("");
+  const [adminTrubuddies, setAdminTrubuddies] = useState([]);
+  const [adminTrubuddyConfig, setAdminTrubuddyConfig] = useState("");
 
   const getUser = () => {
-    axios
-      .post(`${BASE_URL}/login/get-user`, { token: getCookie("token") })
-      .then((response) => {
-        setLogin(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (getCookie("token")) {
+      axios
+        .post(`${BASE_URL}/login/get-user`, { token: getCookie("token") })
+        .then((response) => {
+          setLogin(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const getTrubuddyLogin = () => {
+    if (getCookie("trubuddy_token")) {
+      axios
+        .post(`${BASE_URL}/trubuddy/get`, {
+          token: getCookie("trubuddy_token"),
+        })
+        .then((res) => {
+          setTrubuddy(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {
     getUser();
   }, [getCookie("token")]);
 
-  const getMessages = () => {
+  const getMessages = (id, buddy) => {
     axios
-      .post(`${BASE_URL}/chat/getMessages/${clickedUser?._id}`, {
-        token: getCookie("token"),
+      .post(`${BASE_URL}/chat/getMessages/${id}`, {
+        token: buddy ? getCookie("trubuddy_token") : getCookie("token"),
       })
       .then((res) => {
-        console.log(res.data);
         setMessages(res.data);
       })
       .catch((err) => {
@@ -52,7 +75,6 @@ const B2BState = (props) => {
     axios
       .post(`${BASE_URL}/chat/getGroupChats/${id}`)
       .then((res) => {
-        console.log(res.data);
         setGroupMessages(res.data);
       })
       .catch((err) => {
@@ -62,9 +84,20 @@ const B2BState = (props) => {
 
   const getAllUsers = () => {
     axios
-      .get(`${BASE_URL}/admin/get-users`, (res) => {
-        console.log(res);
+      .get(`${BASE_URL}/admin/get-users?search=${adminUserConfig}`)
+      .then((res) => {
         setAdminUsers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getAllTrubuddies = () => {
+    axios
+      .get(`${BASE_URL}/admin/get-trubuddies?search=${adminTrubuddyConfig}`)
+      .then((res) => {
+        setAdminTrubuddies(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -73,9 +106,26 @@ const B2BState = (props) => {
 
   useEffect(() => {
     getAllUsers();
-  }, []);
+  }, [adminUserConfig]);
 
-  const admin = { getAllUsers, adminUsers };
+  useEffect(() => {
+    getAllTrubuddies();
+  }, [adminTrubuddyConfig]);
+
+  const admin = {
+    getAllUsers,
+    adminUsers,
+    setAdminUserConfig,
+    adminUserConfig,
+    getAllTrubuddies,
+    adminTrubuddies,
+    adminTrubuddyConfig,
+    setAdminTrubuddyConfig,
+  };
+
+  useEffect(() => {
+    getTrubuddyLogin();
+  }, [getCookie("trubuddy_token")]);
 
   return (
     <Context.Provider
@@ -94,6 +144,12 @@ const B2BState = (props) => {
         getUser,
         setShowEditProfile,
         admin,
+        getTrubuddyLogin,
+        trubuddy,
+        showTrubuddyEdit,
+        setShowTrubuddyEdit,
+        clickedBuddy,
+        setClickedBuddy,
       }}
     >
       {props.children}

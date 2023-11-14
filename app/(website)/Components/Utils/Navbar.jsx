@@ -7,13 +7,13 @@ import gsap, { Power2 } from "gsap";
 import { usePathname, useRouter } from "next/navigation";
 import LoginModal from "../login";
 import Context from "../../../Context/Context";
-import { getCookie, getCookies } from "cookies-next";
-import profile from "../../Assets/Chats/picture.png";
+import { deleteCookie, getCookie, getCookies } from "cookies-next";
 
 const Navbar = () => {
-  const { modalIsOpen, setIsOpen } = useContext(Context);
+  const { modalIsOpen, setIsOpen, login } = useContext(Context);
   const pathname = usePathname();
   const history = useRouter();
+  const [showLogOut, setShowLogOut] = useState(false);
   let routes = [
     {
       name: "Home",
@@ -40,7 +40,7 @@ const Navbar = () => {
     <>
       <LoginModal />
       <div
-        className={`flex items-center justify-between md:px-[2vw] py-1.5 z-50 w-full fixed top-0 left-0 ${
+        className={`flex items-center justify-between md:px-[2vw] py-2 z-50 w-full fixed top-0 left-0 ${
           pathname.includes("trubuddies")
             ? "bg-gradient-to-b from-newBlue to-newOcean text-white"
             : "bg-transparent"
@@ -76,14 +76,41 @@ const Navbar = () => {
           })}
         </div>
         {getCookie("token")?.length > 0 ? (
-          <div>
+          <div
+            className="relative md:block hidden"
+            onClick={(e) => {
+              setShowLogOut(!showLogOut);
+            }}
+          >
+            <div
+              className={`absolute right-0 bg-white top-16 rounded-md ${
+                showLogOut ? "block text-black" : "hidden"
+              }`}
+            >
+              <p
+                onClick={(e) => {
+                  history.push("/user/dashboard");
+                }}
+                className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
+              >
+                Profile
+              </p>
+              <p
+                onClick={(e) => {
+                  deleteCookie("token");
+                  history.push("/");
+                }}
+                className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
+              >
+                Logout
+              </p>
+            </div>
             <Image
-              src={profile}
-              onClick={(e) => {
-                history.push("/user/dashboard");
-              }}
+              src={login?.profile}
+              width={100}
+              height={100}
               alt="Profile"
-              className="w-[75%] cursor-pointer shadow-md shadow-gray-500 rounded-full"
+              className="w-[3.5vw] h-[3.5vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
             />
           </div>
         ) : (
@@ -133,20 +160,62 @@ const Navbar = () => {
                 </p>
               );
             })}
-            <div className="flex flex-col items-center">
-              <button
+            {getCookie("token") ? (
+              <div
+                className="relative"
                 onClick={(e) => {
-                  e.preventDefault();
-                  setIsOpen(!modalIsOpen);
+                  setShowLogOut(!showLogOut);
                 }}
-                className="font-semibold px-4 bg-white mb-4 text-newBlue py-1 rounded-md"
               >
-                Login
-              </button>
-              <button className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md">
-                Get Started
-              </button>
-            </div>
+                <div
+                  className={`absolute left-1/2 -translate-x-1/2 bg-white top-14 rounded-md ${
+                    showLogOut ? "block text-black" : "hidden"
+                  }`}
+                >
+                  <p
+                    onClick={(e) => {
+                      history.push("/user/dashboard");
+                      closeNav();
+                    }}
+                    className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
+                  >
+                    Profile
+                  </p>
+                  <p
+                    onClick={(e) => {
+                      deleteCookie("token");
+                      history.push("/");
+                      closeNav();
+                    }}
+                    className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
+                  >
+                    Logout
+                  </p>
+                </div>
+                <Image
+                  src={login?.profile}
+                  width={100}
+                  height={100}
+                  alt="Profile"
+                  className="w-[13vw] h-[13vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
+                />
+              </div>
+            ) : (
+              <div className="flex flex-col items-center">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsOpen(!modalIsOpen);
+                  }}
+                  className="font-semibold px-4 bg-white mb-4 text-newBlue py-1 rounded-md"
+                >
+                  Login
+                </button>
+                <button className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md">
+                  Get Started
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

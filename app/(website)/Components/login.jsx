@@ -114,7 +114,6 @@ const LoginModal = () => {
           email: register?.email,
         })
         .then((res) => {
-          console.log(res);
           if (res.status == 200) {
             setshowOtp(!showOtp);
             setRegister({ ...register, originalOtp: res.data.otp });
@@ -136,7 +135,6 @@ const LoginModal = () => {
       axios
         .post(`${BASE_URL}/login/signin`, { ...login })
         .then((res) => {
-          console.log(res);
           if (res.status === 200) {
             setCookie("token", res.data.jwtToken);
             setLogin({ email: "", password: "" });
@@ -160,13 +158,13 @@ const LoginModal = () => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <div className="w-[50vw] loginBg flex items-center justify-between overflow-hidden">
-          <div className="w-[45%] flex items-center justify-center">
-            <Image src={cartoon} alt="Cartoon" className="w-[65%]" />
+        <div className="w-[70vw] md:w-[50vw] loginBg flex md:flex-row flex-col items-center justify-between overflow-hidden">
+          <div className="md:w-[45%] hidden md:flex items-center justify-center">
+            <Image src={cartoon} alt="Cartoon" className="w-[90%] md:w-[65%]" />
           </div>
-          <div className="w-[3px] bg-newBlue h-[40vh] rounded-full"></div>
+          <div className="w-full md:block hidden md:w-[3px] bg-newBlue h-[1px] md:h-[40vh] md:my-0 my-5 rounded-full"></div>
           <div
-            className={`w-[54%] flex flex-col items-center px-[1vw] ${
+            className={`md:w-[54%] flex flex-col items-center px-[1vw] ${
               showLogin ? "hidden" : "block"
             }`}
             id="login"
@@ -216,7 +214,7 @@ const LoginModal = () => {
                   />
                 )}
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex md:flex-row flex-col items-center justify-between">
                 <button
                   onClick={onLogin}
                   className="px-6 rounded-lg mt-3 font-semibold bg-newBlue text-white py-1"
@@ -237,18 +235,18 @@ const LoginModal = () => {
               </div>
             </div>
             <div className="flex items-center justify-end w-full px-2 mt-1">
-              <div className="flex items-center">
+              <div className="flex w-fit items-center">
                 <p className="text-sm">Or Login With</p>
                 <Image
                   src={google}
                   alt="GOogle"
-                  className="w-[1.75vw] ml-2 cursor-pointer"
+                  className="w-4/12 md:w-[1.75vw] ml-1 md:ml-2 cursor-pointer"
                 />
               </div>
             </div>
           </div>
           <div
-            className={`w-[54%] flex flex-col items-center px-[1vw] ${
+            className={`md:w-[54%] flex flex-col items-center px-[1vw] ${
               showLogin ? "block" : "hidden"
             }`}
             id="register"
@@ -328,7 +326,7 @@ const LoginModal = () => {
                   className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
                 />
               ) : null}
-              <div className="flex items-center justify-between">
+              <div className="flex md:flex-row flex-col items-center justify-between">
                 <button
                   onClick={!showOtp ? onGetOtp : onRegister}
                   className="px-6 rounded-lg mt-3 font-semibold bg-newBlue text-white py-1"
@@ -354,7 +352,7 @@ const LoginModal = () => {
                 <Image
                   src={google}
                   alt="GOogle"
-                  className="w-[1.75vw] ml-2 cursor-pointer"
+                  className="w-4/12 md:w-[1.75vw] ml-2 cursor-pointer"
                 />
               </div>
             </div>

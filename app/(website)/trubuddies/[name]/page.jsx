@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import client from "../../Assets/Home/team/client  (1).png";
 import Image from "next/image";
-import { maliFont, noto_sans } from "../../Components/Utils/font";
+import { noto_sans } from "../../Components/Utils/font";
 import { AiFillClockCircle } from "react-icons/ai";
 
 import male from "../../Assets/Home/icons/male.png";
@@ -11,8 +11,29 @@ import female from "../../Assets/Home/icons/female.png";
 import backtick from "../../Assets/Home/backtick.png";
 
 import { BiSolidUserVoice } from "react-icons/bi";
+import axios from "axios";
+import { BASE_URL } from "../../Components/Utils/url";
+import Context from "../../../Context/Context";
+import { useRouter } from "next/navigation";
+import { getCookie } from "cookies-next";
 
-const SeprateTrubuddy = () => {
+const SeprateTrubuddy = ({ params }) => {
+  const { admin, login, getUser, setClickedUser } = useContext(Context);
+  const [user, setUser] = useState();
+  const history = useRouter();
+  const id = params.name;
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/trubuddy/get-one/${id}`)
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
   return (
     <div
       className="mt-[15vw] md:mt-[4vw] py-[1vw] grid gap-x-10 mx-[3vw]"
@@ -24,22 +45,41 @@ const SeprateTrubuddy = () => {
           : {}
       }
     >
-      <div className="bg-gradient-to-br from-newLightBlue from-70% to-[#1BF9EC] w-full rounded-3xl md:mb-0 mb-5 py-3 px-[2vw] flex flex-col items-center">
+      <div className="bg-gradient-to-br shadow-lg shadow-gray-500 from-newLightBlue from-70% to-[#1BF9EC] w-full rounded-3xl md:mb-0 mb-5 py-3 px-[2vw] flex flex-col items-center">
         <div className="rounded-full bg-gradient-to-t w-4/12 md:w-6/12 from-newLightBlue shadow-sm shadow-gray-200 to-newOceanGreen p-1">
-          <Image src={client} alt={"client"} className="w-full" />
+          <Image
+            src={user?.profile}
+            width={100}
+            height={100}
+            alt={"client"}
+            className="w-full rounded-full"
+          />
         </div>
         <h1
           className={`text-xl md:text-2xl mt-1 md:mt-2 font-semibold ${noto_sans.className}`}
         >
-          Ayush Srivastava
+          {user?.name}
         </h1>
         <div className="border-2 px-2 md:px-4 py-0.5 flex items-center rounded-lg text-sm bg-white border-newBlue w-fit mt-1">
-          <Image src={male} alt="Male" className="mr-1.5 md:mr-2 md:w-[1vw]" />
-          Male
+          {user?.gender?.toLowerCase() === "male" ? (
+            <Image
+              src={male}
+              alt="Male"
+              className="mr-1.5 md:mr-2 md:w-[1vw]"
+            />
+          ) : (
+            <Image
+              src={female}
+              alt="Male"
+              className="mr-1.5 md:mr-2 md:w-[1vw]"
+            />
+          )}
+
+          {user?.gender}
         </div>
         <div className="mt-2 flex items-center">
           <BiSolidUserVoice size={25} />
-          {["Hindi", "English"].map((e) => {
+          {user?.languages.map((e) => {
             return (
               <p
                 key={e}
@@ -59,6 +99,29 @@ const SeprateTrubuddy = () => {
           The Buddy You Need The Most.
         </div>
         <button
+          onClick={(e) => {
+            if (!login?.trubuddies?.includes(user?._id)) {
+              axios
+                .post(`${BASE_URL}/login/start-chat/${user?._id}`, {
+                  token: getCookie("token"),
+                })
+                .then((res) => {
+                  if (res.status == 200) {
+                    setClickedUser(user);
+                    setTimeout(() => {
+                      getUser();
+                      history.push("/chats");
+                    }, 500);
+                  }
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            } else {
+              setClickedUser(user);
+              history.push("/chats");
+            }
+          }}
           className={`bg-newBlue text-white ${noto_sans.className} md:mb-0 -mb-6 mt-0 md:mt-4 px-5 md:text-lg py-0.5 md:py-1 rounded-full font-medium`}
         >
           Start Chat
@@ -69,40 +132,48 @@ const SeprateTrubuddy = () => {
           </h1>
           <div
             onClick={(e) => {
-              history.push(`/trubuddies/${"anekant"}`);
+              history.push(`/trubuddies/${admin?.adminTrubuddies[0]?._id}`);
             }}
             className="bg-white cursor-pointer rounded-3xl shadow-md shadow-gray-500 border mx-auto w-full py-[1vw] md:py-2 mb-1 px-[3.5vw] md:px-[1.5vw] flex flex-col items-center"
           >
             <div className="w-full h-full">
               <div className="flex items-center w-full justify-start z-30">
                 <Image
-                  src={client}
+                  src={admin?.adminTrubuddies[0]?.profile}
+                  width={100}
+                  height={100}
                   alt="Image"
                   className="w-[32vw] md:w-[5vw] border-4 border-newLightBlue rounded-full"
                 />
                 <div className="ml-3">
                   <h1 className="mb-0 text-lg font-semibold">
-                    Ayush Srivastava
+                    {admin?.adminTrubuddies[0]?.name}
                   </h1>
                   <div className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
-                    <Image src={male} alt="Male" className="mr-1" />
-                    Male
+                    {admin?.adminTrubuddies[0]?.gender == "Male" ? (
+                      <Image src={male} alt="Male" className="mr-1" />
+                    ) : (
+                      <Image src={female} alt="Male" className="mr-1" />
+                    )}
+                    {admin?.adminTrubuddies[0]?.gender}
                   </div>
                 </div>
               </div>
               <div className={`${noto_sans.className}`}>
                 <h1 className="text-lg mt-2 md:mt-1.5 mb-0">Expertise</h1>
                 <div className="grid grid-cols-2 gap-x-3">
-                  {["Psycology", "Color Artist"].map((e) => {
-                    return (
-                      <div
-                        className="px-3 text-sm rounded-full mt-1 text-center border-2 border-newBlue"
-                        key={e}
-                      >
-                        {e}
-                      </div>
-                    );
-                  })}
+                  {admin?.adminTrubuddies[0]?.otherExpertise
+                    .slice(0, 2)
+                    ?.map((e) => {
+                      return (
+                        <div
+                          className="px-3 text-sm rounded-full mt-1 text-center border-2 border-newBlue"
+                          key={e}
+                        >
+                          {e}
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -113,20 +184,15 @@ const SeprateTrubuddy = () => {
         </div>
       </div>
       <div
-        className={`bg-gradient-to-br from-newLightBlue to-newOceanGreen md:mb-0 mb-5 p-4 rounded-3xl w-full ${noto_sans.className}`}
+        className={`bg-gradient-to-br shadow-lg shadow-gray-500 from-newLightBlue to-newOceanGreen md:mb-0 mb-5 p-4 rounded-3xl w-full ${noto_sans.className}`}
       >
         <div className="bg-gradient-to-r w-full from-newLightBlue rounded-3xl shadow-md shadow-gray-400 to-newOceanGreen p-0.5">
           <div className="bg-white md:py-5 py-2 px-4 rounded-3xl">
             <h1 className="text-xl md:text-2xl font-semibold md:text-start text-center">
               Bio
             </h1>
-            <p className="font-light mt-0.5 md:mt-1 md:text-base text-sm md:text-start text-center">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Cupiditate odio doloremque adipisci, dolores architecto qui dicta
-              magni a similique consequuntur ad rem! Porro in, nulla eum ipsam
-              ipsa molestias quidem amet nobis officiis voluptatum reprehenderit
-              iure et asperiores eius excepturi ea quisquam quas autem eveniet
-              consectetur ex cumque tenetur neque.
+            <p className="font-light h-[16vh] mt-0.5 md:mt-1 md:text-base text-sm md:text-start text-center">
+              {user?.bio}
             </p>
           </div>
         </div>
@@ -135,31 +201,54 @@ const SeprateTrubuddy = () => {
             <h1 className="text-xl md:text-2xl font-semibold text-center md:text-start">
               Personality
             </h1>
-            <p className="font-light mt-1 md:text-start text-center md:text-base text-sm md:h-[45vh]">
-              Language (3-20 Max skills)
-            </p>
+            <div className="font-light md:mt-1 md:text-start flex-wrap text-center md:text-base text-sm flex justify-start">
+              {user?.otherExpertise?.map((e) => {
+                return (
+                  <p
+                    className="border-2 border-newBlue text-center w-fit px-3 py-0.5 h-fit mr-3 rounded-xl mt-2 md:mt-3"
+                    key={e}
+                  >
+                    {e}
+                  </p>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
       <div
-        className={`bg-gradient-to-br bg-opacity-10 from-newLightBlue rounded-3xl to-newOceanGreen w-full md:mb-0 mb-4 p-4 ${noto_sans.className}`}
+        className={`bg-gradient-to-br shadow-lg shadow-gray-500 bg-opacity-10 from-newLightBlue rounded-3xl to-newOceanGreen w-full md:mb-0 mb-4 p-4 ${noto_sans.className}`}
       >
         <div className="bg-white py-3 px-4 md:px-3 mr-2 shadow-md shadow-gray-500 rounded-3xl mb-3 flex items-center justify-between">
           <h1 className="md:text-lg font-semibold">Status</h1>
-          <div className="border-2 border-green-700 w-fit flex px-2 items-center rounded-full justify-center">
-            <div className="w-[10px] h-[10px] bg-green-700 rounded-full mr-1"></div>
-            <p className="md:text-base text-sm">online</p>
+          <div
+            className={`border-2 ${
+              user?.status == "Online"
+                ? "border-green-700"
+                : "border-orange-500"
+            } w-fit flex px-2 items-center rounded-full justify-center`}
+          >
+            <div
+              className={`w-[10px] h-[10px] ${
+                user?.status == "Online" ? "bg-green-700" : "bg-orange-500"
+              } rounded-full mr-1`}
+            ></div>
+            <p className="md:text-base text-sm">{user?.status}</p>
           </div>
         </div>
         <div className="bg-white py-3 px-4 md:px-3 mr-2 shadow-md shadow-gray-500 rounded-3xl mb-3">
           <h1 className="md:text-lg font-semibold">Expertise</h1>
           <div className="grid grid-cols-2 gap-x-4 mt-1 md:mt-2 md:text-base text-sm">
-            <p className="border-2 border-newBlue text-center rounded-xl">
-              Psycology
-            </p>
-            <p className="border-2 border-newBlue text-center rounded-xl">
-              Engineering
-            </p>
+            {user?.otherExpertise.slice(0, 2)?.map((e) => {
+              return (
+                <div
+                  className="border-2 border-newBlue text-center rounded-xl"
+                  key={e}
+                >
+                  {e}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="bg-white py-3 px-4 md:px-3 mr-2 shadow-md shadow-gray-500 rounded-3xl mb-3">
@@ -175,7 +264,7 @@ const SeprateTrubuddy = () => {
               }
               className="mr-1 md:mr-2"
             />
-            6 : 00 PM To 8 : 00 PM
+            {user?.availability}
           </p>
         </div>
         <div className={`${noto_sans.className}`}>

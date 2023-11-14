@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { maliFont, noto_sans } from "../Utils/font";
 import logo from "../../Assets/Home/Logo Image.png";
 import Image from "next/image";
@@ -18,6 +18,8 @@ import bg from "../../Assets/Home/trubuddies bg.png";
 import male from "../../Assets/Home/icons/male.png";
 import female from "../../Assets/Home/icons/female.png";
 import { useRouter } from "next/navigation";
+
+import Tilt from "react-parallax-tilt";
 
 import {
   Navigation,
@@ -39,8 +41,13 @@ import {
   AiOutlineRight,
   AiOutlineRightSquare,
 } from "react-icons/ai";
+import Context from "../../../Context/Context";
+import axios from "axios";
+import { BASE_URL } from "../Utils/url";
+import { getCookie } from "cookies-next";
 
 const OurTrubuddies = () => {
+  const { admin } = useContext(Context);
   let data = [
     { image: client1 },
     { image: client2 },
@@ -78,10 +85,17 @@ const OurTrubuddies = () => {
             loop={true}
             autoplay={{
               interval: 3000,
-              disableOnInteraction: false,
+              disableOnInteraction: true,
             }}
           >
-            {data.map((e, i) => {
+            {admin?.adminTrubuddies?.map((e, i) => {
+              return (
+                <SwiperSlide key={i}>
+                  <Block data={e} />
+                </SwiperSlide>
+              );
+            })}
+            {admin?.adminTrubuddies?.map((e, i) => {
               return (
                 <SwiperSlide key={i}>
                   <Block data={e} />
@@ -89,26 +103,28 @@ const OurTrubuddies = () => {
               );
             })}
             <SwiperSlide>
-              <div
-                onClick={(e) => {
-                  history.push("/trubuddies");
-                }}
-                className={`bg-white cursor-pointer rounded-3xl mb-9 border md:mx-0 mx-auto w-[80%] h-[46.5vh] md:w-[23vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative`}
-              >
-                <Image
-                  src={bg}
-                  alt="Background"
-                  className="absolute top-0 left-0 h-[45vh] opacity-50"
-                />
-                <div className="w-full h-full flex items-center justify-center hover:scale-110 transition-all">
-                  <div className="flex flex-col items-center justify-center">
-                    <AiOutlineRight size={100} className="text-gray-600" />
-                    <h1 className="text-2xl text-gray-600">
-                      More TruBuddies...
-                    </h1>
+              <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>
+                <div
+                  onClick={(e) => {
+                    history.push("/trubuddies");
+                  }}
+                  className={`bg-white cursor-pointer rounded-3xl mb-9 border md:mx-0 mx-auto w-[80%] h-[41vh] max-h-[49vw] md:w-[23vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative`}
+                >
+                  <Image
+                    src={bg}
+                    alt="Background"
+                    className="absolute top-0 left-0 h-[45vh] opacity-50"
+                  />
+                  <div className="w-full h-full flex items-center justify-center hover:scale-110 transition-all">
+                    <div className="flex flex-col items-center justify-center">
+                      <AiOutlineRight size={100} className="text-gray-600" />
+                      <h1 className="text-2xl text-gray-600">
+                        More TruBuddies...
+                      </h1>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Tilt>
             </SwiperSlide>
           </Swiper>
         </div>
@@ -120,62 +136,96 @@ const OurTrubuddies = () => {
 
 export const Block = ({ data, big }) => {
   const history = useRouter();
+  const { getUser, setClickedUser, login } = useContext(Context);
 
   return (
-    <div
-      onClick={(e) => {
-        history.push(`/trubuddies/${"anekant"}`);
-      }}
-      className={`bg-white cursor-pointer rounded-3xl ${
-        big ? "mb-5" : "mb-9"
-      } border md:mx-0 mx-auto ${
-        big ? "w-[95%] md:w-[21.5vw]" : "w-[80%] md:w-[23vw]"
-      } py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative trubuddiesBg`}
-    >
-      <div className="w-full h-full">
-        <div className="flex items-center w-full justify-start">
-          <Image
-            src={data?.image}
-            alt="Image"
-            className="w-[32vw] md:w-[6.5vw] border-4 border-newLightBlue rounded-full"
-          />
-          <div className="ml-3">
-            <h1 className="mt-1 md:mt-2 mb-0 text-xl font-semibold">
-              Ayush Srivastava
-            </h1>
-            <p className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
-              <Image src={male} alt="Male" className="mr-1" />
-              Male
+    <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>
+      <div
+        onClick={(e) => {
+          history.push(`/trubuddies/${data?._id}`);
+        }}
+        className={` bg-white cursor-pointer rounded-3xl ${
+          big ? "mb-5" : "mb-9"
+        } border md:mx-0 mx-auto ${
+          big ? "w-[95%] md:w-[21.5vw]" : "w-[80%] md:w-[23vw]"
+        } py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative trubuddiesBg`}
+      >
+        <div className="w-full h-full">
+          <div className="flex items-center w-full justify-start">
+            <Image
+              src={data?.profile}
+              width={100}
+              height={100}
+              alt="Image"
+              className="w-[32vw] md:w-[6.5vw] border-4 border-newLightBlue rounded-full"
+            />
+            <div className="ml-3">
+              <h1 className="mt-1 md:mt-2 mb-0 text-xl font-semibold">
+                {data?.name}
+              </h1>
+              <p className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
+                {data?.gender?.toLowerCase() == "male" ? (
+                  <Image src={male} alt="Male" className="mr-1" />
+                ) : (
+                  <Image src={female} alt="Male" className="mr-1" />
+                )}
+                {data?.gender}
+              </p>
+            </div>
+          </div>
+          <div className={`${noto_sans.className}`}>
+            <h1 className="text-xl mt-2 md:mt-3 mb-0">Expertise</h1>
+            <div className="grid grid-cols-2 gap-x-3">
+              {data?.otherExpertise?.slice(0, 2).map((e) => {
+                return (
+                  <div
+                    className="px-3 py-0.5 rounded-full mt-2 text-center border-2 border-newBlue"
+                    key={e}
+                  >
+                    {e}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className={`${noto_sans.className} px-1`}>
+            <h1 className="text-xl mt-2 md:mt-3 mb-0">About</h1>
+            <p className="text-gray-400 text-[16px]">
+              {data?.bio ? data?.bio?.slice(0, 200) + "..." : ""}
             </p>
           </div>
         </div>
-        <div className={`${noto_sans.className}`}>
-          <h1 className="text-xl mt-2 md:mt-3 mb-0">Expertise</h1>
-          <div className="grid grid-cols-2 gap-x-3">
-            {["Psycology", "Color Artist"].map((e) => {
-              return (
-                <div
-                  className="px-3 py-0.5 rounded-full mt-2 text-center border-2 border-newBlue"
-                  key={e}
-                >
-                  {e}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className={`${noto_sans.className} px-1`}>
-          <h1 className="text-xl mt-2 md:mt-3 mb-0">About</h1>
-          <p className="text-gray-400 text-[16px]">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto
-            volup
-          </p>
-        </div>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!login?.trubuddies?.includes(data?._id)) {
+              axios
+                .post(`${BASE_URL}/login/start-chat/${data?._id}`, {
+                  token: getCookie("token"),
+                })
+                .then((res) => {
+                  if (res.status == 200) {
+                    setClickedUser(data);
+                    setTimeout(() => {
+                      getUser();
+                      history.push("/chats");
+                    }, 500);
+                  }
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            } else {
+              setClickedUser(data);
+              history.push("/chats");
+            }
+          }}
+          className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-0 md:mt-5"
+        >
+          Start Chat
+        </button>
       </div>
-      <button className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-0 md:mt-5">
-        Start Chat
-      </button>
-    </div>
+    </Tilt>
   );
 };
 

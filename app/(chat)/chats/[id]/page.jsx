@@ -4,17 +4,26 @@ import React, { useEffect, useState, useRef } from "react";
 import { IoMdSend } from "react-icons/io";
 import { io } from "socket.io-client";
 import { format } from "timeago.js";
-import { URL } from "../../(website)/Components/Utils/url";
-import Context from "../../Context/Context";
-import Navbar from "../../(website)/Components/Utils/Navbar";
+import { URL } from "../../../(website)/Components/Utils/url";
+import Context from "../../../Context/Context";
+import Navbar from "../../../(website)/Components/Utils/Navbar";
+import { useRouter } from "next/navigation";
+import { AiOutlineLeft } from "react-icons/ai";
 
-const Chats = () => {
+const ChatPage = () => {
   const context = React.useContext(Context);
   const { login, clickedUser } = React.useContext(Context);
   const socket = io(URL);
+  const history = useRouter();
   const chatContainerRef = useRef();
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
+
+  useEffect(() => {
+    if (typeof window != "undefined" && window.innerWidth > 550) {
+      history.push("/chats");
+    }
+  }, []);
 
   // Scrolling on new message
   useEffect(() => {
@@ -66,21 +75,26 @@ const Chats = () => {
   }, []);
 
   return (
-    <>
-      <div className="md:hidden block">
-        <Navbar />
-      </div>
-      <div className="border md:block hidden w-full md:w-[73vw] p-[2px] h-[47vh] md:mt-0 mt-1.5 md:h-full bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 mx-7 rounded-3xl">
+    <div>
+      <Navbar />
+      <div className="border w-[98vw] overflow-hidden p-[2px] h-[90vh] bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl mt-14">
         {clickedUser?._id ? (
           <div className="w-full h-full rounded-3xl bg-white">
-            <div className="mx-6">
+            <div className="mx-3">
               <div className="py-2 flex items-center">
+                <AiOutlineLeft
+                  size={30}
+                  className="mr-2"
+                  onClick={(e) => {
+                    history.push("/chats");
+                  }}
+                />
                 <Image
                   src={clickedUser?.profile}
                   width={100}
                   height={100}
                   alt="Profile image"
-                  className="w-[3.5vw] rounded-full"
+                  className="w-[15vw] rounded-full"
                 />
                 <div className="ml-3">
                   <h1 className="font-bold">{clickedUser?.name}</h1>
@@ -89,10 +103,10 @@ const Chats = () => {
               </div>
               <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
             </div>
-            <div className="h-[80%] md:h-[90%] chatBg">
+            <div className="h-[95%] chatBg">
               <div
                 ref={chatContainerRef}
-                className="px-3 md:px-10 h-[80%] md:h-[90%] pt-3 overflow-y-scroll"
+                className="px-3 md:px-10 h-[83%] pt-3 overflow-y-scroll"
               >
                 {context?.messages
                   ?.filter((e) => {
@@ -131,8 +145,8 @@ const Chats = () => {
                     );
                   })}
               </div>
-              <div className="h-[16%] md:h-[10%] flex items-center justify-center">
-                <div className="flex items-center w-full h-[96%] md:h-[65%] px-2 md:px-4">
+              <div className="h-[8%] flex items-center justify-center">
+                <div className="flex items-center w-full h-[96%] px-2 md:px-4">
                   <input
                     type="text"
                     value={messageInput}
@@ -170,13 +184,9 @@ const Chats = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <div className="w-full flex items-center justify-center chatBg h-full rounded-3xl bg-white">
-            <p className="text-2xl">Select a Trubuddy to Start Chat</p>
-          </div>
-        )}
+        ) : null}
       </div>
-    </>
+    </div>
   );
 };
 
@@ -210,4 +220,4 @@ const ChatBlock = ({ me, data }) => {
   );
 };
 
-export default Chats;
+export default ChatPage;

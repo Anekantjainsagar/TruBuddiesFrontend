@@ -1,18 +1,14 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-modal";
-import Image from "next/image";
+
 import Context from "../../Context/Context";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
-import { BASE_URL } from "../Components/Utils/url";
-import {
-  AiOutlineClose,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from "react-icons/ai";
-import { getCookie, setCookie } from "cookies-next";
-import { maliFont, noto_sans } from "../Components/Utils/font";
+import { BASE_URL } from "../../(website)/Components/Utils/url";
+import { getCookie } from "cookies-next";
+import { maliFont, noto_sans } from "../../(website)/Components/Utils/font";
+import { AiOutlineClose } from "react-icons/ai";
 
 const customStyles = {
   overlay: {
@@ -29,50 +25,51 @@ const customStyles = {
   },
 };
 
-const EditProfile = () => {
-  const { showEditProfile, setShowEditProfile, login, getUser } =
+const EditProfileTrubuddy = () => {
+  const { setShowTrubuddyEdit, showTrubuddyEdit, trubuddy, getTrubuddyLogin } =
     useContext(Context);
   const [page, setPage] = useState(1);
-  const [speaks, setSpeaks] = useState("");
-  const [experty, setExperty] = useState("");
   const [user, setUser] = useState({
     name: "",
     email: "",
-    profession: "",
+    bio: "",
+    expertise: "",
     city: "",
     state: "",
-    nationality: "",
+    availability: "",
     gender: "",
-    profile: "",
     languages: [],
-    discussions: [],
+    otherExpertise: [],
   });
+  const [speaks, setSpeaks] = useState("");
+  const [experty, setExperty] = useState("");
 
   useEffect(() => {
     setUser({
-      name: login?.name,
-      email: login?.email,
-      profession: login?.profession,
-      city: login?.city,
-      languages: login?.languages,
-      state: login?.state,
-      nationality: login?.nationality,
-      gender: login?.gender,
-      profile: login?.profile,
-      discussions: login?.discussions,
+      name: trubuddy?.name,
+      email: trubuddy?.email,
+      expertise: trubuddy?.expertise,
+      city: trubuddy?.city,
+      state: trubuddy?.state,
+      gender: trubuddy?.gender,
+      availability: trubuddy?.availability,
+      profile: trubuddy?.profile,
+      languages: trubuddy?.languages,
+      otherExpertise: trubuddy?.otherExpertise,
+      bio: trubuddy?.bio,
     });
-  }, [login]);
+  }, [trubuddy]);
 
   const onSubmit = () => {
     axios
-      .post(`${BASE_URL}/login/update-user`, {
+      .post(`${BASE_URL}/trubuddy/update`, {
         ...user,
-        token: getCookie("token"),
+        token: getCookie("trubuddy_token"),
       })
       .then((res) => {
         if (res.status == 200) {
-          getUser();
-          setShowEditProfile(false);
+          getTrubuddyLogin();
+          setShowTrubuddyEdit(false);
           toast.success("Updated successfully");
         }
       })
@@ -102,9 +99,9 @@ const EditProfile = () => {
     <div className={`${noto_sans.className}`}>
       <Toaster />
       <Modal
-        isOpen={showEditProfile}
+        isOpen={showTrubuddyEdit}
         onRequestClose={() => {
-          setShowEditProfile(false);
+          setShowTrubuddyEdit(false);
         }}
         style={customStyles}
       >
@@ -135,13 +132,6 @@ const EditProfile = () => {
                     },
                   },
                   {
-                    title: "Profession",
-                    value: user?.profession,
-                    onchange: (e) => {
-                      setUser({ ...user, profession: e.target.value });
-                    },
-                  },
-                  {
                     title: "City",
                     value: user?.city,
                     onchange: (e) => {
@@ -156,10 +146,17 @@ const EditProfile = () => {
                     },
                   },
                   {
-                    title: "Nationality",
-                    value: user?.nationality,
+                    title: "Expertise",
+                    value: user?.expertise,
                     onchange: (e) => {
-                      setUser({ ...user, nationality: e.target.value });
+                      setUser({ ...user, expertise: e.target.value });
+                    },
+                  },
+                  {
+                    title: "Availability",
+                    value: user?.availability,
+                    onchange: (e) => {
+                      setUser({ ...user, availability: e.target.value });
                     },
                   },
                 ]?.map((e) => {
@@ -176,21 +173,21 @@ const EditProfile = () => {
                           e?.title === "Name" || e?.title == "Email"
                             ? "text-gray-500"
                             : ""
-                        }  border-2 px-3 py-1 rounded-lg w-[95%] md:w-full outline-none mt-1 border-newBlue`}
+                        }  border-2 px-3 py-1 w-11/12 md:w-full rounded-lg outline-none mt-1 border-newBlue`}
                       />
                     </div>
                   );
                 })}
               </div>
             ) : page == 2 ? (
-              <>
-                <div className="grid grid-cols-2 mt-5">
+              <div className="mt-5">
+                <div className="grid grid-cols-2">
                   <div className="mb-3 mx-auto">
                     <p className={`font-semibold`}>Profile Photo :</p>
                     <input
                       type={"file"}
                       onChange={(e) => onFileSubmit(e)}
-                      className={`border-2 px-3 py-1 rounded-lg w-[95%] md:w-full outline-none mt-1 border-newBlue`}
+                      className={`border-2 px-3 py-1 rounded-lg w-11/12 md:w-full outline-none mt-1 border-newBlue`}
                     />
                   </div>
                   {[
@@ -206,7 +203,7 @@ const EditProfile = () => {
                       <div key={e?.title} className="mb-3 mx-auto">
                         <p className={`font-semibold`}>{e?.title} :</p>
                         <input
-                          type="text"
+                          type={"text"}
                           placeholder={e?.title}
                           disabled={e?.title === "Name" || e?.title == "Email"}
                           value={e?.value}
@@ -215,7 +212,7 @@ const EditProfile = () => {
                             e?.title === "Name" || e?.title == "Email"
                               ? "text-gray-500"
                               : ""
-                          }  border-2 px-3 py-1 rounded-lg outline-none w-[95%] md:w-full mt-1 border-newBlue`}
+                          }  border-2 px-3 py-1 rounded-lg w-11/12 md:w-full outline-none mt-1 border-newBlue`}
                         />
                       </div>
                     );
@@ -223,7 +220,7 @@ const EditProfile = () => {
                 </div>
                 <div className="mb-3 mx-auto">
                   <p className={`font-semibold`}>Languages :</p>
-                  <div className="mt-2 px-2 md:px-3">
+                  <div className="mt-2 px-1 md:px-3">
                     {user?.languages?.map((e, i) => {
                       return (
                         <div className="flex items-center w-full mb-4" key={i}>
@@ -277,32 +274,32 @@ const EditProfile = () => {
                           });
                           setSpeaks("");
                         }}
-                        className="ml-2 md:ml-4 w-[40vw] md:w-[9vw] flex justify-center items-center py-1 bg-green-500 text-white rounded-lg cursor-pointer "
+                        className="ml-2 md:ml-4 w-[46vw] md:w-[9vw] flex justify-center items-center py-1 bg-green-500 text-white rounded-lg cursor-pointer "
                       >
                         Add New
                       </div>
                     </div>
                   </div>
                 </div>
-              </>
-            ) : (
+              </div>
+            ) : page == 3 ? (
               <div className="mt-5">
                 <div className="mb-3 mx-auto">
                   <p className={`font-semibold`}>Other Expertise :</p>
-                  <div className="mt-2 px-1 md:px-3">
-                    {user?.discussions?.map((e, i) => {
+                  <div className="mt-2 px-3 overflow-scroll max-h-[45vh] md:max-h-[60vh]">
+                    {user?.otherExpertise?.map((e, i) => {
                       return (
                         <div className="flex items-center w-full mb-4" key={i}>
                           <input
                             type="text"
                             value={e}
                             onChange={(val) => {
-                              let arr = user.discussions;
+                              let arr = user.otherExpertise;
                               let index = arr.indexOf(e);
                               arr[index] = val.target.value;
                               setUser({
                                 ...user,
-                                discussions: arr,
+                                otherExpertise: arr,
                               });
                             }}
                             className="border outline-none text-gray-600 w-full rounded-md px-4 py-1"
@@ -312,12 +309,12 @@ const EditProfile = () => {
                               className="bg-lightRed p-2 rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all cursor-pointer"
                               size={35}
                               onClick={(event) => {
-                                let arr = user?.discussions;
+                                let arr = user?.otherExpertise;
                                 let pos = arr.indexOf(e);
                                 arr.splice(pos, 1);
                                 setUser({
                                   ...user,
-                                  discussions: arr,
+                                  otherExpertise: arr,
                                 });
                               }}
                             />
@@ -339,11 +336,11 @@ const EditProfile = () => {
                         onClick={(event) => {
                           setUser({
                             ...user,
-                            discussions: [...user.discussions, experty],
+                            otherExpertise: [...user.otherExpertise, experty],
                           });
                           setExperty("");
                         }}
-                        className="ml-2 md:ml-4 w-[40vw] md:w-[9vw] flex justify-center items-center py-1 bg-green-500 text-white rounded-lg cursor-pointer "
+                        className="ml-2 md:ml-4 w-[46vw] md:w-[9vw] flex justify-center items-center py-1 bg-green-500 text-white rounded-lg cursor-pointer "
                       >
                         Add New
                       </div>
@@ -351,35 +348,32 @@ const EditProfile = () => {
                   </div>
                 </div>
               </div>
-            )}
-            {page == 3 ? (
-              <div className="flex items-center justify-center">
-                <button
-                  disabled={page == 1}
-                  onClick={(e) => {
-                    setPage(page - 1);
-                  }}
-                  className={`px-7 mr-3 py-1.5 shadow-md shadow-gray-400 text-white mx-auto block mt-2 rounded-lg font-semibold ${
-                    page == 1 ? "bg-blue-200" : "bg-newBlue"
-                  }`}
-                >
-                  Prev
-                </button>
-                <button
-                  onClick={onSubmit}
-                  className="bg-newBlue px-7 py-1.5 shadow-md shadow-gray-400 text-white mx-auto block mt-2 rounded-lg font-semibold"
-                >
-                  Submit
-                </button>
-              </div>
             ) : (
-              <div className="flex items-center justify-center">
+              <div className="mt-2 md:mt-5">
+                <div className="mb-3 mx-auto">
+                  <p className={`font-semibold`}>Bio :</p>
+                  <textarea
+                    name=""
+                    id=""
+                    cols="20"
+                    rows="5"
+                    value={user?.bio}
+                    onChange={(e) => {
+                      setUser({ ...user, bio: e.target.value });
+                    }}
+                    className="border bg-transparent w-full outline-none rounded-md px-3 py-1 mt-1 md:mt-2"
+                  ></textarea>
+                </div>
+              </div>
+            )}
+            {page != 4 ? (
+              <div className="flex items-center justify-evenly">
                 <button
                   disabled={page == 1}
                   onClick={(e) => {
                     setPage(page - 1);
                   }}
-                  className={`px-7 mr-3 py-1.5 shadow-md shadow-gray-400 text-white mx-auto block mt-2 rounded-lg font-semibold ${
+                  className={`px-7 py-1.5 shadow-md shadow-gray-400 text-white mt-2 rounded-lg font-semibold ${
                     page == 1 ? "bg-blue-200" : "bg-newBlue"
                   }`}
                 >
@@ -389,9 +383,29 @@ const EditProfile = () => {
                   onClick={(e) => {
                     setPage(page + 1);
                   }}
-                  className="bg-newBlue px-7 py-1.5 shadow-md shadow-gray-400 text-white mx-auto block mt-2 rounded-lg font-semibold"
+                  className="bg-newBlue px-7 py-1.5 mr-3 shadow-md shadow-gray-400 text-white mt-2 rounded-lg font-semibold"
                 >
                   Next
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center justify-evenly">
+                <button
+                  disabled={page == 1}
+                  onClick={(e) => {
+                    setPage(page - 1);
+                  }}
+                  className={`px-7 py-1.5 shadow-md shadow-gray-400 text-white mt-2 rounded-lg font-semibold ${
+                    page == 1 ? "bg-blue-200" : "bg-newBlue"
+                  }`}
+                >
+                  Prev
+                </button>
+                <button
+                  onClick={onSubmit}
+                  className="bg-newBlue px-7 py-1.5 shadow-md shadow-gray-400 text-white mt-2 rounded-lg font-semibold"
+                >
+                  Submit
                 </button>
               </div>
             )}
@@ -402,4 +416,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditProfileTrubuddy;

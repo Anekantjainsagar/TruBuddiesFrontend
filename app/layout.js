@@ -1,6 +1,5 @@
 import "./globals.css";
 import { maliFont } from "./(website)/Components/Utils/font";
-import Head from "next/head";
 import State from "./Context/State";
 
 export const metadata = {

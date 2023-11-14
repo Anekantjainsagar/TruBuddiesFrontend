@@ -15,6 +15,10 @@ const AdminUser = () => {
           <p className="mr-2">Filter</p>
           <input
             type="search"
+            value={admin?.adminUserConfig}
+            onChange={(e) => {
+              admin?.setAdminUserConfig(e.target.value);
+            }}
             className="outline-none rounded-md border px-2 py-0.5"
             placeholder="Search Here"
           />
@@ -35,19 +39,18 @@ const AdminUser = () => {
       </div>
       <div className="mt-3 h-[80vh] overflow-scroll">
         {admin?.adminUsers?.map((e, i) => {
-          console.log(e);
           return (
             <div
-              className="grid py-1 mb-1"
+              className={`grid py-2 mb-2 rounded-md ${i % 2 !== 0 ? "" : "bg-gray-200"}`}
               style={{ gridTemplateColumns: "20% 20% 20% 15% 12% 13%" }}
               key={i}
             >
-              <p className="text-center">Name</p>
-              <p className="text-center">Email Id</p>
-              <p className="text-center">Phone no</p>
-              <p className="text-center">Location</p>
-              <p className="text-center">Gender</p>
-              <p className="text-center">Age</p>
+              <p className="text-center">{e?.name}</p>
+              <p className="text-center">{e?.email}</p>
+              <p className="text-center">{e?.phone}</p>
+              <p className="text-center">{e?.location}</p>
+              <p className="text-center">{e?.gender}</p>
+              <p className="text-center">{e?.age}</p>
             </div>
           );
         })}

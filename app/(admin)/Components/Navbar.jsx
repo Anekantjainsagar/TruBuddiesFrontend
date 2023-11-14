@@ -24,13 +24,13 @@ const Navbar = () => {
             routes: "/admin/social-media",
           },
           { title: "FAQ's Question", routes: "/admin/faqs" },
-          { title: "Articles", routes: "/admin" },
-          { title: "About Us Content", routes: "/admin" },
+          { title: "Articles", routes: "/admin/user" },
+          { title: "About Us Content", routes: "/admin/user" },
         ].map((e, i) => {
           return (
             <p
               key={i}
-              className={`text-white text-start py-1 cursor-pointer mb-2 ${
+              className={`text-white text-start py-1 hover:pl-9 hover:bg-[#407BFF] transition-all cursor-pointer mb-2 ${
                 pathname == e?.routes ? "bg-[#407BFF] pl-9" : "pl-4"
               }`}
               onClick={(event) => {

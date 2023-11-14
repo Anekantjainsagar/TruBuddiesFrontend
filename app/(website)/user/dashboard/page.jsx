@@ -1,9 +1,9 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import client from "../../Assets/Home/team/client  (1).png";
 import Image from "next/image";
-import { maliFont, noto_sans } from "../../Components/Utils/font";
-import { AiFillClockCircle, AiOutlineEdit } from "react-icons/ai";
+import { noto_sans } from "../../Components/Utils/font";
+import { AiOutlineEdit } from "react-icons/ai";
 
 import EditProfile from "../EditProfile";
 
@@ -16,13 +16,15 @@ import { BiSolidUserVoice } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 
 import Context from "../../../Context/Context";
+import axios from "axios";
+import { BASE_URL } from "../../Components/Utils/url";
 
 const UserDashboard = () => {
   const history = useRouter();
-  const { login, showEditProfile, setShowEditProfile } = useContext(Context);
+  const { login, setShowEditProfile } = useContext(Context);
 
   return (
-    <>
+    <div className="border overflow-hidden">
       {" "}
       <EditProfile />
       <div
@@ -37,31 +39,45 @@ const UserDashboard = () => {
       >
         <div className="bg-gradient-to-br from-[#38B6FF] shadow-lg to-50% to-white w-full rounded-3xl md:mb-0 mb-5 py-3 px-[2vw] flex flex-col items-center">
           <div className="rounded-full bg-gradient-to-t relative w-4/12 md:w-6/12 from-newLightBlue shadow-sm shadow-gray-200 to-newOceanGreen p-1">
-            <Image src={client} alt={"client"} className="w-full" />
+            <Image
+              src={login?.profile}
+              width={100}
+              height={100}
+              alt={"client"}
+              className="w-[10vw] object-cover object-center h-[9vw] rounded-full"
+            />
             <AiOutlineEdit
               size={25}
               onClick={(e) => {
                 setShowEditProfile(true);
               }}
-              className="absolute -right-1 -bottom-1 cursor-pointer border rounded-full border-black p-1"
+              className="absolute -right-2 md:-right-1 -bottom-2.5 md:-bottom-1 cursor-pointer border rounded-full border-black p-1"
             />
           </div>
           <h1
-            className={`text-xl md:text-2xl mt-1 md:mt-2 font-semibold ${noto_sans.className}`}
+            className={`text-xl md:text-2xl mt-1.5 md:mt-2 font-semibold ${noto_sans.className}`}
           >
             {login?.name}
           </h1>
           <div className="border-2 px-2 md:px-4 py-0.5 flex items-center rounded-lg text-sm bg-white border-newBlue w-fit mt-1">
-            <Image
-              src={male}
-              alt="Male"
-              className="mr-1.5 md:mr-2 md:w-[1vw]"
-            />
-            Male
+            {login?.gender?.toLowerCase() == "male" ? (
+              <Image
+                src={male}
+                alt="Male"
+                className="mr-1.5 md:mr-2 md:w-[1vw]"
+              />
+            ) : (
+              <Image
+                src={female}
+                alt="Male"
+                className="mr-1.5 md:mr-2 md:w-[1vw]"
+              />
+            )}
+            {login?.gender}
           </div>
           <div className="mt-2 flex items-center">
             <BiSolidUserVoice size={25} />
-            {["Hindi", "English"].map((e) => {
+            {login?.languages.map((e) => {
               return (
                 <p
                   key={e}
@@ -110,16 +126,11 @@ const UserDashboard = () => {
           </div>
         </div>
         <div
-          className={`bg-gradient-to-br from-[#38B6FF] via-white to-[#38B6FF] md:mb-0 mb-5 p-4 rounded-3xl w-full ${noto_sans.className}`}
+          className={`bg-gradient-to-br from-[#38B6FF] via-white to-[#38B6FF] md:mb-0 mb-5 p-2 md:p-5 shadow-lg shadow-gray-300 rounded-3xl w-full ${noto_sans.className}`}
         >
           <h1 className="text-xl pl-2">What I need to Discuss?</h1>
           <div className="flex items-center flex-wrap mt-3 px-2">
-            {[
-              "Anxiety",
-              "Relationship issues",
-              "Parental Trauma",
-              "Study Pressure",
-            ].map((e) => {
+            {login?.discussions.map((e) => {
               return (
                 <p
                   key={e}
@@ -134,37 +145,29 @@ const UserDashboard = () => {
           <div>
             <h1 className="text-xl pl-2">Personal Info</h1>
             <div className="grid grid-cols-2 px-3">
-              <div className="text-lg mt-4">
+              <div className="text-lg mt-4 break-words md:pr-0 pr-3 md:mt-7">
                 <h1 className="font-bold">Name :</h1>
                 <p>{login?.name}</p>
               </div>
-              <div className="text-lg mt-4">
+              <div className="text-lg mt-4 break-words md:pr-0 pr-3 md:mt-7">
                 <h1 className="font-bold">Email :</h1>
                 <p>{login?.email}</p>
               </div>
-              <div className="text-lg mt-4">
+              <div className="text-lg mt-4 break-words md:pr-0 pr-3 md:mt-7">
                 <h1 className="font-bold">Profession :</h1>
                 <p>{login?.profession}</p>
               </div>
-              <div className="text-lg mt-4">
+              <div className="text-lg mt-4 break-words md:pr-0 pr-3 md:mt-7">
                 <h1 className="font-bold">City:</h1>
                 <p>{login?.city}</p>
               </div>
-              <div className="text-lg mt-4">
+              <div className="text-lg mt-4 break-words md:pr-0 pr-3 md:mt-7">
                 <h1 className="font-bold">State:</h1>
                 <p>{login?.state}</p>
               </div>
-              <div className="text-lg mt-4">
+              <div className="text-lg mt-4 break-words md:pr-0 pr-3 md:mt-7">
                 <h1 className="font-bold">Nationality:</h1>
                 <p>{login?.nationality}</p>
-              </div>
-              <div className="text-lg mt-4">
-                <h1 className="font-bold">Name:</h1>
-                <p>Ayush Srivastava</p>
-              </div>
-              <div className="text-lg mt-4">
-                <h1 className="font-bold">Name:</h1>
-                <p>Ayush Srivastava</p>
               </div>
             </div>
           </div>
@@ -173,14 +176,10 @@ const UserDashboard = () => {
           className={`flex flex-col items-center justify-between w-full md:mb-0 mb-4 ${noto_sans.className}`}
         >
           <div className="bg-gradient-to-tl from-[#38B6FF] to-white rounded-3xl shadow-lg shadow-gray-400 w-full">
-            <div className="grid grid-cols-4 py-5 gap-y-5 gap-x-5 px-[2vw]">
-              <Image src={client} alt="Logo image" className="cursor-pointer" />
-              <Image src={client} alt="Logo image" className="cursor-pointer" />
-              <Image src={client} alt="Logo image" className="cursor-pointer" />
-              <Image src={client} alt="Logo image" className="cursor-pointer" />
-              <Image src={client} alt="Logo image" className="cursor-pointer" />
-              <Image src={client} alt="Logo image" className="cursor-pointer" />
-              <Image src={client} alt="Logo image" className="cursor-pointer" />
+            <div className="grid grid-cols-4 py-5 gap-y-5 gap-x-5 px-4 md:px-[2vw]">
+              {login?.trubuddies?.map((e) => {
+                return <TrubuddyBlock id={e} key={e} />;
+              })}
               <div
                 className="flex items-center justify-center w-[100%] h-full cursor-pointer"
                 onClick={(e) => {
@@ -193,7 +192,7 @@ const UserDashboard = () => {
               </div>
             </div>
           </div>
-          <div className="bg-gradient-to-tl p-4 flex flex-col items-center from-[#38B6FF] to-white rounded-3xl shadow-lg shadow-gray-400 h-fit w-full">
+          <div className="bg-gradient-to-tl md:mt-0 mt-5 p-4 flex flex-col items-center from-[#38B6FF] to-white rounded-3xl shadow-lg shadow-gray-400 h-fit w-full">
             <h1 className="text-2xl drop-shadow-2xl text-center">
               More Trubuddies
             </h1>
@@ -243,7 +242,48 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
+  );
+};
+
+export const TrubuddyBlock = ({ id }) => {
+  const { setClickedUser } = useContext(Context);
+  const [user, setUser] = useState();
+  const history = useRouter();
+
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/trubuddy/get-one/${id}`)
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
+  return (
+    <div className="md:border-0 border-b flex md:p-0 p-1">
+      <Image
+        onClick={(e) => {
+          setClickedUser(user);
+          if (typeof window != "undefined" && window.innerWidth < 550) {
+            history.push(`/chats/${id}`);
+          } else {
+            history.push("/chats");
+          }
+        }}
+        src={user?.profile}
+        width={100}
+        height={100}
+        alt="Logo image"
+        className="cursor-pointer md:w-full w-2/12 rounded-full"
+      />
+      <div className="ml-2 md:hidden">
+        <h1 className="font-semibold text-lg">{user?.name}</h1>
+        <p className="-mt-1 text-sm">hey!! What are you up to.</p>
+      </div>
+    </div>
   );
 };
 

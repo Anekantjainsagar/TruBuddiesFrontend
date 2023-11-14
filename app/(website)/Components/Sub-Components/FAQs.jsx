@@ -19,7 +19,7 @@ const FAQs = () => {
         </h1>
         <Image src={faq} className="w-[28vw] md:block hidden" alt="FAQ" />
       </div>
-      <div className="w-full md:w-[36vw] flex flex-col items-center justify-start border-black h-[57vh] md:h-[80vh] overflow-y-scroll">
+      <div className="w-full md:w-[36vw] flex flex-col py-2 items-center justify-start border-black h-[57vh] md:h-[80vh] overflow-y-scroll">
         <Block />
         <Block />
         <Block />
@@ -39,7 +39,7 @@ const Block = () => {
   const [view, setView] = useState(false);
 
   return (
-    <div className="border-[3px] rounded-md border-newBlue w-full mb-2 cursor-pointer">
+    <div className="border-[3px] rounded-md border-newBlue w-11/12 mb-2 mx-auto cursor-pointer hover:scale-105 transition-all">
       <div
         className={`w-full px-3 md:px-4 py-2 flex items-center justify-between ${
           view ? "bg-gray-200" : "bg-transparent"

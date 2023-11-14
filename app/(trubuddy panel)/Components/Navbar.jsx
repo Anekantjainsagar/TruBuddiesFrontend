@@ -1,14 +1,18 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 
 import logo from "../../(website)/Assets/Home/Logo Image.png";
-import profile from "../../(website)/Assets/Chats/picture.png";
+import { useRouter } from "next/navigation";
+import Context from "../../Context/Context";
 
 const Navbar = () => {
+  const history = useRouter();
+  const { trubuddy } = useContext(Context);
+
   return (
     <div
-      className={`flex items-center justify-between md:px-[2vw] py-1.5 z-50 w-full fixed top-0 left-0 text-white}`}
+      className={`flex items-center justify-between px-2 md:px-[2vw] py-1.5 z-50 w-full fixed top-0 left-0 text-white}`}
     >
       <div
         className="flex items-center md:pl-0 pl-3 cursor-pointer"
@@ -23,21 +27,16 @@ const Navbar = () => {
           TruBuddies
         </p>
       </div>
-      <div className="hidden md:flex justify-between w-3/6">
-        <input
-          type="text"
-          className="w-full px-3 py-1 rounded-md outline-none"
-          placeholder="Search Here"
-        />
-      </div>
       <div>
         <Image
-          src={profile}
+          src={trubuddy?.profile}
           onClick={(e) => {
-            history.push("/user/dashboard");
+            history.push("/trubuddy");
           }}
+          height={100}
+          width={100}
           alt="Profile"
-          className="w-[75%] cursor-pointer shadow-md shadow-gray-500 rounded-full"
+          className="w-[12vw] md:w-[4vw] h-[12vw] md:h-[4vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
         />
       </div>
     </div>
