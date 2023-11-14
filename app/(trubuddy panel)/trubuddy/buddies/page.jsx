@@ -56,7 +56,7 @@ const Trubuddy = () => {
         </div>
         {trubuddy?.buddies?.length == 0 ? (
           <div className="w-full flex items-center justify-center">
-            <p className="text-xl">Sorry, You don't have any Buddy</p>
+            <p className="text-xl">Sorry, You don&apos;t have any Buddy</p>
           </div>
         ) : (
           <div className="w-full grid grid-cols-2 gap-3 md:gap-5 px-3 md:px-5 pt-2 md:pt-3">
