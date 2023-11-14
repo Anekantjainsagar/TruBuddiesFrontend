@@ -1,6 +1,5 @@
 "use client";
 import React, { useContext } from "react";
-import { TrubuddyBlock } from "../../(website)/user/dashboard/page";
 import Context from "../../Context/Context";
 import { maliFont } from "../../(website)/Components/Utils/font";
 import Image from "next/image";
@@ -9,6 +8,7 @@ import picture from "../../(website)/Assets/Chats/picture.png";
 import male from "../../(website)/Assets/Home/icons/male white.png";
 import female from "../../(website)/Assets/Home/icons/female.png";
 import { useRouter } from "next/navigation";
+import UpperTrubuddyBlock from "../../(website)/user/dashboard/UpperTrubuddyBlock";
 
 const RightBar = () => {
   const history = useRouter();
@@ -27,7 +27,7 @@ const RightBar = () => {
             {login?.trubuddies?.map((e) => {
               return (
                 <div key={e}>
-                  <TrubuddyBlock id={e} />
+                  <UpperTrubuddyBlock id={e} />
                 </div>
               );
             })}

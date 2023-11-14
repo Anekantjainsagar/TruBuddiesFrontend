@@ -166,7 +166,7 @@ const Trubuddy = () => {
             })
           ) : (
             <div className="w-full flex items-center h-[20vh] justify-center">
-              <p className="text-xl">Sorry, You don't have any Buddy</p>
+              <p className="text-xl">Sorry, You don&apos;t have any Buddy</p>
             </div>
           )}
         </div>

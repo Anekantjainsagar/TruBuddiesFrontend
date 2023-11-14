@@ -1,8 +1,8 @@
 "use client";
 import React, { useContext } from "react";
 import { BsFilter } from "react-icons/bs";
-import { Block } from "../Components/Sub-Components/OurTrubuddies";
 import Context from "../../Context/Context";
+import TrubuddyBlock from "../Components/Elements/TrubuddyBlock";
 
 const Trubuddies = () => {
   const { admin } = useContext(Context);
@@ -24,7 +24,7 @@ const Trubuddies = () => {
       </div>
       <div className="px-1 grid grid-cols-1 md:grid-cols-4 mt-4">
         {admin?.adminTrubuddies?.map((e) => {
-          return <Block key={e?._id} data={e} big={true} />;
+          return <TrubuddyBlock key={e?._id} data={e} big={true} />;
         })}
       </div>
     </div>
