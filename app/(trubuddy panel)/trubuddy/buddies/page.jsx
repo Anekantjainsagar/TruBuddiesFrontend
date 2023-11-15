@@ -11,10 +11,10 @@ import profile from "../../../Images/trubuddy/image.png";
 import { useRouter } from "next/navigation";
 import { BASE_URL } from "../../../(website)/Components/Utils/url";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 
 const Trubuddy = () => {
-  const { trubuddy, getTrubuddyLogin, setShowTrubuddyEdit, showTrubuddyEdit } =
-    useContext(Context);
+  const { trubuddy, getTrubuddyLogin } = useContext(Context);
   const history = useRouter();
 
   useEffect(() => {
@@ -76,7 +76,9 @@ const BuddyBlock = ({ id }) => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/login/get-one/${id}`)
+      .post(`${BASE_URL}/login/get-one/${id}`, {
+        token: getCookie("trubuddy_token"),
+      })
       .then((res) => {
         setUser(res.data);
       })
@@ -87,7 +89,7 @@ const BuddyBlock = ({ id }) => {
 
   return (
     <div
-      className="bg-gray-200 flex p-1 md:p-2 rounded-md shadow-md shadow-gray-400 cursor-pointer"
+      className="bg-gray-200 flex p-1 md:p-2 rounded-md relative shadow-md shadow-gray-400 cursor-pointer"
       onClick={(e) => {
         e.preventDefault();
         history.push(`/trubuddy/buddies/${id}`);
@@ -101,8 +103,13 @@ const BuddyBlock = ({ id }) => {
         className="w-[12vw] h-[12vw] object-cover object-center md:w-[5vw] md:h-[5vw] rounded-full border-2 border-newBlue"
       />
       <div className="ml-1 md:ml-3">
-        <h1 className="md:text-xl font-semibold">{user?.name}</h1>
+        <h1 className="md:text-xl text-sm font-semibold">{user?.name}</h1>
       </div>
+      {user?.unseen > 0 ? (
+        <div className="absolute right-[64%] md:text-base text-xs md:right-5 -bottom-0 md:bottom-1/2 md:translate-y-1/2 bg-newBlue px-1 md:px-2 text-white rounded-full">
+          {user?.unseen}
+        </div>
+      ) : null}
     </div>
   );
 };

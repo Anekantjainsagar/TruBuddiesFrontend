@@ -4,9 +4,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { IoMdSend } from "react-icons/io";
 import { io } from "socket.io-client";
 import { format } from "timeago.js";
-import { URL } from "../../(website)/Components/Utils/url";
+import { BASE_URL, URL } from "../../(website)/Components/Utils/url";
 import Context from "../../Context/Context";
 import Navbar from "../../(website)/Components/Utils/Navbar";
+import axios from "axios";
+import { getCookie } from "cookies-next";
 
 const Chats = () => {
   const context = React.useContext(Context);
@@ -54,6 +56,20 @@ const Chats = () => {
       context.getMessages(context?.clickedUser?._id);
     }
   }, [context?.clickedUser]);
+
+  useEffect(() => {
+    if (context?.clickedUser?._id) {
+      axios
+        .post(`${BASE_URL}/login/seen/${context?.clickedUser?._id}`, {
+          token: getCookie("token"),
+        })
+        .then((res) => {
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [context?.messages, messages]);
 
   // On message
   useEffect(() => {

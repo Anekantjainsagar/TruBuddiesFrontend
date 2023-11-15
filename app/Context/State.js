@@ -95,7 +95,9 @@ const B2BState = (props) => {
 
   const getAllTrubuddies = () => {
     axios
-      .get(`${BASE_URL}/admin/get-trubuddies?search=${adminTrubuddyConfig}`)
+      .post(`${BASE_URL}/admin/get-trubuddies?search=${adminTrubuddyConfig}`, {
+        token: getCookie("token"),
+      })
       .then((res) => {
         setAdminTrubuddies(res.data);
       })

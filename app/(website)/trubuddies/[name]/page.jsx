@@ -25,7 +25,7 @@ const SeprateTrubuddy = ({ params }) => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/trubuddy/get-one/${id}`)
+      .post(`${BASE_URL}/trubuddy/get-one/${id}`, { token: getCookie("token") })
       .then((res) => {
         setUser(res.data);
       })

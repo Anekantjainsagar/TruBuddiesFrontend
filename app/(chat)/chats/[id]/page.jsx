@@ -4,13 +4,15 @@ import React, { useEffect, useState, useRef } from "react";
 import { IoMdSend } from "react-icons/io";
 import { io } from "socket.io-client";
 import { format } from "timeago.js";
-import { URL } from "../../../(website)/Components/Utils/url";
+import { BASE_URL, URL } from "../../../(website)/Components/Utils/url";
 import Context from "../../../Context/Context";
 import Navbar from "../../../(website)/Components/Utils/Navbar";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
+import axios from "axios";
+import { getCookie } from "cookies-next";
 
-const ChatPage = () => {
+const ChatPage = ({ id }) => {
   const context = React.useContext(Context);
   const { login, clickedUser } = React.useContext(Context);
   const socket = io(URL);
@@ -56,6 +58,20 @@ const ChatPage = () => {
       alert("Internal server error");
     }
   };
+
+  useEffect(() => {
+    if (context?.clickedUser?._id) {
+      axios
+        .post(`${BASE_URL}/login/seen/${context?.clickedUser?._id}`, {
+          token: getCookie("token"),
+        })
+        .then((res) => {
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [context?.messages, messages]);
 
   // Getting all old one to one chat messages
   useEffect(() => {

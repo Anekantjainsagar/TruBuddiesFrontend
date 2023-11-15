@@ -5,15 +5,16 @@ import Context from "../../../Context/Context";
 import Image from "next/image";
 import { BASE_URL } from "../../Components/Utils/url";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 
-const UpperTrubuddyBlock = ({ id }) => {
+const UpperTrubuddyBlock = ({ id, show }) => {
   const { setClickedUser } = useContext(Context);
   const [user, setUser] = useState();
   const history = useRouter();
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/trubuddy/get-one/${id}`)
+      .post(`${BASE_URL}/trubuddy/get-one/${id}`, { token: getCookie("token") })
       .then((res) => {
         setUser(res.data);
       })
@@ -24,7 +25,9 @@ const UpperTrubuddyBlock = ({ id }) => {
 
   return (
     <div
-      className="md:border-0 border-b flex md:p-0 p-1"
+      className={`md:border-0 ${
+        !show ? "border-b" : ""
+      } flex md:p-0 p-1 relative`}
       onClick={(e) => {
         setClickedUser(user);
         if (typeof window != "undefined" && window.innerWidth < 550) {
@@ -39,12 +42,32 @@ const UpperTrubuddyBlock = ({ id }) => {
         width={100}
         height={100}
         alt="Logo image"
-        className="cursor-pointer md:w-full w-2/12 rounded-full"
+        className={`cursor-pointer ${
+          show ? "w-full" : ""
+        } md:w-full w-2/12 rounded-full`}
       />
-      <div className="ml-2 md:hidden">
+      {user?.unseen > 0 ? (
+        <div
+          className={`bg-newBlue md:block ${
+            show ? "" : "hidden"
+          } cursor-pointer px-2 absolute right-0 text-white bottom-0 rounded-full`}
+        >
+          {user?.unseen}
+        </div>
+      ) : null}
+      <div className={`ml-2 md:hidden ${show ? "hidden" : ""}`}>
         <h1 className="font-semibold text-lg">{user?.name}</h1>
         <p className="-mt-1 text-sm">hey!! What are you up to.</p>
       </div>
+      {user?.unseen > 0 ? (
+        <div
+          className={`ml-2 text-end self-center absolute right-1 flex bg-newBlue text-white rounded-full h-fit items-center justify-center px-2 md:hidden ${
+            show ? "hidden" : ""
+          }`}
+        >
+          <p>{user?.unseen}</p>
+        </div>
+      ) : null}
     </div>
   );
 };

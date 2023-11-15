@@ -39,10 +39,10 @@ const Block = () => {
   const [view, setView] = useState(false);
 
   return (
-    <div className="border-[3px] rounded-md border-newBlue w-11/12 mb-2 mx-auto cursor-pointer hover:scale-105 transition-all">
+    <div className={`border-[3px] rounded-md border-newBlue w-11/12 mb-2 mx-auto cursor-pointer hover:scale-105 transition-all ${view?"bg-white":""}`}>
       <div
         className={`w-full px-3 md:px-4 py-2 flex items-center justify-between ${
-          view ? "bg-gray-200" : "bg-transparent"
+          view ? "bg-white" : "bg-transparent"
         }`}
         onClick={(e) => {
           setView(!view);

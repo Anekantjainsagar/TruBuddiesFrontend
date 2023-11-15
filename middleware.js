@@ -11,8 +11,12 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (request.cookies.get("trubuddy_token")?.value == undefined) {
-    return NextResponse.redirect(new URL("/", request.url));
+  if (
+    request.cookies.get("trubuddy_token")?.value == undefined &&
+    !request.url.includes("/trubuddy/login") &&
+    request.url.includes("/trubuddy")
+  ) {
+    return NextResponse.redirect(new URL("/trubuddy/login", request.url));
   }
 }
 

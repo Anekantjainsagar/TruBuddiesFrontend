@@ -16,8 +16,6 @@ import { BiSolidUserVoice } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 
 import Context from "../../../Context/Context";
-import axios from "axios";
-import { BASE_URL } from "../../Components/Utils/url";
 import UpperTrubuddyBlock from "./UpperTrubuddyBlock";
 
 const UserDashboard = () => {
@@ -39,13 +37,13 @@ const UserDashboard = () => {
         }
       >
         <div className="bg-gradient-to-br from-[#38B6FF] shadow-lg to-50% to-white w-full rounded-3xl md:mb-0 mb-5 py-3 px-[2vw] flex flex-col items-center">
-          <div className="rounded-full bg-gradient-to-t relative w-4/12 md:w-6/12 from-newLightBlue shadow-sm shadow-gray-200 to-newOceanGreen p-1">
+          <div className="rounded-full bg-gradient-to-t relative w-[32vw] h-[32vw] md:w-[10vw] md:h-[10vw] from-newLightBlue shadow-sm shadow-gray-200 to-newOceanGreen p-1">
             <Image
               src={login?.profile}
               width={100}
               height={100}
               alt={"client"}
-              className="w-[10vw] object-cover object-center h-[9vw] rounded-full"
+              className="w-full object-cover object-center h-full rounded-full"
             />
             <AiOutlineEdit
               size={25}
@@ -179,7 +177,7 @@ const UserDashboard = () => {
           <div className="bg-gradient-to-tl from-[#38B6FF] to-white rounded-3xl shadow-lg shadow-gray-400 w-full">
             <div className="grid grid-cols-4 py-5 gap-y-5 gap-x-5 px-4 md:px-[2vw]">
               {login?.trubuddies?.map((e) => {
-                return <UpperTrubuddyBlock id={e} key={e} />;
+                return <UpperTrubuddyBlock id={e} key={e} show={true} />;
               })}
               <div
                 className="flex items-center justify-center w-[100%] h-full cursor-pointer"

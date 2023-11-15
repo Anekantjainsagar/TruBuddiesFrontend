@@ -13,6 +13,7 @@ import { BASE_URL, URL } from "../../../../(website)/Components/Utils/url";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { getCookie } from "cookies-next";
 
 const TrubuddyChat = ({ params }) => {
   const id = params.id;
@@ -21,7 +22,9 @@ const TrubuddyChat = ({ params }) => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/login/get-one/${id}`)
+      .post(`${BASE_URL}/login/get-one/${id}`, {
+        token: getCookie("trubuddy_token"),
+      })
       .then((res) => {
         setUser(res.data);
       })
@@ -55,18 +58,30 @@ const TrubuddyChat = ({ params }) => {
     socket.emit("join", { userId: context?.trubuddy?._id });
   }, [context?.trubuddy]);
 
+  useEffect(() => {
+    axios
+      .post(`${BASE_URL}/trubuddy/seen/${id}`, {
+        token: getCookie("trubuddy_token"),
+      })
+      .then((res) => {
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [context?.messages, messages]);
+
   // On one to one chat message submission
   const handleMessageSubmit = (e) => {
     if (messageInput.trim() === "") {
       return;
     }
     //send message to the server
-    if (context?.trubuddy?._id && messageInput && context?.clickedBuddy?._id) {
+    if (context?.trubuddy?._id && messageInput && id) {
       setMessageInput("");
       socket.emit("message", {
         from: context?.trubuddy?._id,
         message: messageInput,
-        to: context?.clickedBuddy?._id,
+        to: id,
       });
     } else {
       alert("Internal server error");
@@ -75,8 +90,8 @@ const TrubuddyChat = ({ params }) => {
 
   // Getting all old one to one chat messages
   useEffect(() => {
-    if (context?.clickedBuddy?._id) {
-      context.getMessages(context?.clickedBuddy?._id, true);
+    if (id) {
+      context.getMessages(id, true);
     }
   }, [context?.clickedBuddy]);
 
@@ -143,9 +158,9 @@ const TrubuddyChat = ({ params }) => {
                 ?.filter((e) => {
                   return (
                     (e.sender === context?.trubuddy?._id &&
-                      e.receiver === context?.clickedBuddy?._id) ||
+                      e.receiver === id) ||
                     (e.receiver === context?.trubuddy?._id &&
-                      e.sender === context?.clickedBuddy?._id)
+                      e.sender === id)
                   );
                 })
                 .map((e, i) => {
@@ -161,9 +176,9 @@ const TrubuddyChat = ({ params }) => {
                 ?.filter((e) => {
                   return (
                     (e.sender === context?.trubuddy?._id &&
-                      e.receiver === context?.clickedBuddy?._id) ||
+                      e.receiver === id) ||
                     (e.receiver === context?.trubuddy?._id &&
-                      e.sender === context?.clickedBuddy?._id)
+                      e.sender === id)
                   );
                 })
                 .map((e, i) => {

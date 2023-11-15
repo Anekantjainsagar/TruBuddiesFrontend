@@ -34,38 +34,42 @@ const TrubuddyLOgin = () => {
   };
 
   return (
-    <div className="flex items-center h-[100vh]">
+    <div className="flex md:flex-row flex-col items-center h-[100vh]">
       <Toaster />
       <div
-        className={`${maliFont.className} w-1/2 flex flex-col items-center justify-center`}
+        className={`${maliFont.className} w-full md:w-1/2 h-2/6 md:h-full flex flex-col items-center justify-center`}
       >
-        <Image src={image} alt={"image"} className="w-8/12 mb-4" />
+        <Image
+          src={image}
+          alt={"image"}
+          className="w-8/12 mb-4 md:block hidden"
+        />
         <h1
           className={`${maliFont.className} text-4xl text-newDarkBlue font-semibold`}
         >
           WELCOME !!
         </h1>
-        <p className="text-newDarkBlue font-medium text-xl w-4/12 text-center mt-1">
+        <p className="text-newDarkBlue font-medium text-xl w-8/12 md:w-4/12 text-center mt-1">
           TruBuddy you are doing a great job
         </p>
       </div>
-      <div className="w-1/2 h-full bg-newDarkBlue flex flex-col items-start justify-center pl-[4vw]">
-        <div className="text-white w-full">
+      <div className="w-full md:w-1/2 h-4/6 md:h-full bg-newDarkBlue flex flex-col items-center md:items-start justify-center pl-[4vw]">
+        <div className="text-white w-full flex flex-col md:items-start items-center">
           <h1 className="text-3xl font-semibold mb-3">TruBuddy Log in </h1>
-          <div className="py-4">
+          <div className="py-4 w-full flex flex-col md:items-start items-center">
             <input
               type="text"
-              className="bg-transparent border-b outline-none block w-6/12 px-3 py-1 tracking-wider"
+              className="bg-transparent border-b outline-none block md:w-fit w-[57vw] px-3 py-1 tracking-wider"
               placeholder="Email or Phone"
               value={login?.email}
               onChange={(e) => {
                 setLogin({ ...login, email: e.target.value });
               }}
             />
-            <div className="flex items-end relative">
+            <div className="flex justify-center relative">
               <input
                 type={passwordVisible ? "text" : "password"}
-                className="bg-transparent border-b outline-none block mt-5 w-6/12 px-3 py-1 tracking-wider"
+                className="bg-transparent border-b outline-none block mt-5 w-full px-3 py-1 tracking-wider"
                 placeholder="Password"
                 value={login?.password}
                 onChange={(e) => {
@@ -73,7 +77,7 @@ const TrubuddyLOgin = () => {
                 }}
               />
               <div
-                className="absolute left-[45%] bottom-0 opacity-70"
+                className="absolute right-0 bottom-0 opacity-70"
                 onClick={(e) => {
                   setPasswordVisible(!passwordVisible);
                 }}

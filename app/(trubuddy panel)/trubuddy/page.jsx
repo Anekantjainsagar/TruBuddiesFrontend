@@ -96,8 +96,7 @@ const Trubuddy = () => {
                     status: e.target.value,
                     token: getCookie("trubuddy_token"),
                   })
-                  .then((res) => {
-                  })
+                  .then((res) => {})
                   .catch((err) => {
                     console.log(err);
                   });
@@ -180,7 +179,7 @@ const BuddyBlock = ({ id }) => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/login/get-one/${id}`)
+      .post(`${BASE_URL}/login/get-one/${id}`, { token: getCookie("trubuddy_token") })
       .then((res) => {
         setUser(res.data);
       })
