@@ -15,6 +15,11 @@ const OurServices = () => {
 
   return (
     <div className="h-fit md:py-0 py-5 md:h-[100vh] flex items-center relative overflow-hidden justify-center serviceBg">
+      <p className="absolute w-[18vw] right-5 text-2xl text-end top-1/2 -translate-y-1/2 md:block hidden font-semibold">
+        {Math.abs(rotation % 360) === 45
+          ? "Yoga & Meditation"
+          : "Chat and Call Based Conversation "}
+      </p>
       <div className="flex md:flex-row flex-col items-center">
         <div>
           <Image
@@ -51,13 +56,6 @@ const OurServices = () => {
           id="circle"
           className="w-[45vw] md:flex hidden h-[40vw] rounded-full relative items-center justify-center right-[-44%]"
         >
-          <p
-            className={`text-3xl font-semibold mr-[6vw] rotate-[${
-              (rotation % 90) * -1 - 45
-            }deg]`}
-          >
-            Yoga & Exercises
-          </p>
           <Image
             src={animation2}
             alt="Meditation"
@@ -136,7 +134,7 @@ const OurServices = () => {
   );
 };
 
-const Block = ({data}) => {
+const Block = ({ data }) => {
   return (
     <div className="flex flex-col items-center">
       {" "}
@@ -145,7 +143,7 @@ const Block = ({data}) => {
           <Image
             src={data?.image}
             alt="Meditation"
-            className={`w-[30vw]`}
+            className={`w-[30vw] h-[30vw] object-contain md:p-0 p-5`}
           />
         </div>
       </div>
