@@ -6,16 +6,21 @@ import logo from "./Assets/Home/Logo Image.png";
 
 import State from "../Context/State";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
   const history = useRouter();
 
   return (
     <html lang="en">
       <body className={`${maliFont.className}`}>
         <State>
-          <div className="fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer">
+          <div
+            className={`${
+              pathname == "/" ? "hidden" : "block"
+            } fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer`}
+          >
             <Image
               src={logo}
               alt="Logo"

@@ -15,6 +15,7 @@ import call from "../../Assets/Home/icons/Call.png";
 const Footer = () => {
   return (
     <div
+      id="contact"
       className={`py-[5vw] bg-gradient-to-br from-newBlue from-40% to-newOcean md:py-[2.5vw] text-white px-[2vw] flex justify-between items-center ${noto_sans.className}`}
     >
       <div className="w-full md:w-7/12 md:block flex flex-col">

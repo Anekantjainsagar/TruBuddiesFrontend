@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import ThingsLikeAboutUs from "./Components/Sub-Components/ThingsLikeAboutUs";
 import HowItWorks from "./Components/Sub-Components/HowItWorks";
 import OurTrubuddies from "./Components/Sub-Components/OurTrubuddies";
@@ -24,11 +24,14 @@ import mobileBg from "./Assets/Home/Home mobile bg.png";
 import cloud from "./Assets/Home/cloud.png";
 import lightCloud from "./Assets/Home/image 16.png";
 import gsap from "gsap";
-import { Power2 } from "gsap/all";
+import { Power2, ScrollTrigger } from "gsap/all";
 import { useRouter } from "next/navigation";
+import Context from "../Context/Context";
 
 const App = () => {
+  gsap.registerPlugin(ScrollTrigger);
   const history = useRouter();
+  const context = useContext(Context);
   const animateLeftRight = (e) => {
     let timeline = gsap.timeline({ repeat: Infinity });
 
@@ -70,6 +73,31 @@ const App = () => {
     animateRightLeft("#right1Cloud");
   }, []);
 
+  useEffect(() => {
+    let element = document.getElementById(context?.scrollTo);
+    if (element) {
+      element?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
+  useEffect(() => {
+    let element = document.getElementById("logoIcon");
+
+    gsap.to("#logoIcon", {
+      x: window.innerWidth - element.offsetLeft - 100,
+      y: window.innerHeight - (element.offsetHeight + element.offsetTop),
+      scrollTrigger: {
+        trigger: "#trigger",
+        start: "top 65%",
+        ease: Power2.easeInOut,
+        onEnter: () => {
+          element.classList.remove("sticky");
+          element.classList.add("fixed");
+        },
+      },
+    });
+  }, []);
+
   return (
     <>
       <div className="bg-newVeryLightBlue relative overflow-x-hidden">
@@ -84,6 +112,7 @@ const App = () => {
           className="absolute z-10 top-0 h-[100vh]"
         />
         <div
+          id="home"
           className={`homeBg relative h-fit md:h-[100vh] md:py-[6vw] py-[5vw] flex md:flex-row flex-col justify-between items-center`}
         >
           <RightDotsHome />
@@ -122,8 +151,17 @@ const App = () => {
               neque ac tortor iaculis in at. Orci sapien pretium sem diam. Quam
               faucibus amet nec viverra tellus sit orci pellentesque urna.
             </p>
-            <div className="cursor-pointer flex items-center self-center md:self-end mt-1 md:mt-[3vw] text-newDarkNavyGrey">
-              <div className="bg-newYellow h-[15vw] w-[15vw] md:h-[4.5vw] md:w-[4.5vw] rounded-full z-20 flex justify-center items-center">
+            <div
+              id="trigger"
+              className="cursor-pointer flex items-center self-center md:self-end mt-1 md:mt-[3vw] text-newDarkNavyGrey"
+            >
+              <div
+                onClick={(e) => {
+                  history.push("/chats");
+                }}
+                id="logoIcon"
+                className="bg-newYellow sticky h-[15vw] w-[15vw] md:h-[4.5vw] md:w-[4.5vw] rounded-full z-20 flex justify-center items-center"
+              >
                 <Image src={logo} alt="Logo" className="w-7/12" />
               </div>
               <div

@@ -21,7 +21,7 @@ const TrubuddyBlock = ({ data, big }) => {
         onClick={(e) => {
           history.push(`/trubuddies/${data?._id}`);
         }}
-        className={` bg-white cursor-pointer rounded-3xl ${
+        className={` bg-white cursor-pointer shadow-md shadow-gray-600 rounded-3xl ${
           big ? "mb-5" : "mb-9"
         } border md:mx-0 mx-auto ${
           big ? "w-[95%] md:w-[21.5vw]" : "w-[80%] md:w-[23vw]"

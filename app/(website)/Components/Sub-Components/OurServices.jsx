@@ -14,7 +14,10 @@ const OurServices = () => {
   const [rotation, setRotation] = useState(-45);
 
   return (
-    <div className="h-fit md:py-0 py-5 md:h-[100vh] flex items-center relative overflow-hidden justify-center serviceBg">
+    <div
+      id="services"
+      className="h-fit md:py-0 py-5 md:h-[100vh] flex items-center relative overflow-hidden justify-center serviceBg"
+    >
       <p className="absolute w-[18vw] right-5 text-2xl text-end top-1/2 -translate-y-1/2 md:block hidden font-semibold">
         {Math.abs(rotation % 360) === 45
           ? "Yoga & Meditation"
@@ -36,9 +39,9 @@ const OurServices = () => {
         <div className="grid grid-cols-2 md:hidden h-[80vh] w-[90vw] md:mt-0 mt-[5vw]">
           <div className="flex flex-col items-center justify-between h-full">
             {[
+              { image: animation4, title: "Chat & Call Based Conversations" },
               { image: meditation, title: "Yoga & Meditation" },
               { image: animation3, title: "Library" },
-              { image: animation4, title: "Chat & Call Based Conversations" },
             ].map((e) => {
               return <Block key={e?.title} data={e} />;
             })}

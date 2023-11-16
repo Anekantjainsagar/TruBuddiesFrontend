@@ -7,9 +7,9 @@ export async function middleware(request) {
 
   // console.log("first");
   // console.log(request);
-  if (request.cookies.get("token")?.value == undefined) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // if (request.cookies.get("token")?.value == undefined) {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 
   if (
     request.cookies.get("trubuddy_token")?.value == undefined &&

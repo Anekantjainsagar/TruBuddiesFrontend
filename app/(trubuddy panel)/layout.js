@@ -1,11 +1,12 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { maliFont } from "../(website)/Components/Utils/font";
 import logo from "../(website)/Assets/Home/Logo Image.png";
 import Image from "next/image";
 
 export default function RootLayout({ children }) {
   const history = useRouter();
+  const pathname = usePathname();
 
   return (
     <html lang="en">
@@ -13,7 +14,12 @@ export default function RootLayout({ children }) {
         <Image
           src={logo}
           alt="Logo"
-          className="bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw]"
+          className={`bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw] ${
+            pathname.includes("/trubuddy/buddies/") ||
+            pathname.includes("/trubuddy/login")
+              ? "hidden"
+              : "block"
+          }`}
           onClick={(e) => {
             history.push("/trubuddy/buddies");
           }}

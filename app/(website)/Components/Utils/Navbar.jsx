@@ -10,22 +10,23 @@ import Context from "../../../Context/Context";
 import { deleteCookie, getCookie, getCookies } from "cookies-next";
 
 const Navbar = () => {
-  const { modalIsOpen, setIsOpen, login } = useContext(Context);
+  const { modalIsOpen, setIsOpen, login, setScrollTo, scrollTo } =
+    useContext(Context);
   const pathname = usePathname();
   const history = useRouter();
   const [showLogOut, setShowLogOut] = useState(false);
   let routes = [
     {
       name: "Home",
-      route: "",
+      route: "/",
     },
-    { name: "About us", route: "" },
-    { name: "Services", route: "" },
+    { name: "About us", route: "/" },
+    { name: "Services", route: "/" },
     {
       name: "Contact",
-      route: "",
+      route: "/",
     },
-    { name: "Support us", route: "" },
+    { name: "Support us", route: "/" },
   ];
 
   const closeNav = () => {
@@ -69,6 +70,10 @@ const Navbar = () => {
               <p
                 key={i}
                 className="uppercase mb-0 cursor-pointer font-semibold"
+                onClick={(el) => {
+                  setScrollTo(e?.name?.toLowerCase().replaceAll(" ", ""));
+                  history.push(e?.route);
+                }}
               >
                 {e.name}
               </p>
@@ -154,6 +159,11 @@ const Navbar = () => {
               return (
                 <p
                   key={i}
+                  onClick={(el) => {
+                    setScrollTo(e?.name?.toLowerCase().replaceAll(" ", ""));
+                    history.push(e?.route);
+                    closeNav();
+                  }}
                   className="uppercase cursor-pointer mb-4 font-semibold"
                 >
                   {e.name}

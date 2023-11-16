@@ -7,6 +7,8 @@ import { BASE_URL } from "../(website)/Components/Utils/url";
 import { getCookie } from "cookies-next";
 
 const B2BState = (props) => {
+  const [scrollTo, setScrollTo] = useState("home");
+
   const [loginModal, setLoginModal] = useState(false);
   const [login, setLogin] = useState();
   const [messages, setMessages] = useState([]);
@@ -152,6 +154,8 @@ const B2BState = (props) => {
         setShowTrubuddyEdit,
         clickedBuddy,
         setClickedBuddy,
+        scrollTo,
+        setScrollTo,
       }}
     >
       {props.children}

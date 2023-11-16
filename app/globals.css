@@ -177,3 +177,21 @@ input[type="number"] {
 .active {
   background-color: green;
 }
+
+.animate {
+  animation-name: example;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+  0% {
+    width: 5%;
+  }
+  50% {
+    width: 10%;
+  }
+  100% {
+    width: 5%;
+  }
+}

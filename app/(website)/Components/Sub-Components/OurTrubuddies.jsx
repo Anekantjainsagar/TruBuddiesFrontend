@@ -10,7 +10,7 @@ import client2 from "../../Assets/Home/Images/Client 2.png";
 import client3 from "../../Assets/Home/Images/Client 3.png";
 import RightDots from "../Elements/RightDots";
 
-import bg from "../../Assets/Home/trubuddies bg.png"
+import bg from "../../Assets/Home/trubuddies bg.png";
 
 import { useRouter } from "next/navigation";
 
@@ -96,7 +96,7 @@ const OurTrubuddies = () => {
                   onClick={(e) => {
                     history.push("/trubuddies");
                   }}
-                  className={`bg-white cursor-pointer rounded-3xl mb-9 border md:mx-0 mx-auto w-[80%] h-[41vh] max-h-[49vw] md:w-[23vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative`}
+                  className={`bg-white shadow-md shadow-gray-600 cursor-pointer rounded-3xl mb-9 border md:mx-0 mx-auto w-[80%] h-[41vh] max-h-[49vw] md:w-[23vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative`}
                 >
                   <Image
                     src={bg}
