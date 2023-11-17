@@ -12,7 +12,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
-const ChatPage = ({ id }) => {
+const ChatPage = () => {
   const context = React.useContext(Context);
   const { login, clickedUser } = React.useContext(Context);
   const socket = io(URL);
