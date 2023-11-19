@@ -184,6 +184,12 @@ input[type="number"] {
   animation-iteration-count: infinite;
 }
 
+.foolPatti {
+  background-image: url("./\(website\)/Assets/fool patti.png");
+  background-size: cover;
+  background-position: center;
+}
+
 @keyframes example {
   0% {
     width: 5%;

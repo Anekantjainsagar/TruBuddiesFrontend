@@ -15,8 +15,8 @@ const RightBar = () => {
   const { login } = useContext(Context);
 
   return (
-    <div className="w-full md:mt-0 mt-4 md:w-[23vw] h-[95vh] flex flex-col items-center justify-between overflow-hidden">
-      <div className="border w-full p-[2px] h-[39vh] md:h-[48%] bg-gradient-to-tr mt-[10vw] md:mt-0 from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
+    <div className="w-full md:px-0 px-5 md:mt-0 foolPatti mt-4 md:w-[23vw] h-[95vh] flex flex-col items-center justify-between overflow-hidden">
+      <div className="border w-full p-[2px] h-full md:h-[48%] bg-gradient-to-tr mt-[10vw] md:mt-0 from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
         <div className="w-full h-full rounded-3xl bg-white py-1 md:py-5">
           <h1
             className={`text-xl md:block hidden md:ext-2xl font-semibold text-center ${maliFont.className}`}
@@ -44,8 +44,8 @@ const RightBar = () => {
           </div>
         </div>
       </div>
-      <div className="border w-full md:mt-0 mt-[1vw] p-[2px] h-fit md:h-[48%] md:bg-gradient-to-tr from-newBlue to-newOcean md:shadow-md md:shadow-gray-600 rounded-3xl">
-        <div className="w-full h-full rounded-3xl bg-white relative py-0 md:py-5 md:communityBg">
+      <div className="md:border w-full md:mt-0 mt-[1vw] p-[2px] h-fit md:h-[48%] md:bg-gradient-to-tr from-newBlue to-newOcean md:shadow-md md:shadow-gray-600 rounded-3xl">
+        <div className="w-full h-full rounded-3xl bg-transparent md:bg-white relative py-0 md:py-5 md:communityBg">
           <h1
             className={`text-2xl z-50 md:pt-0 pt-1 font-semibold text-center ${maliFont.className}`}
           >

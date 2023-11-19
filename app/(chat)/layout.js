@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${maliFont.className}`}>
         <div
-          className={`w-full h-[100vh] bg-[#eff3ff] px-5 py-[1vw] flex md:flex-row flex-col items-center ${maliFont.className}`}
+          className={`w-full h-[100vh] bg-[#eff3ff] md:px-5 py-[1vw] flex md:flex-row flex-col items-center ${maliFont.className}`}
         >
           <div
             className={`${pathname.includes("/chats/") ? "hidden" : "block"}`}

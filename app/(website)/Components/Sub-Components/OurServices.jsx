@@ -9,6 +9,7 @@ import animation2 from "../../Assets/Home/services/animation2.png";
 import animation3 from "../../Assets/Home/services/animation3.png";
 import animation4 from "../../Assets/Home/services/animation4.png";
 import gsap from "gsap";
+import ComingSoon from "./ComingSoon";
 
 const OurServices = () => {
   const [rotation, setRotation] = useState(-45);
@@ -39,17 +40,25 @@ const OurServices = () => {
         <div className="grid grid-cols-2 md:hidden h-[80vh] w-[90vw] md:mt-0 mt-[5vw]">
           <div className="flex flex-col items-center justify-between h-full">
             {[
-              { image: animation4, title: "Chat & Call Based Conversations" },
-              { image: meditation, title: "Yoga & Meditation" },
-              { image: animation3, title: "Library" },
+              {
+                image: animation4,
+                title: "Chat & Call Based Conversations",
+                upcoming: false,
+              },
+              { image: meditation, title: "Yoga & Meditation", upcoming: true },
+              { image: animation3, title: "Library", upcoming: true },
             ].map((e) => {
               return <Block key={e?.title} data={e} />;
             })}
           </div>
           <div className="flex flex-col items-center justify-evenly">
             {[
-              { image: animation1, title: "Social Support" },
-              { image: animation2, title: "Routine Improvement" },
+              { image: animation1, title: "Social Support", upcoming: false },
+              {
+                image: animation2,
+                title: "Routine Improvement",
+                upcoming: true,
+              },
             ].map((e) => {
               return <Block key={e?.title} data={e} />;
             })}
@@ -138,19 +147,33 @@ const OurServices = () => {
 };
 
 const Block = ({ data }) => {
+  const [showComingSoon, setShowComingSoon] = useState(false);
   return (
-    <div className="flex flex-col items-center">
-      {" "}
-      <div className="bg-gradient-to-br from-newBlue via-newOceanGreen to-newOrange rounded-full p-1">
-        <div className="bg-white rounded-full">
-          <Image
-            src={data?.image}
-            alt="Meditation"
-            className={`w-[30vw] h-[30vw] object-contain md:p-0 p-5`}
-          />
+    <div className="relative">
+      <ComingSoon
+        showComingSoon={showComingSoon}
+        setShowComingSoon={setShowComingSoon}
+      />
+      <div
+        className={`flex flex-col items-center`}
+        onClick={(e) => {
+          if (data?.upcoming) {
+            setShowComingSoon(true);
+          }
+        }}
+      >
+        {" "}
+        <div className="bg-gradient-to-br from-newBlue via-newOceanGreen to-newOrange rounded-full p-1">
+          <div className="bg-white rounded-full">
+            <Image
+              src={data?.image}
+              alt="Meditation"
+              className={`w-[30vw] h-[30vw] object-contain md:p-0 p-5`}
+            />
+          </div>
         </div>
+        <p className="text-lg text-center font-semibold">{data?.title}</p>
       </div>
-      <p className="text-lg text-center font-semibold">{data?.title}</p>
     </div>
   );
 };

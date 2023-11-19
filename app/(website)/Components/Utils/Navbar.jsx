@@ -10,8 +10,7 @@ import Context from "../../../Context/Context";
 import { deleteCookie, getCookie, getCookies } from "cookies-next";
 
 const Navbar = () => {
-  const { modalIsOpen, setIsOpen, login, setScrollTo, scrollTo } =
-    useContext(Context);
+  const { modalIsOpen, setIsOpen, login, setScrollTo } = useContext(Context);
   const pathname = usePathname();
   const history = useRouter();
   const [showLogOut, setShowLogOut] = useState(false);
@@ -41,11 +40,7 @@ const Navbar = () => {
     <>
       <LoginModal />
       <div
-        className={`flex items-center justify-between md:px-[2vw] py-2 z-50 w-full fixed top-0 left-0 ${
-          pathname.includes("trubuddies")
-            ? "bg-gradient-to-b from-newBlue to-newOcean text-white"
-            : "bg-transparent"
-        }`}
+        className={`flex items-center justify-between md:px-[2vw] py-2 z-50 w-full fixed top-0 left-0`}
       >
         <div
           className="flex items-center md:pl-0 pl-3 cursor-pointer"
@@ -55,11 +50,7 @@ const Navbar = () => {
         >
           <Image src={logo} alt="Logo image" className="w-[10vw] md:w-[3vw]" />
           <p
-            className={`text-xl md:font-semibold font-bold ${
-              pathname.includes("trubuddies")
-                ? "md:text-white"
-                : "md:text-black"
-            } text-[#002689] ml-2 md:ml-4 mt-1 md:mt-1`}
+            className={`text-xl md:font-semibold font-bold md:text-black text-[#002689] ml-2 md:ml-4 mt-1 md:mt-1`}
           >
             TruBuddies
           </p>

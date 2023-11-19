@@ -27,8 +27,11 @@ import gsap from "gsap";
 import { Power2, ScrollTrigger } from "gsap/all";
 import { useRouter } from "next/navigation";
 import Context from "../Context/Context";
+import LoginModal from "./Components/login";
+import { getCookie } from "cookies-next";
 
 const App = () => {
+  const { modalIsOpen, setIsOpen } = useContext(Context);
   gsap.registerPlugin(ScrollTrigger);
   const history = useRouter();
   const context = useContext(Context);
@@ -95,6 +98,10 @@ const App = () => {
             element.classList.remove("sticky");
             element.classList.add("fixed");
           },
+          onEnterBack: () => {
+            element.classList.remove("fixed");
+            element.classList.add("sticky");
+          },
         },
       });
     } else {
@@ -116,6 +123,7 @@ const App = () => {
 
   return (
     <>
+      <LoginModal />
       <div className="bg-newVeryLightBlue relative overflow-x-hidden">
         <Image
           src={bg}
@@ -159,13 +167,12 @@ const App = () => {
               HEALTHY
             </div>
             <p
-              className="text-end mt-8 text-white pl-[7vw] md:block hidden"
+              className="text-end mt-8 text-white pl-[7vw] text-xl md:block hidden"
               style={{ textShadow: "0px 3px 2px rgba(56, 56, 56,0.5)" }}
             >
-              Lorem ipsum dolor sit amet consectetur. Semper id arcu scelerisque
-              sed nulla curabitur gravida commodo mattis. Sem mauris quam nulla
-              neque ac tortor iaculis in at. Orci sapien pretium sem diam. Quam
-              faucibus amet nec viverra tellus sit orci pellentesque urna.
+              TruBuddies is a mental health-focused organization fostering
+              community, awareness, and support for individuals navigating
+              mental health challenges.
             </p>
             <div
               id="trigger"
@@ -173,7 +180,11 @@ const App = () => {
             >
               <div
                 onClick={(e) => {
-                  history.push("/chats");
+                  if (getCookie("token")) {
+                    history.push("/chats");
+                  } else {
+                    setIsOpen(!modalIsOpen);
+                  }
                 }}
                 id="logoIcon"
                 className="bg-newYellow sticky h-[15vw] w-[15vw] md:h-[4.5vw] md:w-[4.5vw] rounded-full z-20 flex justify-center items-center"
@@ -182,12 +193,16 @@ const App = () => {
               </div>
               <div
                 onClick={(e) => {
-                  history.push("/chats");
+                  if (getCookie("token")) {
+                    history.push("/chats");
+                  } else {
+                    setIsOpen(!modalIsOpen);
+                  }
                 }}
-                className="bg-newYellow h-[9.5vw] md:h-[3vw] w-[55vw] md:w-[15vw] rounded-xl -ml-7 pl-3 flex justify-center items-center  text-lg md:text-xl font-bold"
+                className="bg-newYellow h-[9.5vw] md:h-[3vw] w-[65vw] md:w-[18vw] rounded-xl -ml-7 pl-3 flex justify-center items-center  text-lg md:text-xl font-bold"
                 style={{ textShadow: "0px 3px 3px rgba(56, 56, 56,0.5)" }}
               >
-                Chat With Buddy
+                Chat With TruBuddies
               </div>
             </div>
           </div>
