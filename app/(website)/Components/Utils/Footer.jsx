@@ -11,96 +11,86 @@ import linkedin from "../../Assets/Home/icons/LinkedIn.png";
 import instagram from "../../Assets/Home/icons/Instagram.png";
 import facebook from "../../Assets/Home/icons/Facebook.png";
 import call from "../../Assets/Home/icons/Call.png";
+import { FaFacebook, FaInstagram, FaTelegram } from "react-icons/fa";
+import { IoIosMail } from "react-icons/io";
 
 const Footer = () => {
   return (
     <div
       id="contact"
-      className={`py-[5vw] bg-gradient-to-br from-newBlue from-40% to-newOcean md:py-[2.5vw] text-white px-[2vw] flex justify-between items-center ${noto_sans.className}`}
+      className={`py-[3vw] bg-gradient-to-br from-newBlue from-60% to-newOcean md:py-[2vw] text-white px-[2vw] flex md:flex-row flex-col justify-between ${noto_sans.className}`}
     >
-      <div className="w-full md:w-7/12 md:block flex flex-col">
-        <div className="md:hidden flex items-center mx-auto md:mx-0 pt-[2vw] pb-3">
-          <Image src={logo} alt="Logo" className="mr-2" />
-          <p className="text-2xl font-bold">TruBuddy</p>
-        </div>
-        <div className="flex items-center justify-between w-11/12 mx-auto md:w-full">
-          {[
-            { name: "About", route: "" },
-            { name: "Products", route: "" },
-            { name: "Shop All", route: "" },
-            { name: "Contact", route: "" },
-            { name: "Terms of Use", route: "" },
-          ].map((e, i) => {
-            return (
-              <p
-                key={i}
-                className="font-medium md:text-base text-xs cursor-pointer"
-              >
-                {e?.name}
-              </p>
-            );
-          })}
-        </div>
-        <div className="md:flex hidden items-center mx-auto md:mx-0 pt-[2vw] pb-3">
-          <Image src={logo} alt="Logo" className="mr-2" />
-          <p className="text-2xl font-bold">TruBuddy</p>
-        </div>
-        <div className="flex items-end md:justify-start justify-center">
-          <p className="mb-2 md:block hidden">Follow us</p>
-          <div className="flex items-center ml-3 md:w-fit w-full">
-            <Image
-              src={facebook}
-              alt="Icons"
-              className="w-[10vw] md:w-[3vw] cursor-pointer"
-            />
-            <Image
-              src={twitter}
-              alt="Icons"
-              className="w-[10vw] md:w-[3vw] cursor-pointer"
-            />
-            <Image
-              src={instagram}
-              alt="Icons"
-              className="w-[10vw] md:w-[3vw] cursor-pointer"
-            />
-            <Image
-              src={linkedin}
-              alt="Icons"
-              className="w-[10vw] md:w-[3vw] cursor-pointer"
-            />
-            <Image
-              src={youtube}
-              alt="Icons"
-              className="w-[10vw] md:w-[3vw] cursor-pointer"
-            />
+      <div className="w-full md:w-8/12">
+        <div className="flex md:flex-row flex-col items-center md:items-start justify-between">
+          <div className="flex flex-col md:items-start md:mb-0 mb-5 items-center">
+            <h1 className="font-semibold mb-1 text-lg">Quick Links:</h1>
+            {[
+              { name: "Home", route: "/" },
+              { name: "About us", route: "/about" },
+              { name: "FAQs", route: "/" },
+              { name: "Terms of Service", route: "/" },
+              { name: "Privacy Policy", route: "/" },
+              { name: "Community Guidelines", route: "/" },
+            ].map((e) => {
+              return (
+                <p key={e?.name} className="md:mb-0 mb-0.5">
+                  {e?.name}
+                </p>
+              );
+            })}
+          </div>
+          <div className="mb-5 md:mb-0 flex flex-col items-center md:items-start">
+            <h1 className="font-semibold mb-1 text-lg">Connect With Us</h1>
+            <p className="flex items-center mb-3">
+              <FaFacebook size={25} className="mr-2" />
+              @TruBuddies
+            </p>
+            <p className="flex items-center mb-3">
+              <FaInstagram size={25} className="mr-2" />
+              @TruBuddies
+            </p>
+            <p className="flex items-center mb-3">
+              <FaTelegram size={25} className="mr-2" />
+              @TruBuddies
+            </p>
+            <p className="flex items-center mb-3">
+              <IoIosMail size={25} className="mr-2" />
+              trubuddiesofficial@gmail.com
+            </p>
+          </div>
+          <div className="mb-5 md:mb-0 flex flex-col items-center md:items-start">
+            <h1 className="font-semibold mb-1 text-lg">
+              Support and Resources
+            </h1>
+            {[
+              { name: "Help or Support", route: "/" },
+              { name: "Feedback", route: "/about" },
+              { name: "Terms of Conditions", route: "/" },
+              { name: "Trademark", route: "/" },
+              { name: "Customer Care", route: "/" },
+            ].map((e) => {
+              return (
+                <p key={e?.name} className="md:mb-0 mb-0.5">
+                  {e?.name}
+                </p>
+              );
+            })}
           </div>
         </div>
-        <div className="flex items-end mt-2">
-          <p className="mb-1 font-light md:block hidden">
-            Contact us directly:
+        <div className="flex md:flex-row flex-col justify-between items-center md:w-11/12 md:items-end mt-[3vw]">
+          <div className="flex items-center">
+            <Image src={logo} alt="Logo" />
+            <div className="ml-3">
+              <h1 className="font-bold text-2xl">TruBuddies</h1>
+              <p className="capitalize">The Buddy you need the most</p>
+            </div>
+          </div>
+          <p className="mb-2 md:mt-0 mt-3">
+            @2023 TruBuddy. All Rights Reserved
           </p>
-          <div className="flex items-center ml-1">
-            <Image
-              src={call}
-              alt="Icons"
-              className="w-[10vw] md:w-[2.2vw] mx-1 md:mx-2"
-            />
-            <Image
-              src={whatsapp}
-              alt="Icons"
-              className="w-[10vw] md:w-[2.2vw]"
-            />
-          </div>
         </div>
-        <p className="my-2 md:ml-0 ml-3 md:mr-0 mr-16">
-          Lorem ipsum dolor sit amet consectetur. Mattis turpis cras vivamus
-          nulla consectetur a libero. Porta sit.
-        </p>
-        <p className="text-sm md:ml-0 ml-3 opacity-75 mt-2">
-          © 2023 TruBuddy . All Rights Reserved.
-        </p>
       </div>
-      <div className="md:block hidden w-[26%] bg-newLightBlue py-[1.5vw] px-[1.5vw] rounded-3xl">
+      <div className="md:w-[23%] w-[80%] mx-auto md:mt-0 mt-5 bg-newLightBlue py-[4vw] md:py-[1.5vw] px-[1.5vw] rounded-3xl">
         <h1 className="text-center text-xl font-semibold">
           Send us Your Enquiry
         </h1>

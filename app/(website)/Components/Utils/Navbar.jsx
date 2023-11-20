@@ -7,7 +7,7 @@ import gsap, { Power2 } from "gsap";
 import { usePathname, useRouter } from "next/navigation";
 import LoginModal from "../login";
 import Context from "../../../Context/Context";
-import { deleteCookie, getCookie, getCookies } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 
 const Navbar = () => {
   const { modalIsOpen, setIsOpen, login, setScrollTo } = useContext(Context);
@@ -19,7 +19,7 @@ const Navbar = () => {
       name: "Home",
       route: "/",
     },
-    { name: "About us", route: "/" },
+    { name: "About us", route: "/about" },
     { name: "Services", route: "/" },
     {
       name: "Contact",

@@ -15,7 +15,7 @@ const FAQs = () => {
     {
       title: "Is it free to use?",
       value:
-        "At Trubuddies you can get 15 minutes of free chatting/calling 2 times a day free of charge.",
+        "For now it is free to use.",
     },
     {
       title: "Can children under 16 years of age use TruBuddies?",
@@ -40,7 +40,7 @@ const FAQs = () => {
     {
       title: "Can i become a TruBuddies?",
       value:
-        "Yes you can join us as a TruBuddy and can enjoy benefits of being of a Trubuddy. In order to become a TruBuddy please click the below.",
+        "Yes you can join us as a TruBuddy and can enjoy benefits of being of a Trubuddy. In order to become a TruBuddy contact us directly.",
     },
     {
       title:

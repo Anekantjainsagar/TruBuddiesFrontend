@@ -50,8 +50,8 @@ const LearnInspire = () => {
     },
     {
       image: blog3,
-      title: "Heading",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. In nesciunt eligendi impedit nemo sequi! Rem nam nihil incidunt praesentium iure.",
+      title: "Peer Pressure",
+      text: "Anisha is a 19-year-old girl studying English Honours at a well-known university in Delhi. Her classmates were jealous of her and doubted her academic success, attributing it to impressing teachers rather than hard work. Falsely accused, isolated, and bullied, she felt depressed, abandoned her hobbies and developed trust issues. Pressurized to obey her classmates orders, this case reflects peer pressure, causing stress, anxiety, and internal conflict as individuals strive to conform to group norms. Trubuddies offers a platform for individuals dealing with such issues providing a confidential and compassionate space where you can freely share your concerns with therapists in an anonymous and non-judgmental environment.",
     },
   ];
 
@@ -122,7 +122,9 @@ const Block = ({ data }) => {
       />
       <Image src={data?.image} alt="Image" />
       <h1 className="text-xl font-semibold pt-2 pl-2">{data?.title}</h1>
-      <p className="px-2 mb-0 text-sm font-light">{data?.text}</p>
+      <p className="px-2 mb-0 text-sm font-light">
+        {data?.text?.slice(0, 100) + "..."}
+      </p>
     </div>
   );
 };

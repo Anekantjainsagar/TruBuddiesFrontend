@@ -7,7 +7,7 @@ const HowItWorks = () => {
     const video = document.createElement("video");
     video.autoplay = true;
     video.muted = true;
-    // video.controls = true;
+
     const source = document.createElement("source");
     source.src = "/trubuddies.mp4";
     let videoElement = document.getElementById("video-container");
@@ -48,10 +48,12 @@ const HowItWorks = () => {
             );
           })}
         </div>
-        <div
-          id="video-container"
-          className="px-4 rounded-md mx-auto md:w-[25vw] md:px-5"
-        ></div>
+        <div className="bg-gradient-to-br mx-5 from-newBlue md:w-[25vw] bg-white to-newOceanGreen rounded-xl p-2">
+          <div
+            id="video-container"
+            className="rounded-md"
+          ></div>
+        </div>
       </div>
     </div>
   );

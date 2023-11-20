@@ -90,6 +90,7 @@ const App = () => {
       gsap.to("#logoIcon", {
         x: window.innerWidth - element.offsetLeft - 100,
         y: window.innerHeight - (element.offsetHeight + element.offsetTop),
+        duration: 1,
         scrollTrigger: {
           trigger: "#trigger",
           start: "top 65%",
@@ -108,6 +109,7 @@ const App = () => {
       gsap.to("#logoIcon", {
         x: window.innerWidth - element.offsetLeft - 155,
         y: window.innerHeight - (element.offsetHeight + element.offsetTop) - 10,
+        duration: 1,
         scrollTrigger: {
           trigger: "#trigger",
           start: "top 65%",
