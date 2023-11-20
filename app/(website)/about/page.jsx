@@ -8,9 +8,9 @@ const About = () => {
       </h1>{" "}
       <br />
       At Trubuddies, we recognize that the journey of mental health is both
-      personal and shared. Our platform is not just an organization; it's a
+      personal and shared. Our platform is not just an organization; it&apos;s a
       vibrant community of individuals, united by the common goal of fostering
-      mental well-being. Here's a closer look at who we are, what we stand for,
+      mental well-being. Here&apos;s a closer look at who we are, what we stand for,
       and how we aim to make a positive impact on the lives of those we touch.
       <br />
       <br />
@@ -23,7 +23,7 @@ const About = () => {
       <br />
       <br /> <h4 className="font-medium text-lg">Founding Principles:</h4>{" "}
       <p className="text-lg">Empathy:</p> At the core of Trubuddies is empathy.
-      We understand that each person's mental health journey is unique, and we
+      We understand that each person&apos;s mental health journey is unique, and we
       approach it with compassion, respect, and an unwavering commitment to
       support.
       <br /> <p className="text-lg">Community:</p> Trubuddies thrives on the
@@ -46,7 +46,7 @@ const About = () => {
       Trubuddies is a resource hub. We provide valuable information, tools, and
       resources to empower individuals on their mental health journeys. <br />
       <p className="text-lg">Safe Space:</p>
-      We've created a safe space for open conversations. Trubuddies is a
+      We&apos;ve created a safe space for open conversations. Trubuddies is a
       judgment-free zone where members can express themselves, seek guidance,
       and find understanding.
       <br />
@@ -57,7 +57,7 @@ const About = () => {
       unique skills and perspectives to the table. <br />
       <br />
       <h4 className="font-medium text-lg"> Join Our Community:</h4> Whether
-      you're looking to share your story, gain insights, or simply connect with
+      you&apos;re looking to share your story, gain insights, or simply connect with
       like-minded individuals, Trubuddies welcomes you. Engage in our community
       events, explore our resources, and become part of a supportive network
       dedicated to nurturing mental well-being. <br />
