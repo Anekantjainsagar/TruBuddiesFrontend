@@ -62,8 +62,14 @@ const Navbar = () => {
                 key={i}
                 className="uppercase mb-0 cursor-pointer font-semibold"
                 onClick={(el) => {
-                  setScrollTo(e?.name?.toLowerCase().replaceAll(" ", ""));
-                  history.push(e?.route);
+                  if (pathname !== e?.route) {
+                    setScrollTo(e?.name?.toLowerCase().replaceAll(" ", ""));
+                    history.push(e?.route);
+                  } else {
+                    let id = e?.name?.toLowerCase().replaceAll(" ", "");
+                    let element = document.getElementById(id);
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
                 }}
               >
                 {e.name}
@@ -157,8 +163,14 @@ const Navbar = () => {
                 <p
                   key={i}
                   onClick={(el) => {
-                    setScrollTo(e?.name?.toLowerCase().replaceAll(" ", ""));
-                    history.push(e?.route);
+                    if (pathname !== e?.route) {
+                      setScrollTo(e?.name?.toLowerCase().replaceAll(" ", ""));
+                      history.push(e?.route);
+                    } else {
+                      let id = e?.name?.toLowerCase().replaceAll(" ", "");
+                      let element = document.getElementById(id);
+                      element.scrollIntoView({ behavior: "smooth" });
+                    }
                     closeNav();
                   }}
                   className="uppercase cursor-pointer mb-4 font-semibold"

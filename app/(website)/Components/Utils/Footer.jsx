@@ -13,6 +13,8 @@ import facebook from "../../Assets/Home/icons/Facebook.png";
 import call from "../../Assets/Home/icons/Call.png";
 import { FaFacebook, FaInstagram, FaTelegram } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
+import Link from "next/link";
+import { BsLinkedin, BsWhatsapp } from "react-icons/bs";
 
 const Footer = () => {
   return (
@@ -41,22 +43,57 @@ const Footer = () => {
           </div>
           <div className="mb-5 md:mb-0 flex flex-col items-center md:items-start">
             <h1 className="font-semibold mb-1 text-lg">Connect With Us</h1>
-            <p className="flex items-center mb-3">
-              <FaFacebook size={25} className="mr-2" />
-              @TruBuddies
-            </p>
-            <p className="flex items-center mb-3">
-              <FaInstagram size={25} className="mr-2" />
-              @TruBuddies
-            </p>
-            <p className="flex items-center mb-3">
-              <FaTelegram size={25} className="mr-2" />
-              @TruBuddies
-            </p>
-            <p className="flex items-center mb-3">
+            <Link
+              target="__blank"
+              href={"mailto:trubuddiesofficial@gmail.com"}
+              className="flex items-center mb-3"
+            >
               <IoIosMail size={25} className="mr-2" />
               trubuddiesofficial@gmail.com
-            </p>
+            </Link>
+            <div className="flex items-center">
+              <Link
+                href={"https://whatsapp.com/channel/0029VaDcspe6hENjNsq3jU3u"}
+                target="__blank"
+                className="flex items-center mb-3"
+              >
+                <BsWhatsapp size={25} className="mr-2" />
+              </Link>
+              <Link
+                href={
+                  "https://www.facebook.com/profile.php?id=100089422935878&mibextid=ZbWKwL"
+                }
+                target="__blank"
+                className="flex items-center mb-3"
+              >
+                <FaFacebook size={25} className="mr-2" />
+              </Link>
+              <Link
+                href={
+                  "https://instagram.com/trubuddies?igshid=OGQ5ZDc2ODk2ZA=="
+                }
+                target="__blank"
+                className="flex items-center mb-3"
+              >
+                <FaInstagram size={25} className="mr-2" />
+              </Link>
+              <Link
+                href={
+                  "https://www.linkedin.com/in/trubuddies-894b03293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                }
+                target="__blank"
+                className="flex items-center mb-3"
+              >
+                <BsLinkedin size={25} className="mr-2" />
+              </Link>
+              <Link
+                href={"https://t.me/trubuddiescommunity"}
+                target="__blank"
+                className="flex items-center mb-3"
+              >
+                <FaTelegram size={25} className="mr-2" />
+              </Link>
+            </div>
           </div>
           <div className="mb-5 md:mb-0 flex flex-col items-center md:items-start">
             <h1 className="font-semibold mb-1 text-lg">

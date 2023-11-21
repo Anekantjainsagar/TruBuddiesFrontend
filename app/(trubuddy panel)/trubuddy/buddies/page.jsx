@@ -59,7 +59,7 @@ const Trubuddy = () => {
             <p className="text-xl">Sorry, You don&apos;t have any Buddy</p>
           </div>
         ) : (
-          <div className="w-full grid grid-cols-2 gap-3 md:gap-5 px-3 md:px-5 pt-2 md:pt-3">
+          <div className="w-full grid overflow-y-auto pb-5 grid-cols-2 gap-3 md:gap-5 px-3 md:px-5 pt-2 md:pt-3">
             {trubuddy?.buddies?.map((e) => {
               return <BuddyBlock id={e} key={e} />;
             })}

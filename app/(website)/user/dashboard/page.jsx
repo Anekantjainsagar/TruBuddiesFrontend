@@ -56,7 +56,7 @@ const UserDashboard = () => {
           <h1
             className={`text-xl md:text-2xl mt-1.5 md:mt-2 font-semibold ${noto_sans.className}`}
           >
-            {login?.name}
+            {login?.anonymous}
           </h1>
           <p>
             @uid{login?._id.slice(login?._id?.length - 4, login?._id?.length)}
