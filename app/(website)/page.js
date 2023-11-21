@@ -87,24 +87,6 @@ const App = () => {
     let element = document.getElementById("logoIcon");
 
     if (typeof window != "undefined" && window.innerWidth < 550) {
-      gsap.to("#logoIcon", {
-        x: window.innerWidth - element.offsetLeft - 100,
-        y: window.innerHeight - (element.offsetHeight + element.offsetTop),
-        duration: 1,
-        scrollTrigger: {
-          trigger: "#trigger",
-          start: "top 65%",
-          ease: Power2.easeInOut,
-          onEnter: () => {
-            element.classList.remove("sticky");
-            element.classList.add("fixed");
-          },
-          onEnterBack: () => {
-            element.classList.remove("fixed");
-            element.classList.add("sticky");
-          },
-        },
-      });
     } else {
       gsap.to("#logoIcon", {
         x: window.innerWidth - element.offsetLeft - 155,

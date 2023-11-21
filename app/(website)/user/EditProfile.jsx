@@ -46,6 +46,7 @@ const EditProfile = () => {
     profile: "",
     languages: [],
     discussions: [],
+    anonymous: "",
   });
 
   useEffect(() => {
@@ -60,6 +61,7 @@ const EditProfile = () => {
       gender: login?.gender,
       profile: login?.profile,
       discussions: login?.discussions,
+      anonymous: login?.anonymous,
     });
   }, [login]);
 
@@ -160,6 +162,13 @@ const EditProfile = () => {
                     value: user?.nationality,
                     onchange: (e) => {
                       setUser({ ...user, nationality: e.target.value });
+                    },
+                  },
+                  {
+                    title: "Anonymous Name",
+                    value: user?.anonymous,
+                    onchange: (e) => {
+                      setUser({ ...user, anonymous: e.target.value });
                     },
                   },
                 ]?.map((e) => {
@@ -288,7 +297,7 @@ const EditProfile = () => {
             ) : (
               <div className="mt-5">
                 <div className="mb-3 mx-auto">
-                  <p className={`font-semibold`}>Other Expertise :</p>
+                  <p className={`font-semibold`}>What You need to discuss :</p>
                   <div className="mt-2 px-1 md:px-3">
                     {user?.discussions?.map((e, i) => {
                       return (
@@ -329,7 +338,7 @@ const EditProfile = () => {
                       <input
                         type="text"
                         value={experty}
-                        placeholder="Expertise"
+                        placeholder="Problems"
                         onChange={(e) => {
                           setExperty(e.target.value);
                         }}

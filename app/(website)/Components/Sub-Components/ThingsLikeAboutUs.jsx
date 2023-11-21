@@ -1,7 +1,7 @@
 "use client";
 import { noto_sans } from "../Utils/font";
 import React from "react";
-import Tilt from 'react-parallax-tilt'
+import Tilt from "react-parallax-tilt";
 import HeadingCurvedLine from "../Elements/HeadingCurvedLine";
 import Flower1 from "../Elements/Flower1";
 import Flower2 from "../Elements/Flower2";
@@ -18,14 +18,14 @@ const ThingsLikeAboutUs = () => {
       <h1
         className={`text-newDarkGreen ${noto_sans.className} w-fit mx-auto text-xl md:text-2xl text-center font-bold relative`}
       >
-        THINGS YOU LIKE ABOUT US
+        THINGS THAT YOU LIKE ABOUT US
         <HeadingCurvedLine />
         <Flower1 />
         <Flower2 />
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-4 mt-[5vw] md:px-0 px-[10vw]">
         {[
-          { image: img3, text: "Anonymouse Conversation" },
+          { image: img3, text: "Anonymous Conversation" },
           { image: img1, text: "24/7 Instant Availability" },
           { image: img2, text: "Verified Buddies" },
           { image: img4, text: "Safe and Secure" },

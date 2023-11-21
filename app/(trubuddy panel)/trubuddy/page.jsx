@@ -158,11 +158,21 @@ const Trubuddy = () => {
           })}
         </div>
         <div className="w-3/12 -ml-14 bg-gray-300 my-2 h-[1.5px]"></div>
-        <div className="md:w-[80%] mx-auto flex items-center mt-2 justify-center">
+        <div className="md:w-[80%] mx-[2vw] md:mx-auto grid grid-cols-3 md:gap-y-0 gap-y-2 md:flex items-center mt-2 justify-center">
           {trubuddy?.buddies?.length !== 0 ? (
-            trubuddy?.buddies.map((e) => {
-              return <BuddyBlock id={e} key={e} />;
-            })
+            <>
+              {trubuddy?.buddies?.slice(0, 5).map((e) => {
+                return <BuddyBlock id={e} key={e} />;
+              })}
+              <p
+                className="text-center underline md:hidden"
+                onClick={(e) => {
+                  history.push("/trubuddy/buddies");
+                }}
+              >
+                View All
+              </p>
+            </>
           ) : (
             <div className="w-full flex items-center h-[20vh] justify-center">
               <p className="text-xl">Sorry, You don&apos;t have any Buddy</p>
@@ -179,7 +189,9 @@ const BuddyBlock = ({ id }) => {
 
   useEffect(() => {
     axios
-      .post(`${BASE_URL}/login/get-one/${id}`, { token: getCookie("trubuddy_token") })
+      .post(`${BASE_URL}/login/get-one/${id}`, {
+        token: getCookie("trubuddy_token"),
+      })
       .then((res) => {
         setUser(res.data);
       })
@@ -189,16 +201,16 @@ const BuddyBlock = ({ id }) => {
   }, [id]);
 
   return (
-    <div className="w-[15%] flex flex-col items-center cursor-pointer">
+    <div className="md:w-[15%] w-10/12 flex flex-col items-center justify-center md:mx-0 mx-auto cursor-pointer">
       <Image
         src={user?.profile}
         width={100}
         height={100}
         alt="Profile"
-        className="rounded-full border border-newBlue w-[7vw] h-[7vw] object-cover object-center"
+        className="rounded-full border border-newBlue md:w-[7vw] h-[23vw] w-full md:h-[7vw] object-cover object-center"
       />
-      <div className="border-2 text-sm border-newBlue px-4 rounded-full mt-2">
-        View Profile
+      <div className="md:block hidden text-center text-sm border-newBlue px-4 rounded-full mt-2">
+        {user?.name}
       </div>
     </div>
   );

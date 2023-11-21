@@ -14,6 +14,7 @@ import axios from "axios";
 import { BASE_URL } from "../Components/Utils/url";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 const customStyles = {
   overlay: {
@@ -32,6 +33,7 @@ const customStyles = {
 };
 
 const LoginModal = () => {
+  const history = useRouter();
   const [showLogin, setShowLogin] = useState(false);
   const [showOtp, setshowOtp] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -109,13 +111,13 @@ const LoginModal = () => {
     if (!register?.email) {
       toast.error("Please enter the email to get otp");
     } else {
+      setshowOtp(!showOtp);
       axios
         .post(`${BASE_URL}/login/otp-verification`, {
           email: register?.email,
         })
         .then((res) => {
           if (res.status == 200) {
-            setshowOtp(!showOtp);
             setRegister({ ...register, originalOtp: res.data.otp });
             toast.success(res.data.data);
           } else {
@@ -138,6 +140,7 @@ const LoginModal = () => {
           if (res.status === 200) {
             setCookie("token", res.data.jwtToken);
             setLogin({ email: "", password: "" });
+            history.push("/trubuddies");
             setIsOpen(!modalIsOpen);
             toast.success("Login Successful");
           } else {

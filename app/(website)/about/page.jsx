@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="my-10 p-[3vw]">
+    <div className="my-10 p-[4.5vw] md:p-[3vw]">
       <h1 className="font-semibold text-2xl">
         Welcome to Trubuddies: Nurturing Mental Well-being Together
       </h1>{" "}

@@ -9,6 +9,7 @@ import animation2 from "../../Assets/Home/services/animation2.png";
 import animation3 from "../../Assets/Home/services/animation3.png";
 import animation4 from "../../Assets/Home/services/animation4.png";
 import gsap from "gsap";
+import { useRouter } from "next/navigation";
 import ComingSoon from "./ComingSoon";
 
 const OurServices = () => {
@@ -44,20 +45,37 @@ const OurServices = () => {
                 image: animation4,
                 title: "Chat & Call Based Conversations",
                 upcoming: false,
+                route: "/chats",
               },
-              { image: meditation, title: "Yoga & Meditation", upcoming: true },
-              { image: animation3, title: "Library", upcoming: true },
+              {
+                image: meditation,
+                title: "Yoga & Meditation",
+                upcoming: true,
+                route: "/",
+              },
+              {
+                image: animation3,
+                title: "Library",
+                upcoming: true,
+                route: "/",
+              },
             ].map((e) => {
               return <Block key={e?.title} data={e} />;
             })}
           </div>
           <div className="flex flex-col items-center justify-evenly">
             {[
-              { image: animation1, title: "Social Support", upcoming: false },
+              {
+                image: animation1,
+                title: "Social Support",
+                upcoming: false,
+                route: "/chats",
+              },
               {
                 image: animation2,
                 title: "Routine Improvement",
                 upcoming: true,
+                route: "/",
               },
             ].map((e) => {
               return <Block key={e?.title} data={e} />;
@@ -148,6 +166,8 @@ const OurServices = () => {
 
 const Block = ({ data }) => {
   const [showComingSoon, setShowComingSoon] = useState(false);
+  const history = useRouter();
+
   return (
     <div className="relative">
       <ComingSoon
@@ -159,6 +179,8 @@ const Block = ({ data }) => {
         onClick={(e) => {
           if (data?.upcoming) {
             setShowComingSoon(true);
+          } else {
+            history.push(data?.route);
           }
         }}
       >

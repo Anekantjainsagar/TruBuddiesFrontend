@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <State>
           <div
             className={`${
-              pathname == "/" ? "hidden" : "block"
+              pathname == "/" ? "block md:hidden" : "block"
             } fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer`}
           >
             <Image

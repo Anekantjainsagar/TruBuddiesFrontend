@@ -120,7 +120,13 @@ const Navbar = () => {
             >
               Login
             </button>
-            <button className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setIsOpen(!modalIsOpen);
+              }}
+              className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md"
+            >
               Get Started
             </button>
           </div>
@@ -212,7 +218,13 @@ const Navbar = () => {
                 >
                   Login
                 </button>
-                <button className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsOpen(!modalIsOpen);
+                  }}
+                  className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md"
+                >
                   Get Started
                 </button>
               </div>

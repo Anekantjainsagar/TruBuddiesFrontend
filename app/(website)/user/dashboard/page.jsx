@@ -58,6 +58,9 @@ const UserDashboard = () => {
           >
             {login?.name}
           </h1>
+          <p>
+            @uid{login?._id.slice(login?._id?.length - 4, login?._id?.length)}
+          </p>
           <div className="border-2 px-2 md:px-4 py-0.5 flex items-center rounded-lg text-sm bg-white border-newBlue w-fit mt-1">
             {login?.gender?.toLowerCase() == "male" ? (
               <Image
@@ -149,6 +152,10 @@ const UserDashboard = () => {
                 <p>{login?.name}</p>
               </div>
               <div className="text-lg mt-4 break-words md:pr-0 pr-3 md:mt-7">
+                <h1 className="font-bold">Anonymous Name :</h1>
+                <p>{login?.anonymous}</p>
+              </div>
+              <div className="text-lg mt-4 break-words md:pr-4 pr-3 md:mt-7">
                 <h1 className="font-bold">Email :</h1>
                 <p>{login?.email}</p>
               </div>
@@ -234,7 +241,7 @@ const UserDashboard = () => {
                   </div>
                 </div>
               </div>
-              <button className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-0 md:mt-4">
+              <button className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-3 md:mt-4">
                 Start Chat
               </button>
             </div>
