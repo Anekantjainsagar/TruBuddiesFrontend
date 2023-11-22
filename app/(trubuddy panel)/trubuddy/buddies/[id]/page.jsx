@@ -6,7 +6,6 @@ import { format } from "timeago.js";
 import bg from "../../../../(website)/Assets/User/purple bg.png";
 import dotBg from "../../../../(website)/Assets/User/dots bg.png";
 import Context from "../../../../Context/Context";
-import picture from "../../../../(website)/Assets/Chats/picture.png";
 import { io } from "socket.io-client";
 import { IoMdSend } from "react-icons/io";
 import { BASE_URL, URL } from "../../../../(website)/Components/Utils/url";

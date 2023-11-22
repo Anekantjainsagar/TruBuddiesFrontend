@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
           alt="Logo"
           className={`bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw] ${
             pathname.includes("/trubuddy/buddies/") ||
+            pathname.includes("/trubuddy/community/") ||
             pathname.includes("/trubuddy/login")
               ? "hidden"
               : "block"

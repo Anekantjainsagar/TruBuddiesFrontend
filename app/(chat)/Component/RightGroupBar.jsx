@@ -195,7 +195,7 @@ const RightGroupBar = () => {
               </div>
               <div
                 onClick={(e) => {
-                  history.push("group-chats/65429c9f26aaf64195859089");
+                  history.push("/group-chats/65429c9f26aaf64195859089");
                 }}
                 className="flex cursor-pointer items-center h-[20vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue"
               >

@@ -1,24 +1,48 @@
 "use client";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import Navbar from "../../../Components/Navbar";
 import Image from "next/image";
-import React, { useEffect, useState, useRef } from "react";
-import { IoMdSend } from "react-icons/io";
-import { io } from "socket.io-client";
 import { format } from "timeago.js";
-import { URL } from "../../(website)/Components/Utils/url";
-import Context from "../../Context/Context";
-import { usePathname } from "next/navigation";
-import RightGroupBar from "../Component/RightGroupBar";
+import bg from "../../../../(website)/Assets/User/purple bg.png";
+import dotBg from "../../../../(website)/Assets/User/dots bg.png";
+import Context from "../../../../Context/Context";
+import { io } from "socket.io-client";
+import { IoMdSend } from "react-icons/io";
+import { BASE_URL, URL } from "../../../../(website)/Components/Utils/url";
+import { AiOutlineLeft } from "react-icons/ai";
+import {  useRouter } from "next/navigation";
+import axios from "axios";
+import { getCookie } from "cookies-next";
 import { CgCommunity } from "react-icons/cg";
-import Navbar from "../../(website)/Components/Utils/Navbar";
 
-const GroupChats = () => {
+const TrubuddyChat = ({ params }) => {
+  const id = params.id;
   const context = React.useContext(Context);
-  const { login } = React.useContext(Context);
+  const { trubuddy, getTrubuddyLogin } = useContext(Context);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    axios
+      .post(`${BASE_URL}/login/get-one/${id}`, {
+        token: getCookie("trubuddy_token"),
+      })
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    getTrubuddyLogin();
+  }, []);
+
+  const history = useRouter();
   const socket = io(URL);
   const chatContainerRef = useRef();
   const [messageInput, setMessageInput] = useState("");
   const [groupMessages, setGroupMessages] = useState([]);
-  const pathname = usePathname();
 
   // Scrolling on new message
   useEffect(() => {
@@ -31,7 +55,7 @@ const GroupChats = () => {
   // Connecting it with socket server
   useEffect(() => {
     socket.emit("connection");
-    socket.emit("join", { userId: context?.login?._id });
+    socket.emit("join", { userId: context?.trubuddy?._id });
   }, [context?.user]);
 
   // On group chat message submission
@@ -40,13 +64,13 @@ const GroupChats = () => {
       return;
     }
     //send message to the server
-    if (context?.login?._id && messageInput) {
+    if (context?.trubuddy?._id && messageInput) {
       setMessageInput("");
       socket.emit("chat", {
-        from: context?.login?._id,
+        from: context?.trubuddy?._id,
         message: messageInput,
         id: "65429c9f26aaf64195859089",
-        profile: context?.login?.profile,
+        profile: context?.trubuddy?.profile,
       });
     } else {
       alert("Internal server error");
@@ -69,29 +93,48 @@ const GroupChats = () => {
   }, []);
 
   return (
-    <>
-      <div className="md:hidden block">
-        <Navbar />
+    <div>
+      <Navbar />
+      <div className="absolute top-0 left-0 z-0">
+        <Image
+          src={bg}
+          alt="Bg"
+          className="h-[20vh] md:h-[35vh] object-cover object-center"
+        />
+        <Image src={dotBg} alt="Dots bg" className="md:block hidden" />
       </div>
-      <div className="hidden md:block border w-full md:w-[73vw] p-[2px] h-[47vh] md:mt-0 mt-1.5 md:h-full bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 mx-7 rounded-3xl">
+      <div className="absolute z-10 bg-white w-[85vw] md:overflow-auto overflow-hidden md:w-[70vw] h-[85vh] md:h-[75vh] flex flex-col items-center rounded-lg bottom-0 left-1/2 -translate-x-1/2 shadow-xl shadow-gray-500">
         <div className="w-full h-full rounded-3xl bg-white">
-          <div className="mx-6">
+          <div className="mx-2 md:mx-6">
             <div className="py-2 flex items-center">
+              <AiOutlineLeft
+                size={
+                  typeof window != "undefined"
+                    ? window.innerWidth < 550
+                      ? 25
+                      : 30
+                    : 0
+                }
+                className="mr-2 cursor-pointer"
+                onClick={(e) => {
+                  history.push("/trubuddy/buddies");
+                }}
+              />
               <CgCommunity
                 size={45}
                 className="font-bold text-newBlue p-1 border-2 border-newBlue rounded-full"
               />
               <div className="ml-3">
-                <h1 className="font-bold">Common Community</h1>
-                <p className="text-sm">Hey!! What Are You Up To.</p>
+                <h1 className="font-semibold text-lg">Common Community</h1>
+                <p className="text-xs md:text-sm">Hey!! What Are You Up To.</p>
               </div>
             </div>
             <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
           </div>
-          <div className="h-[80%] md:h-[90%] chatBg">
+          <div className="h-[90%] md:h-[86%] chatBg">
             <div
               ref={chatContainerRef}
-              className="px-3 md:px-10 h-[80%] md:h-[90%] pt-3 overflow-y-scroll"
+              className="px-3 md:px-10 h-[94%] md:h-[91%] pt-3 overflow-y-scroll"
             >
               {
                 <>
@@ -100,7 +143,7 @@ const GroupChats = () => {
                       <ChatBlock
                         key={i}
                         data={e}
-                        me={login?._id == e?.sender}
+                        me={trubuddy?._id == e?.sender}
                       />
                     );
                   })}
@@ -110,15 +153,15 @@ const GroupChats = () => {
                       <ChatBlock
                         key={i}
                         data={e}
-                        me={login?._id == e?.sender}
+                        me={trubuddy?._id == e?.sender}
                       />
                     );
                   })}
                 </>
               }
             </div>
-            <div className="h-[16%] md:h-[10%] flex items-center justify-center">
-              <div className="flex items-center w-full h-[96%] md:h-[65%] px-2 md:px-4">
+            <div className="h-[7%] md:h-[10%] flex items-center justify-center">
+              <div className="flex items-center w-full h-[98%] md:h-[85%] px-3 md:px-4">
                 <input
                   type="text"
                   value={messageInput}
@@ -157,10 +200,7 @@ const GroupChats = () => {
           </div>
         </div>
       </div>
-      <div className={`${pathname.includes("/chats/") ? "hidden" : "block"}`}>
-        <RightGroupBar />
-      </div>
-    </>
+    </div>
   );
 };
 
@@ -211,4 +251,5 @@ const ChatBlock = ({ me, data }) => {
     </div>
   );
 };
-export default GroupChats;
+
+export default TrubuddyChat;

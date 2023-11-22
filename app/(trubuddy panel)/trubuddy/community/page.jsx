@@ -11,9 +11,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { BASE_URL } from "../../../(website)/Components/Utils/url";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import ComingSoon from "../../../(website)/Components/Sub-Components/ComingSoon";
+import { IoIosFemale, IoIosMale } from "react-icons/io";
+import { CgCommunity } from "react-icons/cg";
 
-const Trubuddy = () => {
+const TrubuddyComm = () => {
   const { trubuddy, getTrubuddyLogin } = useContext(Context);
+  const [showComingSoon, setShowComingSoon] = useState(false);
   const history = useRouter();
   const pathname = usePathname();
 
@@ -23,6 +27,10 @@ const Trubuddy = () => {
 
   return (
     <div>
+      <ComingSoon
+        showComingSoon={showComingSoon}
+        setShowComingSoon={setShowComingSoon}
+      />
       <Navbar />
       <div className="absolute top-0 left-0 z-0">
         <Image
@@ -73,17 +81,42 @@ const Trubuddy = () => {
             Community
           </p>
         </div>
-        {trubuddy?.buddies?.length == 0 ? (
-          <div className="w-full flex items-center justify-center">
-            <p className="text-xl">Sorry, You don&apos;t have any Buddy</p>
+        <div className="w-full grid overflow-y-auto pb-5 grid-cols-3 gap-3 md:gap-5 px-3 md:px-5 pt-2 md:pt-3">
+          <div
+            onClick={(e) => {
+              setShowComingSoon(!showComingSoon);
+            }}
+            className="flex cursor-pointer items-center h-[20vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue"
+          >
+            <IoIosMale size={45} className="font-bold" />
           </div>
-        ) : (
-          <div className="w-full grid overflow-y-auto pb-5 grid-cols-2 gap-3 md:gap-5 px-3 md:px-5 pt-2 md:pt-3">
-            {trubuddy?.buddies?.map((e) => {
-              return <BuddyBlock id={e} key={e} />;
-            })}
+          <div
+            onClick={(e) => {
+              setShowComingSoon(!showComingSoon);
+            }}
+            className="flex cursor-pointer items-center h-[20vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue"
+          >
+            <IoIosFemale size={45} className="font-bold" />
           </div>
-        )}
+          <div
+            onClick={(e) => {
+              history.push("/trubuddy/community/65429c9f26aaf64195859089");
+            }}
+            className="flex cursor-pointer items-center h-[20vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue"
+          >
+            <CgCommunity size={45} className="font-bold" />
+          </div>
+          {/* <div
+            className="items-center shadow-lg shadow-gray-400 rounded-lg border border-newBlue md:flex hidden justify-center cursor-pointer h-[14vw] md:h-[5vw]"
+            onClick={(e) => {
+              history.push("/trubuddies");
+            }}
+          >
+            <div className="w-full md:w-[5vw] text-black flex items-center justify-center pb-2 md:pb-3 h-full rounded-lg text-5xl font-semibold">
+              +
+            </div>
+          </div> */}
+        </div>
       </div>
     </div>
   );
@@ -133,4 +166,4 @@ const BuddyBlock = ({ id }) => {
   );
 };
 
-export default Trubuddy;
+export default TrubuddyComm;

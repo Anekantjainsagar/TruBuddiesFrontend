@@ -4,21 +4,23 @@ import React, { useEffect, useState, useRef } from "react";
 import { IoMdSend } from "react-icons/io";
 import { io } from "socket.io-client";
 import { format } from "timeago.js";
-import { URL } from "../../../(website)/Components/Utils/url";
+import { BASE_URL, URL } from "../../../(website)/Components/Utils/url";
 import Context from "../../../Context/Context";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import RightGroupBar from "../../Component/RightGroupBar";
 import { CgCommunity } from "react-icons/cg";
 import Navbar from "../../../(website)/Components/Utils/Navbar";
+import { AiOutlineLeft } from "react-icons/ai";
+import axios from "axios";
 
 const GroupChats = () => {
   const context = React.useContext(Context);
   const { login } = React.useContext(Context);
   const socket = io(URL);
+  const history = useRouter();
   const chatContainerRef = useRef();
   const [messageInput, setMessageInput] = useState("");
   const [groupMessages, setGroupMessages] = useState([]);
-  const pathname = usePathname();
 
   // Scrolling on new message
   useEffect(() => {
@@ -46,6 +48,7 @@ const GroupChats = () => {
         from: context?.login?._id,
         message: messageInput,
         id: "65429c9f26aaf64195859089",
+        profile: context?.login?.profile,
       });
     } else {
       alert("Internal server error");
@@ -76,6 +79,13 @@ const GroupChats = () => {
         <div className="w-full h-full rounded-3xl bg-white">
           <div className="mx-3">
             <div className="py-2 flex items-center">
+              <AiOutlineLeft
+                size={30}
+                onClick={(e) => {
+                  history.push("/group-chats");
+                }}
+                className="mr-2"
+              />
               <CgCommunity
                 size={45}
                 className="font-bold text-newBlue p-1 border-2 border-newBlue rounded-full"
@@ -104,7 +114,6 @@ const GroupChats = () => {
                     );
                   })}
                   {groupMessages.map((e, i) => {
-                    console.log(e);
                     return (
                       <ChatBlock
                         key={i}
@@ -168,14 +177,32 @@ const ChatBlock = ({ me, data }) => {
           me ? "float-right items-end" : "float-left items-start"
         } flex flex-col`}
       >
-        <div
-          className={`${
-            me
-              ? "text-newBlue bg-transparent border-newBlue"
-              : "text-white bg-newChatBlue border-white"
-          } w-fit px-3 md:px-5 py-0.5 md:py-1 rounded-lg border-2`}
-        >
-          {data?.message}
+        <div className="flex items-center">
+          <Image
+            src={data?.profile}
+            width={100}
+            height={100}
+            className={`w-[10vw] md:w-[4vw] ${
+              !me ? "block" : "hidden"
+            } mr-2 rounded-full h-[10vw] md:h-[4vw] object-cover object-center`}
+          />
+          <div
+            className={`${
+              me
+                ? "text-newBlue bg-transparent border-newBlue"
+                : "text-white bg-newChatBlue border-white"
+            } w-fit px-3 md:px-5 py-0.5 md:py-1 rounded-lg border-2`}
+          >
+            {data?.message}
+          </div>
+          <Image
+            src={data?.profile}
+            width={100}
+            height={100}
+            className={`w-[10vw] md:w-[4vw] ${
+              me ? "block" : "hidden"
+            } ml-2 rounded-full h-[10vw] md:h-[4vw] object-cover object-center`}
+          />
         </div>
         <p
           className={`text-gray-400 text-xs md:text-sm ${
