@@ -69,7 +69,7 @@ const OurServices = () => {
                 image: animation1,
                 title: "Social Support",
                 upcoming: false,
-                route: "/chats",
+                route: "/group-chats",
               },
               {
                 image: animation2,

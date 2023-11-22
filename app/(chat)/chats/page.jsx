@@ -9,6 +9,8 @@ import Context from "../../Context/Context";
 import Navbar from "../../(website)/Components/Utils/Navbar";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import { usePathname } from "next/navigation";
+import RightBar from "../Component/RightBar";
 
 const Chats = () => {
   const context = React.useContext(Context);
@@ -17,6 +19,7 @@ const Chats = () => {
   const chatContainerRef = useRef();
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
+  const pathname = usePathname();
 
   // Scrolling on new message
   useEffect(() => {
@@ -63,8 +66,7 @@ const Chats = () => {
         .post(`${BASE_URL}/login/seen/${context?.clickedUser?._id}`, {
           token: getCookie("token"),
         })
-        .then((res) => {
-        })
+        .then((res) => {})
         .catch((err) => {
           console.log(err);
         });
@@ -191,6 +193,9 @@ const Chats = () => {
             <p className="text-2xl">Select a Trubuddy to Start Chat</p>
           </div>
         )}
+      </div>
+      <div className={`${pathname.includes("/chats/") ? "hidden" : "block"}`}>
+        <RightBar />
       </div>
     </>
   );

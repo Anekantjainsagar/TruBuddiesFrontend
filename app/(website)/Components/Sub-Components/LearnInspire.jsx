@@ -40,13 +40,13 @@ const LearnInspire = () => {
   let data = [
     {
       image: blog1,
-      title: "Heading",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. In nesciunt eligendi impedit nemo sequi! Rem nam nihil incidunt praesentium iure.",
+      title: "Relationship issues",
+      text: "Rakul, 30, and Anaya, 28, encountered relationship issues characterized by dwindling intimacy and communication breakdowns. The symptoms included increasing emotional distance and a lack of shared moments. The root causes were traced to work-related stress and differing expectations. Recognizing the need for change they turned to Trubuddies for professional help, utilizing the platform's confidential and compassionate space to address underlying concerns and rekindle the spark in their marriage.",
     },
     {
       image: blog2,
-      title: "Heading",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. In nesciunt eligendi impedit nemo sequi! Rem nam nihil incidunt praesentium iure.",
+      title: "Internet Addiction",
+      text: "Sam, a 20-year-old boy used to spend too much time on his phone. He stayed up late surfing on the internet, playing games and watching videos on social media platforms for about 15-20 hours everyday. His parents were extremely tensed because of his declining grades and detoriating health. This is a case of internet addiction causing poor concentration, stress, anxiety and physical complaints. Trubuddies offers a compassionate and safe space to share concerns with professionals anonymously and without judgment helping individuals like Sam regain control and well-being.",
     },
     {
       image: blog3,

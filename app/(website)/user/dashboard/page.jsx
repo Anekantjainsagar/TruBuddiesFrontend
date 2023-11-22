@@ -14,13 +14,12 @@ import backtick from "../../Assets/Home/backtick.png";
 
 import { BiSolidUserVoice } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-
 import Context from "../../../Context/Context";
 import UpperTrubuddyBlock from "./UpperTrubuddyBlock";
 
 const UserDashboard = () => {
   const history = useRouter();
-  const { login, setShowEditProfile } = useContext(Context);
+  const { login, setShowEditProfile, admin } = useContext(Context);
 
   return (
     <div className="border overflow-hidden">
@@ -204,40 +203,82 @@ const UserDashboard = () => {
             </h1>
             <div
               onClick={(e) => {
-                history.push(`/trubuddies/${"anekant"}`);
+                history.push(
+                  `/trubuddies/${
+                    admin?.adminTrubuddies[0]?._id == login?._id
+                      ? admin?.adminTrubuddies[1]?._id
+                      : admin?.adminTrubuddies[0]?._id
+                  }`
+                );
               }}
               className={`bg-white cursor-pointer rounded-3xl mt-[1vw] border md:mx-0 mx-auto w-[80%] md:w-[21vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center`}
             >
               <div className="w-full h-full">
                 <div className="flex items-center w-full justify-start">
                   <Image
-                    src={client}
+                    src={
+                      admin?.adminTrubuddies[0]?._id == login?._id
+                        ? admin?.adminTrubuddies[1]?.profile
+                        : admin?.adminTrubuddies[0]?.profile
+                    }
+                    width={100}
+                    height={100}
                     alt="Image"
                     className="w-[32vw] md:w-[5vw] border-4 border-newLightBlue rounded-full"
                   />
                   <div className="ml-3">
                     <h1 className="mt-1 md:mt-2 mb-0 text-xl font-semibold">
-                      Ayush Srivastava
+                      {admin?.adminTrubuddies[0]?._id == login?._id
+                        ? admin?.adminTrubuddies[1]?.name
+                        : admin?.adminTrubuddies[0]?.name}
                     </h1>
                     <div className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
-                      <Image src={male} alt="Male" className="mr-1" />
-                      Male
+                      {admin?.adminTrubuddies[0]?._id == login?._id ? (
+                        admin?.adminTrubuddies[1]?.gender == "Male" ? (
+                          <Image src={male} alt="Male" className="mr-1" />
+                        ) : (
+                          <Image src={female} alt="Male" className="mr-1" />
+                        )
+                      ) : admin?.adminTrubuddies[0]?.gender == "Male" ? (
+                        <Image src={male} alt="Male" className="mr-1" />
+                      ) : (
+                        <Image src={female} alt="Male" className="mr-1" />
+                      )}
+
+                      {admin?.adminTrubuddies[0]?._id == login?._id
+                        ? admin?.adminTrubuddies[1]?.gender
+                        : admin?.adminTrubuddies[0]?.gender}
                     </div>
                   </div>
                 </div>
                 <div className={`${noto_sans.className}`}>
                   <h1 className="text-lg mt-2 md:mt-1 mb-0">Expertise</h1>
                   <div className="grid grid-cols-2 gap-x-3">
-                    {["Psycology", "Color Artist"].map((e) => {
-                      return (
-                        <div
-                          className="rounded-full mt-2 text-center border-2 border-newBlue"
-                          key={e}
-                        >
-                          {e}
-                        </div>
-                      );
-                    })}
+                    {admin?.adminTrubuddies[0]?._id == login?._id
+                      ? admin?.adminTrubuddies[1]?.otherExpertise
+                          ?.slice(0, 2)
+                          .map((e) => {
+                            return (
+                              <div
+                                className="rounded-full mt-2 text-center border-2 border-newBlue"
+                                key={e}
+                              >
+                                {e}
+                              </div>
+                            );
+                          })
+                      : admin?.adminTrubuddies[0]?.otherExpertise
+                          ?.slice(0, 2)
+                          .map((e) => {
+                            return (
+                              <div
+                                className="rounded-full mt-2 text-center border-2 border-newBlue"
+                                key={e}
+                              >
+                                {e}
+                              </div>
+                            );
+                          })}
                   </div>
                 </div>
               </div>

@@ -4,12 +4,12 @@ import React, { useEffect, useState, useRef } from "react";
 import { IoMdSend } from "react-icons/io";
 import { io } from "socket.io-client";
 import { format } from "timeago.js";
-import { URL } from "../../(website)/Components/Utils/url";
-import Context from "../../Context/Context";
+import { URL } from "../../../(website)/Components/Utils/url";
+import Context from "../../../Context/Context";
 import { usePathname } from "next/navigation";
-import RightGroupBar from "../Component/RightGroupBar";
+import RightGroupBar from "../../Component/RightGroupBar";
 import { CgCommunity } from "react-icons/cg";
-import Navbar from "../../(website)/Components/Utils/Navbar";
+import Navbar from "../../../(website)/Components/Utils/Navbar";
 
 const GroupChats = () => {
   const context = React.useContext(Context);
@@ -72,9 +72,9 @@ const GroupChats = () => {
       <div className="md:hidden block">
         <Navbar />
       </div>
-      <div className="hidden md:block border w-full md:w-[73vw] p-[2px] h-[47vh] md:mt-0 mt-1.5 md:h-full bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 mx-7 rounded-3xl">
+      <div className="border w-[94vw] p-[2px] h-[91vh] mt-[14vw] md:h-full bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
         <div className="w-full h-full rounded-3xl bg-white">
-          <div className="mx-6">
+          <div className="mx-3">
             <div className="py-2 flex items-center">
               <CgCommunity
                 size={45}
@@ -87,10 +87,10 @@ const GroupChats = () => {
             </div>
             <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
           </div>
-          <div className="h-[80%] md:h-[90%] chatBg">
+          <div className="h-[95%] chatBg">
             <div
               ref={chatContainerRef}
-              className="px-3 md:px-10 h-[80%] md:h-[90%] pt-3 overflow-y-scroll"
+              className="px-3 md:px-10 h-[90%] pt-3 overflow-y-scroll"
             >
               {
                 <>
@@ -116,7 +116,7 @@ const GroupChats = () => {
                 </>
               }
             </div>
-            <div className="h-[16%] md:h-[10%] flex items-center justify-center">
+            <div className="h-[6%] flex items-center justify-center">
               <div className="flex items-center w-full h-[96%] md:h-[65%] px-2 md:px-4">
                 <input
                   type="text"
@@ -155,9 +155,6 @@ const GroupChats = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className={`${pathname.includes("/chats/") ? "hidden" : "block"}`}>
-        <RightGroupBar />
       </div>
     </>
   );

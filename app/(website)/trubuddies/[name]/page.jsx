@@ -132,14 +132,24 @@ const SeprateTrubuddy = ({ params }) => {
           </h1>
           <div
             onClick={(e) => {
-              history.push(`/trubuddies/${admin?.adminTrubuddies[0]?._id}`);
+              history.push(
+                `/trubuddies/${
+                  admin?.adminTrubuddies[0]?._id == id
+                    ? admin?.adminTrubuddies[1]?._id
+                    : admin?.adminTrubuddies[0]?._id
+                }`
+              );
             }}
             className="bg-white cursor-pointer rounded-3xl shadow-md shadow-gray-500 border mx-auto w-full py-[1vw] md:py-2 mb-1 px-[3.5vw] md:px-[1.5vw] flex flex-col items-center"
           >
             <div className="w-full h-full">
               <div className="flex items-center w-full justify-start z-30">
                 <Image
-                  src={admin?.adminTrubuddies[0]?.profile}
+                  src={
+                    admin?.adminTrubuddies[0]?._id == id
+                      ? admin?.adminTrubuddies[1]?.profile
+                      : admin?.adminTrubuddies[0]?.profile
+                  }
                   width={100}
                   height={100}
                   alt="Image"
@@ -147,33 +157,57 @@ const SeprateTrubuddy = ({ params }) => {
                 />
                 <div className="ml-3">
                   <h1 className="mb-0 text-lg font-semibold">
-                    {admin?.adminTrubuddies[0]?.name}
+                    {admin?.adminTrubuddies[0]?._id == id
+                      ? admin?.adminTrubuddies[1]?.name
+                      : admin?.adminTrubuddies[0]?.name}
                   </h1>
                   <div className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
-                    {admin?.adminTrubuddies[0]?.gender == "Male" ? (
+                    {admin?.adminTrubuddies[0]?._id == id ? (
+                      admin?.adminTrubuddies[1]?.gender == "Male" ? (
+                        <Image src={male} alt="Male" className="mr-1" />
+                      ) : (
+                        <Image src={female} alt="Male" className="mr-1" />
+                      )
+                    ) : admin?.adminTrubuddies[0]?.gender == "Male" ? (
                       <Image src={male} alt="Male" className="mr-1" />
                     ) : (
                       <Image src={female} alt="Male" className="mr-1" />
                     )}
-                    {admin?.adminTrubuddies[0]?.gender}
+
+                    {admin?.adminTrubuddies[0]?._id == id
+                      ? admin?.adminTrubuddies[1]?.gender
+                      : admin?.adminTrubuddies[0]?.gender}
                   </div>
                 </div>
               </div>
               <div className={`${noto_sans.className}`}>
                 <h1 className="text-lg mt-2 md:mt-1.5 mb-0">Expertise</h1>
                 <div className="grid grid-cols-2 gap-x-3">
-                  {admin?.adminTrubuddies[0]?.otherExpertise
-                    .slice(0, 2)
-                    ?.map((e) => {
-                      return (
-                        <div
-                          className="px-3 text-sm rounded-full mt-1 text-center border-2 border-newBlue"
-                          key={e}
-                        >
-                          {e}
-                        </div>
-                      );
-                    })}
+                  {admin?.adminTrubuddies[0]?._id == id
+                    ? admin?.adminTrubuddies[1]?.otherExpertise
+                        ?.slice(0, 2)
+                        .map((e) => {
+                          return (
+                            <div
+                              className="rounded-full mt-2 text-center border-2 border-newBlue"
+                              key={e}
+                            >
+                              {e}
+                            </div>
+                          );
+                        })
+                    : admin?.adminTrubuddies[0]?.otherExpertise
+                        ?.slice(0, 2)
+                        .map((e) => {
+                          return (
+                            <div
+                              className="rounded-full mt-2 text-center border-2 border-newBlue"
+                              key={e}
+                            >
+                              {e}
+                            </div>
+                          );
+                        })}
                 </div>
               </div>
             </div>

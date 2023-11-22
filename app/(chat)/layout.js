@@ -19,11 +19,6 @@ export default function RootLayout({ children }) {
             <Sidebar />
           </div>
           {children}
-          <div
-            className={`${pathname.includes("/chats/") ? "hidden" : "block"}`}
-          >
-            <RightBar />
-          </div>
         </div>
       </body>
     </html>

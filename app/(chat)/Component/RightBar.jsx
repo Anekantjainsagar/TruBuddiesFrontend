@@ -16,7 +16,25 @@ const RightBar = () => {
 
   return (
     <div className="w-full md:px-0 px-5 md:mt-0 foolPatti mt-4 md:w-[23vw] h-[95vh] flex flex-col items-center justify-between overflow-hidden">
-      <div className="border w-full p-[2px] h-full md:h-[48%] bg-gradient-to-tr mt-[10vw] md:mt-0 from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
+      <div className="flex md:hidden w-full mt-[9vw] mb-2">
+        <p
+          onClick={(e) => {
+            history.push("/chats");
+          }}
+          className="border-2 rounded-full bg-white px-3 border-newBlue"
+        >
+          Chats
+        </p>
+        <p
+          onClick={(e) => {
+            history.push("/group-chats");
+          }}
+          className="border-2 rounded-full bg-white px-3 border-newBlue ml-3"
+        >
+          Community
+        </p>
+      </div>
+      <div className="border w-full p-[2px] h-full md:h-[48%] bg-gradient-to-tr md:mt-0 from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
         <div className="w-full h-full rounded-3xl bg-white py-1 md:py-5">
           <h1
             className={`text-xl md:block hidden md:ext-2xl font-semibold text-center ${maliFont.className}`}
