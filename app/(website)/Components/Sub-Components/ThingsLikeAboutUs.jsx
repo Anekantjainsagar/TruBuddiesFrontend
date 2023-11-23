@@ -27,7 +27,7 @@ const ThingsLikeAboutUs = () => {
         {[
           { image: img3, text: "Anonymous Conversation" },
           { image: img1, text: "24/7 Instant Availability" },
-          { image: img2, text: "Verified Buddies" },
+          { image: img2, text: "Verified TruBuddies" },
           { image: img4, text: "Safe and Secure" },
         ].map((e, i) => {
           return <Block item={e} key={i} index={i} />;
