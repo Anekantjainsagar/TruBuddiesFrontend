@@ -5,9 +5,10 @@ export async function middleware(request) {
   let userAuth = ["/chats", "/user"];
   let trubuddyAuth = ["/trubuddy/:path*"];
 
-  // console.log("first");
-  // console.log(request);
-  if (request.cookies.get("token")?.value == undefined) {
+  if (
+    request.cookies.get("token")?.value == undefined &&
+    !request.url.includes("/trubuddy")
+  ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import image from "../../Assets/Home/Images/services.png";
 import Image from "next/image";
 import { noto_sans } from "../Utils/font";
@@ -11,6 +11,8 @@ import animation4 from "../../Assets/Home/services/animation4.png";
 import gsap from "gsap";
 import { useRouter } from "next/navigation";
 import ComingSoon from "./ComingSoon";
+import Context from "../../../Context/Context";
+import { getCookie } from "cookies-next";
 
 const OurServices = () => {
   const [rotation, setRotation] = useState(-45);
@@ -165,6 +167,7 @@ const OurServices = () => {
 };
 
 const Block = ({ data }) => {
+  const { modalIsOpen, setIsOpen } = useContext(Context);
   const [showComingSoon, setShowComingSoon] = useState(false);
   const history = useRouter();
 
@@ -180,7 +183,11 @@ const Block = ({ data }) => {
           if (data?.upcoming) {
             setShowComingSoon(true);
           } else {
-            history.push(data?.route);
+            if (getCookie("token")) {
+              history.push(data?.route);
+            } else {
+              setIsOpen(!modalIsOpen);
+            }
           }
         }}
       >

@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { noto_sans } from "./font";
 
 import logo from "../../Assets/Home/Logo Image.png";
 import Image from "next/image";
 
-import youtube from "../../Assets/Home/icons/YouTube.png";
-import whatsapp from "../../Assets/Home/icons/whatsapp.png";
-import twitter from "../../Assets/Home/icons/Twitter.png";
-import linkedin from "../../Assets/Home/icons/LinkedIn.png";
-import instagram from "../../Assets/Home/icons/Instagram.png";
-import facebook from "../../Assets/Home/icons/Facebook.png";
-import call from "../../Assets/Home/icons/Call.png";
 import { FaFacebook, FaInstagram, FaTelegram } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import Link from "next/link";
 import { BsLinkedin, BsWhatsapp } from "react-icons/bs";
+import { usePathname, useRouter } from "next/navigation";
+import Context from "../../../Context/Context";
 
 const Footer = () => {
+  const { setScrollTo } = useContext(Context);
+  const pathname = usePathname();
+  const history = useRouter();
+
   return (
     <div
       id="contact"
@@ -35,7 +34,20 @@ const Footer = () => {
               { name: "Community Guidelines", route: "/" },
             ].map((e) => {
               return (
-                <p key={e?.name} className="md:mb-0 mb-0.5">
+                <p
+                  onClick={(el) => {
+                    if (pathname !== e?.route) {
+                      setScrollTo(e?.name?.toLowerCase().replaceAll(" ", ""));
+                      history.push(e?.route);
+                    } else {
+                      let id = e?.name?.toLowerCase().replaceAll(" ", "");
+                      let element = document.getElementById(id);
+                      element?.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  key={e?.name}
+                  className="md:mb-0 mb-0.5 cursor-pointer"
+                >
                   {e?.name}
                 </p>
               );

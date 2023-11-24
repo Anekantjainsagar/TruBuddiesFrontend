@@ -14,8 +14,7 @@ const FAQs = () => {
   const faqs = [
     {
       title: "Is it free to use?",
-      value:
-        "For now it is free to use.",
+      value: "For now it is free to use.",
     },
     {
       title: "Can children under 16 years of age use TruBuddies?",
@@ -51,7 +50,10 @@ const FAQs = () => {
   ];
 
   return (
-    <div className="flex md:flex-row faqBg flex-col items-center overflow-hidden relative justify-evenly py-[8vw] md:py-[3vw] px-[5vw]">
+    <div
+      id="faqs"
+      className="flex md:flex-row faqBg flex-col items-center overflow-hidden relative justify-evenly py-[8vw] md:py-[3vw] px-[5vw]"
+    >
       <div className="flex flex-col items-center">
         <h1
           className={`uppercase text-center w-fit mx-auto text-2xl md:text-4xl mb-[4vw] md:mb-[2vw] text-newBlue font-bold ${noto_sans.className}`}
