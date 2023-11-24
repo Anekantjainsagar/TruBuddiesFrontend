@@ -128,7 +128,7 @@ const App = () => {
             <Image
               src={girl}
               alt="Girl"
-              className="floatGirl absolute w-11/12 md:w-7/12 md:mt-0 mt-5"
+              className="md:floatGirl absolute w-11/12 md:w-7/12 md:mt-0 mt-5"
             />
           </div>
           <div

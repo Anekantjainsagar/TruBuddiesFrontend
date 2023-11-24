@@ -76,14 +76,7 @@ const OurTrubuddies = () => {
               disableOnInteraction: true,
             }}
           >
-            {admin?.adminTrubuddies?.map((e, i) => {
-              return (
-                <SwiperSlide key={i}>
-                  <TrubuddyBlock data={e} />
-                </SwiperSlide>
-              );
-            })}
-            {admin?.adminTrubuddies?.map((e, i) => {
+            {admin?.adminTrubuddies?.slice(0, 3)?.map((e, i) => {
               return (
                 <SwiperSlide key={i}>
                   <TrubuddyBlock data={e} />
