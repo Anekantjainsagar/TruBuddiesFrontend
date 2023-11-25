@@ -4,16 +4,11 @@ import Modal from "react-modal";
 import Image from "next/image";
 
 import logo from "../Assets/Home/Logo Image.png";
-import cartoon from "../Assets/Login/cartoon.png";
 
-import google from "../Assets/Login/Google logo.png";
 import Context from "../../Context/Context";
-import gsap, { Power2 } from "gsap/all";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { BASE_URL } from "../Components/Utils/url";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import qr from "../Assets/qr.png";
 import QRCodeStyling from "qr-code-styling";
@@ -35,8 +30,6 @@ const customStyles = {
 };
 
 const SupportUs = () => {
-  const history = useRouter();
-  const [showLogin, setShowLogin] = useState(false);
   const [login, setLogin] = useState({
     email: "",
     name: "",
@@ -65,22 +58,70 @@ const SupportUs = () => {
     }
   };
 
-  const qr = useRef(null);
+  // const qr = useRef(null);
 
-  const qrCode = new QRCodeStyling({
-    width: 150,
-    height: 150,
-    data: `https://trubuddies.com`,
-  });
+  // const qrCode = new QRCodeStyling({
+  //   width: 150,
+  //   height: 150,
+  //   data: `https://trubuddies.com`,
+  //   margin: 0,
+  //   image: logo,
+  //   qrOptions: { typeNumber: "0", mode: "Byte", errorCorrectionLevel: "Q" },
+  //   imageOptions: { hideBackgroundDots: true, imageSize: 0.4, margin: 0 },
+  //   dotsOptions: { type: "dots", color: "#074f97", gradient: null },
+  //   backgroundOptions: { color: "#ffffff", gradient: null },
+  //   dotsOptionsHelper: {
+  //     colorType: { single: true, gradient: false },
+  //     gradient: {
+  //       linear: true,
+  //       radial: false,
+  //       color1: "#6a1a4c",
+  //       color2: "#6a1a4c",
+  //       rotation: "0",
+  //     },
+  //   },
+  //   cornersSquareOptions: { type: "extra-rounded", color: "#032f5e" },
+  //   cornersSquareOptionsHelper: {
+  //     colorType: { single: true, gradient: false },
+  //     gradient: {
+  //       linear: true,
+  //       radial: false,
+  //       color1: "#000000",
+  //       color2: "#000000",
+  //       rotation: "0",
+  //     },
+  //   },
+  //   cornersDotOptions: { type: "", color: "#042f5e" },
+  //   cornersDotOptionsHelper: {
+  //     colorType: { single: true, gradient: false },
+  //     gradient: {
+  //       linear: true,
+  //       radial: false,
+  //       color1: "#000000",
+  //       color2: "#000000",
+  //       rotation: "0",
+  //     },
+  //   },
+  //   backgroundOptionsHelper: {
+  //     colorType: { single: true, gradient: false },
+  //     gradient: {
+  //       linear: true,
+  //       radial: false,
+  //       color1: "#ffffff",
+  //       color2: "#ffffff",
+  //       rotation: "0",
+  //     },
+  //   },
+  // });
 
-  useEffect(() => {
-    qrCode.update({
-      data: `https://trubuddies.com`,
-    });
-    if (!qr?.current?.innerHTML.includes("canvas")) {
-      qrCode.append(qr.current);
-    }
-  }, []);
+  // useEffect(() => {
+  //   qrCode.update({
+  //     data: `https://trubuddies.com`,
+  //   });
+  //   if (!qr?.current?.innerHTML.includes("canvas")) {
+  //     qrCode.append(qr.current);
+  //   }
+  // }, []);
 
   return (
     <div className="z-50">
@@ -94,14 +135,12 @@ const SupportUs = () => {
       >
         <div className="w-[70vw] md:w-[50vw] loginBg flex md:flex-row flex-col-reverse items-center justify-between overflow-hidden">
           <div className="md:w-[45%] w-[80%] md:mt-0 mt-5 flex items-center justify-center">
-            {/* <Image src={qr} alt="Cartoon" className="w-[90%] md:w-[65%]" /> */}
-            <div ref={qr} className="bg-white p-1.5 rounded-lg"></div>
+            <Image src={qr} alt="Cartoon" className="w-[90%] md:w-[65%]" />
+            {/* <div ref={qr} className="bg-white p-1.5 rounded-lg"></div> */}
           </div>
           <div className="w-full md:block hidden md:w-[3px] bg-newBlue h-[1px] md:h-[40vh] md:my-0 my-5 rounded-full"></div>
           <div
-            className={`md:w-[54%] flex flex-col items-center px-[1vw] ${
-              showLogin ? "hidden" : "block"
-            }`}
+            className={`md:w-[54%] flex flex-col items-center px-[1vw]`}
             id="login"
           >
             <div className="flex items-center">
