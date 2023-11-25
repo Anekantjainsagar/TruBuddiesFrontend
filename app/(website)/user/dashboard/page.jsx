@@ -16,6 +16,7 @@ import { BiSolidUserVoice } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import Context from "../../../Context/Context";
 import UpperTrubuddyBlock from "./UpperTrubuddyBlock";
+import LoginModal from '../../Components/login'
 import { getCookie } from "cookies-next";
 
 const UserDashboard = () => {

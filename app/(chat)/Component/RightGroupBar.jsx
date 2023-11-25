@@ -12,6 +12,7 @@ import { IoIosFemale, IoIosMale } from "react-icons/io";
 import { CgCommunity } from "react-icons/cg";
 import ComingSoon from "../../(website)/Components/Sub-Components/ComingSoon";
 import { getCookie } from "cookies-next";
+import LoginModal from "../../(website)/Components/login";
 
 const RightGroupBar = () => {
   const history = useRouter();
