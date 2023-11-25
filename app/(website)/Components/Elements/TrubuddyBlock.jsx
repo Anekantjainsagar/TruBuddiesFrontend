@@ -81,7 +81,7 @@ const TrubuddyBlock = ({ data, big }) => {
           <div className={`${noto_sans.className} px-1`}>
             <h1 className="text-xl mt-2 md:mt-3 mb-0">About</h1>
             <p className="text-gray-400 text-[16px] md:mb-0 mb-2">
-              {data?.bio ? data?.bio?.slice(0, 60) + "..." : ""}
+              {data?.bio ? data?.bio?.slice(0, 50) + "..." : ""}
             </p>
           </div>
         </div>

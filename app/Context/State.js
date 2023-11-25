@@ -103,7 +103,12 @@ const B2BState = (props) => {
         token: getCookie("token"),
       })
       .then((res) => {
-        setAdminTrubuddies(res.data);
+        let data = res?.data?.filter((e) => {
+          if (e?.otherExpertise?.length >= 2 && e?.bio?.length >= 30) {
+            return e;
+          }
+        });
+        setAdminTrubuddies(data);
       })
       .catch((err) => {
         console.log(err);
