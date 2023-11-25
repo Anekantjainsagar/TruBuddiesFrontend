@@ -19,7 +19,6 @@ const TrubuddyBlock = ({ data, big }) => {
 
   return (
     <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>
-      <LoginModal />
       <div
         onClick={(e) => {
           history.push(`/trubuddies/${data?._id}`);

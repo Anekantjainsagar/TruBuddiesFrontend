@@ -13,8 +13,12 @@ import { useRouter } from "next/navigation";
 import ComingSoon from "./ComingSoon";
 import Context from "../../../Context/Context";
 import { getCookie } from "cookies-next";
+import LoginModal from "../login";
 
 const OurServices = () => {
+  const { setIsOpen, modalIsOpen } = useContext(Context);
+  const history = useRouter();
+  const [showComingSoon, setShowComingSoon] = useState(false);
   const [rotation, setRotation] = useState(-45);
 
   return (
@@ -22,9 +26,14 @@ const OurServices = () => {
       id="services"
       className="h-fit md:py-0 py-5 md:h-[100vh] flex items-center relative overflow-hidden justify-center serviceBg"
     >
+      <LoginModal />
+      <ComingSoon
+        showComingSoon={showComingSoon}
+        setShowComingSoon={setShowComingSoon}
+      />
       <p className="absolute w-[18vw] right-5 text-2xl text-end top-1/2 -translate-y-1/2 md:block hidden font-semibold">
-        {Math.abs(rotation % 360) === 45
-          ? "Yoga & Meditation"
+        {Math.abs(rotation % 360) !== 45
+          ? "Social Support"
           : "Chat and Call Based Conversation "}
       </p>
       <div className="flex md:flex-row flex-col items-center">
@@ -94,6 +103,7 @@ const OurServices = () => {
             onClick={(e) => {
               setRotation(rotation - 45);
               gsap.to("#circle", { rotate: rotation });
+              setShowComingSoon(true);
             }}
             className={`w-[8vw] h-[8vw] bg-white object-scale-down object-center border-2 border-newBlue p-3 rounded-full cursor-pointer absolute top-0 left-[50%] -translate-x-[50%] rotate-[90deg]`}
           />
@@ -103,6 +113,11 @@ const OurServices = () => {
             onClick={(e) => {
               setRotation(rotation - 45);
               gsap.to("#circle", { rotate: rotation });
+              if (getCookie("token")) {
+                history.push("/chats");
+              } else {
+                setIsOpen(!modalIsOpen);
+              }
             }}
             className="w-[8vw] h-[8vw] object-scale-down object-center border-2 border-newBlue bg-white p-3 rounded-full cursor-pointer absolute bottom-0 left-[50%] -translate-x-[50%] rotate-[270deg]"
           />
@@ -112,6 +127,7 @@ const OurServices = () => {
             onClick={(e) => {
               setRotation(rotation - 45);
               gsap.to("#circle", { rotate: rotation });
+              setShowComingSoon(true);
             }}
             className="w-[8vw] h-[8vw] object-scale-down object-center border-2 border-newBlue bg-white p-3 rounded-full cursor-pointer absolute top-[50%] left-0 -translate-y-[50%]"
           />
@@ -121,6 +137,7 @@ const OurServices = () => {
             onClick={(e) => {
               setRotation(rotation - 45);
               gsap.to("#circle", { rotate: rotation });
+              setShowComingSoon(true);
             }}
             className="w-[8vw] h-[8vw] object-scale-down object-center border-2 border-newBlue bg-white p-3 rounded-full cursor-pointer absolute top-[50%] right-0 -translate-y-[50%] rotate-[180deg]"
           />
@@ -130,6 +147,11 @@ const OurServices = () => {
             onClick={(e) => {
               setRotation(rotation - 45);
               gsap.to("#circle", { rotate: rotation });
+              if (getCookie("token")) {
+                history.push("/group-chats");
+              } else {
+                setIsOpen(!modalIsOpen);
+              }
             }}
             className="w-[8vw] h-[8vw] object-scale-down object-center border-2 border-newBlue bg-white p-3 rounded-full cursor-pointer absolute top-[10%] left-[10%] rotate-[45deg]"
           />
@@ -139,6 +161,11 @@ const OurServices = () => {
             onClick={(e) => {
               setRotation(rotation - 45);
               gsap.to("#circle", { rotate: rotation });
+              if (getCookie("token")) {
+                history.push("/chats");
+              } else {
+                setIsOpen(!modalIsOpen);
+              }
             }}
             className="w-[8vw] h-[8vw] object-scale-down object-center border-2 border-newBlue bg-white p-3 rounded-full cursor-pointer absolute top-[10%] right-[10%] rotate-[135deg]"
           />
@@ -148,6 +175,7 @@ const OurServices = () => {
             onClick={(e) => {
               setRotation(rotation - 45);
               gsap.to("#circle", { rotate: rotation });
+              setShowComingSoon(true);
             }}
             className="w-[8vw] h-[8vw] object-scale-down object-center border-2 border-newBlue bg-white p-3 rounded-full cursor-pointer absolute bottom-[10%] left-[10%] rotate-[315deg]"
           />
@@ -157,6 +185,7 @@ const OurServices = () => {
             onClick={(e) => {
               setRotation(rotation - 45);
               gsap.to("#circle", { rotate: rotation });
+              setShowComingSoon(true);
             }}
             className="w-[8vw] h-[8vw] object-scale-down object-center border-2 border-newBlue bg-white p-3 rounded-full cursor-pointer absolute bottom-[10%] right-[10%] rotate-[-135deg]"
           />

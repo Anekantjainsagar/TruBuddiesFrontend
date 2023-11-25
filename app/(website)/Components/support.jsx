@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import Modal from "react-modal";
 import Image from "next/image";
 
@@ -16,6 +16,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import qr from "../Assets/qr.png";
+import QRCodeStyling from "qr-code-styling";
 
 const customStyles = {
   overlay: {
@@ -64,6 +65,23 @@ const SupportUs = () => {
     }
   };
 
+  const qr = useRef(null);
+
+  const qrCode = new QRCodeStyling({
+    width: 150,
+    height: 150,
+    data: `https://trubuddies.com`,
+  });
+
+  useEffect(() => {
+    qrCode.update({
+      data: `https://trubuddies.com`,
+    });
+    if (!qr?.current?.innerHTML.includes("canvas")) {
+      qrCode.append(qr.current);
+    }
+  }, []);
+
   return (
     <div className="z-50">
       <Toaster />
@@ -76,7 +94,8 @@ const SupportUs = () => {
       >
         <div className="w-[70vw] md:w-[50vw] loginBg flex md:flex-row flex-col-reverse items-center justify-between overflow-hidden">
           <div className="md:w-[45%] w-[80%] md:mt-0 mt-5 flex items-center justify-center">
-            <Image src={qr} alt="Cartoon" className="w-[90%] md:w-[65%]" />
+            {/* <Image src={qr} alt="Cartoon" className="w-[90%] md:w-[65%]" /> */}
+            <div ref={qr} className="bg-white p-1.5 rounded-lg"></div>
           </div>
           <div className="w-full md:block hidden md:w-[3px] bg-newBlue h-[1px] md:h-[40vh] md:my-0 my-5 rounded-full"></div>
           <div

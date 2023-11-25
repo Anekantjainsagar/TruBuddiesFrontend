@@ -10,7 +10,7 @@ const B2BState = (props) => {
   const [scrollTo, setScrollTo] = useState("home");
 
   const [loginModal, setLoginModal] = useState(false);
-  const [showSupportUs, setShowSupportUs] = useState(true);
+  const [showSupportUs, setShowSupportUs] = useState(false);
 
   const [login, setLogin] = useState();
   const [messages, setMessages] = useState([]);

@@ -39,6 +39,7 @@ import {
 import Context from "../../../Context/Context";
 
 import TrubuddyBlock from "../Elements/TrubuddyBlock";
+import { Toaster } from "react-hot-toast";
 
 const OurTrubuddies = () => {
   const { admin } = useContext(Context);
@@ -46,6 +47,7 @@ const OurTrubuddies = () => {
 
   return (
     <div className="pt-[3vw]">
+      <Toaster />
       <div
         className={`uppercase text-center w-fit mx-auto text-2xl text-newTomato font-bold ${noto_sans.className} flex items-center`}
       >
