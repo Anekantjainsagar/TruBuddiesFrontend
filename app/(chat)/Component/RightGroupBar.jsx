@@ -11,15 +11,17 @@ import { useRouter } from "next/navigation";
 import { IoIosFemale, IoIosMale } from "react-icons/io";
 import { CgCommunity } from "react-icons/cg";
 import ComingSoon from "../../(website)/Components/Sub-Components/ComingSoon";
+import { getCookie } from "cookies-next";
 
 const RightGroupBar = () => {
   const history = useRouter();
-  const { login, admin } = useContext(Context);
+  const { login, admin, modalIsOpen, setIsOpen } = useContext(Context);
   const [showComingSoon, setShowComingSoon] = useState(false);
 
   return (
     <>
       <div className="w-full md:flex hidden md:px-0 px-5 md:mt-0 foolPatti mt-4 md:w-[23vw] h-[95vh] flex-col items-center justify-between overflow-hidden">
+        <LoginModal />
         <ComingSoon
           showComingSoon={showComingSoon}
           setShowComingSoon={setShowComingSoon}
@@ -148,7 +150,16 @@ const RightGroupBar = () => {
                   </div>
                 </div>
               </div>
-              <button className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-3 md:mt-4">
+              <button
+                onClick={(e) => {
+                  if (getCookie("token")) {
+                    history.push("/chats");
+                  } else {
+                    setIsOpen(!modalIsOpen);
+                  }
+                }}
+                className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-3 md:mt-4"
+              >
                 Start Chat
               </button>
             </div>

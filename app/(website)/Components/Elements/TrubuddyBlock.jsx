@@ -10,13 +10,16 @@ import female from "../../Assets/Home/icons/female.png";
 import Tilt from "react-parallax-tilt";
 import { noto_sans } from "../Utils/font";
 import Image from "next/image";
+import LoginModal from "../login";
 
 const TrubuddyBlock = ({ data, big }) => {
   const history = useRouter();
-  const { getUser, setClickedUser, login } = useContext(Context);
+  const { getUser, setClickedUser, login, modalIsOpen, setIsOpen } =
+    useContext(Context);
 
   return (
     <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>
+      <LoginModal />
       <div
         onClick={(e) => {
           history.push(`/trubuddies/${data?._id}`);
@@ -75,26 +78,30 @@ const TrubuddyBlock = ({ data, big }) => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            if (!login?.trubuddies?.includes(data?._id)) {
-              axios
-                .post(`${BASE_URL}/login/start-chat/${data?._id}`, {
-                  token: getCookie("token"),
-                })
-                .then((res) => {
-                  if (res.status == 200) {
-                    setClickedUser(data);
-                    setTimeout(() => {
-                      getUser();
-                      history.push("/chats");
-                    }, 500);
-                  }
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
+            if (getCookie("token")) {
+              if (!login?.trubuddies?.includes(data?._id)) {
+                axios
+                  .post(`${BASE_URL}/login/start-chat/${data?._id}`, {
+                    token: getCookie("token"),
+                  })
+                  .then((res) => {
+                    if (res.status == 200) {
+                      setClickedUser(data);
+                      setTimeout(() => {
+                        getUser();
+                        history.push("/chats");
+                      }, 500);
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } else {
+                setClickedUser(data);
+                history.push("/chats");
+              }
             } else {
-              setClickedUser(data);
-              history.push("/chats");
+              setIsOpen(!modalIsOpen);
             }
           }}
           className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-0 md:mt-5"

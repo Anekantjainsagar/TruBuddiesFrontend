@@ -2,6 +2,7 @@
 import React from "react";
 import { noto_sans } from "../../(website)/Components/Utils/font";
 import { usePathname, useRouter } from "next/navigation";
+import { deleteCookie } from "cookies-next";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -41,6 +42,15 @@ const Navbar = () => {
             </p>
           );
         })}
+        <p
+          className={`text-white text-start py-1 hover:pl-9 hover:bg-[#407BFF] transition-all cursor-pointer mb-2`}
+          onClick={(event) => {
+            deleteCookie("admin_token");
+            history.push("/admin/login");
+          }}
+        >
+          Logout
+        </p>
       </div>
     </div>
   );

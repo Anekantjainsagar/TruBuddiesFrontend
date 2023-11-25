@@ -16,15 +16,16 @@ import { BiSolidUserVoice } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import Context from "../../../Context/Context";
 import UpperTrubuddyBlock from "./UpperTrubuddyBlock";
+import { getCookie } from "cookies-next";
 
 const UserDashboard = () => {
   const history = useRouter();
-  const { login, setShowEditProfile, admin } = useContext(Context);
+  const { login, setShowEditProfile, admin, setIsOpen, modalIsOpen } =
+    useContext(Context);
 
   return (
     <div className="border overflow-hidden">
-      {" "}
-      <EditProfile />
+      <LoginModal /> <EditProfile />
       <div
         className="mt-[15vw] md:mt-[4vw] py-[1vw] grid gap-x-5 mx-[3vw]"
         style={
@@ -282,7 +283,16 @@ const UserDashboard = () => {
                   </div>
                 </div>
               </div>
-              <button className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-3 md:mt-4">
+              <button
+                onClick={(e) => {
+                  if (getCookie("token")) {
+                    history.push("/chats");
+                  } else {
+                    setIsOpen(!modalIsOpen);
+                  }
+                }}
+                className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-3 md:mt-4"
+              >
                 Start Chat
               </button>
             </div>

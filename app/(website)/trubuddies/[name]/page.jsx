@@ -16,9 +16,11 @@ import { BASE_URL } from "../../Components/Utils/url";
 import Context from "../../../Context/Context";
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
+import LoginModal from "../../Components/login";
 
 const SeprateTrubuddy = ({ params }) => {
-  const { admin, login, getUser, setClickedUser } = useContext(Context);
+  const { admin, login, getUser, setClickedUser, setIsOpen, modalIsOpen } =
+    useContext(Context);
   const [user, setUser] = useState();
   const history = useRouter();
   const id = params.name;
@@ -45,6 +47,9 @@ const SeprateTrubuddy = ({ params }) => {
           : {}
       }
     >
+      <div className="absolute">
+        <LoginModal />
+      </div>
       <div className="bg-gradient-to-br shadow-lg shadow-gray-500 from-newLightBlue from-70% to-[#1BF9EC] w-full rounded-3xl md:mb-0 mb-5 py-3 px-[2vw] flex flex-col items-center">
         <div className="rounded-full bg-gradient-to-t w-4/12 md:w-6/12 from-newLightBlue shadow-sm shadow-gray-200 to-newOceanGreen p-1">
           <Image
@@ -100,26 +105,30 @@ const SeprateTrubuddy = ({ params }) => {
         </div>
         <button
           onClick={(e) => {
-            if (!login?.trubuddies?.includes(user?._id)) {
-              axios
-                .post(`${BASE_URL}/login/start-chat/${user?._id}`, {
-                  token: getCookie("token"),
-                })
-                .then((res) => {
-                  if (res.status == 200) {
-                    setClickedUser(user);
-                    setTimeout(() => {
-                      getUser();
-                      history.push("/chats");
-                    }, 500);
-                  }
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
+            if (getCookie("token")) {
+              if (!login?.trubuddies?.includes(user?._id)) {
+                axios
+                  .post(`${BASE_URL}/login/start-chat/${user?._id}`, {
+                    token: getCookie("token"),
+                  })
+                  .then((res) => {
+                    if (res.status == 200) {
+                      setClickedUser(user);
+                      setTimeout(() => {
+                        getUser();
+                        history.push("/chats");
+                      }, 500);
+                    }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } else {
+                setClickedUser(user);
+                history.push("/chats");
+              }
             } else {
-              setClickedUser(user);
-              history.push("/chats");
+              setIsOpen(!modalIsOpen);
             }
           }}
           className={`bg-newBlue text-white ${noto_sans.className} md:mb-0 -mb-6 mt-0 md:mt-4 px-5 md:text-lg py-0.5 md:py-1 rounded-full font-medium`}
@@ -211,7 +220,17 @@ const SeprateTrubuddy = ({ params }) => {
                 </div>
               </div>
             </div>
-            <button className="bg-newBlue w-full z-40 cursor-pointer font-semibold text-white py-1 rounded-full mt-0 md:mt-5">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (getCookie("token")) {
+                  history.push("/chats");
+                } else {
+                  setIsOpen(!modalIsOpen);
+                }
+              }}
+              className="bg-newBlue w-full z-40 cursor-pointer font-semibold text-white py-1 rounded-full mt-0 md:mt-5"
+            >
               Start Chat
             </button>
           </div>

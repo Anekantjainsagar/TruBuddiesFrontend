@@ -10,6 +10,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import Context from "../Context/Context";
+import LoginModal from "./Components/login";
 
 export default function RootLayout({ children }) {
   const { modalIsOpen, setIsOpen } = useContext(Context);
@@ -25,12 +26,12 @@ export default function RootLayout({ children }) {
               pathname == "/" ? "block md:hidden" : "block"
             } fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer`}
           >
+            <LoginModal />
             <Image
               src={logo}
               alt="Logo"
               className="bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw]"
               onClick={(e) => {
-                console.log(getCookie("token"));
                 if (getCookie("token")) {
                   history.push("/chats");
                 } else {

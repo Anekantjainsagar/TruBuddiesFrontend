@@ -6,11 +6,19 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import gsap, { Power2 } from "gsap";
 import { usePathname, useRouter } from "next/navigation";
 import LoginModal from "../login";
+import SupportUs from "../support";
 import Context from "../../../Context/Context";
 import { deleteCookie, getCookie } from "cookies-next";
 
 const Navbar = () => {
-  const { modalIsOpen, setIsOpen, login, setScrollTo } = useContext(Context);
+  const {
+    modalIsOpen,
+    setIsOpen,
+    login,
+    setScrollTo,
+    showSupportUs,
+    setShowSupportUs,
+  } = useContext(Context);
   const pathname = usePathname();
   const history = useRouter();
   const [showLogOut, setShowLogOut] = useState(false);
@@ -25,7 +33,6 @@ const Navbar = () => {
       name: "Contact",
       route: "/",
     },
-    { name: "Support us", route: "/" },
   ];
 
   const closeNav = () => {
@@ -39,6 +46,7 @@ const Navbar = () => {
   return (
     <>
       <LoginModal />
+      <SupportUs />
       <div
         className={`flex items-center justify-between md:px-[2vw] py-2 z-50 w-full fixed top-0 left-0`}
       >
@@ -76,6 +84,14 @@ const Navbar = () => {
               </p>
             );
           })}
+          <p
+            className="uppercase mb-0 cursor-pointer font-semibold"
+            onClick={(el) => {
+              setShowSupportUs(!showSupportUs);
+            }}
+          >
+            Support Us
+          </p>
         </div>
         {getCookie("token")?.length > 0 ? (
           <div
@@ -179,6 +195,14 @@ const Navbar = () => {
                 </p>
               );
             })}
+            <p
+              className="uppercase cursor-pointer mb-4 font-semibold"
+              onClick={(el) => {
+                setShowSupportUs(!showSupportUs);
+              }}
+            >
+              Support Us
+            </p>
             {getCookie("token") ? (
               <div
                 className="relative"

@@ -8,17 +8,27 @@ import { BASE_URL } from "../../../(website)/Components/Utils/url";
 import { getCookie } from "cookies-next";
 import toast, { Toaster } from "react-hot-toast";
 import Create from "./Create";
+import { useRouter } from "next/navigation";
 
 const TruBuddyProfile = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const { admin } = useContext(Context);
+  const history = useRouter();
+
+  useEffect(() => {
+    if (!getCookie("admin_token")) {
+      history.push("/admin/login");
+    }
+  }, []);
 
   return (
     <div className={`h-[100vh] ${noto_sans.className} px-5`}>
       {/* TOpbar */}
       <Create modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
       <div className="flex items-center justify-between py-3">
-        <h1 className="text-2xl font-semibold">TruBuddies Profile</h1>
+        <h1 className="text-2xl font-semibold">
+          TruBuddies Profile ({admin?.adminTrubuddies?.length})
+        </h1>
         <div className="flex items-center">
           <p className="mr-2">Filter</p>
           <input
