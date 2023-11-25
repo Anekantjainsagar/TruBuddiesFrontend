@@ -11,7 +11,6 @@ import axios from "axios";
 import { BASE_URL } from "../Components/Utils/url";
 import { useRouter } from "next/navigation";
 import qr from "../Assets/qr.png";
-import QRCodeStyling from "qr-code-styling";
 
 const customStyles = {
   overlay: {
