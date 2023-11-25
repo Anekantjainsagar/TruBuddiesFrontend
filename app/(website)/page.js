@@ -267,7 +267,7 @@ const App = () => {
           <LeftBlueLight />
           <BlueEffect />
           <ThingsLikeAboutUs />
-          <HowItWorks />
+          {/* <HowItWorks /> */}
           <OurTrubuddies />
           <OurServices />
           <LearnInspire />

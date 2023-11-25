@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 
 import image from "../../../Images/trubuddy/rafiki.png";
@@ -8,7 +8,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 import { BASE_URL } from "../../../(website)/Components/Utils/url";
 import toast, { Toaster } from "react-hot-toast";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
 const TrubuddyLOgin = () => {
@@ -32,6 +32,12 @@ const TrubuddyLOgin = () => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    if (getCookie("trubuddy_token")) {
+      history.push("/trubuddy");
+    }
+  }, [getCookie("trubuddy_token")]);
 
   return (
     <div className="flex md:flex-row flex-col items-center h-[100vh]">
