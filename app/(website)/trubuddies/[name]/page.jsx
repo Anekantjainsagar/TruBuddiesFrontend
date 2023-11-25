@@ -63,7 +63,7 @@ const SeprateTrubuddy = ({ params }) => {
         <h1
           className={`text-xl md:text-2xl mt-1 md:mt-2 font-semibold ${noto_sans.className}`}
         >
-          {user?.name}
+          {user?.anonymous ? user?.anonymous : user?.name}
         </h1>
         <div className="border-2 px-2 md:px-4 py-0.5 flex items-center rounded-lg text-sm bg-white border-newBlue w-fit mt-1">
           {user?.gender?.toLowerCase() === "male" ? (
@@ -105,6 +105,7 @@ const SeprateTrubuddy = ({ params }) => {
         </div>
         <button
           onClick={(e) => {
+            setClickedUser(user);
             if (getCookie("token")) {
               if (!login?.trubuddies?.includes(user?._id)) {
                 axios
@@ -113,18 +114,14 @@ const SeprateTrubuddy = ({ params }) => {
                   })
                   .then((res) => {
                     if (res.status == 200) {
-                      setClickedUser(user);
-                      setTimeout(() => {
-                        getUser();
-                        history.push("/chats");
-                      }, 500);
+                      getUser();
+                      history.push("/chats");
                     }
                   })
                   .catch((err) => {
                     console.log(err);
                   });
               } else {
-                setClickedUser(user);
                 history.push("/chats");
               }
             } else {
@@ -167,7 +164,11 @@ const SeprateTrubuddy = ({ params }) => {
                 <div className="ml-3">
                   <h1 className="mb-0 text-lg font-semibold">
                     {admin?.adminTrubuddies[0]?._id == id
-                      ? admin?.adminTrubuddies[1]?.name
+                      ? admin?.adminTrubuddies[1]?.anonymous
+                        ? admin?.adminTrubuddies[1]?.anonymous
+                        : admin?.adminTrubuddies[1]?.name
+                      : admin?.adminTrubuddies[0]?.anonymous
+                      ? admin?.adminTrubuddies[0]?.anonymous
                       : admin?.adminTrubuddies[0]?.name}
                   </h1>
                   <div className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
@@ -223,6 +224,11 @@ const SeprateTrubuddy = ({ params }) => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
+                setClickedUser(
+                  admin?.adminTrubuddies[0]?._id == id
+                    ? admin?.adminTrubuddies[1]
+                    : admin?.adminTrubuddies[0]
+                );
                 if (getCookie("token")) {
                   history.push("/chats");
                 } else {

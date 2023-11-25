@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Context from "../../Context/Context";
 import { maliFont } from "../../(website)/Components/Utils/font";
 import Image from "next/image";
@@ -13,7 +13,11 @@ import UpperTrubuddyBlock from "../../(website)/user/dashboard/UpperTrubuddyBloc
 const RightBar = () => {
   const history = useRouter();
   const pathname = usePathname();
-  const { login } = useContext(Context);
+  const { login, getUser } = useContext(Context);
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div className="w-full md:px-0 px-5 md:mt-0 foolPatti mt-4 md:w-[23vw] h-[95vh] flex flex-col items-center justify-between overflow-hidden">

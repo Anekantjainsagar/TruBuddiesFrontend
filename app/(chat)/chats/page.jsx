@@ -83,6 +83,11 @@ const Chats = () => {
     };
   }, []);
 
+  useEffect(() => {
+    console.log("clickedUser");
+    console.log(context?.clickedUser);
+  }, [clickedUser]);
+
   return (
     <>
       <div className="md:hidden block">
@@ -101,7 +106,12 @@ const Chats = () => {
                   className="w-[3.5vw] rounded-full"
                 />
                 <div className="ml-3">
-                  <h1 className="font-bold">{clickedUser?.name}</h1>
+                  <h1 className="font-bold">
+                    {" "}
+                    {clickedUser?.anonymous
+                      ? clickedUser?.anonymous
+                      : clickedUser?.name}
+                  </h1>
                   <p className="text-sm">The Buddy You Need The Most</p>
                 </div>
               </div>

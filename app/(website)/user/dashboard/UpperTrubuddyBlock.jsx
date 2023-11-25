@@ -43,8 +43,10 @@ const UpperTrubuddyBlock = ({ id, show }) => {
         height={100}
         alt="Logo image"
         className={`cursor-pointer ${
-          show ? "w-full" : ""
-        } md:w-full w-2/12 rounded-full`}
+          show
+            ? "w-[16vw] h-[16vw] md:w-[5vw] md:h-[5vw] object-cover object-center"
+            : "w-[16vw] h-[16vw] md:w-[5vw] md:h-[5vw] object-cover object-center"
+        } rounded-full`}
       />
       {user?.unseen > 0 ? (
         <div

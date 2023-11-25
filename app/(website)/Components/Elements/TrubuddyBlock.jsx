@@ -1,5 +1,5 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../Utils/url";
 import { getCookie } from "cookies-next";
@@ -10,12 +10,23 @@ import female from "../../Assets/Home/icons/female.png";
 import Tilt from "react-parallax-tilt";
 import { noto_sans } from "../Utils/font";
 import Image from "next/image";
-import LoginModal from "../login";
 
 const TrubuddyBlock = ({ data, big }) => {
   const history = useRouter();
-  const { getUser, setClickedUser, login, modalIsOpen, setIsOpen } =
-    useContext(Context);
+  const {
+    getUser,
+    clickedUser,
+    setClickedUser,
+    login,
+    modalIsOpen,
+    setIsOpen,
+  } = useContext(Context);
+
+  useEffect(() => {
+    console.log("Updated data in useEffect:", clickedUser);
+
+    // Perform navigation logic here, e.g., history.push("/newPage");
+  }, [clickedUser]);
 
   return (
     <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>
@@ -40,7 +51,7 @@ const TrubuddyBlock = ({ data, big }) => {
             />
             <div className="ml-3">
               <h1 className="mt-1 md:mt-2 mb-0 text-xl font-semibold">
-                {data?.name}
+                {data?.anonymous ? data?.anonymous : data?.name}
               </h1>
               <p className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
                 {data?.gender?.toLowerCase() == "male" ? (
@@ -70,34 +81,35 @@ const TrubuddyBlock = ({ data, big }) => {
           <div className={`${noto_sans.className} px-1`}>
             <h1 className="text-xl mt-2 md:mt-3 mb-0">About</h1>
             <p className="text-gray-400 text-[16px] md:mb-0 mb-2">
-              {data?.bio ? data?.bio?.slice(0, 70) + "..." : ""}
+              {data?.bio ? data?.bio?.slice(0, 60) + "..." : ""}
             </p>
           </div>
         </div>
         <button
-          onClick={(e) => {
+          onClick={async (e) => {
             e.stopPropagation();
+            console.log("Updated data");
+            await setClickedUser(data);
             if (getCookie("token")) {
-              if (!login?.trubuddies?.includes(data?._id)) {
-                axios
-                  .post(`${BASE_URL}/login/start-chat/${data?._id}`, {
-                    token: getCookie("token"),
-                  })
-                  .then((res) => {
-                    if (res.status == 200) {
-                      setClickedUser(data);
-                      setTimeout(() => {
-                        getUser();
-                        history.push("/chats");
-                      }, 500);
+              try {
+                if (!login?.trubuddies?.includes(data?._id)) {
+                  let res = await axios.post(
+                    `${BASE_URL}/login/start-chat/${data?._id}`,
+                    {
+                      token: getCookie("token"),
                     }
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
-              } else {
-                setClickedUser(data);
-                history.push("/chats");
+                  );
+                  if (res.status == 200) {
+                    console.log("Here");
+                    console.log(clickedUser);
+                    getUser();
+                    history.push("/chats");
+                  }
+                } else {
+                  history.push("/chats");
+                }
+              } catch (err) {
+                console.log(err);
               }
             } else {
               setIsOpen(!modalIsOpen);

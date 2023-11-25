@@ -40,6 +40,7 @@ const EditProfileTrubuddy = () => {
     gender: "",
     languages: [],
     otherExpertise: [],
+    anonymous: "",
   });
   const [speaks, setSpeaks] = useState("");
   const [experty, setExperty] = useState("");
@@ -48,7 +49,7 @@ const EditProfileTrubuddy = () => {
     setUser({
       name: trubuddy?.name,
       email: trubuddy?.email,
-      expertise: trubuddy?.expertise,
+      anonymous: trubuddy?.anonymous,
       city: trubuddy?.city,
       state: trubuddy?.state,
       gender: trubuddy?.gender,
@@ -125,6 +126,13 @@ const EditProfileTrubuddy = () => {
                     },
                   },
                   {
+                    title: "Anonymous Name",
+                    value: user?.anonymous,
+                    onchange: (e) => {
+                      setUser({ ...user, anonymous: e.target.value });
+                    },
+                  },
+                  {
                     title: "Email",
                     value: user?.email,
                     onchange: (e) => {
@@ -143,13 +151,6 @@ const EditProfileTrubuddy = () => {
                     value: user?.state,
                     onchange: (e) => {
                       setUser({ ...user, state: e.target.value });
-                    },
-                  },
-                  {
-                    title: "Expertise",
-                    value: user?.expertise,
-                    onchange: (e) => {
-                      setUser({ ...user, expertise: e.target.value });
                     },
                   },
                   {

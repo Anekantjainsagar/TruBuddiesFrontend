@@ -16,13 +16,17 @@ import { BiSolidUserVoice } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import Context from "../../../Context/Context";
 import UpperTrubuddyBlock from "./UpperTrubuddyBlock";
-import LoginModal from '../../Components/login'
+import LoginModal from "../../Components/login";
 import { getCookie } from "cookies-next";
 
 const UserDashboard = () => {
   const history = useRouter();
-  const { login, setShowEditProfile, admin, setIsOpen, modalIsOpen } =
+  const { login, setShowEditProfile, getUser, admin, setIsOpen, modalIsOpen } =
     useContext(Context);
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div className="border overflow-hidden">
@@ -95,7 +99,7 @@ const UserDashboard = () => {
             <Image
               alt="Backtick"
               src={backtick}
-              className="absolute left-[-2vw]"
+              className="absolute w-[3vw] md:w-[1vw] -left-0"
             />
             The Buddy You Need The Most.
           </div>
@@ -183,7 +187,7 @@ const UserDashboard = () => {
           className={`flex flex-col items-center justify-between w-full md:mb-0 mb-4 ${noto_sans.className}`}
         >
           <div className="bg-gradient-to-tl from-[#38B6FF] to-white rounded-3xl shadow-lg shadow-gray-400 w-full">
-            <div className="grid grid-cols-4 py-5 gap-y-5 gap-x-5 px-4 md:px-[2vw]">
+            <div className="grid grid-cols-4 py-5 md:max-h-[33vh] max-h-[23vh] overflow-y-auto gap-y-5 gap-x-5 px-4 md:px-[2vw]">
               {login?.trubuddies?.map((e) => {
                 return <UpperTrubuddyBlock id={e} key={e} show={true} />;
               })}
@@ -231,7 +235,11 @@ const UserDashboard = () => {
                   <div className="ml-3">
                     <h1 className="mt-1 md:mt-2 mb-0 text-xl font-semibold">
                       {admin?.adminTrubuddies[0]?._id == login?._id
-                        ? admin?.adminTrubuddies[1]?.name
+                        ? admin?.adminTrubuddies[1]?.anonymous
+                          ? admin?.adminTrubuddies[1]?.anonymous
+                          : admin?.adminTrubuddies[1]?.name
+                        : admin?.adminTrubuddies[0]?.anonymous
+                        ? admin?.adminTrubuddies[0]?.anonymous
                         : admin?.adminTrubuddies[0]?.name}
                     </h1>
                     <div className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">

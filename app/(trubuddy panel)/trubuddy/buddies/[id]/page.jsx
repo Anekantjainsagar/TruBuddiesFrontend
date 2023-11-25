@@ -140,7 +140,7 @@ const TrubuddyChat = ({ params }) => {
               />
               <div className="ml-3">
                 <h1 className="font-semibold text-lg md:text-xl">
-                  {user?.name}
+                  {user?.anonymous ? user?.anonymous : user?.name}
                 </h1>
                 <p className="text-xs md:text-sm">
                   The Buddy You Need The Most

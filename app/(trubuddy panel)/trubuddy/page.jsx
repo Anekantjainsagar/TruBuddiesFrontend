@@ -76,7 +76,7 @@ const Trubuddy = () => {
               className="w-[34vw] md:w-[12vw] h-[34vw] md:h-[12vw] object-cover object-center rounded-lg"
             />
             <h1 className="text-lg md:text-2xl mt-0.5 font-medium">
-              {trubuddy?.name}
+              {trubuddy?.name} ({trubuddy?.anonymous})
             </h1>
             <p className="bg-black text-white text-sm md:text-base px-5 mt-0.5 py-0.5 rounded-lg">
               @uid{trubuddy?._id?.slice(trubuddy?._id?.length - 4)}
@@ -210,7 +210,7 @@ const BuddyBlock = ({ id }) => {
         className="rounded-full border border-newBlue md:w-[7vw] h-[23vw] w-full md:h-[7vw] object-cover object-center"
       />
       <div className="md:block hidden text-center text-sm border-newBlue px-4 rounded-full mt-2">
-        {user?.name}
+        {user?.anonymous ? user?.anonymous : user?.name}
       </div>
     </div>
   );

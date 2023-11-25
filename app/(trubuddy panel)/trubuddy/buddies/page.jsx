@@ -122,7 +122,9 @@ const BuddyBlock = ({ id }) => {
         className="w-[12vw] h-[12vw] object-cover object-center md:w-[5vw] md:h-[5vw] rounded-full border-2 border-newBlue"
       />
       <div className="ml-1 md:ml-3">
-        <h1 className="md:text-xl text-sm font-semibold">{user?.name}</h1>
+        <h1 className="md:text-xl text-sm font-semibold">
+          {user?.anonymous ? user?.anonymous : user?.name}
+        </h1>
       </div>
       {user?.unseen > 0 ? (
         <div className="absolute right-[64%] md:text-base text-xs md:right-5 -bottom-0 md:bottom-1/2 md:translate-y-1/2 bg-newBlue px-1 md:px-2 text-white rounded-full">

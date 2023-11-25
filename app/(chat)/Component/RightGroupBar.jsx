@@ -99,7 +99,11 @@ const RightGroupBar = () => {
                   <div className="ml-3">
                     <h1 className="mt-1 md:mt-2 mb-0 text-xl font-semibold">
                       {admin?.adminTrubuddies[0]?._id == login?._id
-                        ? admin?.adminTrubuddies[1]?.name
+                        ? admin?.adminTrubuddies[1]?.anonymous
+                          ? admin?.adminTrubuddies[1]?.anonymous
+                          : admin?.adminTrubuddies[1]?.name
+                        : admin?.adminTrubuddies[0]?.anonymous
+                        ? admin?.adminTrubuddies[0]?.anonymous
                         : admin?.adminTrubuddies[0]?.name}
                     </h1>
                     <div className="border-2 px-2 flex items-center rounded-3xl text-sm border-newBlue w-fit mt-1">
@@ -165,7 +169,6 @@ const RightGroupBar = () => {
                 Start Chat
               </button>
             </div>
-            
           </div>
         </div>
       </div>
