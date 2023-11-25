@@ -57,7 +57,7 @@ const UpperTrubuddyBlock = ({ id, show }) => {
       ) : null}
       <div className={`ml-2 md:hidden ${show ? "hidden" : ""}`}>
         <h1 className="font-semibold text-lg">{user?.name}</h1>
-        <p className="-mt-1 text-sm">hey!! What are you up to.</p>
+        <p className="-mt-1 text-sm">The Buddy You Need The Most</p>
       </div>
       {user?.unseen > 0 ? (
         <div

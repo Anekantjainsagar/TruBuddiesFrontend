@@ -62,8 +62,7 @@ const TrubuddyChat = ({ params }) => {
       .post(`${BASE_URL}/trubuddy/seen/${id}`, {
         token: getCookie("trubuddy_token"),
       })
-      .then((res) => {
-      })
+      .then((res) => {})
       .catch((err) => {
         console.log(err);
       });
@@ -143,7 +142,9 @@ const TrubuddyChat = ({ params }) => {
                 <h1 className="font-semibold text-lg md:text-xl">
                   {user?.name}
                 </h1>
-                <p className="text-xs md:text-sm">Hey!! What Are You Up To.</p>
+                <p className="text-xs md:text-sm">
+                  The Buddy You Need The Most
+                </p>
               </div>
             </div>
             <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
@@ -158,8 +159,7 @@ const TrubuddyChat = ({ params }) => {
                   return (
                     (e.sender === context?.trubuddy?._id &&
                       e.receiver === id) ||
-                    (e.receiver === context?.trubuddy?._id &&
-                      e.sender === id)
+                    (e.receiver === context?.trubuddy?._id && e.sender === id)
                   );
                 })
                 .map((e, i) => {
@@ -176,8 +176,7 @@ const TrubuddyChat = ({ params }) => {
                   return (
                     (e.sender === context?.trubuddy?._id &&
                       e.receiver === id) ||
-                    (e.receiver === context?.trubuddy?._id &&
-                      e.sender === id)
+                    (e.receiver === context?.trubuddy?._id && e.sender === id)
                   );
                 })
                 .map((e, i) => {

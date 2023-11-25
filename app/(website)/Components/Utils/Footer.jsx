@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+"use client";
+import React, { useContext, useState } from "react";
 import { noto_sans } from "./font";
 
 import logo from "../../Assets/Home/Logo Image.png";
@@ -10,8 +11,17 @@ import Link from "next/link";
 import { BsLinkedin, BsWhatsapp } from "react-icons/bs";
 import { usePathname, useRouter } from "next/navigation";
 import Context from "../../../Context/Context";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import { BASE_URL } from "./url";
 
 const Footer = () => {
+  const [query, setQuery] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
   const { setScrollTo } = useContext(Context);
   const pathname = usePathname();
   const history = useRouter();
@@ -21,6 +31,7 @@ const Footer = () => {
       id="contact"
       className={`py-[3vw] bg-gradient-to-br from-newBlue from-60% to-newOcean md:py-[2vw] text-white px-[2vw] flex md:flex-row flex-col justify-between ${noto_sans.className}`}
     >
+      <Toaster />
       <div className="w-full md:w-8/12">
         <div className="flex md:flex-row flex-col items-center md:items-start justify-between">
           <div className="flex flex-col md:items-start md:mb-0 mb-5 items-center">
@@ -145,25 +156,67 @@ const Footer = () => {
         </h1>
         <input
           type="text"
+          value={query?.name}
+          onChange={(e) => {
+            setQuery({ ...query, name: e.target.value });
+          }}
           placeholder="First Name"
           className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-3 placeholder-slate-200"
         />
         <input
           type="text"
+          value={query?.email}
+          onChange={(e) => {
+            setQuery({ ...query, email: e.target.value });
+          }}
           placeholder="Email Address"
           className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-4 placeholder-slate-200"
         />
         <input
           type="text"
+          value={query?.phone}
+          onChange={(e) => {
+            setQuery({ ...query, phone: e.target.value });
+          }}
           placeholder="Contact Number"
           className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-4 placeholder-slate-200"
         />
         <input
           type="text"
+          value={query?.message}
+          onChange={(e) => {
+            setQuery({ ...query, message: e.target.value });
+          }}
           placeholder="Message"
           className="border-b bg-transparent outline-none text-white px-3 pb-1 w-full mt-4 placeholder-slate-200"
         />
-        <button className="bg-newBlue px-6 py-1 rounded-xl mt-4 block mx-auto">
+        <button
+          onClick={(e) => {
+            if (
+              !query?.email ||
+              !query?.phone ||
+              !query?.message ||
+              !query?.name
+            ) {
+              toast.error("Please fill all the details");
+            } else {
+              axios
+                .post(`${BASE_URL}/support/`, { ...query })
+                .then((res) => {
+                  if (res.status === 200) {
+                    toast.success("Submitted Successful");
+                    setQuery({ name: "", email: "", phone: "", message: "" });
+                  } else {
+                    toast.error(res.data.data);
+                  }
+                })
+                .catch((err) => {
+                  toast.error(err.message);
+                });
+            }
+          }}
+          className="bg-newBlue px-6 py-1 rounded-xl mt-4 block mx-auto"
+        >
           Submit
         </button>
       </div>

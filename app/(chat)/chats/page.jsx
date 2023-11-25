@@ -102,7 +102,7 @@ const Chats = () => {
                 />
                 <div className="ml-3">
                   <h1 className="font-bold">{clickedUser?.name}</h1>
-                  <p className="text-sm">Hey!! What Are You Up To.</p>
+                  <p className="text-sm">The Buddy You Need The Most</p>
                 </div>
               </div>
               <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>

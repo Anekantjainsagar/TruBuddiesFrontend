@@ -65,8 +65,7 @@ const ChatPage = () => {
         .post(`${BASE_URL}/login/seen/${context?.clickedUser?._id}`, {
           token: getCookie("token"),
         })
-        .then((res) => {
-        })
+        .then((res) => {})
         .catch((err) => {
           console.log(err);
         });
@@ -91,7 +90,7 @@ const ChatPage = () => {
   }, []);
 
   return (
-    <div >
+    <div>
       <Navbar />
       <div className="border w-[98vw] overflow-hidden p-[2px] h-[90vh] bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl mt-14">
         {clickedUser?._id ? (
@@ -114,7 +113,7 @@ const ChatPage = () => {
                 />
                 <div className="ml-3">
                   <h1 className="font-bold">{clickedUser?.name}</h1>
-                  <p className="text-sm">Hey!! What Are You Up To.</p>
+                  <p className="text-sm">The Buddy You Need The Most</p>
                 </div>
               </div>
               <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>

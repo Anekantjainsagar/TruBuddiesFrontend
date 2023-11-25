@@ -7,7 +7,7 @@ import picture from "../../(website)/Assets/Chats/picture.png";
 
 import male from "../../(website)/Assets/Home/icons/male white.png";
 import female from "../../(website)/Assets/Home/icons/female.png";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IoIosFemale, IoIosMale } from "react-icons/io";
 import { CgCommunity } from "react-icons/cg";
 import ComingSoon from "../../(website)/Components/Sub-Components/ComingSoon";
@@ -16,6 +16,7 @@ import LoginModal from "../../(website)/Components/login";
 
 const RightGroupBar = () => {
   const history = useRouter();
+  const pathname = usePathname();
   const { login, admin, modalIsOpen, setIsOpen } = useContext(Context);
   const [showComingSoon, setShowComingSoon] = useState(false);
 
@@ -39,7 +40,7 @@ const RightGroupBar = () => {
                 onClick={(e) => {
                   setShowComingSoon(!showComingSoon);
                 }}
-                className="flex cursor-pointer items-center h-[14vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue"
+                className="flex cursor-pointer items-center h-[14vw] md:h-[4.5vw] mx-1 justify-center border border-newBlue rounded-2xl shadow-lg shadow-gray-400 text-newBlue"
               >
                 <IoIosMale size={30} className="font-bold" />
               </div>
@@ -47,20 +48,20 @@ const RightGroupBar = () => {
                 onClick={(e) => {
                   setShowComingSoon(!showComingSoon);
                 }}
-                className="flex cursor-pointer items-center h-[14vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue"
+                className="flex cursor-pointer items-center h-[14vw] md:h-[4.5vw] mx-1 justify-center border border-newBlue rounded-2xl shadow-lg shadow-gray-400 text-newBlue"
               >
                 <IoIosFemale size={30} className="font-bold" />
               </div>
-              <div className="flex cursor-pointer items-center h-[14vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue">
+              <div className="flex cursor-pointer items-center h-[14vw] md:h-[4.5vw] mx-1 justify-center border border-newBlue rounded-2xl shadow-lg shadow-gray-400 text-newBlue">
                 <CgCommunity size={30} className="font-bold" />
               </div>
               <div
-                className="items-center shadow-lg shadow-gray-400 rounded-lg md:flex hidden justify-center cursor-pointer h-[14vw] md:h-[5vw]"
+                className="items-center shadow-lg shadow-gray-400 rounded-2xl md:flex hidden justify-center cursor-pointer h-[14vw] mx-1 md:h-[4.5vw]"
                 onClick={(e) => {
                   history.push("/trubuddies");
                 }}
               >
-                <div className="w-full md:w-[5vw] text-black flex items-center justify-center pb-2 md:pb-3 h-full border border-newBlue rounded-lg text-5xl font-semibold">
+                <div className="w-full text-black flex items-center justify-center pb-2 md:pb-3 h-full border border-newBlue rounded-2xl text-5xl font-semibold">
                   +
                 </div>
               </div>
@@ -68,7 +69,7 @@ const RightGroupBar = () => {
           </div>
         </div>
         <div className="md:border w-full md:mt-0 mt-[1vw] p-[2px] h-fit md:h-[48%] md:bg-gradient-to-tr from-newBlue to-newOcean md:shadow-md md:shadow-gray-600 rounded-3xl">
-          <div className="w-full h-full rounded-3xl flex flex-col items-center bg-transparent md:bg-white relative py-0 md:py-5 md:foolPatti">
+          <div className="w-full h-full rounded-3xl flex flex-col overflow-y-auto items-center bg-transparent md:bg-white relative py-0 md:py-5 md:foolPatti">
             <h1 className="text-2xl drop-shadow-2xl text-center">Trubuddies</h1>
             <div
               onClick={(e) => {
@@ -164,16 +165,21 @@ const RightGroupBar = () => {
                 Start Chat
               </button>
             </div>
+            
           </div>
         </div>
       </div>
       <div className="w-full md:hidden block md:px-0 px-5 md:mt-0 foolPatti mt-4 md:w-[23vw] h-[95vh] flex flex-col items-center justify-between overflow-hidden">
-        <div className="flex w-full mt-[9vw] mb-2">
+        <div className="flex md:hidden w-full mt-[9vw] mb-2">
           <p
             onClick={(e) => {
               history.push("/chats");
             }}
-            className="border-2 rounded-full bg-white px-3 border-newBlue"
+            className={`${
+              pathname == "/chats"
+                ? "bg-newBlue text-white"
+                : "bg-white text-newBlue"
+            } border-2 shadow-md shadow-gray-400 rounded-full px-3 border-newBlue`}
           >
             Chats
           </p>
@@ -181,19 +187,23 @@ const RightGroupBar = () => {
             onClick={(e) => {
               history.push("/group-chats");
             }}
-            className="border-2 rounded-full bg-white px-3 border-newBlue ml-3"
+            className={`${
+              pathname == "/group-chats"
+                ? "bg-newBlue text-white"
+                : "bg-white text-newBlue"
+            } border-2 shadow-md shadow-gray-400 rounded-full px-3 border-newBlue ml-3`}
           >
             Community
           </p>
         </div>
         <div className="border w-full p-[2px] h-full md:h-[48%] bg-gradient-to-tr md:mt-0 from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
-          <div className="w-full h-full rounded-3xl bg-white px-2.5 py-2">
+          <div className="w-full h-full rounded-3xl bg-white px-2.5 py-3">
             <div className="grid grid-cols-3 px-2 md:px-5 py-2 md:py-5 gap-y-2.5 md:gap-y-5 md:h-[95%] h-full overflow-y-scroll gap-x-3">
               <div
                 onClick={(e) => {
                   setShowComingSoon(!showComingSoon);
                 }}
-                className="flex cursor-pointer items-center h-[20vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue"
+                className="flex cursor-pointer items-center h-[15vw] mx-3 md:h-[5vw] justify-center border border-newBlue rounded-2xl shadow-lg shadow-gray-400 text-newBlue"
               >
                 <IoIosMale size={45} className="font-bold" />
               </div>
@@ -201,7 +211,7 @@ const RightGroupBar = () => {
                 onClick={(e) => {
                   setShowComingSoon(!showComingSoon);
                 }}
-                className="flex cursor-pointer items-center h-[20vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue"
+                className="flex cursor-pointer items-center h-[15vw] mx-3 md:h-[5vw] justify-center border border-newBlue rounded-2xl shadow-lg shadow-gray-400 text-newBlue"
               >
                 <IoIosFemale size={45} className="font-bold" />
               </div>
@@ -209,7 +219,7 @@ const RightGroupBar = () => {
                 onClick={(e) => {
                   history.push("/group-chats/65429c9f26aaf64195859089");
                 }}
-                className="flex cursor-pointer items-center h-[20vw] md:h-[5vw] justify-center border border-newBlue rounded-md shadow-lg shadow-gray-400 text-newBlue"
+                className="flex cursor-pointer items-center h-[15vw] mx-3 md:h-[5vw] justify-center border border-newBlue rounded-2xl shadow-lg shadow-gray-400 text-newBlue"
               >
                 <CgCommunity size={45} className="font-bold" />
               </div>

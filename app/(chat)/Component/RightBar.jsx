@@ -7,11 +7,12 @@ import picture from "../../(website)/Assets/Chats/picture.png";
 
 import male from "../../(website)/Assets/Home/icons/male white.png";
 import female from "../../(website)/Assets/Home/icons/female.png";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import UpperTrubuddyBlock from "../../(website)/user/dashboard/UpperTrubuddyBlock";
 
 const RightBar = () => {
   const history = useRouter();
+  const pathname = usePathname();
   const { login } = useContext(Context);
 
   return (
@@ -21,7 +22,11 @@ const RightBar = () => {
           onClick={(e) => {
             history.push("/chats");
           }}
-          className="border-2 rounded-full bg-white px-3 border-newBlue"
+          className={`${
+            pathname == "/chats"
+              ? "bg-newBlue text-white"
+              : "bg-white text-newBlue"
+          } border-2 shadow-md shadow-gray-400 rounded-full px-3 border-newBlue`}
         >
           Chats
         </p>
@@ -29,7 +34,11 @@ const RightBar = () => {
           onClick={(e) => {
             history.push("/group-chats");
           }}
-          className="border-2 rounded-full bg-white px-3 border-newBlue ml-3"
+          className={`${
+            pathname == "/group-chats"
+              ? "bg-newBlue text-white"
+              : "bg-white text-newBlue"
+          } border-2 shadow-md shadow-gray-400 rounded-full px-3 border-newBlue ml-3`}
         >
           Community
         </p>
@@ -63,7 +72,7 @@ const RightBar = () => {
         </div>
       </div>
       <div className="md:border w-full md:mt-0 mt-[1vw] p-[2px] h-fit md:h-[48%] md:bg-gradient-to-tr from-newBlue to-newOcean md:shadow-md md:shadow-gray-600 rounded-3xl">
-        <div className="w-full h-full rounded-3xl bg-transparent md:bg-white relative py-0 md:py-5 md:communityBg">
+        <div className="w-full h-full rounded-3xl  overflow-y-auto bg-transparent md:bg-white relative py-0 md:py-5 md:communityBg">
           <h1
             className={`text-2xl z-50 md:pt-0 pt-1 font-semibold text-center ${maliFont.className}`}
           >

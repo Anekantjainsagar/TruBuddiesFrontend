@@ -51,13 +51,13 @@ const SeprateTrubuddy = ({ params }) => {
         <LoginModal />
       </div>
       <div className="bg-gradient-to-br shadow-lg shadow-gray-500 from-newLightBlue from-70% to-[#1BF9EC] w-full rounded-3xl md:mb-0 mb-5 py-3 px-[2vw] flex flex-col items-center">
-        <div className="rounded-full bg-gradient-to-t w-4/12 md:w-6/12 from-newLightBlue shadow-sm shadow-gray-200 to-newOceanGreen p-1">
+        <div className="rounded-full bg-gradient-to-t w-[40vw] md:w-[9vw] h-[40vw] md:h-[9vw] from-newLightBlue shadow-sm shadow-gray-200 to-newOceanGreen p-1">
           <Image
             src={user?.profile}
             width={100}
             height={100}
             alt={"client"}
-            className="w-full rounded-full"
+            className="rounded-full w-full h-full object-cover object-center"
           />
         </div>
         <h1
@@ -244,7 +244,7 @@ const SeprateTrubuddy = ({ params }) => {
             <h1 className="text-xl md:text-2xl font-semibold md:text-start text-center">
               Bio
             </h1>
-            <p className="font-light h-[16vh] mt-0.5 md:mt-1 md:text-base text-sm md:text-start text-center">
+            <p className="font-light overflow-y-auto h-[16vh] mt-0.5 md:mt-1 md:text-base text-sm md:text-start text-center">
               {user?.bio}
             </p>
           </div>
@@ -254,17 +254,19 @@ const SeprateTrubuddy = ({ params }) => {
             <h1 className="text-xl md:text-2xl font-semibold text-center md:text-start">
               Personality
             </h1>
-            <div className="font-light md:mt-1 md:text-start flex-wrap text-center md:text-base text-sm flex justify-start">
-              {user?.otherExpertise?.map((e) => {
-                return (
-                  <p
-                    className="border-2 border-newBlue text-center w-fit px-3 py-0.5 h-fit mr-3 rounded-xl mt-2 md:mt-3"
-                    key={e}
-                  >
-                    {e}
-                  </p>
-                );
-              })}
+            <div className="bg-white h-fit md:h-[44vh]">
+              <div className="font-light md:mt-1 md:text-start flex-wrap text-center md:text-base text-sm flex justify-start">
+                {user?.otherExpertise?.map((e) => {
+                  return (
+                    <p
+                      className="border-2 border-newBlue text-center w-fit px-3 py-0.5 h-fit mr-3 rounded-xl mt-2 md:mt-3"
+                      key={e}
+                    >
+                      {e}
+                    </p>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

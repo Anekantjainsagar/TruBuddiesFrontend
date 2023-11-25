@@ -36,7 +36,7 @@ const TrubuddyBlock = ({ data, big }) => {
               width={100}
               height={100}
               alt="Image"
-              className="w-[32vw] md:w-[6.5vw] border-4 border-newLightBlue rounded-full"
+              className="w-[32vw] md:h-[6.5vw] h-[32vw] object-cover object-center md:w-[6.5vw] border-4 border-newLightBlue rounded-full"
             />
             <div className="ml-3">
               <h1 className="mt-1 md:mt-2 mb-0 text-xl font-semibold">
@@ -70,7 +70,7 @@ const TrubuddyBlock = ({ data, big }) => {
           <div className={`${noto_sans.className} px-1`}>
             <h1 className="text-xl mt-2 md:mt-3 mb-0">About</h1>
             <p className="text-gray-400 text-[16px] md:mb-0 mb-2">
-              {data?.bio ? data?.bio?.slice(0, 200) + "..." : ""}
+              {data?.bio ? data?.bio?.slice(0, 70) + "..." : ""}
             </p>
           </div>
         </div>

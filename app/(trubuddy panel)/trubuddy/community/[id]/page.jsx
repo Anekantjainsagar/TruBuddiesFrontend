@@ -10,7 +10,7 @@ import { io } from "socket.io-client";
 import { IoMdSend } from "react-icons/io";
 import { BASE_URL, URL } from "../../../../(website)/Components/Utils/url";
 import { AiOutlineLeft } from "react-icons/ai";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { CgCommunity } from "react-icons/cg";
@@ -126,7 +126,9 @@ const TrubuddyChat = ({ params }) => {
               />
               <div className="ml-3">
                 <h1 className="font-semibold text-lg">Common Community</h1>
-                <p className="text-xs md:text-sm">Hey!! What Are You Up To.</p>
+                <p className="text-xs md:text-sm">
+                  The Buddy You Need The Most
+                </p>
               </div>
             </div>
             <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
