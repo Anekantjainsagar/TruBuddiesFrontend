@@ -54,7 +54,7 @@ const RightBar = () => {
           >
             My TruBuddies
           </h1>
-          <div className="md:grid grid-cols-3 px-2 md:px-5 py-2 md:py-5 gap-y-2.5 md:gap-y-5 md:h-[95%] h-full overflow-y-scroll gap-x-8">
+          <div className="md:grid grid-cols-3 px-2 md:px-5 py-2 md:py-5 gap-y-2.5 md:gap-y-5 md:h-[95%] h-[46vh] overflow-y-scroll gap-x-8">
             {login?.trubuddies?.map((e) => {
               return (
                 <div key={e} className="h-fit md:mb-0 mb-2">

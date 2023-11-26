@@ -21,26 +21,28 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${maliFont.className}`}>
         <State>
-          <div
-            className={`${
-              pathname == "/" ? "block md:hidden" : "block"
-            } fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer`}
-          >
-            <LoginModal />
-            <Image
-              src={logo}
-              alt="Logo"
-              className="bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw]"
-              onClick={(e) => {
-                if (getCookie("token")) {
-                  history.push("/chats");
-                } else {
-                  setIsOpen(!modalIsOpen);
-                }
-              }}
-            />
+          <div className={`${pathname.includes("chats") ? "hidden" : "block"}`}>
+            <div
+              className={`${
+                pathname == "/" ? "block md:hidden" : "block"
+              } fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer`}
+            >
+              <LoginModal />
+              <Image
+                src={logo}
+                alt="Logo"
+                className="bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw]"
+                onClick={(e) => {
+                  if (getCookie("token")) {
+                    history.push("/chats");
+                  } else {
+                    setIsOpen(!modalIsOpen);
+                  }
+                }}
+              />
+            </div>
+            <Navbar />
           </div>
-          <Navbar />
           {children}
           <Footer />
         </State>

@@ -158,8 +158,42 @@ const RightGroupBar = () => {
               </div>
               <button
                 onClick={(e) => {
+                  let user =
+                    admin?.adminTrubuddies[0]?._id == login?._id
+                      ? admin?.adminTrubuddies[1]
+                      : admin?.adminTrubuddies[0];
                   if (getCookie("token")) {
-                    history.push("/chats");
+                    if (!login?.trubuddies?.includes(user?._id)) {
+                      axios
+                        .post(`${BASE_URL}/login/start-chat/${user?._id}`, {
+                          token: getCookie("token"),
+                        })
+                        .then((res) => {
+                          if (res.status == 200) {
+                            getUser();
+                            if (
+                              typeof window != undefined &&
+                              window.innerWidth < 550
+                            ) {
+                              history.push(`/chats/${user?._id}`);
+                            } else {
+                              history.push("/chats");
+                            }
+                          }
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    } else {
+                      if (
+                        typeof window != undefined &&
+                        window.innerWidth < 550
+                      ) {
+                        history.push(`/chats/${user?._id}`);
+                      } else {
+                        history.push("/chats");
+                      }
+                    }
                   } else {
                     setIsOpen(!modalIsOpen);
                   }

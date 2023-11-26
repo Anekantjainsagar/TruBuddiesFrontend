@@ -19,8 +19,15 @@ import { getCookie } from "cookies-next";
 import LoginModal from "../../Components/login";
 
 const SeprateTrubuddy = ({ params }) => {
-  const { admin, login, getUser, setClickedUser, setIsOpen, modalIsOpen } =
-    useContext(Context);
+  const {
+    admin,
+    login,
+    getUser,
+    setClickedUser,
+    clickedUser,
+    setIsOpen,
+    modalIsOpen,
+  } = useContext(Context);
   const [user, setUser] = useState();
   const history = useRouter();
   const id = params.name;
@@ -105,7 +112,7 @@ const SeprateTrubuddy = ({ params }) => {
         </div>
         <button
           onClick={(e) => {
-            setClickedUser(user);
+            setClickedUser({ ...user });
             if (getCookie("token")) {
               if (!login?.trubuddies?.includes(user?._id)) {
                 axios
@@ -115,14 +122,25 @@ const SeprateTrubuddy = ({ params }) => {
                   .then((res) => {
                     if (res.status == 200) {
                       getUser();
-                      history.push("/chats");
+                      if (
+                        typeof window != undefined &&
+                        window.innerWidth < 550
+                      ) {
+                        history.push(`/chats/${user?._id}`);
+                      } else {
+                        history.push("/chats");
+                      }
                     }
                   })
                   .catch((err) => {
                     console.log(err);
                   });
               } else {
-                history.push("/chats");
+                if (typeof window != undefined && window.innerWidth < 550) {
+                  history.push(`/chats/${user?._id}`);
+                } else {
+                  history.push("/chats");
+                }
               }
             } else {
               setIsOpen(!modalIsOpen);
@@ -224,13 +242,40 @@ const SeprateTrubuddy = ({ params }) => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setClickedUser(
+                let user =
                   admin?.adminTrubuddies[0]?._id == id
                     ? admin?.adminTrubuddies[1]
-                    : admin?.adminTrubuddies[0]
-                );
+                    : admin?.adminTrubuddies[0];
+                setClickedUser(user);
                 if (getCookie("token")) {
-                  history.push("/chats");
+                  if (!login?.trubuddies?.includes(user?._id)) {
+                    axios
+                      .post(`${BASE_URL}/login/start-chat/${user?._id}`, {
+                        token: getCookie("token"),
+                      })
+                      .then((res) => {
+                        if (res.status == 200) {
+                          getUser();
+                          if (
+                            typeof window != undefined &&
+                            window.innerWidth < 550
+                          ) {
+                            history.push(`/chats/${user?._id}`);
+                          } else {
+                            history.push("/chats");
+                          }
+                        }
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  } else {
+                    if (typeof window != undefined && window.innerWidth < 550) {
+                      history.push(`/chats/${user?._id}`);
+                    } else {
+                      history.push("/chats");
+                    }
+                  }
                 } else {
                   setIsOpen(!modalIsOpen);
                 }
@@ -258,11 +303,32 @@ const SeprateTrubuddy = ({ params }) => {
         <div className="bg-gradient-to-r w-full from-newLightBlue rounded-3xl mt-3 md:mt-5 shadow-md shadow-gray-400 to-newOceanGreen p-0.5">
           <div className="bg-white py-2 md:py-5 px-4 rounded-3xl">
             <h1 className="text-xl md:text-2xl font-semibold text-center md:text-start">
-              Personality
+              Expertise
             </h1>
-            <div className="bg-white h-fit md:h-[44vh]">
+            <div className="bg-white h-fit md:h-[16vh] overflow-y-auto">
               <div className="font-light md:mt-1 md:text-start flex-wrap text-center md:text-base text-sm flex justify-start">
                 {user?.otherExpertise?.map((e) => {
+                  return (
+                    <p
+                      className="border-2 border-newBlue text-center w-fit px-3 py-0.5 h-fit mr-3 rounded-xl mt-2 md:mt-3"
+                      key={e}
+                    >
+                      {e}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gradient-to-r w-full from-newLightBlue rounded-3xl mt-3 md:mt-5 shadow-md shadow-gray-400 to-newOceanGreen p-0.5">
+          <div className="bg-white py-2 md:py-5 px-4 rounded-3xl">
+            <h1 className="text-xl md:text-2xl font-semibold text-center md:text-start">
+              Personality
+            </h1>
+            <div className="bg-white h-fit md:h-[16vh] overflow-y-auto">
+              <div className="font-light md:mt-1 md:text-start flex-wrap text-center md:text-base text-sm flex justify-start">
+                {user?.personality?.map((e) => {
                   return (
                     <p
                       className="border-2 border-newBlue text-center w-fit px-3 py-0.5 h-fit mr-3 rounded-xl mt-2 md:mt-3"
@@ -330,7 +396,7 @@ const SeprateTrubuddy = ({ params }) => {
         </div>
         <div className={`${noto_sans.className}`}>
           <h1 className="text-xl md:text-[22px] font-medium mb-1.5">Reviews</h1>
-          <div className="h-[45vh] overflow-y-scroll">
+          <div className="h-[44vh] overflow-y-scroll">
             {["A", "B", "C", "D"].map((e) => {
               return (
                 <div

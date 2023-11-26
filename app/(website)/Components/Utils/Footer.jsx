@@ -29,7 +29,9 @@ const Footer = () => {
   return (
     <div
       id="contact"
-      className={`py-[3vw] bg-gradient-to-br from-newBlue from-60% to-newOcean md:py-[2vw] text-white px-[2vw] flex md:flex-row flex-col justify-between ${noto_sans.className}`}
+      className={`py-[3vw] bg-gradient-to-br from-newBlue from-60% to-newOcean md:py-[2vw] text-white px-[2vw] flex md:flex-row flex-col justify-between ${
+        noto_sans.className
+      } ${pathname?.includes("chats") ? "hidden" : "block"}`}
     >
       <Toaster />
       <div className="w-full md:w-8/12">

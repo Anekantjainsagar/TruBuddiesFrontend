@@ -65,11 +65,11 @@ const TrubuddyBlock = ({ data, big }) => {
           </div>
           <div className={`${noto_sans.className}`}>
             <h1 className="text-xl mt-2 md:mt-3 mb-0">Expertise</h1>
-            <div className="grid grid-cols-2 gap-x-3">
+            <div className="flex overflow-x-scroll hideScroll">
               {data?.otherExpertise?.slice(0, 2).map((e) => {
                 return (
                   <div
-                    className="px-3 py-0.5 rounded-full mt-2 text-center border-2 border-newBlue"
+                    className="py-0.5 w-fit px-5 whitespace-nowrap mr-2 rounded-full mt-2 text-center border-2 border-newBlue"
                     key={e}
                   >
                     {e}
@@ -88,28 +88,35 @@ const TrubuddyBlock = ({ data, big }) => {
         <button
           onClick={async (e) => {
             e.stopPropagation();
-            console.log("Updated data");
-            await setClickedUser(data);
+            setClickedUser({ ...data });
             if (getCookie("token")) {
-              try {
-                if (!login?.trubuddies?.includes(data?._id)) {
-                  let res = await axios.post(
-                    `${BASE_URL}/login/start-chat/${data?._id}`,
-                    {
-                      token: getCookie("token"),
+              if (!login?.trubuddies?.includes(data?._id)) {
+                axios
+                  .post(`${BASE_URL}/login/start-chat/${data?._id}`, {
+                    token: getCookie("token"),
+                  })
+                  .then((res) => {
+                    if (res.status == 200) {
+                      getUser();
+                      if (
+                        typeof window != undefined &&
+                        window.innerWidth < 550
+                      ) {
+                        history.push(`/chats/${data?._id}`);
+                      } else {
+                        history.push("/chats");
+                      }
                     }
-                  );
-                  if (res.status == 200) {
-                    console.log("Here");
-                    console.log(clickedUser);
-                    getUser();
-                    history.push("/chats");
-                  }
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } else {
+                if (typeof window != undefined && window.innerWidth < 550) {
+                  history.push(`/chats/${data?._id}`);
                 } else {
                   history.push("/chats");
                 }
-              } catch (err) {
-                console.log(err);
               }
             } else {
               setIsOpen(!modalIsOpen);

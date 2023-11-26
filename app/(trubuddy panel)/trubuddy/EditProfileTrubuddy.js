@@ -40,10 +40,12 @@ const EditProfileTrubuddy = () => {
     gender: "",
     languages: [],
     otherExpertise: [],
+    personality: [],
     anonymous: "",
   });
   const [speaks, setSpeaks] = useState("");
   const [experty, setExperty] = useState("");
+  const [personality, setPersonality] = useState("");
 
   useEffect(() => {
     setUser({
@@ -57,6 +59,7 @@ const EditProfileTrubuddy = () => {
       profile: trubuddy?.profile,
       languages: trubuddy?.languages,
       otherExpertise: trubuddy?.otherExpertise,
+      personality: trubuddy?.personality,
       bio: trubuddy?.bio,
     });
   }, [trubuddy]);
@@ -349,6 +352,75 @@ const EditProfileTrubuddy = () => {
                   </div>
                 </div>
               </div>
+            ) : page == 4 ? (
+              <div className="mt-5">
+                <div className="mb-3 mx-auto">
+                  <p className={`font-semibold`}>Personalilty :</p>
+                  <div className="mt-2 px-3 overflow-scroll max-h-[45vh] md:max-h-[60vh]">
+                    {user?.personality?.map((e, i) => {
+                      return (
+                        <div className="flex items-center w-full mb-4" key={i}>
+                          <input
+                            type="text"
+                            value={e}
+                            onChange={(val) => {
+                              let arr = user.personality;
+                              let index = arr.indexOf(e);
+                              arr[index] = val.target.value;
+                              setUser({
+                                ...user,
+                                personality: arr,
+                              });
+                            }}
+                            className="border outline-none text-gray-600 w-full rounded-md px-4 py-1"
+                          />
+                          <div className="pl-4">
+                            <AiOutlineClose
+                              className="bg-lightRed p-2 rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all cursor-pointer"
+                              size={35}
+                              onClick={(event) => {
+                                let arr = user?.personality;
+                                let pos = arr.indexOf(e);
+                                arr.splice(pos, 1);
+                                setUser({
+                                  ...user,
+                                  personality: arr,
+                                });
+                              }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                    <div className="flex items-center w-full mb-4">
+                      <input
+                        type="text"
+                        value={personality}
+                        placeholder="Personality"
+                        onChange={(e) => {
+                          setPersonality(e.target.value);
+                        }}
+                        className="border-2 border-newBlue outline-none text-gray-600 w-full rounded-md px-4 py-1"
+                      />
+                      <div
+                        onClick={(event) => {
+                          setUser({
+                            ...user,
+                            personality: [
+                              ...user.personality,
+                              personality,
+                            ],
+                          });
+                          setPersonality("");
+                        }}
+                        className="ml-2 md:ml-4 w-[46vw] md:w-[9vw] flex justify-center items-center py-1 bg-green-500 text-white rounded-lg cursor-pointer "
+                      >
+                        Add New
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ) : (
               <div className="mt-2 md:mt-5">
                 <div className="mb-3 mx-auto">
@@ -367,7 +439,7 @@ const EditProfileTrubuddy = () => {
                 </div>
               </div>
             )}
-            {page != 4 ? (
+            {page != 5 ? (
               <div className="flex items-center justify-evenly">
                 <button
                   disabled={page == 1}

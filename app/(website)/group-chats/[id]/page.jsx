@@ -6,26 +6,24 @@ import { io } from "socket.io-client";
 import { format } from "timeago.js";
 import { BASE_URL, URL } from "../../../(website)/Components/Utils/url";
 import Context from "../../../Context/Context";
+import { usePathname, useRouter } from "next/navigation";
+import RightGroupBar from "../../Component/RightGroupBar";
+import { CgCommunity } from "react-icons/cg";
 import Navbar from "../../../(website)/Components/Utils/Navbar";
-import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import axios from "axios";
-import { getCookie } from "cookies-next";
+import { maliFont } from "../../Components/Utils/font";
+import Sidebar from "../../Component/Sidebar";
 
-const ChatPage = () => {
+const GroupChats = () => {
   const context = React.useContext(Context);
-  const { login, clickedUser } = React.useContext(Context);
+  const { login } = React.useContext(Context);
   const socket = io(URL);
   const history = useRouter();
   const chatContainerRef = useRef();
-  const [messages, setMessages] = useState([]);
+  const pathname = usePathname();
   const [messageInput, setMessageInput] = useState("");
-
-  useEffect(() => {
-    if (typeof window != "undefined" && window.innerWidth > 550) {
-      history.push("/chats");
-    }
-  }, []);
+  const [groupMessages, setGroupMessages] = useState([]);
 
   // Scrolling on new message
   useEffect(() => {
@@ -33,7 +31,7 @@ const ChatPage = () => {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [context?.messages, messages]);
+  }, [groupMessages, context?.groupMessages]);
 
   // Connecting it with socket server
   useEffect(() => {
@@ -41,78 +39,68 @@ const ChatPage = () => {
     socket.emit("join", { userId: context?.login?._id });
   }, [context?.user]);
 
-  // On one to one chat message submission
-  const handleMessageSubmit = (e) => {
+  // On group chat message submission
+  const handleGroupMessage = (e) => {
     if (messageInput.trim() === "") {
       return;
     }
     //send message to the server
-    if (context?.login?._id && messageInput && context?.clickedUser?._id) {
+    if (context?.login?._id && messageInput) {
       setMessageInput("");
-      socket.emit("message", {
+      socket.emit("chat", {
         from: context?.login?._id,
         message: messageInput,
-        to: context?.clickedUser?._id,
+        id: "65429c9f26aaf64195859089",
+        profile: context?.login?.profile,
       });
     } else {
       alert("Internal server error");
     }
   };
 
+  // Getting old group chats
   useEffect(() => {
-    if (context?.clickedUser?._id) {
-      axios
-        .post(`${BASE_URL}/login/seen/${context?.clickedUser?._id}`, {
-          token: getCookie("token"),
-        })
-        .then((res) => {})
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [context?.messages, messages]);
+    context.getGroupChats("65429c9f26aaf64195859089");
+  }, []);
 
-  // Getting all old one to one chat messages
+  // On group chat
   useEffect(() => {
-    if (context?.clickedUser?._id) {
-      context.getMessages(context?.clickedUser?._id);
-    }
-  }, [context?.clickedUser]);
-
-  // On message
-  useEffect(() => {
-    socket.on("message", (saveMessage) => {
-      setMessages((prevMessage) => [...prevMessage, saveMessage]);
+    socket.on("chat", (saveMessage) => {
+      setGroupMessages((prevMessage) => [...prevMessage, saveMessage]);
     });
     return () => {
-      socket.off("message");
+      socket.off("chat");
     };
   }, []);
 
   return (
-    <div>
-      <Navbar />
-      <div className="border w-[98vw] overflow-hidden p-[2px] h-[90vh] bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl mt-14">
-        {clickedUser?._id ? (
+    <div
+      className={`w-full h-[100vh] bg-[#eff3ff] md:px-5 py-[1vw] flex md:flex-row flex-col items-center ${maliFont.className}`}
+    >
+      <div className={`${pathname.includes("/chats/") ? "hidden" : "block"}`}>
+        <Sidebar />
+      </div>
+      <>
+        <div className="md:hidden block">
+          <Navbar />
+        </div>
+        <div className="border w-[94vw] p-[2px] h-[91vh] mt-[14vw] md:h-full bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
           <div className="w-full h-full rounded-3xl bg-white">
             <div className="mx-3">
               <div className="py-2 flex items-center">
                 <AiOutlineLeft
                   size={30}
-                  className="mr-2"
                   onClick={(e) => {
-                    history.push("/chats");
+                    history.push("/group-chats");
                   }}
+                  className="mr-2"
                 />
-                <Image
-                  src={clickedUser?.profile}
-                  width={100}
-                  height={100}
-                  alt="Profile image"
-                  className="w-[15vw] rounded-full"
+                <CgCommunity
+                  size={45}
+                  className="font-bold text-newBlue p-1 border-2 border-newBlue rounded-full"
                 />
                 <div className="ml-3">
-                  <h1 className="font-bold">{clickedUser?.name}</h1>
+                  <h1 className="font-bold">Common Community</h1>
                   <p className="text-sm">The Buddy You Need The Most</p>
                 </div>
               </div>
@@ -121,53 +109,39 @@ const ChatPage = () => {
             <div className="h-[95%] chatBg">
               <div
                 ref={chatContainerRef}
-                className="px-3 md:px-10 h-[83%] pt-3 overflow-y-scroll"
+                className="px-3 md:px-10 h-[90%] pt-3 overflow-y-scroll"
               >
-                {context?.messages
-                  ?.filter((e) => {
-                    return (
-                      (e.sender === context?.login?._id &&
-                        e.receiver === context?.clickedUser?._id) ||
-                      (e.receiver === context?.login?._id &&
-                        e.sender === context?.clickedUser?._id)
-                    );
-                  })
-                  .map((e, i) => {
-                    return (
-                      <ChatBlock
-                        key={i}
-                        data={e}
-                        me={login?._id == e?.sender}
-                      />
-                    );
-                  })}
-                {messages
-                  ?.filter((e) => {
-                    return (
-                      (e.sender === context?.login?._id &&
-                        e.receiver === context?.clickedUser?._id) ||
-                      (e.receiver === context?.login?._id &&
-                        e.sender === context?.clickedUser?._id)
-                    );
-                  })
-                  .map((e, i) => {
-                    return (
-                      <ChatBlock
-                        key={i}
-                        data={e}
-                        me={login?._id == e?.sender}
-                      />
-                    );
-                  })}
+                {
+                  <>
+                    {context?.groupMessages.map((e, i) => {
+                      return (
+                        <ChatBlock
+                          key={i}
+                          data={e}
+                          me={login?._id == e?.sender}
+                        />
+                      );
+                    })}
+                    {groupMessages.map((e, i) => {
+                      return (
+                        <ChatBlock
+                          key={i}
+                          data={e}
+                          me={login?._id == e?.sender}
+                        />
+                      );
+                    })}
+                  </>
+                }
               </div>
-              <div className="h-[8%] flex items-center justify-center">
-                <div className="flex items-center w-full h-[96%] px-2 md:px-4">
+              <div className="h-[6%] flex items-center justify-center">
+                <div className="flex items-center w-full h-[96%] md:h-[65%] px-2 md:px-4">
                   <input
                     type="text"
                     value={messageInput}
                     onKeyDown={(e) => {
                       if (e.key == "Enter") {
-                        handleMessageSubmit();
+                        handleGroupMessage();
                         setMessageInput("");
                       }
                     }}
@@ -179,7 +153,7 @@ const ChatPage = () => {
                   />
                   <div
                     onClick={(e) => {
-                      handleMessageSubmit();
+                      handleGroupMessage();
                       setMessageInput("");
                     }}
                     className="bg-newBlue w-[15%] md:w-[5%] cursor-pointer h-full rounded-e-lg md:rounded-e-2xl flex items-center justify-center"
@@ -199,8 +173,8 @@ const ChatPage = () => {
               </div>
             </div>
           </div>
-        ) : null}
-      </div>
+        </div>
+      </>
     </div>
   );
 };
@@ -213,14 +187,32 @@ const ChatBlock = ({ me, data }) => {
           me ? "float-right items-end" : "float-left items-start"
         } flex flex-col`}
       >
-        <div
-          className={`${
-            me
-              ? "text-newBlue bg-transparent border-newBlue"
-              : "text-white bg-newChatBlue border-white"
-          } w-fit px-3 md:px-5 py-0.5 md:py-1 rounded-lg border-2`}
-        >
-          {data?.message}
+        <div className="flex items-center">
+          <Image
+            src={data?.profile}
+            width={100}
+            height={100}
+            className={`w-[10vw] md:w-[4vw] ${
+              !me ? "block" : "hidden"
+            } mr-2 rounded-full h-[10vw] md:h-[4vw] object-cover object-center`}
+          />
+          <div
+            className={`${
+              me
+                ? "text-newBlue bg-transparent border-newBlue"
+                : "text-white bg-newChatBlue border-white"
+            } w-fit px-3 md:px-5 py-0.5 md:py-1 rounded-lg border-2`}
+          >
+            {data?.message}
+          </div>
+          <Image
+            src={data?.profile}
+            width={100}
+            height={100}
+            className={`w-[10vw] md:w-[4vw] ${
+              me ? "block" : "hidden"
+            } ml-2 rounded-full h-[10vw] md:h-[4vw] object-cover object-center`}
+          />
         </div>
         <p
           className={`text-gray-400 text-xs md:text-sm ${
@@ -235,4 +227,4 @@ const ChatBlock = ({ me, data }) => {
   );
 };
 
-export default ChatPage;
+export default GroupChats;
