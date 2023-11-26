@@ -11,6 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import Context from "../Context/Context";
 import LoginModal from "./Components/login";
+import Head from "next/head";
 
 export default function RootLayout({ children }) {
   const { modalIsOpen, setIsOpen } = useContext(Context);
