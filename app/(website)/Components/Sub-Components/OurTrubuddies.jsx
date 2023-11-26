@@ -1,19 +1,12 @@
 "use client";
-import React, { useContext, useState } from "react";
-import { maliFont, noto_sans } from "../Utils/font";
+import React, { useContext } from "react";
+import { noto_sans } from "../Utils/font";
 import logo from "../../Assets/Home/Logo Image.png";
 import Image from "next/image";
 import LeftDots from "../Elements/LeftDots";
-
-import client1 from "../../Assets/Home/Images/Client 1.png";
-import client2 from "../../Assets/Home/Images/Client 2.png";
-import client3 from "../../Assets/Home/Images/Client 3.png";
 import RightDots from "../Elements/RightDots";
-
 import bg from "../../Assets/Home/trubuddies bg.png";
-
 import { useRouter } from "next/navigation";
-
 import Tilt from "react-parallax-tilt";
 
 import {
@@ -25,17 +18,13 @@ import {
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import {
-  AiOutlineDoubleRight,
-  AiOutlineRight,
-  AiOutlineRightSquare,
-} from "react-icons/ai";
+
+import { AiOutlineRight } from "react-icons/ai";
 import Context from "../../../Context/Context";
 
 import TrubuddyBlock from "../Elements/TrubuddyBlock";
