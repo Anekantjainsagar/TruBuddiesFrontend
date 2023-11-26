@@ -206,7 +206,7 @@ const RightGroupBar = () => {
           </div>
         </div>
       </div>
-      <div className="w-full md:hidden block md:px-0 px-5 md:mt-0 foolPatti mt-4 md:w-[23vw] h-[95vh] flex flex-col items-center justify-between overflow-hidden">
+      <div className="w-full md:hidden md:px-0 px-5 md:mt-0 foolPatti mt-4 md:w-[23vw] h-[95vh] flex flex-col items-center justify-between overflow-hidden">
         <div className="flex md:hidden w-full mt-[9vw] mb-2">
           <p
             onClick={(e) => {
