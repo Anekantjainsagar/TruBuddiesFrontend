@@ -364,23 +364,8 @@ const SeprateTrubuddy = ({ params }) => {
           </div>
         </div>
         <div className="bg-white py-3 px-4 md:px-3 mr-2 shadow-md shadow-gray-500 rounded-3xl mb-3">
-          <h1 className="md:text-lg font-semibold">Expertise</h1>
-          <div className="grid grid-cols-2 gap-x-4 mt-1 md:mt-2 md:text-base text-sm">
-            {user?.otherExpertise.slice(0, 2)?.map((e) => {
-              return (
-                <div
-                  className="border-2 border-newBlue text-center rounded-xl"
-                  key={e}
-                >
-                  {e}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className="bg-white py-3 px-4 md:px-3 mr-2 shadow-md shadow-gray-500 rounded-3xl mb-3">
-          <h1 className="md:text-lg font-semibold">Availability</h1>
-          <p className="flex items-center justify-center mt-1 md:mt-2 text-sm md:text-lg">
+          <h1 className="md:text-lg font-semibold flex items-center">
+            Availability{" "}
             <AiFillClockCircle
               size={
                 typeof window != "undefined"
@@ -389,34 +374,47 @@ const SeprateTrubuddy = ({ params }) => {
                     : 25
                   : 0
               }
-              className="mr-1 md:mr-2"
+              className="ml-1 md:ml-2"
             />
+          </h1>
+          <p className="flex items-center justify-center h-[17vh] mt-1 md:mt-2 text-sm md:text-lg">
             {user?.availability}
           </p>
         </div>
         <div className={`${noto_sans.className}`}>
-          <h1 className="text-xl md:text-[22px] font-medium mb-1.5">Reviews</h1>
+          <h1 className="text-xl md:text-[22px] font-medium mb-2.5">Reviews</h1>
           <div className="h-[44vh] overflow-y-scroll">
-            {["A", "B", "C", "D"].map((e) => {
-              return (
-                <div
-                  className="bg-white py-2 px-4 md:px-3 mr-2 shadow-md shadow-gray-500 rounded-3xl mb-3"
-                  key={e}
-                >
-                  <h1 className="md:text-lg font-medium">Personality</h1>
-                  <p className="text-sm">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quaerat reprehenderit facere, porro{" "}
-                  </p>
-                  <p className="text-end text-gray-500 text-xs md:text-sm">
-                    1 day ago
-                  </p>
-                </div>
-              );
+            {user?.review?.map((e, i) => {
+              return <Block e={e} key={i} />;
             })}
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+const Block = ({ e }) => {
+  const [readMore, setReadMore] = useState(false);
+
+  return (
+    <div className="bg-white py-2 px-4 md:px-5 mr-2 shadow-md shadow-gray-500 rounded-3xl mb-3">
+      <h1 className="md:text-lg font-medium">{e?.name}</h1>
+      <p className="text-sm">
+        {!readMore
+          ? e?.review.slice(0, 100) + (e?.review?.length > 100 ? "..." : "")
+          : e?.review}
+      </p>
+      {e?.review?.length > 100 ? (
+        <p
+          onClick={(e) => {
+            setReadMore(!readMore);
+          }}
+          className="text-end font-semibold text-sm cursor-pointer hover:text-newBlue transition-all"
+        >
+          {!readMore ? "Show More" : "Show Less"}
+        </p>
+      ) : null}
     </div>
   );
 };

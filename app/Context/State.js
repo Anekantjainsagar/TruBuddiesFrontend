@@ -108,7 +108,7 @@ const B2BState = (props) => {
             return e;
           }
         });
-        setAdminTrubuddies(data);
+        setAdminTrubuddies(data.reverse());
       })
       .catch((err) => {
         console.log(err);

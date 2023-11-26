@@ -49,7 +49,7 @@ const HowItWorks = () => {
           return (
             <div className="flex flex-col items-center justify-between" key={i}>
               <h1 className="font-semibold">{e?.title}</h1>
-              <p className="w-8/12 text-center">{e?.desc}</p>
+              <p className="w-9/12 text-center">{e?.desc}</p>
               <Image
                 src={e?.image}
                 alt={e?.image?.src}

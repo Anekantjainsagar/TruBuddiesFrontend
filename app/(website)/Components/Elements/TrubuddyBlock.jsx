@@ -69,7 +69,7 @@ const TrubuddyBlock = ({ data, big }) => {
               {data?.otherExpertise?.slice(0, 2).map((e) => {
                 return (
                   <div
-                    className="py-0.5 w-fit px-5 whitespace-nowrap mr-2 rounded-full mt-2 text-center border-2 border-newBlue"
+                    className="py-0.5 w-fit px-5 whitespace-nowrap mr-2 shadow-sm shadow-gray-600 rounded-full my-2 text-center border-2 border-newBlue"
                     key={e}
                   >
                     {e}
@@ -122,7 +122,7 @@ const TrubuddyBlock = ({ data, big }) => {
               setIsOpen(!modalIsOpen);
             }
           }}
-          className="bg-newBlue w-full cursor-pointer text-white py-1 rounded-full mt-0 md:mt-5"
+          className="bg-newBlue w-full cursor-pointer text-white py-1 shadow-md shadow-gray-600 rounded-full mt-0 md:mt-5"
         >
           Start Chat
         </button>
