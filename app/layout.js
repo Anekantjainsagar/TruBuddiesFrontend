@@ -1,6 +1,7 @@
 import "./globals.css";
 import { maliFont } from "./(website)/Components/Utils/font";
 import State from "./Context/State";
+import Head from "next/head";
 
 export const metadata = {
   title: "TruBuddies",
@@ -10,6 +11,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3501133654906163"
+          crossorigin="anonymous"
+        ></script>
+      </Head>
       <State>
         <body className={`${maliFont.className}`}>{children}</body>
       </State>
