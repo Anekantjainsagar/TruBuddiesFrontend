@@ -22,6 +22,17 @@ export default function RootLayout({ children }) {
       <body className={`${maliFont.className}`}>
         <State>
           <div className={`${pathname.includes("chats") ? "hidden" : "block"}`}>
+            <Head>
+              <script
+                async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3501133654906163"
+                crossorigin="anonymous"
+              ></script>
+              <meta
+                name="google-adsense-account"
+                content="ca-pub-3501133654906163"
+              />
+            </Head>
             <div
               className={`${
                 pathname == "/" ? "block md:hidden" : "block"
