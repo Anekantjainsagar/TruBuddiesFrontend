@@ -150,7 +150,6 @@ const TrubuddyChat = ({ params }) => {
                     );
                   })}
                   {groupMessages.map((e, i) => {
-                    console.log(e);
                     return (
                       <ChatBlock
                         key={i}

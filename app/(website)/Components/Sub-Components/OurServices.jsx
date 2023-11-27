@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import image from "../../Assets/Home/Images/services.png";
 import Image from "next/image";
 import { noto_sans } from "../Utils/font";
@@ -32,9 +32,17 @@ const OurServices = () => {
         setShowComingSoon={setShowComingSoon}
       />
       <p className="absolute w-[18vw] right-5 text-2xl text-end top-1/2 -translate-y-1/2 md:block hidden font-semibold">
-        {Math.abs(rotation % 360) !== 45
+        {Math.abs(rotation % 360) === 90
           ? "Social Support"
-          : "Chat and Call Based Conversation "}
+          : Math.abs(rotation % 360) === 45 || Math.abs(rotation % 360) === 270
+          ? "Yoga & Meditation"
+          : Math.abs(rotation % 360) == 135
+          ? "Routine Improvement"
+          : Math.abs(rotation % 360) == 180 || Math.abs(rotation % 360) === 315
+          ? "Chat and Call Based Conversation"
+          : Math.abs(rotation % 360) == 225 || Math.abs(rotation % 360) == 0
+          ? "Library"
+          : ""}
       </p>
       <div className="flex md:flex-row flex-col items-center">
         <div>
@@ -95,7 +103,7 @@ const OurServices = () => {
         </div>
         <div
           id="circle"
-          className="w-[45vw] md:flex hidden h-[40vw] rounded-full relative items-center justify-center right-[-44%]"
+          className="w-[45vw] md:flex hidden h-[45vw] rounded-full relative items-center justify-center right-[-44%]"
         >
           <Image
             src={animation2}

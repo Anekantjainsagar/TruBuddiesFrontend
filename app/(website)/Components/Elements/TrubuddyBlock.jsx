@@ -22,12 +22,6 @@ const TrubuddyBlock = ({ data, big }) => {
     setIsOpen,
   } = useContext(Context);
 
-  useEffect(() => {
-    console.log("Updated data in useEffect:", clickedUser);
-
-    // Perform navigation logic here, e.g., history.push("/newPage");
-  }, [clickedUser]);
-
   return (
     <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>
       <div
