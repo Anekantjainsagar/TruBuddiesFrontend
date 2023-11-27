@@ -50,6 +50,11 @@ const Chats = () => {
         message: messageInput,
         to: context?.clickedUser?._id,
       });
+      console.log({
+        from: context?.login?._id,
+        message: messageInput,
+        to: context?.clickedUser?._id,
+      });
     } else {
       alert("Internal server error");
     }
@@ -75,9 +80,10 @@ const Chats = () => {
     }
   }, [context?.messages, messages]);
 
-  // On message
+  // // On message
   useEffect(() => {
     socket.on("message", (saveMessage) => {
+      console.log(saveMessage);
       setMessages((prevMessage) => [...prevMessage, saveMessage]);
     });
     return () => {
