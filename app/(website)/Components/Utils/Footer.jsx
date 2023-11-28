@@ -127,7 +127,7 @@ const Footer = () => {
             {[
               { name: "Help or Support", route: "/" },
               { name: "Feedback", route: "/about" },
-              { name: "Terms of Conditions", route: "/" },
+              { name: "Terms & Conditions", route: "/" },
               { name: "Trademark", route: "/" },
               { name: "Customer Care", route: "/" },
             ].map((e) => {
