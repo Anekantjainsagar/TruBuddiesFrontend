@@ -243,7 +243,9 @@ const LoginModal = () => {
                     toast.error("Please fill the email for the password reset");
                   } else {
                     axios
-                      .post(`${BASE_URL}/login/password-reset`)
+                      .post(`${BASE_URL}/login/password-reset`, {
+                        email: login?.email,
+                      })
                       .then((res) => {
                         if (res.status === 200) {
                           toast.success(res.data.data);
