@@ -8,6 +8,7 @@ export async function middleware(request) {
   if (
     request.cookies.get("token")?.value == undefined &&
     !request.url.includes("/trubuddy") &&
+    !request.url.includes("/user/password-reset") &&
     !request.url.includes("/admin")
   ) {
     return NextResponse.redirect(new URL("/", request.url));
@@ -15,6 +16,7 @@ export async function middleware(request) {
 
   if (
     request.cookies.get("trubuddy_token")?.value == undefined &&
+    !request.url.includes("/user/password-reset") &&
     !request.url.includes("/trubuddy/login") &&
     !request.url.includes("/admin") &&
     request.url.includes("/trubuddy")

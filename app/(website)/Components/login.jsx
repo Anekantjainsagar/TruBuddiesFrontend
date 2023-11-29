@@ -94,6 +94,7 @@ const LoginModal = () => {
               });
               setShowLogin(!showLogin);
               toast.success("Registered successfully");
+              setshowOtp(false);
             } else {
               toast.error(res.data.data);
             }
@@ -227,7 +228,7 @@ const LoginModal = () => {
                 <p className="mt-2 text-sm">
                   Don’t have an account?
                   <span
-                    className="text-newBlue ml-1 cursor-pointer"
+                    className="text-newBlue font-semibold ml-1 cursor-pointer"
                     onClick={(e) => {
                       setShowLogin(!showLogin);
                     }}
@@ -236,6 +237,27 @@ const LoginModal = () => {
                   </span>{" "}
                 </p>
               </div>
+              <p
+                onClick={(e) => {
+                  if (!login?.email) {
+                    toast.error("Please fill the email for the password reset");
+                  } else {
+                    axios
+                      .post(`${BASE_URL}/login/password-reset`)
+                      .then((res) => {
+                        if (res.status === 200) {
+                          toast.success(res.data.data);
+                        }
+                      })
+                      .catch((err) => {
+                        toast.error(err.message);
+                      });
+                  }
+                }}
+                className="text-sm text-end text-newBlue font-semibold md:mt-0.5 mt-2 ml-1 cursor-pointer"
+              >
+                Forgot Password
+              </p>
             </div>
             <div className="flex items-center justify-end w-full px-2 mt-1">
               <div className="flex w-fit items-center">
@@ -339,7 +361,7 @@ const LoginModal = () => {
                 <p className="mt-2 text-sm">
                   Already have an account?
                   <span
-                    className="text-newBlue ml-1 cursor-pointer"
+                    className="text-newBlue ml-1 font-semibold cursor-pointer"
                     onClick={(e) => {
                       setShowLogin(!showLogin);
                     }}

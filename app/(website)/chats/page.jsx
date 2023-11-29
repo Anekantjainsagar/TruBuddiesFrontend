@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 import RightBar from "../Component/RightBar";
 import { maliFont } from "../Components/Utils/font";
 import Sidebar from "../Component/Sidebar";
+import Typewriter from "typewriter-effect";
 
 const Chats = () => {
   const context = React.useContext(Context);
@@ -161,6 +162,20 @@ const Chats = () => {
                         />
                       );
                     })}
+                  <p className={`flex items-center`}>
+                    {clickedUser?.anonymous
+                      ? clickedUser?.anonymous
+                      : clickedUser?.name}{" "}
+                    is typing{" "}
+                    <Typewriter
+                      options={{
+                        strings: [".", "..", "..."],
+                        autoStart: true,
+                        loop: true,
+                        delay: 0.5,
+                      }}
+                    />
+                  </p>
                 </div>
                 <div className="h-[16%] md:h-[10%] flex items-center justify-center">
                   <div className="flex items-center w-full h-[96%] md:h-[65%] px-2 md:px-4">

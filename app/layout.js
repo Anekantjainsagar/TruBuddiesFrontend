@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
             content="ca-pub-3501133654906163"
           />
         </Head>
-        <Loader />
+        {/* <Loader /> */}
         <body className={`${maliFont.className}`}>{children}</body>
       </State>
     </html>
