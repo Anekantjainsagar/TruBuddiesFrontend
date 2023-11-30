@@ -13,6 +13,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import Typewriter from "typewriter-effect";
 
 const TrubuddyChat = ({ params }) => {
   const id = params.id;
@@ -42,6 +43,10 @@ const TrubuddyChat = ({ params }) => {
   const chatContainerRef = useRef();
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
+    const [isOtherTyping, setIsOtherTyping] = useState({
+      user: "",
+      typing: false,
+    });
 
   // Scrolling on new message
   useEffect(() => {
@@ -103,6 +108,16 @@ const TrubuddyChat = ({ params }) => {
     };
   }, [messages]);
 
+  const isCheckTyping = () => {
+    socket.on("typing", (data) => {
+      setIsOtherTyping(data);
+    });
+  };
+
+  useEffect(() => {
+    isCheckTyping();
+  }, [messages]);
+
   return (
     <div>
       <Navbar />
@@ -142,9 +157,28 @@ const TrubuddyChat = ({ params }) => {
                 <h1 className="font-semibold text-lg md:text-xl">
                   {user?.anonymous ? user?.anonymous : user?.name}
                 </h1>
-                <p className="text-xs md:text-sm">
-                  The Buddy You Need The Most
-                </p>
+                {isOtherTyping?.typing &&
+                isOtherTyping?.user !==
+                  (trubuddy?.anonymous
+                    ? trubuddy?.anonymous
+                    : trubuddy?.name) ? (
+                  <p className={`flex items-center`}>
+                    {isOtherTyping?.user
+                      ? isOtherTyping?.user
+                      : isOtherTyping?.user}{" "}
+                    is typing{" "}
+                    <Typewriter
+                      options={{
+                        strings: [".", "..", "..."],
+                        autoStart: true,
+                        loop: true,
+                        delay: 0.5,
+                      }}
+                    />
+                  </p>
+                ) : (
+                  <p className="text-sm">The Buddy You Need The Most</p>
+                )}
               </div>
             </div>
             <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
@@ -194,6 +228,30 @@ const TrubuddyChat = ({ params }) => {
                 <input
                   type="text"
                   value={messageInput}
+                  onKeyUp={(e) => {
+                    if (e.key !== "Enter") {
+                      socket.emit("typing", {
+                        user: trubuddy?.anonymous
+                          ? trubuddy?.anonymous
+                          : trubuddy?.name,
+                        typing: true,
+                      });
+                      setTimeout(() => {
+                        socket.emit("typing", {
+                          user: trubuddy?.anonymous
+                            ? trubuddy?.anonymous
+                            : trubuddy?.name,
+                          typing: false,
+                        });
+                      }, 3000);
+                    } else {
+                      socket.emit("typing", {
+                        user: trubuddy?.anonymous ? trubuddy?.anonymous : trubuddy?.name,
+                        typing: false,
+                      });
+                    }
+                    isCheckTyping();
+                  }}
                   onKeyDown={(e) => {
                     if (e.key == "Enter") {
                       handleMessageSubmit();
