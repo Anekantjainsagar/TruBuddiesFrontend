@@ -13,6 +13,7 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import { maliFont } from "../../Components/Utils/font";
 import Sidebar from "../../Component/Sidebar";
+import Typewriter from "typewriter-effect";
 
 const ChatPage = ({ params }) => {
   const context = React.useContext(Context);
