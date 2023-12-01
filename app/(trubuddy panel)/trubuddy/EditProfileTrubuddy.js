@@ -280,7 +280,7 @@ const EditProfileTrubuddy = () => {
                         }}
                         className="ml-2 md:ml-4 w-[46vw] md:w-[9vw] flex justify-center items-center py-1 bg-green-500 text-white rounded-lg cursor-pointer "
                       >
-                        Add New
+                        Save
                       </div>
                     </div>
                   </div>
@@ -346,7 +346,7 @@ const EditProfileTrubuddy = () => {
                         }}
                         className="ml-2 md:ml-4 w-[46vw] md:w-[9vw] flex justify-center items-center py-1 bg-green-500 text-white rounded-lg cursor-pointer "
                       >
-                        Add New
+                        Save
                       </div>
                     </div>
                   </div>
@@ -415,7 +415,7 @@ const EditProfileTrubuddy = () => {
                         }}
                         className="ml-2 md:ml-4 w-[46vw] md:w-[9vw] flex justify-center items-center py-1 bg-green-500 text-white rounded-lg cursor-pointer "
                       >
-                        Add New
+                        Save
                       </div>
                     </div>
                   </div>

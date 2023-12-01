@@ -43,10 +43,10 @@ const TrubuddyChat = ({ params }) => {
   const chatContainerRef = useRef();
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
-    const [isOtherTyping, setIsOtherTyping] = useState({
-      user: "",
-      typing: false,
-    });
+  const [isOtherTyping, setIsOtherTyping] = useState({
+    user: "",
+    typing: false,
+  });
 
   // Scrolling on new message
   useEffect(() => {
@@ -108,15 +108,15 @@ const TrubuddyChat = ({ params }) => {
     };
   }, [messages]);
 
-  const isCheckTyping = () => {
-    socket.on("typing", (data) => {
-      setIsOtherTyping(data);
-    });
-  };
+  // const isCheckTyping = () => {
+  //   socket.on("typing", (data) => {
+  //     setIsOtherTyping(data);
+  //   });
+  // };
 
-  useEffect(() => {
-    isCheckTyping();
-  }, [messages]);
+  // useEffect(() => {
+  //   isCheckTyping();
+  // }, [messages]);
 
   return (
     <div>
@@ -228,30 +228,30 @@ const TrubuddyChat = ({ params }) => {
                 <input
                   type="text"
                   value={messageInput}
-                  onKeyUp={(e) => {
-                    if (e.key !== "Enter") {
-                      socket.emit("typing", {
-                        user: trubuddy?.anonymous
-                          ? trubuddy?.anonymous
-                          : trubuddy?.name,
-                        typing: true,
-                      });
-                      setTimeout(() => {
-                        socket.emit("typing", {
-                          user: trubuddy?.anonymous
-                            ? trubuddy?.anonymous
-                            : trubuddy?.name,
-                          typing: false,
-                        });
-                      }, 3000);
-                    } else {
-                      socket.emit("typing", {
-                        user: trubuddy?.anonymous ? trubuddy?.anonymous : trubuddy?.name,
-                        typing: false,
-                      });
-                    }
-                    isCheckTyping();
-                  }}
+                  // onKeyUp={(e) => {
+                  //   if (e.key !== "Enter") {
+                  //     socket.emit("typing", {
+                  //       user: trubuddy?.anonymous
+                  //         ? trubuddy?.anonymous
+                  //         : trubuddy?.name,
+                  //       typing: true,
+                  //     });
+                  //     setTimeout(() => {
+                  //       socket.emit("typing", {
+                  //         user: trubuddy?.anonymous
+                  //           ? trubuddy?.anonymous
+                  //           : trubuddy?.name,
+                  //         typing: false,
+                  //       });
+                  //     }, 3000);
+                  //   } else {
+                  //     socket.emit("typing", {
+                  //       user: trubuddy?.anonymous ? trubuddy?.anonymous : trubuddy?.name,
+                  //       typing: false,
+                  //     });
+                  //   }
+                  //   isCheckTyping();
+                  // }}
                   onKeyDown={(e) => {
                     if (e.key == "Enter") {
                       handleMessageSubmit();

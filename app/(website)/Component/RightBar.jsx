@@ -135,7 +135,7 @@ const RightBar = () => {
                       alt="Male"
                       className="text-black w-[10px]"
                     />
-                    <p className="ml-1">Male</p>
+                    <p className="ml-1">Female</p>
                   </div>
                 </div>
               </div>

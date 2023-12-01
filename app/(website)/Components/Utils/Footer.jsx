@@ -124,19 +124,34 @@ const Footer = () => {
             <h1 className="font-semibold mb-1 text-lg">
               Support and Resources
             </h1>
+            <Link
+              target="__blank"
+              href={"mailto:trubuddiesofficial@gmail.com"}
+              className="flex items-center"
+            >
+              <p className="md:mb-0 cursor-pointer mb-0.5">
+                {"Help & Support"}
+              </p>
+            </Link>
             {[
-              { name: "Help or Support", route: "/" },
               { name: "Feedback", route: "/about" },
               { name: "Terms & Conditions", route: "/" },
               { name: "Trademark", route: "/" },
-              { name: "Customer Care", route: "/" },
             ].map((e) => {
               return (
-                <p key={e?.name} className="md:mb-0 mb-0.5">
+                <p key={e?.name} className="md:mb-0 cursor-pointer mb-0.5">
                   {e?.name}
                 </p>
               );
             })}
+
+            <Link
+              target="__blank"
+              href={"https://api.whatsapp.com/send?phone=918088621858"}
+              className="flex items-center"
+            >
+              <p className="md:mb-0 cursor-pointer mb-0.5">{"Customer Care"}</p>
+            </Link>
           </div>
         </div>
         <div className="flex md:flex-row flex-col justify-between items-center md:w-11/12 md:items-end mt-[3vw]">
@@ -154,7 +169,7 @@ const Footer = () => {
       </div>
       <div className="md:w-[23%] w-[80%] mx-auto md:mt-0 mt-5 bg-newLightBlue py-[4vw] md:py-[1.5vw] px-[1.5vw] rounded-3xl">
         <h1 className="text-center text-xl font-semibold">
-          Send us Your Enquiry
+          Add an Enquiry / Feedback
         </h1>
         <input
           type="text"

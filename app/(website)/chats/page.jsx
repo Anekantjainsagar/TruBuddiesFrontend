@@ -80,15 +80,16 @@ const Chats = () => {
     }
   }, [context?.messages, messages]);
 
-  const isCheckTyping = () => {
-    socket.on("typing", (data) => {
-      setIsOtherTyping(data);
-    });
-  };
+  // const isCheckTyping = () => {
+  //   socket.on("typing", (data) => {
+  //     console.log(data)
+  //     setIsOtherTyping(data);
+  //   });
+  // };
 
-  useEffect(() => {
-    isCheckTyping();
-  }, [messages]);
+  // useEffect(() => {
+  //   isCheckTyping();
+  // }, [messages]);
 
   // // On message
   useEffect(() => {
@@ -108,7 +109,7 @@ const Chats = () => {
         <Sidebar />
       </div>
       <>
-        <div className="md:hidden block">
+        <div className={`md:hidden block`}>
           <Navbar />
         </div>
         <div className="border md:block hidden w-full md:w-[73vw] p-[2px] h-[47vh] md:mt-0 mt-1.5 md:h-full bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 mx-7 rounded-3xl">
@@ -201,32 +202,32 @@ const Chats = () => {
                     <input
                       type="text"
                       value={messageInput}
-                      onKeyUp={(e) => {
-                        if (e.key !== "Enter") {
-                          socket.emit("typing", {
-                            user: login?.anonymous
-                              ? login?.anonymous
-                              : login?.name,
-                            typing: true,
-                          });
-                          setTimeout(() => {
-                            socket.emit("typing", {
-                              user: login?.anonymous
-                                ? login?.anonymous
-                                : login?.name,
-                              typing: false,
-                            });
-                          }, 3000);
-                        } else {
-                          socket.emit("typing", {
-                            user: login?.anonymous
-                              ? login?.anonymous
-                              : login?.name,
-                            typing: false,
-                          });
-                        }
-                        isCheckTyping();
-                      }}
+                      // onKeyUp={(e) => {
+                      //   if (e.key !== "Enter") {
+                      //     socket.emit("typing", {
+                      //       user: login?.anonymous
+                      //         ? login?.anonymous
+                      //         : login?.name,
+                      //       typing: true,
+                      //     });
+                      //     setTimeout(() => {
+                      //       socket.emit("typing", {
+                      //         user: login?.anonymous
+                      //           ? login?.anonymous
+                      //           : login?.name,
+                      //         typing: false,
+                      //       });
+                      //     }, 3000);
+                      //   } else {
+                      //     socket.emit("typing", {
+                      //       user: login?.anonymous
+                      //         ? login?.anonymous
+                      //         : login?.name,
+                      //       typing: false,
+                      //     });
+                      //   }
+                      //   isCheckTyping();
+                      // }}
                       onKeyDown={(e) => {
                         if (e.key == "Enter") {
                           handleMessageSubmit();

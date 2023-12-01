@@ -24,6 +24,10 @@ const ChatPage = ({ params }) => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [user, setUser] = useState();
+  const [isOtherTyping, setIsOtherTyping] = useState({
+    user: "",
+    typing: false,
+  });
 
   useEffect(() => {
     if (typeof window != "undefined" && window.innerWidth > 550) {
@@ -104,6 +108,16 @@ const ChatPage = ({ params }) => {
     };
   }, []);
 
+  // const isCheckTyping = () => {
+  //   socket.on("typing", (data) => {
+  //     setIsOtherTyping(data);
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   isCheckTyping();
+  // }, [messages]);
+
   return (
     <div
       className={`w-full h-[100vh] bg-[#eff3ff] md:px-5 py-[1vw] flex md:flex-row flex-col items-center ${maliFont.className}`}
@@ -112,8 +126,7 @@ const ChatPage = ({ params }) => {
         <Sidebar />
       </div>
       <div>
-        <Navbar />
-        <div className="border w-[98vw] overflow-hidden p-[2px] h-[90vh] bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl mt-14">
+        <div className="border w-[98vw] overflow-hidden p-[2px] h-[98vh] bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
           {user?._id ? (
             <div className="w-full h-full rounded-3xl bg-white">
               <div className="mx-3">
@@ -136,15 +149,34 @@ const ChatPage = ({ params }) => {
                     <h1 className="font-bold text-lg">
                       {user?.anonymous ? user?.anonymous : user?.name}
                     </h1>
-                    <p className="text-sm">The Buddy You Need The Most</p>
+                    {isOtherTyping?.typing &&
+                    isOtherTyping?.user !==
+                      (login?.anonymous ? login?.anonymous : login?.name) ? (
+                      <p className={`flex items-center`}>
+                        {isOtherTyping?.user
+                          ? isOtherTyping?.user
+                          : isOtherTyping?.user}{" "}
+                        is typing{" "}
+                        <Typewriter
+                          options={{
+                            strings: [".", "..", "..."],
+                            autoStart: true,
+                            loop: true,
+                            delay: 0.5,
+                          }}
+                        />
+                      </p>
+                    ) : (
+                      <p className="text-sm">The Buddy You Need The Most</p>
+                    )}
                   </div>
                 </div>
                 <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
               </div>
-              <div className="h-[95%] chatBg">
+              <div className="h-[99%] chatBg">
                 <div
                   ref={chatContainerRef}
-                  className="px-3 md:px-10 h-[83%] pt-3 overflow-y-scroll"
+                  className="px-3 md:px-10 h-[85.5%] pt-3 overflow-y-scroll"
                 >
                   {context?.messages
                     ?.filter((e) => {
@@ -183,11 +215,37 @@ const ChatPage = ({ params }) => {
                       );
                     })}
                 </div>
-                <div className="h-[8%] flex items-center justify-center">
+                <div className="h-[5%] flex items-center justify-center">
                   <div className="flex items-center w-full h-[96%] px-2 md:px-4">
                     <input
                       type="text"
                       value={messageInput}
+                      // onKeyUp={(e) => {
+                      //   if (e.key !== "Enter") {
+                      //     socket.emit("typing", {
+                      //       user: login?.anonymous
+                      //         ? login?.anonymous
+                      //         : login?.name,
+                      //       typing: true,
+                      //     });
+                      //     setTimeout(() => {
+                      //       socket.emit("typing", {
+                      //         user: login?.anonymous
+                      //           ? login?.anonymous
+                      //           : login?.name,
+                      //         typing: false,
+                      //       });
+                      //     }, 3000);
+                      //   } else {
+                      //     socket.emit("typing", {
+                      //       user: login?.anonymous
+                      //         ? login?.anonymous
+                      //         : login?.name,
+                      //       typing: false,
+                      //     });
+                      //   }
+                      //   isCheckTyping();
+                      // }}
                       onKeyDown={(e) => {
                         if (e.key == "Enter") {
                           handleMessageSubmit();

@@ -80,101 +80,96 @@ const GroupChats = () => {
       <div className={`${pathname.includes("/chats/") ? "hidden" : "block"}`}>
         <Sidebar />
       </div>
-      <>
-        <div className="md:hidden block">
-          <Navbar />
-        </div>
-        <div className="border w-[94vw] p-[2px] h-[91vh] mt-[14vw] md:h-full bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
-          <div className="w-full h-full rounded-3xl bg-white">
-            <div className="mx-3">
-              <div className="py-2 flex items-center">
-                <AiOutlineLeft
-                  size={30}
-                  onClick={(e) => {
-                    history.push("/group-chats");
-                  }}
-                  className="mr-2"
-                />
-                <CgCommunity
-                  size={45}
-                  className="font-bold text-newBlue p-1 border-2 border-newBlue rounded-full"
-                />
-                <div className="ml-3">
-                  <h1 className="font-bold">Common Community</h1>
-                  <p className="text-sm">The Buddy You Need The Most</p>
-                </div>
+      <div className="border w-[94vw] p-[2px] h-[98vh] md:h-full bg-gradient-to-tr from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">
+        <div className="w-full h-full rounded-3xl bg-white">
+          <div className="mx-3">
+            <div className="py-2 flex items-center">
+              <AiOutlineLeft
+                size={30}
+                onClick={(e) => {
+                  history.push("/group-chats");
+                }}
+                className="mr-2"
+              />
+              <CgCommunity
+                size={45}
+                className="font-bold text-newBlue p-1 border-2 border-newBlue rounded-full"
+              />
+              <div className="ml-3">
+                <h1 className="font-bold">Common Community</h1>
+                <p className="text-sm">The Buddy You Need The Most</p>
               </div>
-              <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
             </div>
-            <div className="h-[95%] chatBg">
-              <div
-                ref={chatContainerRef}
-                className="px-3 md:px-10 h-[90%] pt-3 overflow-y-scroll"
-              >
-                {
-                  <>
-                    {context?.groupMessages.map((e, i) => {
-                      return (
-                        <ChatBlock
-                          key={i}
-                          data={e}
-                          me={login?._id == e?.sender}
-                        />
-                      );
-                    })}
-                    {groupMessages.map((e, i) => {
-                      return (
-                        <ChatBlock
-                          key={i}
-                          data={e}
-                          me={login?._id == e?.sender}
-                        />
-                      );
-                    })}
-                  </>
-                }
-              </div>
-              <div className="h-[6%] flex items-center justify-center">
-                <div className="flex items-center w-full h-[96%] md:h-[65%] px-2 md:px-4">
-                  <input
-                    type="text"
-                    value={messageInput}
-                    onKeyDown={(e) => {
-                      if (e.key == "Enter") {
-                        handleGroupMessage();
-                        setMessageInput("");
-                      }
-                    }}
-                    onChange={(e) => {
-                      setMessageInput(e.target.value);
-                    }}
-                    placeholder="Type Your Message Here"
-                    className="border-[3px] w-[85%] md:w-[95%] h-full px-4 rounded-s-lg md:rounded-s-2xl border-newBlue md:text-base text-sm outline-none"
-                  />
-                  <div
-                    onClick={(e) => {
+            <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
+          </div>
+          <div className="h-[95%] chatBg">
+            <div
+              ref={chatContainerRef}
+              className="px-3 md:px-10 h-[92%] pt-3 overflow-y-scroll"
+            >
+              {
+                <>
+                  {context?.groupMessages.map((e, i) => {
+                    return (
+                      <ChatBlock
+                        key={i}
+                        data={e}
+                        me={login?._id == e?.sender}
+                      />
+                    );
+                  })}
+                  {groupMessages.map((e, i) => {
+                    return (
+                      <ChatBlock
+                        key={i}
+                        data={e}
+                        me={login?._id == e?.sender}
+                      />
+                    );
+                  })}
+                </>
+              }
+            </div>
+            <div className="h-[5%] flex items-center justify-center">
+              <div className="flex items-center w-full h-[96%] md:h-[65%] px-2 md:px-4">
+                <input
+                  type="text"
+                  value={messageInput}
+                  onKeyDown={(e) => {
+                    if (e.key == "Enter") {
                       handleGroupMessage();
                       setMessageInput("");
-                    }}
-                    className="bg-newBlue w-[15%] md:w-[5%] cursor-pointer h-full rounded-e-lg md:rounded-e-2xl flex items-center justify-center"
-                  >
-                    <IoMdSend
-                      className="text-white"
-                      size={
-                        typeof window != "undefined"
-                          ? window?.innerWidth < 500
-                            ? 29
-                            : 30
-                          : 0
-                      }
-                    />
-                  </div>
+                    }
+                  }}
+                  onChange={(e) => {
+                    setMessageInput(e.target.value);
+                  }}
+                  placeholder="Type Your Message Here"
+                  className="border-[3px] w-[85%] md:w-[95%] h-full px-4 rounded-s-lg md:rounded-s-2xl border-newBlue md:text-base text-sm outline-none"
+                />
+                <div
+                  onClick={(e) => {
+                    handleGroupMessage();
+                    setMessageInput("");
+                  }}
+                  className="bg-newBlue w-[15%] md:w-[5%] cursor-pointer h-full rounded-e-lg md:rounded-e-2xl flex items-center justify-center"
+                >
+                  <IoMdSend
+                    className="text-white"
+                    size={
+                      typeof window != "undefined"
+                        ? window?.innerWidth < 500
+                          ? 29
+                          : 30
+                        : 0
+                    }
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </>
+      </div>
     </div>
   );
 };

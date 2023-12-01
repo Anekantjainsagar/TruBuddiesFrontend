@@ -164,7 +164,7 @@ const SeprateTrubuddy = ({ params }) => {
                 }`
               );
             }}
-            className="bg-white cursor-pointer rounded-3xl shadow-md shadow-gray-500 border mx-auto w-full py-[1vw] md:py-2 mb-1 px-[3.5vw] md:px-[1.5vw] flex flex-col items-center"
+            className="bg-white cursor-pointer rounded-3xl shadow-md shadow-gray-500 border  mx-auto w-10/12 py-[1vw] md:py-2 mb-1 px-[3.5vw] md:px-[1.5vw] flex flex-col items-center"
           >
             <div className="w-full h-full">
               <div className="flex items-center w-full justify-start z-30">
@@ -210,14 +210,14 @@ const SeprateTrubuddy = ({ params }) => {
               </div>
               <div className={`${noto_sans.className}`}>
                 <h1 className="text-lg mt-2 md:mt-1.5 mb-0">Expertise</h1>
-                <div className="grid grid-cols-2 gap-x-3">
+                <div className="flex overflow-x-scroll hideScroll">
                   {admin?.adminTrubuddies[0]?._id == id
                     ? admin?.adminTrubuddies[1]?.otherExpertise
                         ?.slice(0, 2)
                         .map((e) => {
                           return (
                             <div
-                              className="rounded-full mt-2 text-center border-2 border-newBlue"
+                              className="py-0.5 w-fit px-5 whitespace-nowrap mr-2 shadow-sm shadow-gray-600 rounded-full my-2 text-center border-2 border-newBlue"
                               key={e}
                             >
                               {e}
@@ -229,7 +229,7 @@ const SeprateTrubuddy = ({ params }) => {
                         .map((e) => {
                           return (
                             <div
-                              className="rounded-full mt-2 text-center border-2 border-newBlue"
+                              className="py-0.5 w-fit px-5 whitespace-nowrap mr-2 shadow-sm shadow-gray-600 rounded-full my-2 text-center border-2 border-newBlue"
                               key={e}
                             >
                               {e}

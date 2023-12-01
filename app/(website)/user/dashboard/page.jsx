@@ -263,14 +263,14 @@ const UserDashboard = () => {
                 </div>
                 <div className={`${noto_sans.className}`}>
                   <h1 className="text-lg mt-2 md:mt-1 mb-0">Expertise</h1>
-                  <div className="grid grid-cols-2 gap-x-3">
+                  <div className="flex overflow-x-scroll hideScroll">
                     {admin?.adminTrubuddies[0]?._id == login?._id
                       ? admin?.adminTrubuddies[1]?.otherExpertise
                           ?.slice(0, 2)
                           .map((e) => {
                             return (
                               <div
-                                className="rounded-full mt-2 text-center border-2 border-newBlue"
+                                className="py-0.5 w-fit px-5 whitespace-nowrap mr-2 shadow-sm shadow-gray-600 rounded-full my-2 text-center border-2 border-newBlue"
                                 key={e}
                               >
                                 {e}
@@ -282,7 +282,7 @@ const UserDashboard = () => {
                           .map((e) => {
                             return (
                               <div
-                                className="rounded-full mt-2 text-center border-2 border-newBlue"
+                                className="py-0.5 w-fit px-5 whitespace-nowrap mr-2 shadow-sm shadow-gray-600 rounded-full my-2 text-center border-2 border-newBlue"
                                 key={e}
                               >
                                 {e}

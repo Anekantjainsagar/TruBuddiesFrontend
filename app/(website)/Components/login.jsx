@@ -11,7 +11,7 @@ import Context from "../../Context/Context";
 import gsap, { Power2 } from "gsap/all";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
-import { BASE_URL } from "../Components/Utils/url";
+import { BASE_URL, URL } from "../Components/Utils/url";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
@@ -374,7 +374,19 @@ const LoginModal = () => {
               </div>
             </div>
             <div className="flex items-center justify-end w-full px-2 mt-1">
-              <div className="flex items-center">
+              <div
+                className="flex items-center cursor-pointer"
+                onClick={(e) => {
+                  axios
+                    .get(`${URL}auth/google`)
+                    .then((res) => {
+                      console.log(res);
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }}
+              >
                 <p className="text-sm">Or Register With</p>
                 <Image
                   src={google}
