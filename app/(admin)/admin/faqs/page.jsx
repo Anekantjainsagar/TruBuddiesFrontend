@@ -12,7 +12,7 @@ const FAQs = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/admin/get-faq/${search}`)
+      .post(`${BASE_URL}/admin/get-faq/${search}`)
       .then((response) => {
         setFaq(response.data);
       })
