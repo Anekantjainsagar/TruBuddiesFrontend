@@ -184,7 +184,7 @@ input[type="number"] {
 
 .animate {
   animation-name: example;
-  animation-duration: 2s;
+  animation-duration: 3s;
   animation-iteration-count: infinite;
 }
 
@@ -199,7 +199,7 @@ input[type="number"] {
     width: 5%;
   }
   50% {
-    width: 10%;
+    width: 15%;
   }
   100% {
     width: 5%;

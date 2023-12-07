@@ -109,16 +109,6 @@ const ChatPage = ({ params }) => {
     };
   }, []);
 
-  // const isCheckTyping = () => {
-  //   socket.on("typing", (data) => {
-  //     setIsOtherTyping(data);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   isCheckTyping();
-  // }, [messages]);
-
   return (
     <div
       className={`w-full h-[100vh] bg-[#eff3ff] md:px-5 py-[1vw] flex md:flex-row flex-col items-center ${maliFont.className}`}

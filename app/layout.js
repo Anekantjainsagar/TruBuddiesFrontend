@@ -13,17 +13,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <State>
-        <Head>
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3501133654906163"
-            crossorigin="anonymous"
-          ></script>
-          <meta
-            name="google-adsense-account"
-            content="ca-pub-3501133654906163"
-          />
-        </Head>
         <Loader />
         <body className={`${maliFont.className}`}>{children}</body>
       </State>

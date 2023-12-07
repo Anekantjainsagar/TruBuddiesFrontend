@@ -13,6 +13,8 @@ import Context from "../Context/Context";
 import LoginModal from "./Components/login";
 import Head from "next/head";
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 export default function RootLayout({ children }) {
   const { modalIsOpen, setIsOpen } = useContext(Context);
   const pathname = usePathname();
@@ -23,40 +25,44 @@ export default function RootLayout({ children }) {
       <body className={`${maliFont.className}`}>
         <LoginModal />
         <State>
-          <div className={`${pathname.includes("chats") ? "hidden" : "block"}`}>
-            <Head>
-              <script
-                async
-                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3501133654906163"
-                crossorigin="anonymous"
-              ></script>
-              <meta
-                name="google-adsense-account"
-                content="ca-pub-3501133654906163"
-              />
-            </Head>
+          {/* <GoogleOAuthProvider clientId="580940125933-rrhjuk5tf6k45hdm9vlukg1q68dc40tv.apps.googleusercontent.com"> */}
             <div
-              className={`${
-                pathname == "/" ? "block md:hidden" : "block"
-              } fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer`}
+              className={`${pathname.includes("chats") ? "hidden" : "block"}`}
             >
-              <Image
-                src={logo}
-                alt="Logo"
-                className="bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw]"
-                onClick={(e) => {
-                  if (getCookie("token")) {
-                    history.push("/chats");
-                  } else {
-                    setIsOpen(true);
-                  }
-                }}
-              />
+              <Head>
+                <script
+                  async
+                  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3501133654906163"
+                  crossorigin="anonymous"
+                ></script>
+                <meta
+                  name="google-adsense-account"
+                  content="ca-pub-3501133654906163"
+                />
+              </Head>
+              <div
+                className={`${
+                  pathname == "/" ? "block md:hidden" : "block"
+                } fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer`}
+              >
+                <Image
+                  src={logo}
+                  alt="Logo"
+                  className="bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw]"
+                  onClick={(e) => {
+                    if (getCookie("token")) {
+                      history.push("/chats");
+                    } else {
+                      setIsOpen(true);
+                    }
+                  }}
+                />
+              </div>
+              <Navbar />
             </div>
-            <Navbar />
-          </div>
-          {children}
-          <Footer />
+            {children}
+            <Footer />
+          {/* </GoogleOAuthProvider> */}
         </State>
       </body>
     </html>

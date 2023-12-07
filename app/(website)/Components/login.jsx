@@ -15,6 +15,7 @@ import { BASE_URL, URL } from "../Components/Utils/url";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+// import { GoogleLogin } from "@react-oauth/google";
 
 const customStyles = {
   overlay: {
@@ -386,26 +387,14 @@ const LoginModal = () => {
               </div>
             </div>
             <div className="flex items-center justify-end w-full px-2 mt-1">
-              <div
-                className="flex items-center cursor-pointer"
-                onClick={(e) => {
-                  axios
-                    .get(`${URL}auth/google`)
-                    .then((res) => {
-                      console.log(res);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
+              {/* <GoogleLogin
+                onSuccess={(response) => {
+                  console.log(response);
                 }}
-              >
-                <p className="text-sm">Or Register With</p>
-                <Image
-                  src={google}
-                  alt="GOogle"
-                  className="w-4/12 md:w-[1.75vw] ml-2 cursor-pointer"
-                />
-              </div>
+                onError={(error) => {
+                  console.log(error);
+                }}
+              /> */}
             </div>
           </div>
         </div>
