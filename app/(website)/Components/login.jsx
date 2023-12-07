@@ -45,6 +45,7 @@ const LoginModal = () => {
     phone: "",
     otp: "",
     originalOtp: "",
+    anonymous: "",
   });
   const { modalIsOpen, setIsOpen } = useContext(Context);
   function closeModal() {
@@ -75,6 +76,7 @@ const LoginModal = () => {
       !register?.password ||
       !register?.phone ||
       !register?.name ||
+      !register?.anonymous ||
       !register?.otp
     ) {
       toast.error("Please fill all the details");
@@ -91,6 +93,7 @@ const LoginModal = () => {
                 phone: "",
                 otp: "",
                 originalOtp: "",
+                anonymous: "",
               });
               setShowLogin(!showLogin);
               toast.success("Registered successfully");
@@ -295,6 +298,15 @@ const LoginModal = () => {
               />
               <input
                 type="text"
+                value={register?.anonymous}
+                onChange={(e) => {
+                  setRegister({ ...register, anonymous: e.target.value });
+                }}
+                placeholder="Enter Your Anonymous Name"
+                className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
+              />
+              <input
+                type="text"
                 disabled={showOtp}
                 value={register?.email}
                 onChange={(e) => {
@@ -319,7 +331,7 @@ const LoginModal = () => {
                     setRegister({ ...register, password: e.target.value });
                   }}
                   value={register?.password}
-                  placeholder="Password"
+                  placeholder="Create your Password"
                   className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
                 />
                 {passwordVisible ? (

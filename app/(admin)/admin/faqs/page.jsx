@@ -12,7 +12,7 @@ const FAQs = () => {
 
   useEffect(() => {
     axios
-      .post(`${BASE_URL}/admin/get-faq/${search}`)
+      .post(`${BASE_URL}/admin/get-faqs/`, { question: search })
       .then((response) => {
         setFaq(response.data);
       })
@@ -39,7 +39,9 @@ const FAQs = () => {
             placeholder="Search Here"
           />
           <button
-            onClick={(e) => {}}
+            onClick={(e) => {
+              setIsOpen(!modalIsOpen);
+            }}
             className="text-white bg-newBlue px-3 ml-3 py-1 rounded-md"
           >
             + Add New
@@ -47,19 +49,27 @@ const FAQs = () => {
         </div>
       </div>
       <div>
-        <div className="grid mt-5" style={{ gridTemplateColumns: "20% 80%" }}>
+        <div
+          className="grid mt-5 font-semibold text-lg"
+          style={{ gridTemplateColumns: "20% 80%" }}
+        >
           <p className="text-center">Question</p>
           <p className="text-center">Answer</p>
         </div>
       </div>
       <div className="mt-3 h-[80vh] overflow-scroll">
-        <div
-          className="grid py-1 mb-1"
-          style={{ gridTemplateColumns: "20% 80%" }}
-        >
-          <p className="text-center">Name</p>
-          <p className="text-center">Link</p>
-        </div>
+        {faq?.map((e, i) => {
+          return (
+            <div
+              key={i}
+              className="grid py-1 mb-1"
+              style={{ gridTemplateColumns: "20% 80%" }}
+            >
+              <p className="text-center">{e?.question}</p>
+              <p className="text-center">{e?.answer}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

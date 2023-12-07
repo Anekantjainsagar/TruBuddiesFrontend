@@ -9,7 +9,7 @@
 }
 
 .hideScroll::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 input::-webkit-outer-spin-button,

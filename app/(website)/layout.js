@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${maliFont.className}`}>
+        <LoginModal />
         <State>
           <div className={`${pathname.includes("chats") ? "hidden" : "block"}`}>
             <Head>
@@ -39,7 +40,6 @@ export default function RootLayout({ children }) {
                 pathname == "/" ? "block md:hidden" : "block"
               } fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer`}
             >
-              <LoginModal />
               <Image
                 src={logo}
                 alt="Logo"
@@ -48,7 +48,7 @@ export default function RootLayout({ children }) {
                   if (getCookie("token")) {
                     history.push("/chats");
                   } else {
-                    setIsOpen(!modalIsOpen);
+                    setIsOpen(true);
                   }
                 }}
               />
