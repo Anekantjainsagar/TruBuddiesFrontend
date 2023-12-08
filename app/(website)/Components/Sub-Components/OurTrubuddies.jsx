@@ -36,7 +36,7 @@ const OurTrubuddies = () => {
 
   return (
     <div>
-      {/* <div className="mt-[2vw] md:hidden">
+      <div className="mt-[2vw] md:hidden">
         <Swiper
           slidesPerView={1}
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
@@ -84,7 +84,7 @@ const OurTrubuddies = () => {
             );
           })}
         </Swiper>
-      </div> */}
+      </div>
       <Toaster />
       <div
         className={`uppercase text-center w-fit mx-auto pt-[5vw] text-2xl text-newTomato font-bold ${noto_sans.className} flex items-center`}
