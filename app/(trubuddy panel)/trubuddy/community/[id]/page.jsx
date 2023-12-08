@@ -39,10 +39,7 @@ const TrubuddyChat = ({ params }) => {
   }, []);
 
   const history = useRouter();
-  const socket = io(URL, {
-    transports: ["polling", "websocket"],
-    path: "/api/new/socket",
-  });
+  const socket = io(URL);
   const chatContainerRef = useRef();
   const [messageInput, setMessageInput] = useState("");
   const [groupMessages, setGroupMessages] = useState([]);
