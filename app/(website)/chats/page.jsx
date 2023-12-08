@@ -18,7 +18,11 @@ import Typewriter from "typewriter-effect";
 const Chats = () => {
   const context = React.useContext(Context);
   const { login, clickedUser } = React.useContext(Context);
-  const socket = io(URL);
+  const socket = io(URL, {
+  reconnection: true,
+  reconnectionDelay: 1000, // milliseconds
+  reconnectionAttempts: 3, // number of attempts
+});
   const chatContainerRef = useRef();
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");

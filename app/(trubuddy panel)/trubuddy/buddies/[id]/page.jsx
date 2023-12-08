@@ -38,7 +38,11 @@ const TrubuddyChat = ({ params }) => {
   }, []);
 
   const context = React.useContext(Context);
-  const socket = io(URL);
+  const socket = io(URL, {
+  reconnection: true,
+  reconnectionDelay: 1000, // milliseconds
+  reconnectionAttempts: 3, // number of attempts
+});
   const history = useRouter();
   const chatContainerRef = useRef();
   const [messages, setMessages] = useState([]);
