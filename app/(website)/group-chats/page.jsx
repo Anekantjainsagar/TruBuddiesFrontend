@@ -16,7 +16,10 @@ import Sidebar from "../Component/Sidebar";
 const GroupChats = () => {
   const context = React.useContext(Context);
   const { login } = React.useContext(Context);
-  const socket = io(URL);
+  const socket = io(URL, {
+    transports: ["polling", "websocket"],
+    path: "/api/new/socket",
+  });
   const chatContainerRef = useRef();
   const [messageInput, setMessageInput] = useState("");
   const [groupMessages, setGroupMessages] = useState([]);

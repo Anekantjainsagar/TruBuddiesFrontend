@@ -18,7 +18,10 @@ import Typewriter from "typewriter-effect";
 const ChatPage = ({ params }) => {
   const context = React.useContext(Context);
   const { login } = React.useContext(Context);
-  const socket = io(URL);
+  const socket = io(URL, {
+    transports: ["polling", "websocket"],
+    path: "/api/new/socket",
+  });
   const pathname = usePathname();
   const history = useRouter();
   const chatContainerRef = useRef();
