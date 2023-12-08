@@ -25,10 +25,6 @@ const ChatPage = ({ params }) => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [user, setUser] = useState();
-  const [isOtherTyping, setIsOtherTyping] = useState({
-    user: "",
-    typing: false,
-  });
 
   useEffect(() => {
     if (typeof window != "undefined" && window.innerWidth > 550) {
@@ -140,26 +136,7 @@ const ChatPage = ({ params }) => {
                     <h1 className="font-bold text-lg">
                       {user?.anonymous ? user?.anonymous : user?.name}
                     </h1>
-                    {isOtherTyping?.typing &&
-                    isOtherTyping?.user !==
-                      (login?.anonymous ? login?.anonymous : login?.name) ? (
-                      <p className={`flex items-center`}>
-                        {isOtherTyping?.user
-                          ? isOtherTyping?.user
-                          : isOtherTyping?.user}{" "}
-                        is typing{" "}
-                        <Typewriter
-                          options={{
-                            strings: [".", "..", "..."],
-                            autoStart: true,
-                            loop: true,
-                            delay: 0.5,
-                          }}
-                        />
-                      </p>
-                    ) : (
-                      <p className="text-sm">The Buddy You Need The Most</p>
-                    )}
+                    <p className="text-sm">The Buddy You Need The Most</p>
                   </div>
                 </div>
                 <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
@@ -211,32 +188,6 @@ const ChatPage = ({ params }) => {
                     <input
                       type="text"
                       value={messageInput}
-                      // onKeyUp={(e) => {
-                      //   if (e.key !== "Enter") {
-                      //     socket.emit("typing", {
-                      //       user: login?.anonymous
-                      //         ? login?.anonymous
-                      //         : login?.name,
-                      //       typing: true,
-                      //     });
-                      //     setTimeout(() => {
-                      //       socket.emit("typing", {
-                      //         user: login?.anonymous
-                      //           ? login?.anonymous
-                      //           : login?.name,
-                      //         typing: false,
-                      //       });
-                      //     }, 3000);
-                      //   } else {
-                      //     socket.emit("typing", {
-                      //       user: login?.anonymous
-                      //         ? login?.anonymous
-                      //         : login?.name,
-                      //       typing: false,
-                      //     });
-                      //   }
-                      //   isCheckTyping();
-                      // }}
                       onKeyDown={(e) => {
                         if (e.key == "Enter") {
                           handleMessageSubmit();
