@@ -38,7 +38,7 @@ const GroupChats = () => {
   useEffect(() => {
     socket.emit("connection");
     socket.emit("join", { userId: context?.login?._id });
-  }, [context?.user, messages]);
+  }, [context?.user, groupMessages]);
 
   // On group chat message submission
   const handleGroupMessage = (e) => {
