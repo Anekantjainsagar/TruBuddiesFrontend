@@ -19,10 +19,10 @@ const ChatPage = ({ params }) => {
   const context = React.useContext(Context);
   const { login } = React.useContext(Context);
   const socket = io(URL, {
-  reconnection: true,
-  reconnectionDelay: 1000, // milliseconds
-  reconnectionAttempts: 3, // number of attempts
-});
+    reconnection: true,
+    reconnectionDelay: 1000, // milliseconds
+    reconnectionAttempts: 3, // number of attempts
+  });
   const pathname = usePathname();
   const history = useRouter();
   const chatContainerRef = useRef();
@@ -59,7 +59,7 @@ const ChatPage = ({ params }) => {
   useEffect(() => {
     socket.emit("connection");
     socket.emit("join", { userId: context?.login?._id });
-  }, [context?.user]);
+  }, [context?.user, messages]);
 
   // On one to one chat message submission
   const handleMessageSubmit = (e) => {

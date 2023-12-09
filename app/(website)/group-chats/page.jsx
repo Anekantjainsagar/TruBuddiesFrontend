@@ -17,10 +17,10 @@ const GroupChats = () => {
   const context = React.useContext(Context);
   const { login } = React.useContext(Context);
   const socket = io(URL, {
-  reconnection: true,
-  reconnectionDelay: 1000, // milliseconds
-  reconnectionAttempts: 3, // number of attempts
-});
+    reconnection: true,
+    reconnectionDelay: 1000, // milliseconds
+    reconnectionAttempts: 3, // number of attempts
+  });
   const chatContainerRef = useRef();
   const [messageInput, setMessageInput] = useState("");
   const [groupMessages, setGroupMessages] = useState([]);
@@ -38,7 +38,7 @@ const GroupChats = () => {
   useEffect(() => {
     socket.emit("connection");
     socket.emit("join", { userId: context?.login?._id });
-  }, [context?.user]);
+  }, [context?.user, messages]);
 
   // On group chat message submission
   const handleGroupMessage = (e) => {

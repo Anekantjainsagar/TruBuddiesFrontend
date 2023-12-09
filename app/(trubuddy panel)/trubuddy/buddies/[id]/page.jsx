@@ -39,10 +39,10 @@ const TrubuddyChat = ({ params }) => {
 
   const context = React.useContext(Context);
   const socket = io(URL, {
-  reconnection: true,
-  reconnectionDelay: 1000, // milliseconds
-  reconnectionAttempts: 3, // number of attempts
-});
+    reconnection: true,
+    reconnectionDelay: 1000, // milliseconds
+    reconnectionAttempts: 3, // number of attempts
+  });
   const history = useRouter();
   const chatContainerRef = useRef();
   const [messages, setMessages] = useState([]);
@@ -61,7 +61,7 @@ const TrubuddyChat = ({ params }) => {
     socket.emit("connection");
     console.log("Connected");
     socket.emit("join", { userId: context?.trubuddy?._id });
-  }, [context?.trubuddy]);
+  }, [context?.trubuddy, messages]);
 
   useEffect(() => {
     axios

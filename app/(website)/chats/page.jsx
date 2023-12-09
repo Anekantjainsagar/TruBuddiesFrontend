@@ -19,10 +19,10 @@ const Chats = () => {
   const context = React.useContext(Context);
   const { login, clickedUser } = React.useContext(Context);
   const socket = io(URL, {
-  reconnection: true,
-  reconnectionDelay: 1000, // milliseconds
-  reconnectionAttempts: 3, // number of attempts
-});
+    reconnection: true,
+    reconnectionDelay: 1000, // milliseconds
+    reconnectionAttempts: 3, // number of attempts
+  });
   const chatContainerRef = useRef();
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
@@ -40,7 +40,7 @@ const Chats = () => {
   useEffect(() => {
     socket.emit("connection");
     socket.emit("join", { userId: context?.login?._id });
-  }, [context?.user]);
+  }, [context?.user, messages]);
 
   // On one to one chat message submission
   const handleMessageSubmit = (e) => {
