@@ -237,7 +237,7 @@ const ChatBlock = ({ me, data, setIsOpen, modalIsOpen }) => {
               alt={data?.profile?.src}
               width={100}
               height={100}
-              className="w-[14vw] h-[14vw] object-cover object-center rounded-full"
+              className="w-[14vw] md:w-[3vw] md:h-[3vw] h-[14vw] object-cover object-center rounded-full"
             />
             <p className="font-medium ml-2 text-lg text-white">{data?.name}</p>
           </div>
