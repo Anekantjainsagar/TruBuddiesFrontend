@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { CgCommunity } from "react-icons/cg";
+import GroupChatsUser from "../../../../(website)/group-chats/model";
 
 const TrubuddyChat = ({ params }) => {
   const id = params.id;
@@ -47,6 +48,7 @@ const TrubuddyChat = ({ params }) => {
   const chatContainerRef = useRef();
   const [messageInput, setMessageInput] = useState("");
   const [groupMessages, setGroupMessages] = useState([]);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   // Scrolling on new message
   useEffect(() => {
@@ -60,7 +62,7 @@ const TrubuddyChat = ({ params }) => {
   useEffect(() => {
     socket.emit("connection");
     socket.emit("join", { userId: context?.trubuddy?._id });
-  }, [context?.user, messages]);
+  }, [context?.trubuddy, groupMessages]);
 
   // On group chat message submission
   const handleGroupMessage = (e) => {
@@ -74,6 +76,7 @@ const TrubuddyChat = ({ params }) => {
         from: context?.trubuddy?._id,
         message: messageInput,
         id: "65429c9f26aaf64195859089",
+        name: context?.trubuddy?.name,
         profile: context?.trubuddy?.profile,
       });
     } else {
@@ -89,6 +92,7 @@ const TrubuddyChat = ({ params }) => {
   // On group chat
   useEffect(() => {
     socket.on("chat", (saveMessage) => {
+      console.log(saveMessage);
       setGroupMessages((prevMessage) => [...prevMessage, saveMessage]);
     });
     return () => {
@@ -99,6 +103,7 @@ const TrubuddyChat = ({ params }) => {
   return (
     <div>
       <Navbar />
+      <GroupChatsUser modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
       <div className="absolute top-0 left-0 z-0">
         <Image
           src={bg}
@@ -121,7 +126,7 @@ const TrubuddyChat = ({ params }) => {
                 }
                 className="mr-2 cursor-pointer"
                 onClick={(e) => {
-                  history.push("/trubuddy/buddies");
+                  history.push("/trubuddy/community");
                 }}
               />
               <CgCommunity
@@ -142,28 +147,28 @@ const TrubuddyChat = ({ params }) => {
               ref={chatContainerRef}
               className="px-3 md:px-10 h-[94%] md:h-[91%] pt-3 overflow-y-scroll"
             >
-              {
-                <>
-                  {context?.groupMessages.map((e, i) => {
-                    return (
-                      <ChatBlock
-                        key={i}
-                        data={e}
-                        me={trubuddy?._id == e?.sender}
-                      />
-                    );
-                  })}
-                  {groupMessages.map((e, i) => {
-                    return (
-                      <ChatBlock
-                        key={i}
-                        data={e}
-                        me={trubuddy?._id == e?.sender}
-                      />
-                    );
-                  })}
-                </>
-              }
+              {context?.groupMessages.map((e, i) => {
+                return (
+                  <ChatBlock
+                    key={i}
+                    data={e}
+                    me={trubuddy?._id == e?.sender}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                );
+              })}
+              {groupMessages.map((e, i) => {
+                return (
+                  <ChatBlock
+                    key={i}
+                    data={e}
+                    me={trubuddy?._id == e?.sender}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                );
+              })}
             </div>
             <div className="h-[7%] md:h-[10%] flex items-center justify-center">
               <div className="flex items-center w-full h-[98%] md:h-[85%] px-3 md:px-4">
@@ -209,48 +214,38 @@ const TrubuddyChat = ({ params }) => {
   );
 };
 
-const ChatBlock = ({ me, data }) => {
+const ChatBlock = ({ me, data, setIsOpen, modalIsOpen }) => {
+  const { setCommunityClicked } = useContext(Context);
+
   return (
-    <div className="mb-2 md:mb-4">
+    <div>
       <div
         className={`${
           me ? "float-right items-end" : "float-left items-start"
         } flex flex-col`}
       >
-        <div className="flex items-center">
-          <Image
-            src={data?.profile}
-            width={100}
-            height={100}
-            className={`w-[10vw] md:w-[3vw] ${
-              !me ? "block" : "hidden"
-            } mr-2 rounded-full h-[10vw] md:h-[3vw] object-cover object-center`}
-          />
-          <div
-            className={`${
-              me
-                ? "text-newBlue bg-transparent border-newBlue"
-                : "text-white bg-newChatBlue border-white"
-            } w-fit px-3 md:px-5 py-0.5 md:py-1 rounded-lg border-2`}
-          >
-            {data?.message}
-          </div>
-          <Image
-            src={data?.profile}
-            width={100}
-            height={100}
-            className={`w-[10vw] md:w-[3vw] ${
-              me ? "block" : "hidden"
-            } ml-2 rounded-full h-[10vw] md:h-[3vw] object-cover object-center`}
-          />
-        </div>
-        <p
-          className={`text-gray-400 text-xs md:text-sm ${
-            me ? "text-end mr-1" : "text-start ml-1"
-          }`}
+        <div
+          onClick={(e) => {
+            setCommunityClicked(data);
+            setIsOpen(!modalIsOpen);
+          }}
+          className="bg-gradient-to-r from-[#407BFF] to-[#92E3A9] rounded-2xl w-fit pl-3 pr-5 py-2 mb-3 cursor-pointer"
         >
-          {format(data?.time)}
-        </p>
+          <div className="flex items-center">
+            <Image
+              src={data?.profile}
+              alt={data?.profile?.src}
+              width={100}
+              height={100}
+              className="w-[14vw] h-[14vw] object-cover object-center rounded-full"
+            />
+            <p className="font-medium ml-2 text-lg text-white">{data?.name}</p>
+          </div>
+          <p className="text-white mt-0.5">{data?.message}</p>
+          <p className="text-end text-white text-xs mt-0.5">
+            {format(data?.time)}
+          </p>
+        </div>
       </div>
       <div className="clear-both"></div>
     </div>

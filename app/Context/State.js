@@ -23,6 +23,7 @@ const B2BState = (props) => {
   const [clickedBuddy, setClickedBuddy] = useState({
     _id: "653ba550d4139488f6ec3cd4",
   });
+  const [communityClicked, setCommunityClicked] = useState();
 
   // Admin states
   const [adminUsers, setAdminUsers] = useState([]);
@@ -165,6 +166,8 @@ const B2BState = (props) => {
         setScrollTo,
         showSupportUs,
         setShowSupportUs,
+        communityClicked,
+        setCommunityClicked,
       }}
     >
       {props.children}

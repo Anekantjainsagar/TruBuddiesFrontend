@@ -9,7 +9,6 @@ import Context from "../../Context/Context";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { BASE_URL } from "../Components/Utils/url";
-import { useRouter } from "next/navigation";
 import qr from "../Assets/qr.png";
 
 const customStyles = {
@@ -56,71 +55,6 @@ const SupportUs = () => {
         });
     }
   };
-
-  // const qr = useRef(null);
-
-  // const qrCode = new QRCodeStyling({
-  //   width: 150,
-  //   height: 150,
-  //   data: `https://trubuddies.com`,
-  //   margin: 0,
-  //   image: logo,
-  //   qrOptions: { typeNumber: "0", mode: "Byte", errorCorrectionLevel: "Q" },
-  //   imageOptions: { hideBackgroundDots: true, imageSize: 0.4, margin: 0 },
-  //   dotsOptions: { type: "dots", color: "#074f97", gradient: null },
-  //   backgroundOptions: { color: "#ffffff", gradient: null },
-  //   dotsOptionsHelper: {
-  //     colorType: { single: true, gradient: false },
-  //     gradient: {
-  //       linear: true,
-  //       radial: false,
-  //       color1: "#6a1a4c",
-  //       color2: "#6a1a4c",
-  //       rotation: "0",
-  //     },
-  //   },
-  //   cornersSquareOptions: { type: "extra-rounded", color: "#032f5e" },
-  //   cornersSquareOptionsHelper: {
-  //     colorType: { single: true, gradient: false },
-  //     gradient: {
-  //       linear: true,
-  //       radial: false,
-  //       color1: "#000000",
-  //       color2: "#000000",
-  //       rotation: "0",
-  //     },
-  //   },
-  //   cornersDotOptions: { type: "", color: "#042f5e" },
-  //   cornersDotOptionsHelper: {
-  //     colorType: { single: true, gradient: false },
-  //     gradient: {
-  //       linear: true,
-  //       radial: false,
-  //       color1: "#000000",
-  //       color2: "#000000",
-  //       rotation: "0",
-  //     },
-  //   },
-  //   backgroundOptionsHelper: {
-  //     colorType: { single: true, gradient: false },
-  //     gradient: {
-  //       linear: true,
-  //       radial: false,
-  //       color1: "#ffffff",
-  //       color2: "#ffffff",
-  //       rotation: "0",
-  //     },
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   qrCode.update({
-  //     data: `https://trubuddies.com`,
-  //   });
-  //   if (!qr?.current?.innerHTML.includes("canvas")) {
-  //     qrCode.append(qr.current);
-  //   }
-  // }, []);
 
   return (
     <div className="z-50">

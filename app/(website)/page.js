@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ThingsLikeAboutUs from "./Components/Sub-Components/ThingsLikeAboutUs";
 import HowItWorks from "./Components/Sub-Components/HowItWorks";
 import OurTrubuddies from "./Components/Sub-Components/OurTrubuddies";
@@ -29,12 +29,15 @@ import { useRouter } from "next/navigation";
 import Context from "../Context/Context";
 import LoginModal from "./Components/login";
 import { getCookie } from "cookies-next";
+import Advertisement from "./Advertisement";
 
 const App = () => {
   const { modalIsOpen, setIsOpen } = useContext(Context);
   gsap.registerPlugin(ScrollTrigger);
   const history = useRouter();
   const context = useContext(Context);
+  const [showAd, setShowAd] = useState(true);
+
   const animateLeftRight = (e) => {
     let timeline = gsap.timeline({ repeat: Infinity });
 
@@ -108,6 +111,7 @@ const App = () => {
   return (
     <>
       <LoginModal />
+      <Advertisement showAd={showAd} setShowAd={setShowAd} />
       <div className="bg-newVeryLightBlue relative overflow-x-hidden">
         <Image
           src={bg}

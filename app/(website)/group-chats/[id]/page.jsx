@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { IoMdSend } from "react-icons/io";
 import { io } from "socket.io-client";
 import { format } from "timeago.js";
@@ -14,6 +14,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import axios from "axios";
 import { maliFont } from "../../Components/Utils/font";
 import Sidebar from "../../Component/Sidebar";
+import GroupChatsUser from "../model";
 
 const GroupChats = () => {
   const context = React.useContext(Context);
@@ -26,7 +27,7 @@ const GroupChats = () => {
   const history = useRouter();
   const chatContainerRef = useRef();
   const pathname = usePathname();
-  const [messageInput, setMessageInput] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [groupMessages, setGroupMessages] = useState([]);
 
   // Scrolling on new message
@@ -42,25 +43,6 @@ const GroupChats = () => {
     socket.emit("connection");
     socket.emit("join", { userId: context?.login?._id });
   }, [context?.user, groupMessages]);
-
-  // On group chat message submission
-  const handleGroupMessage = (e) => {
-    if (messageInput.trim() === "") {
-      return;
-    }
-    //send message to the server
-    if (context?.login?._id && messageInput) {
-      setMessageInput("");
-      socket.emit("chat", {
-        from: context?.login?._id,
-        message: messageInput,
-        id: "65429c9f26aaf64195859089",
-        profile: context?.login?.profile,
-      });
-    } else {
-      alert("Internal server error");
-    }
-  };
 
   // Getting old group chats
   useEffect(() => {
@@ -79,8 +61,9 @@ const GroupChats = () => {
 
   return (
     <div
-      className={`w-full h-[100vh] bg-[#eff3ff] md:px-5 py-[1vw] flex md:flex-row flex-col items-center ${maliFont.className}`}
+      className={`w-full h-[100vh] bg-[#eff3ff] md:px-5 py-[1vw] overflow-hidden flex md:flex-row flex-col items-center ${maliFont.className}`}
     >
+      <GroupChatsUser modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
       <div className={`${pathname.includes("/chats/") ? "hidden" : "block"}`}>
         <Sidebar />
       </div>
@@ -109,67 +92,28 @@ const GroupChats = () => {
           <div className="h-[95%] chatBg">
             <div
               ref={chatContainerRef}
-              className="px-3 md:px-10 h-[92%] pt-3 overflow-y-scroll"
+              className="px-3 md:px-10 h-[97%] pt-3 overflow-y-scroll"
             >
-              {
-                <>
-                  {context?.groupMessages.map((e, i) => {
-                    return (
-                      <ChatBlock
-                        key={i}
-                        data={e}
-                        me={login?._id == e?.sender}
-                      />
-                    );
-                  })}
-                  {groupMessages.map((e, i) => {
-                    return (
-                      <ChatBlock
-                        key={i}
-                        data={e}
-                        me={login?._id == e?.sender}
-                      />
-                    );
-                  })}
-                </>
-              }
-            </div>
-            <div className="h-[5%] flex items-center justify-center">
-              <div className="flex items-center w-full h-[96%] md:h-[65%] px-2 md:px-4">
-                <input
-                  type="text"
-                  value={messageInput}
-                  onKeyDown={(e) => {
-                    if (e.key == "Enter") {
-                      handleGroupMessage();
-                      setMessageInput("");
-                    }
-                  }}
-                  onChange={(e) => {
-                    setMessageInput(e.target.value);
-                  }}
-                  placeholder="Type Your Message Here"
-                  className="border-[3px] w-[85%] md:w-[95%] h-full px-4 rounded-s-lg md:rounded-s-2xl border-newBlue md:text-base text-sm outline-none"
-                />
-                <div
-                  onClick={(e) => {
-                    handleGroupMessage();
-                    setMessageInput("");
-                  }}
-                  className="bg-newBlue w-[15%] md:w-[5%] cursor-pointer h-full rounded-e-lg md:rounded-e-2xl flex items-center justify-center"
-                >
-                  <IoMdSend
-                    className="text-white"
-                    size={
-                      typeof window != "undefined"
-                        ? window?.innerWidth < 500
-                          ? 29
-                          : 30
-                        : 0
-                    }
+              {context?.groupMessages.map((e, i) => {
+                return (
+                  <ChatBlock
+                    key={i}
+                    data={e}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
                   />
-                </div>
-              </div>
+                );
+              })}
+              {groupMessages.map((e, i) => {
+                return (
+                  <ChatBlock
+                    key={i}
+                    data={e}
+                    modalIsOpen={modalIsOpen}
+                    setIsOpen={setIsOpen}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
@@ -178,50 +122,29 @@ const GroupChats = () => {
   );
 };
 
-const ChatBlock = ({ me, data }) => {
+const ChatBlock = ({ setIsOpen, modalIsOpen, data }) => {
+  const { setCommunityClicked } = useContext(Context);
+
   return (
-    <div className="mb-2 md:mb-4">
-      <div
-        className={`${
-          me ? "float-right items-end" : "float-left items-start"
-        } flex flex-col`}
-      >
-        <div className="flex items-center">
-          <Image
-            src={data?.profile}
-            width={100}
-            height={100}
-            className={`w-[10vw] md:w-[4vw] ${
-              !me ? "block" : "hidden"
-            } mr-2 rounded-full h-[10vw] md:h-[4vw] object-cover object-center`}
-          />
-          <div
-            className={`${
-              me
-                ? "text-newBlue bg-transparent border-newBlue"
-                : "text-white bg-newChatBlue border-white"
-            } w-fit px-3 md:px-5 py-0.5 md:py-1 rounded-lg border-2`}
-          >
-            {data?.message}
-          </div>
-          <Image
-            src={data?.profile}
-            width={100}
-            height={100}
-            className={`w-[10vw] md:w-[4vw] ${
-              me ? "block" : "hidden"
-            } ml-2 rounded-full h-[10vw] md:h-[4vw] object-cover object-center`}
-          />
-        </div>
-        <p
-          className={`text-gray-400 text-xs md:text-sm ${
-            me ? "text-end mr-1" : "text-start ml-1"
-          }`}
-        >
-          {format(data?.time)}
-        </p>
+    <div
+      onClick={(e) => {
+        setCommunityClicked(data);
+        setIsOpen(!modalIsOpen);
+      }}
+      className="bg-gradient-to-r from-[#407BFF] to-[#92E3A9] rounded-2xl w-fit pl-3 pr-5 py-2 mb-3 cursor-pointer"
+    >
+      <div className="flex items-center">
+        <Image
+          src={data?.profile}
+          alt={data?.profile?.src}
+          width={100}
+          height={100}
+          className="w-[14vw] h-[14vw] object-cover object-center rounded-full"
+        />
+        <p className="font-medium ml-2 text-lg text-white">{data?.name}</p>
       </div>
-      <div className="clear-both"></div>
+      <p className="text-white mt-0.5">{data?.message}</p>
+      <p className="text-end text-white text-xs mt-0.5">{format(data?.time)}</p>
     </div>
   );
 };
