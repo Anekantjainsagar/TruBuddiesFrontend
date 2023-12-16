@@ -42,6 +42,7 @@ const EditProfileTrubuddy = () => {
     otherExpertise: [],
     personality: [],
     anonymous: "",
+    meeting_url: "",
   });
   const [speaks, setSpeaks] = useState("");
   const [experty, setExperty] = useState("");
@@ -61,6 +62,7 @@ const EditProfileTrubuddy = () => {
       otherExpertise: trubuddy?.otherExpertise,
       personality: trubuddy?.personality,
       bio: trubuddy?.bio,
+      meeting_url: trubuddy?.meeting_url,
     });
   }, [trubuddy]);
 
@@ -161,6 +163,13 @@ const EditProfileTrubuddy = () => {
                     value: user?.availability,
                     onchange: (e) => {
                       setUser({ ...user, availability: e.target.value });
+                    },
+                  },
+                  {
+                    title: "Meeting Url",
+                    value: user?.meeting_url,
+                    onchange: (e) => {
+                      setUser({ ...user, meeting_url: e.target.value });
                     },
                   },
                 ]?.map((e) => {
@@ -406,10 +415,7 @@ const EditProfileTrubuddy = () => {
                         onClick={(event) => {
                           setUser({
                             ...user,
-                            personality: [
-                              ...user.personality,
-                              personality,
-                            ],
+                            personality: [...user.personality, personality],
                           });
                           setPersonality("");
                         }}

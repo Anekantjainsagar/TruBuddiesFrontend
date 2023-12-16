@@ -47,6 +47,7 @@ const LoginModal = () => {
     otp: "",
     originalOtp: "",
     anonymous: "",
+    gender: "",
   });
   const { modalIsOpen, setIsOpen } = useContext(Context);
   function closeModal() {
@@ -76,8 +77,8 @@ const LoginModal = () => {
       !register?.email ||
       !register?.password ||
       !register?.phone ||
-      !register?.name ||
       !register?.anonymous ||
+      !register?.gender ||
       !register?.otp
     ) {
       toast.error("Please fill all the details");
@@ -304,6 +305,15 @@ const LoginModal = () => {
                   setRegister({ ...register, anonymous: e.target.value });
                 }}
                 placeholder="Enter Your Anonymous Name"
+                className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
+              />
+              <input
+                type="text"
+                value={register?.gender}
+                onChange={(e) => {
+                  setRegister({ ...register, gender: e.target.value });
+                }}
+                placeholder="Enter Your Gender"
                 className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
               />
               <input

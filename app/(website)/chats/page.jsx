@@ -13,7 +13,8 @@ import { usePathname } from "next/navigation";
 import RightBar from "../Component/RightBar";
 import { maliFont } from "../Components/Utils/font";
 import Sidebar from "../Component/Sidebar";
-import Typewriter from "typewriter-effect";
+import { SiGooglemeet } from "react-icons/si";
+import Link from "next/link";
 
 const Chats = () => {
   const context = React.useContext(Context);
@@ -105,23 +106,32 @@ const Chats = () => {
           {clickedUser?._id ? (
             <div className="w-full h-full rounded-3xl bg-white">
               <div className="mx-6">
-                <div className="py-2 flex items-center">
-                  <Image
-                    src={clickedUser?.profile}
-                    width={100}
-                    height={100}
-                    alt="Profile image"
-                    className="w-[3.5vw] h-[3.5vw] object-cover object-center rounded-full"
-                  />
-                  <div className="ml-3">
-                    <h1 className="font-bold">
-                      {" "}
-                      {clickedUser?.anonymous
-                        ? clickedUser?.anonymous
-                        : clickedUser?.name}
-                    </h1>
-                    <p className="text-sm">The Buddy You Need The Most</p>
+                <div className="py-2 flex items-center justify-between">
+                  <div className="flex items-center">
+                    <Image
+                      src={clickedUser?.profile}
+                      width={100}
+                      height={100}
+                      alt="Profile image"
+                      className="w-[3.5vw] h-[3.5vw] object-cover object-center rounded-full"
+                    />
+                    <div className="ml-3">
+                      <h1 className="font-bold">
+                        {" "}
+                        {clickedUser?.anonymous
+                          ? clickedUser?.anonymous
+                          : clickedUser?.name}
+                      </h1>
+                      <p className="text-sm">The Buddy You Need The Most</p>
+                    </div>
                   </div>
+                  {clickedUser?.meeting_url && (
+                    <Link target="__blank" href={clickedUser?.meeting_url}>
+                      <div className="cursor-pointer p-2 rounded-full border-2 border-newBlue">
+                        <SiGooglemeet size={25} className="text-newBlue" />
+                      </div>
+                    </Link>
+                  )}
                 </div>
                 <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
               </div>

@@ -14,6 +14,8 @@ import { getCookie } from "cookies-next";
 import { maliFont } from "../../Components/Utils/font";
 import Sidebar from "../../Component/Sidebar";
 import Typewriter from "typewriter-effect";
+import Link from "next/link";
+import { SiGooglemeet } from "react-icons/si";
 
 const ChatPage = ({ params }) => {
   const context = React.useContext(Context);
@@ -122,26 +124,35 @@ const ChatPage = ({ params }) => {
             <div className="w-full h-full rounded-3xl bg-white">
               <div className="mx-3">
                 <div className="py-2 flex items-center">
-                  <AiOutlineLeft
-                    size={30}
-                    className="mr-2"
-                    onClick={(e) => {
-                      history.push("/chats");
-                    }}
-                  />
-                  <Image
-                    src={user?.profile}
-                    width={100}
-                    height={100}
-                    alt="Profile image"
-                    className="w-[15vw] h-[15vw] object-cover object-center rounded-full"
-                  />
-                  <div className="ml-3">
-                    <h1 className="font-bold text-lg">
-                      {user?.anonymous ? user?.anonymous : user?.name}
-                    </h1>
-                    <p className="text-sm">The Buddy You Need The Most</p>
+                  <div className="flex items-center">
+                    <AiOutlineLeft
+                      size={30}
+                      className="mr-2"
+                      onClick={(e) => {
+                        history.push("/chats");
+                      }}
+                    />
+                    <Image
+                      src={user?.profile}
+                      width={100}
+                      height={100}
+                      alt="Profile image"
+                      className="w-[15vw] h-[15vw] object-cover object-center rounded-full"
+                    />
+                    <div className="ml-3">
+                      <h1 className="font-bold text-lg">
+                        {user?.anonymous ? user?.anonymous : user?.name}
+                      </h1>
+                      <p className="text-sm">The Buddy You Need The Most</p>
+                    </div>
                   </div>
+                  {user?.meeting_url && (
+                    <Link target="__blank" href={user?.meeting_url}>
+                      <div className="cursor-pointer p-2 rounded-full border-2 border-newBlue">
+                        <SiGooglemeet size={25} className="text-newBlue" />
+                      </div>
+                    </Link>
+                  )}
                 </div>
                 <div className="bg-gradient-to-r from-newBlue via-newOcean to-newBlue h-[2px]"></div>
               </div>
