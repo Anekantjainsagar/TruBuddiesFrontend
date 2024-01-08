@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import Image from "next/image";
 import image from "../(website)/Assets/Home/Images/Rectangle 20.png";
 import { AiOutlineClose } from "react-icons/ai";
+import Context from "../Context/Context";
 
 const customStyles = {
   overlay: {
@@ -22,10 +23,12 @@ const customStyles = {
 };
 
 const Advertisement = ({ showAd, setShowAd }) => {
+  const { popups } = useContext(Context);
+
   return (
     <div className="z-50 ">
       <Modal
-        isOpen={showAd}
+        isOpen={showAd && popups?.popup?.photo}
         onRequestClose={(e) => {
           setShowAd(!showAd);
         }}
@@ -33,7 +36,9 @@ const Advertisement = ({ showAd, setShowAd }) => {
       >
         <div className="w-[60vw] h-[50vh] relative overflow-hidden">
           <Image
-            src={image}
+            src={popups?.popup?.photo}
+            width={100}
+            height={100}
             alt={"Image"}
             className="object-cover w-full h-full object-center rounded-lg"
           />

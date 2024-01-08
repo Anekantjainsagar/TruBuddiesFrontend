@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${noto_sans.className}`}>
         <State>
-          <div className="flex items-center justify-between">
+          <div className="flex items-start justify-between">
             <div className={`${pathname !== "/admin/login" ? "block" : "hidden"}`}>
               <Navbar />
             </div>

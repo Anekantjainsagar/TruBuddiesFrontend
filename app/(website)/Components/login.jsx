@@ -272,6 +272,17 @@ const LoginModal = () => {
                 <Image
                   src={google}
                   alt="GOogle"
+                  onClick={(e) => {
+                    // window.open(`${BASE_URL}/auth/google`);
+                    axios
+                      .get(`${URL}auth/google/callback`)
+                      .then((response) => {
+                        console.log(response);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
                   className="w-4/12 md:w-[1.75vw] ml-1 md:ml-2 cursor-pointer"
                 />
               </div>

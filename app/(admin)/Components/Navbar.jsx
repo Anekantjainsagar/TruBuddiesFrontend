@@ -25,6 +25,7 @@ const Navbar = () => {
             routes: "/admin/social-media",
           },
           { title: "FAQ's Question", routes: "/admin/faqs" },
+          { title: "Popup", routes: "/admin/popup" },
           { title: "Articles", routes: "/admin/user" },
           { title: "About Us Content", routes: "/admin/user" },
         ].map((e, i) => {

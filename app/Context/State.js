@@ -29,6 +29,7 @@ const B2BState = (props) => {
   const [adminUsers, setAdminUsers] = useState([]);
   const [adminUserConfig, setAdminUserConfig] = useState("");
   const [adminTrubuddies, setAdminTrubuddies] = useState([]);
+  const [popup, setPopup] = useState();
   const [adminTrubuddyConfig, setAdminTrubuddyConfig] = useState("");
 
   const getUser = () => {
@@ -135,6 +136,21 @@ const B2BState = (props) => {
     setAdminTrubuddyConfig,
   };
 
+  const getPopup = () => {
+    axios.get(`${BASE_URL}/admin/get-popup`).then((res) => {
+      setPopup(res.data[0]);
+    });
+  };
+
+  useEffect(() => {
+    getPopup();
+  }, []);
+
+  const popups = {
+    getPopup,
+    popup,
+  };
+
   useEffect(() => {
     getTrubuddyLogin();
   }, [getCookie("trubuddy_token")]);
@@ -168,6 +184,7 @@ const B2BState = (props) => {
         setShowSupportUs,
         communityClicked,
         setCommunityClicked,
+        popups,
       }}
     >
       {props.children}
