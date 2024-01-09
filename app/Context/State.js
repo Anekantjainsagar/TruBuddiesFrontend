@@ -36,8 +36,10 @@ const B2BState = (props) => {
     const response = await axios.get(`${URL}login/sucess`, {
       withCredentials: true,
     });
-    setLogin(response.data.user);
-    setCookie("token", response.data.jwtToken);
+    if (response.data.user) {
+      setLogin(response.data.user);
+      setCookie("token", response.data.jwtToken);
+    }
     if (getCookie("token")) {
       axios
         .post(`${BASE_URL}/login/get-user`, { token: getCookie("token") })

@@ -9,6 +9,8 @@ import LoginModal from "../login";
 import SupportUs from "../support";
 import Context from "../../../Context/Context";
 import { deleteCookie, getCookie } from "cookies-next";
+import axios from "axios";
+import { URL } from "../Utils/url";
 
 const Navbar = () => {
   const {
@@ -116,6 +118,7 @@ const Navbar = () => {
               <p
                 onClick={(e) => {
                   deleteCookie("token");
+                  window.open(`${URL}logout`, "_self");
                   history.push("/");
                 }}
                 className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
@@ -227,6 +230,7 @@ const Navbar = () => {
                   <p
                     onClick={(e) => {
                       deleteCookie("token");
+                      window.open(`${URL}logout`, "_self");
                       history.push("/");
                       closeNav();
                     }}
