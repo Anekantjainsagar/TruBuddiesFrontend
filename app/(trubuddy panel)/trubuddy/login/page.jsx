@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
 
 import image from "../../../Images/trubuddy/rafiki.png";
@@ -10,10 +10,12 @@ import { BASE_URL } from "../../../(website)/Components/Utils/url";
 import toast, { Toaster } from "react-hot-toast";
 import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import Context from "../../../Context/Context";
 
 const TrubuddyLOgin = () => {
   const [login, setLogin] = React.useState({ email: "", password: "" });
   const history = useRouter();
+  const {trubuddy} = useContext(Context)
   const [passwordVisible, setPasswordVisible] = React.useState(false);
 
   const onSubmit = () => {
@@ -34,7 +36,7 @@ const TrubuddyLOgin = () => {
   };
 
   useEffect(() => {
-    if (getCookie("trubuddy_token")) {
+    if (trubuddy?._id) {
       history.push("/trubuddy");
     }
   }, [getCookie("trubuddy_token")]);

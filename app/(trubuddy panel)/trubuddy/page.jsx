@@ -28,6 +28,12 @@ const Trubuddy = () => {
     setStatus(trubuddy?.status);
   }, [trubuddy]);
 
+  useEffect(() => {
+    if (!trubuddy?._id) {
+      history.push("/trubuddy/login");
+    }
+  }, []);
+
   return (
     <div>
       <Navbar />

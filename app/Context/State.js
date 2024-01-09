@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import Context from "./Context";
 import { usePathname } from "next/navigation";
 import axios from "axios";
-import { BASE_URL } from "../(website)/Components/Utils/url";
-import { getCookie } from "cookies-next";
+import { BASE_URL, URL } from "../(website)/Components/Utils/url";
+import { getCookie, setCookie } from "cookies-next";
 
 const B2BState = (props) => {
   const [scrollTo, setScrollTo] = useState("home");
@@ -32,7 +32,12 @@ const B2BState = (props) => {
   const [popup, setPopup] = useState();
   const [adminTrubuddyConfig, setAdminTrubuddyConfig] = useState("");
 
-  const getUser = () => {
+  const getUser = async () => {
+    const response = await axios.get(`${URL}login/sucess`, {
+      withCredentials: true,
+    });
+    setLogin(response.data.user);
+    setCookie("token", response.data.jwtToken);
     if (getCookie("token")) {
       axios
         .post(`${BASE_URL}/login/get-user`, { token: getCookie("token") })
