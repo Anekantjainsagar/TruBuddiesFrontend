@@ -116,8 +116,8 @@ const BuddyBlock = ({ id }) => {
     >
       <Image
         src={user?.profile}
-        width={100}
-        height={100}
+        width={10000}
+        height={10000}
         alt="Profile"
         className="w-[12vw] h-[12vw] object-cover object-center md:w-[5vw] md:h-[5vw] rounded-full border-2 border-newBlue"
       />

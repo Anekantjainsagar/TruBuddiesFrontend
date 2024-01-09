@@ -61,8 +61,8 @@ const SeprateTrubuddy = ({ params }) => {
         <div className="rounded-full bg-gradient-to-t w-[40vw] md:w-[9vw] h-[40vw] md:h-[9vw] from-newLightBlue shadow-sm shadow-gray-200 to-newOceanGreen p-1">
           <Image
             src={user?.profile}
-            width={100}
-            height={100}
+            width={10000}
+            height={10000}
             alt={"client"}
             className="rounded-full w-full h-full object-cover object-center"
           />
@@ -174,8 +174,8 @@ const SeprateTrubuddy = ({ params }) => {
                       ? admin?.adminTrubuddies[1]?.profile
                       : admin?.adminTrubuddies[0]?.profile
                   }
-                  width={100}
-                  height={100}
+                  width={10000}
+                  height={10000}
                   alt="Image"
                   className="w-[32vw] md:w-[5vw] border-4 border-newLightBlue rounded-full"
                 />

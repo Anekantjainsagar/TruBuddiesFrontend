@@ -110,8 +110,8 @@ const Chats = () => {
                   <div className="flex items-center">
                     <Image
                       src={clickedUser?.profile}
-                      width={100}
-                      height={100}
+                      width={10000}
+                      height={10000}
                       alt="Profile image"
                       className="w-[3.5vw] h-[3.5vw] object-cover object-center rounded-full"
                     />

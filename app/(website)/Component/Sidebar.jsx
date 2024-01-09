@@ -17,8 +17,8 @@ const Sidebar = () => {
       <div>
         <Image
           src={login?.profile}
-          width={100}
-          height={100}
+          width={10000}
+          height={10000}
           className="rounded-full w-[3.4vw] object-cover object-center h-[3vw] cursor-pointer"
           onClick={(e) => {
             history.push("/user/dashboard");

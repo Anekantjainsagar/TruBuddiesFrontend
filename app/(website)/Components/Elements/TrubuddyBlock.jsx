@@ -38,8 +38,8 @@ const TrubuddyBlock = ({ data, big }) => {
           <div className="flex items-center w-full justify-start">
             <Image
               src={data?.profile}
-              width={100}
-              height={100}
+              width={10000}
+              height={10000}
               alt="Image"
               className="w-[32vw] md:h-[6.5vw] h-[32vw] object-cover object-center md:w-[6.5vw] border-4 border-newLightBlue rounded-full"
             />

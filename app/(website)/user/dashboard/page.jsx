@@ -45,8 +45,8 @@ const UserDashboard = () => {
           <div className="rounded-full bg-gradient-to-t relative w-[32vw] h-[32vw] md:w-[10vw] md:h-[10vw] from-newLightBlue shadow-sm shadow-gray-200 to-newOceanGreen p-1">
             <Image
               src={login?.profile}
-              width={100}
-              height={100}
+              width={10000}
+              height={10000}
               alt={"client"}
               className="w-full object-cover object-center h-full rounded-full"
             />
@@ -227,8 +227,8 @@ const UserDashboard = () => {
                         ? admin?.adminTrubuddies[1]?.profile
                         : admin?.adminTrubuddies[0]?.profile
                     }
-                    width={100}
-                    height={100}
+                    width={10000}
+                    height={10000}
                     alt="Image"
                     className="w-[32vw] md:w-[5vw] border-4 border-newLightBlue rounded-full"
                   />

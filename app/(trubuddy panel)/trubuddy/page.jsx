@@ -76,8 +76,8 @@ const Trubuddy = () => {
           <div className="-mt-10 md:-mt-20 md:ml-[7vw] flex flex-col items-center">
             <Image
               src={trubuddy?.profile}
-              width={100}
-              height={100}
+              width={10000}
+              height={10000}
               alt="Profile"
               className="w-[34vw] md:w-[12vw] h-[34vw] md:h-[12vw] object-cover object-center rounded-lg"
             />
@@ -210,8 +210,8 @@ const BuddyBlock = ({ id }) => {
     <div className="md:w-[15%] w-10/12 flex flex-col items-center justify-center md:mx-0 mx-auto cursor-pointer">
       <Image
         src={user?.profile}
-        width={100}
-        height={100}
+        width={10000}
+        height={10000}
         alt="Profile"
         className="rounded-full border border-newBlue md:w-[7vw] h-[23vw] w-full md:h-[7vw] object-cover object-center"
       />

@@ -39,8 +39,8 @@ const UpperTrubuddyBlock = ({ id, show }) => {
     >
       <Image
         src={user?.profile}
-        width={100}
-        height={100}
+        width={10000}
+        height={10000}
         alt="Logo image"
         className={`cursor-pointer ${
           show

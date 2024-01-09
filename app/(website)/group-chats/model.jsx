@@ -98,13 +98,17 @@ const GroupChatsUser = ({ modalIsOpen, setIsOpen }) => {
             <div className="flex items-center">
               <Image
                 src={communityClicked?.profile}
-                width={100}
-                height={100}
+                width={10000}
+                height={10000}
                 className="w-[13vw] md:w-[3vw] h-[13vw] md:h-[3vw] rounded-full object-cover object-center"
               />
-              <p className="ml-2 text-xl md:text-lg font-semibold">Anekant Jain</p>
+              <p className="ml-2 text-xl md:text-lg font-semibold">
+                Anekant Jain
+              </p>
             </div>
-            <h1 className="mt-2 md:text-base text-lg">{communityClicked?.message}</h1>
+            <h1 className="mt-2 md:text-base text-lg">
+              {communityClicked?.message}
+            </h1>
           </div>
           <div
             className="h-[80%] md:h-[76%] overflow-y-scroll py-2 px-2 md:px-5"
@@ -177,8 +181,8 @@ const ChatBlock = ({ me, data }) => {
         <div className="flex items-center">
           <Image
             src={data?.profile}
-            width={100}
-            height={100}
+            width={10000}
+            height={10000}
             className={`w-[10vw] md:w-[2.5vw] ${
               !me ? "block" : "hidden"
             } mr-2 rounded-full h-[10vw] md:h-[2.5vw] object-cover object-center`}
@@ -194,8 +198,8 @@ const ChatBlock = ({ me, data }) => {
           </div>
           <Image
             src={data?.profile}
-            width={100}
-            height={100}
+            width={10000}
+            height={10000}
             className={`w-[10vw] md:w-[2.5vw] ${
               me ? "block" : "hidden"
             } ml-2 rounded-full h-[10vw] md:h-[2.5vw] object-cover object-center`}

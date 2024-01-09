@@ -128,8 +128,8 @@ const Navbar = () => {
             </div>
             <Image
               src={login?.profile}
-              width={100}
-              height={100}
+              width={10000}
+              height={10000}
               alt="Profile"
               className="w-[3.5vw] h-[3.5vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
             />
@@ -241,8 +241,8 @@ const Navbar = () => {
                 </div>
                 <Image
                   src={login?.profile}
-                  width={100}
-                  height={100}
+                  width={10000}
+                  height={10000}
                   alt="Profile"
                   className="w-[13vw] h-[13vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
                 />

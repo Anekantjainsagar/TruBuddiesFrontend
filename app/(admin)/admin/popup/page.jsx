@@ -17,8 +17,8 @@ const Popup = () => {
       {image || popups?.popup?.photo ? (
         <Image
           alt="Image"
-          width={100}
-          height={100}
+          width={10000}
+          height={10000}
           src={image ? image : popups?.popup?.photo}
           className="w-6/12 object-cover rounded-md mx-auto object-center"
         />

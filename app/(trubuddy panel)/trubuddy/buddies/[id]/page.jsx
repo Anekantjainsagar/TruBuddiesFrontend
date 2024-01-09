@@ -139,8 +139,8 @@ const TrubuddyChat = ({ params }) => {
               />
               <Image
                 src={user?.profile}
-                width={100}
-                height={100}
+                width={10000}
+                height={10000}
                 alt="Profile image"
                 className="w-[12vw] md:w-[3.5vw] md:h-[3.5vw] h-[12vw] object-cover object-center rounded-full border"
               />

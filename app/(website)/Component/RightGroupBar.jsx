@@ -92,8 +92,8 @@ const RightGroupBar = () => {
                         ? admin?.adminTrubuddies[1]?.profile
                         : admin?.adminTrubuddies[0]?.profile
                     }
-                    width={100}
-                    height={100}
+                    width={10000}
+                    height={10000}
                     alt="Image"
                     className="w-[32vw] md:w-[5vw] border-4 border-newLightBlue rounded-full"
                   />

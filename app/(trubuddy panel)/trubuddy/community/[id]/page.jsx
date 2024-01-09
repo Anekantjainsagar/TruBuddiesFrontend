@@ -235,8 +235,8 @@ const ChatBlock = ({ me, data, setIsOpen, modalIsOpen }) => {
             <Image
               src={data?.profile}
               alt={data?.profile?.src}
-              width={100}
-              height={100}
+              width={10000}
+              height={10000}
               className="w-[14vw] md:w-[3vw] md:h-[3vw] h-[14vw] object-cover object-center rounded-full"
             />
             <p className="font-medium ml-2 text-lg text-white">{data?.name}</p>

@@ -75,8 +75,8 @@ const OurTrubuddies = () => {
                   <Image
                     src={e?.image}
                     alt={e?.image?.src}
-                    width={100}
-                    height={100}
+                    width={10000}
+                    height={10000}
                     className="w-[70vw] mt-[3vw]"
                   />
                 </div>
@@ -138,7 +138,7 @@ const OurTrubuddies = () => {
                   />
                   <div className="w-full h-full flex items-center justify-center hover:scale-110 transition-all">
                     <div className="flex flex-col items-center justify-center">
-                      <AiOutlineRight size={100} className="text-gray-600" />
+                      <AiOutlineRight size={10000} className="text-gray-600" />
                       <h1 className="text-2xl text-gray-600">
                         More TruBuddies...
                       </h1>
