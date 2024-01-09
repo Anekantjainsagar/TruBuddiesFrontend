@@ -36,7 +36,7 @@ const Advertisement = ({ showAd, setShowAd }) => {
         }}
         style={customStyles}
       >
-        <div className="w-[30vw] bg-transparent h-full rounded-xl relative overflow-hidden">
+        <div className="w-[80vw] md:w-[30vw] bg-transparent h-full rounded-xl relative overflow-hidden">
           <Image
             src={popups?.popup?.photo}
             width={10000}
