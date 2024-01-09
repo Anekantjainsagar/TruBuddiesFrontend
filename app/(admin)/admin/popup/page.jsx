@@ -20,10 +20,10 @@ const Popup = () => {
           width={100}
           height={100}
           src={image ? image : popups?.popup?.photo}
-          className="w-11/12 h-[50vh] object-cover rounded-md mx-auto object-center"
+          className="w-6/12 object-cover rounded-md mx-auto object-center"
         />
       ) : (
-        <div className="w-11/12 mt-5 mx-auto bg-gray-200 rounded-md h-[50vh]"></div>
+        <div className="w-6/12 mt-5 mx-auto bg-gray-200 rounded-md h-[50vh]"></div>
       )}
       <div className="w-11/12 mx-auto mt-3 flex items-center justify-between">
         <input

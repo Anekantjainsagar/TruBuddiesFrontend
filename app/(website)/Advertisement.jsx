@@ -19,6 +19,8 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     zIndex: 1001, // Adjust the value as
     padding: 0,
+    backgroundColor: "transparent",
+    border: "none",
   },
 };
 
@@ -26,7 +28,7 @@ const Advertisement = ({ showAd, setShowAd }) => {
   const { popups } = useContext(Context);
 
   return (
-    <div className="z-50 ">
+    <div className="z-50">
       <Modal
         isOpen={showAd && popups?.popup?.photo}
         onRequestClose={(e) => {
@@ -34,13 +36,13 @@ const Advertisement = ({ showAd, setShowAd }) => {
         }}
         style={customStyles}
       >
-        <div className="w-[60vw] h-[50vh] relative overflow-hidden">
+        <div className="w-[30vw] bg-transparent h-full rounded-xl relative overflow-hidden">
           <Image
             src={popups?.popup?.photo}
             width={100}
             height={100}
             alt={"Image"}
-            className="object-cover w-full h-full object-center rounded-lg"
+            className="object-cover w-full h-full object-center rounded-xl"
           />
         </div>
       </Modal>
