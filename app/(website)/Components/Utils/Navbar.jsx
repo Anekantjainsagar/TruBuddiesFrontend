@@ -118,8 +118,8 @@ const Navbar = () => {
               <p
                 onClick={(e) => {
                   deleteCookie("token");
-                  window.open(`${URL}logout`, "_self");
                   history.push("/");
+                  window.open(`${URL}logout`, "_self");
                 }}
                 className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
               >
@@ -230,9 +230,9 @@ const Navbar = () => {
                   <p
                     onClick={(e) => {
                       deleteCookie("token");
-                      window.open(`${URL}logout`, "_self");
                       history.push("/");
                       closeNav();
+                      window.open(`${URL}logout`, "_self");
                     }}
                     className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
                   >
