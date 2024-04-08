@@ -116,37 +116,13 @@ const OurTrubuddies = () => {
               disableOnInteraction: true,
             }}
           >
-            {admin?.adminTrubuddies?.slice(0, 3)?.map((e, i) => {
+            {admin?.adminTrubuddies?.slice(0, 4)?.map((e, i) => {
               return (
                 <SwiperSlide key={i}>
                   <TrubuddyBlock data={e} />
                 </SwiperSlide>
               );
             })}
-            <SwiperSlide>
-              <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>
-                <div
-                  onClick={(e) => {
-                    history.push("/trubuddies");
-                  }}
-                  className={`bg-white shadow-md shadow-gray-600 cursor-pointer rounded-3xl mb-9 border md:mx-0 mx-auto w-[80%] h-[41vh] max-h-[49vw] md:w-[23vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center relative`}
-                >
-                  <Image
-                    src={bg}
-                    alt="Background"
-                    className="absolute top-0 left-0 h-[45vh] opacity-50"
-                  />
-                  <div className="w-full h-full flex items-center justify-center hover:scale-110 transition-all">
-                    <div className="flex flex-col items-center justify-center">
-                      <AiOutlineRight size={10000} className="text-gray-600" />
-                      <h1 className="text-2xl text-gray-600">
-                        More TruBuddies...
-                      </h1>
-                    </div>
-                  </div>
-                </div>
-              </Tilt>
-            </SwiperSlide>
           </Swiper>
         </div>
         <RightDots />

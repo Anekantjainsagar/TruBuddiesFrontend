@@ -30,6 +30,7 @@ import Context from "../Context/Context";
 import LoginModal from "./Components/login";
 import { getCookie } from "cookies-next";
 import Advertisement from "./Advertisement";
+import Tokens from "./Components/Sub-Components/Tokens";
 
 const App = () => {
   const { modalIsOpen, setIsOpen } = useContext(Context);
@@ -273,6 +274,7 @@ const App = () => {
           <ThingsLikeAboutUs />
           <HowItWorks />
           <OurTrubuddies />
+          <Tokens />
           <OurServices />
           <LearnInspire />
           <FAQs />

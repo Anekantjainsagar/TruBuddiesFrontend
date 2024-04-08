@@ -20,6 +20,8 @@ module.exports = {
         newOcean: "#1DFBEE",
         newOceanGreen: "#92E3A9",
         newDarkGreen: "#077825",
+        nb1: "#4C9EFF",
+        nb2: "#9CB7FF",
       },
       screens: {
         mobile: "340px",

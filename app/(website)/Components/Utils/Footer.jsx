@@ -134,17 +134,26 @@ const Footer = () => {
               </p>
             </Link>
             {[
-              { name: "Feedback", route: "/about" },
-              { name: "Terms & Conditions", route: "/" },
-              { name: "Trademark", route: "/" },
+              { name: "Terms & Conditions", route: "/policies/terms" },
+              { name: "Privacy Policy", route: "/policies/privacy" },
+              {
+                name: "Cancellation & Refund Policy",
+                route: "/policies/cancellation",
+              },
+              { name: "Privacy Policy", route: "/policies/privacy" },
             ].map((e) => {
               return (
-                <p key={e?.name} className="md:mb-0 cursor-pointer mb-0.5">
+                <p
+                  key={e?.name}
+                  onClick={() => {
+                    history.push(e?.route);
+                  }}
+                  className="md:mb-0 cursor-pointer mb-0.5"
+                >
                   {e?.name}
                 </p>
               );
             })}
-
             <Link
               target="__blank"
               href={"https://api.whatsapp.com/send?phone=918088621858"}
