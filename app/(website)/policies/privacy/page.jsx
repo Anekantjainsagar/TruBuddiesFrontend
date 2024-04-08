@@ -8,13 +8,14 @@ const Terms = () => {
       </h1>
       <div className="px-2">
         <p className="my-3">
-          This privacy policy (“Policy”) relates to the manner SHUBHAM KUMAR
-          (“we”, “us”, “our”) in which we use, handle and process the data that
-          you provide us in connection with using the products or services we
-          offer. By using this website or by availing goods or services offered
-          by us, you agree to the terms and conditions of this Policy, and
-          consent to our use, storage, disclosure, and transfer of your
-          information or data in the manner described in this Policy.
+          This privacy policy (&quot;Policy&quot;) relates to the manner SHUBHAM
+          KUMAR (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) in which we
+          use, handle and process the data that you provide us in connection
+          with using the products or services we offer. By using this website or
+          by availing goods or services offered by us, you agree to the terms
+          and conditions of this Policy, and consent to our use, storage,
+          disclosure, and transfer of your information or data in the manner
+          described in this Policy.
         </p>
         <p className="my-3">
           We are committed to ensuring that your privacy is protected in
@@ -95,13 +96,13 @@ const Terms = () => {
         </ul>
         <h1 className="font-semibold text-xl my-3">How we use cookies</h1>
         <p className="my-3">
-          We use "cookies" to collect information and to better understand
-          customer behaviour. You can instruct your browser to refuse all
-          cookies or to indicate when a cookie is being sent. However, if you do
-          not accept cookies, you may not be able to avail our goods or services
-          to the full extent. We do not control the use of cookies by third
-          parties. The third party service providers have their own privacy
-          policies addressing how they use such information.
+          We use &quot;cookies&quot; to collect information and to better
+          understand customer behaviour. You can instruct your browser to refuse
+          all cookies or to indicate when a cookie is being sent. However, if
+          you do not accept cookies, you may not be able to avail our goods or
+          services to the full extent. We do not control the use of cookies by
+          third parties. The third party service providers have their own
+          privacy policies addressing how they use such information.
         </p>
         <h1 className="font-semibold text-xl my-3">
           Your rights relating to your data
