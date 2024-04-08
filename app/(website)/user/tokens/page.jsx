@@ -12,7 +12,7 @@ const Tokens = () => {
 
   return (
     <div className={`pt-16 md:pt-20 px-6 md:px-12 ${noto_sans.className}`}>
-      <p>Welcome Back 👋</p>
+      <p className="text-lg mb-3">Welcome Back 👋</p>
       <div className="my-2 flex md:flex-row flex-col items-stretch px-2">
         <div className="bg-gradient-to-br flex flex-col items-center justify-center from-nb1 rounded-2xl shadow-lg p-4 to-nb2 w-full md:w-3/12 md:mr-5">
           <Image
@@ -20,10 +20,10 @@ const Tokens = () => {
             width={10000}
             height={10000}
             alt={"client"}
-            className="w-5/12 aspect-squre object-cover border-4 border-newBlue object-center rounded-full"
+            className="w-5/12 aspect-squre object-cover border-4 border-newDarkBlue object-center rounded-full"
           />
           <h1 className="text-xl font-semibold mt-2">{login?.anonymous}</h1>
-          <div className="border-2 px-2 md:px-4 py-0.5 flex items-center rounded-lg text-sm bg-white border-newBlue w-fit mt-1">
+          <div className="border-2 px-2 md:px-4 py-0.5 flex items-center rounded-lg text-sm bg-white border-newDarkBlue w-fit mt-1">
             {login?.gender?.toLowerCase() == "male" ? (
               <Image
                 src={male}
@@ -57,46 +57,45 @@ const Tokens = () => {
       <h1 className="text-xl font-semibold my-2 pt-5 pb-2 text-center">
         Buy Coins
       </h1>
-      <div className="bg-gradient-to-br from-newBlue rounded-2xl shadow-lg w-full to-newOceanGreen p-1 mb-10">
+      <div className="bg-gradient-to-br from-newDarkBlue rounded-2xl shadow-lg w-full to-newOceanGreen p-1 mb-10">
         <div className="from-[#ddebfd] flex flex-col items-center justify-center bg-gradient-to-br to-[#d4dffe] rounded-2xl w-full h-full py-8">
           <Block coin={1} type={true} />
-          <div className="bg-gradient-to-r from-newBlue to-newOceanGreen w-11/12 h-[2px] opacity-50 my-4"></div>
+          <div className="bg-gradient-to-r from-newDarkBlue to-newOceanGreen w-11/12 h-[2px] opacity-50 my-4"></div>
           <Block coin={1} />
-          <div className="bg-gradient-to-r from-newBlue to-newOceanGreen w-11/12 h-[2px] opacity-50 my-4"></div>
+          <div className="bg-gradient-to-r from-newDarkBlue to-newOceanGreen w-11/12 h-[2px] opacity-50 my-4"></div>
           <Block coin={5} />
         </div>
       </div>
-      <div className="bg-gradient-to-br from-newBlue rounded-2xl shadow-lg w-full to-newOceanGreen p-1 mb-10">
-        <div className="from-[#ddebfd] flex flex-col items-center justify-center bg-gradient-to-br to-[#d4dffe] rounded-2xl w-full h-full py-8 px-[10vw]">
-          <h1 className="font-bold text-newBlue text-2xl text-center">
+      <div className="bg-gradient-to-br from-newDarkBlue rounded-2xl shadow-lg w-full to-newOceanGreen p-1 mb-10">
+        <div className="from-[#ddebfd] flex flex-col items-center justify-center bg-gradient-to-br to-[#d4dffe] rounded-2xl w-full h-full py-8 md:px-[10vw]">
+          <h1 className="font-bold text-newDarkBlue text-2xl text-center">
             TB Deals
           </h1>
-          <p className="text-newDarkNavyGrey text-center my-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            tempore nostrum nemo quidem nisi, harum nobis et ab non qui libero
-            repellendus sapiente explicabo eum saepe reprehenderit. Consequuntur
-            eaque nesciunt doloremque nulla deserunt blanditiis, omnis iure
-            mollitia saepe laborum labore itaque veniam consectetur soluta, modi
-            voluptatem unde! Itaque voluptatum cum enim ducimus dolorum, modi
-            dicta sint inventore eveniet qui nisi temporibus voluptate sequi
-            voluptas omnis exercitationem,
-          </p>
-          <button className="bg-newBlue text-white px-5 py-1 rounded-full">
-            Get Deal
-          </button>
-          <p className="text-newDarkNavyGrey text-center my-3 pt-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            tempore nostrum nemo quidem nisi, harum nobis et ab non qui libero
-            repellendus sapiente explicabo eum saepe reprehenderit. Consequuntur
-            eaque nesciunt doloremque nulla deserunt blanditiis, omnis iure
-            mollitia saepe laborum labore itaque veniam consectetur soluta, modi
-            voluptatem unde! Itaque voluptatum cum enim ducimus dolorum, modi
-            dicta sint inventore eveniet qui nisi temporibus voluptate sequi
-            voluptas omnis exercitationem,
-          </p>
-          <button className="bg-newBlue text-white px-5 py-1 rounded-full">
-            Get Deal
-          </button>
+          <DealBlock />
+          <div className="bg-gradient-to-r from-newDarkBlue to-newOceanGreen w-11/12 md:w-full h-[2px] opacity-50 my-4"></div>
+          <DealBlock />
+          <div className="bg-gradient-to-r from-newDarkBlue to-newOceanGreen w-11/12 md:w-full h-[2px] opacity-50 my-4"></div>
+          <DealBlock />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const DealBlock = () => {
+  return (
+    <div className="w-10/12 md:w-11/12 my-3">
+      <p className="text-gray-600 md:text-base text-sm">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
+        distinctio. Minima adipisci magni, sequi provident, sint, nostrum
+        incidunt dolores corrupti deleniti illum suscipit quaerat quia!
+      </p>
+      <div className="mt-2 md:mt-3 flex items-center">
+        <button className="bg-newDarkBlue text-white mr-4 px-8 py-1 rounded-full">
+          View
+        </button>
+        <div className="border-2 px-3 md:px-5 py-1 w-[25vw] md:text-base text-xs md:w-[8vw] items-center flex rounded-full border-newDarkBlue">
+          <Image src={token} alt="Token" className="w-3/12 mr-3" />2 TB
         </div>
       </div>
     </div>
@@ -126,10 +125,10 @@ const Block = ({ coin, type }) => {
                 onChange={(e) => {
                   setCoins(e.target.value);
                 }}
-                className="bg-green-500 rounded-full outline-none border-none text-white px-4 mr-4 w-[10vw] md:w-[5vw]"
+                className="bg-green-500 rounded-full text-center outline-none border-none text-white px-4 mr-4 w-[10vw] md:w-[5vw]"
               />
             )}
-            <button className="text-white bg-newBlue px-4 rounded-full">
+            <button className="text-white bg-newDarkBlue px-4 rounded-full">
               Buy Now
             </button>
           </div>
