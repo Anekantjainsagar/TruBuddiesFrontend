@@ -37,7 +37,7 @@ const Tokens = () => {
               setIsOpen(true);
             }
           }}
-          className="bg-newBlue px-5 py-1 rounded-full text-white mt-4"
+          className="bg-newBlue px-5 shadow-md shadow-gray-400 py-1 rounded-full text-white mt-4"
         >
           Buy Now
         </button>

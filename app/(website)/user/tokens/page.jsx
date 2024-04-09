@@ -6,13 +6,26 @@ import Image from "next/image";
 import male from "../../Assets/Home/icons/male.png";
 import female from "../../Assets/Home/icons/female.png";
 import token from "../../Assets/token.png";
+import { FaHistory } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const Tokens = () => {
   const { login } = useContext(Context);
+  const history = useRouter();
 
   return (
     <div className={`pt-16 md:pt-20 px-6 md:px-12 ${noto_sans.className}`}>
-      <p className="text-lg mb-3">Welcome Back 👋</p>
+      <div className="flex mb-3 items-center justify-between">
+        <p className="text-lg">Welcome Back 👋</p>
+        <button
+          onClick={(e) => {
+            history.push("/user/tokens/history");
+          }}
+          className="shadow-md shadow-gray-400 text-sm md:text-base bg-newBlue text-white flex items-center px-4 py-1 rounded-full"
+        >
+          <FaHistory className="mr-1" /> Order History
+        </button>
+      </div>
       <div className="my-2 flex md:flex-row flex-col items-stretch px-2">
         <div className="bg-gradient-to-br flex flex-col items-center justify-center from-nb1 rounded-2xl shadow-lg p-4 to-nb2 w-full md:w-3/12 md:mr-5">
           <Image
@@ -91,10 +104,10 @@ const DealBlock = () => {
         incidunt dolores corrupti deleniti illum suscipit quaerat quia!
       </p>
       <div className="mt-2 md:mt-3 flex items-center">
-        <button className="bg-newDarkBlue text-white mr-4 px-8 py-1 rounded-full">
+        <button className="bg-newDarkBlue shadow-md shadow-gray-400 text-white mr-4 px-8 py-1 rounded-full">
           View
         </button>
-        <div className="border-2 px-3 md:px-5 py-1 w-[25vw] md:text-base text-xs md:w-[8vw] items-center flex rounded-full border-newDarkBlue">
+        <div className="border-2 px-3 md:px-5 shadow-md shadow-gray-400 py-1 w-[25vw] md:text-base text-xs md:w-[8vw] items-center flex rounded-full border-newDarkBlue">
           <Image src={token} alt="Token" className="w-3/12 mr-3" />2 TB
         </div>
       </div>
@@ -125,10 +138,10 @@ const Block = ({ coin, type }) => {
                 onChange={(e) => {
                   setCoins(e.target.value);
                 }}
-                className="bg-green-500 rounded-full text-center outline-none border-none text-white px-4 mr-4 w-[10vw] md:w-[5vw]"
+                className="bg-green-500 rounded-full text-center shadow-md shadow-gray-400 outline-none border-none text-white px-1 md:px-4 mr-2 md:mr-4 w-[12vw] md:w-[5vw]"
               />
             )}
-            <button className="text-white bg-newDarkBlue px-4 rounded-full">
+            <button className="text-white bg-newDarkBlue px-3 shadow-md shadow-gray-400 md:px-4 rounded-full">
               Buy Now
             </button>
           </div>

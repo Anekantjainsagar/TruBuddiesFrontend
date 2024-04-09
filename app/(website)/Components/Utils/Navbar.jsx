@@ -9,8 +9,8 @@ import LoginModal from "../login";
 import SupportUs from "../support";
 import Context from "../../../Context/Context";
 import { deleteCookie, getCookie } from "cookies-next";
-import axios from "axios";
 import { URL } from "../Utils/url";
+import token from "../../Assets/token.png";
 
 const Navbar = () => {
   const {
@@ -95,74 +95,100 @@ const Navbar = () => {
             Support Us
           </p>
         </div>
-        {getCookie("token")?.length > 0 ? (
-          <div
-            className="relative md:block hidden"
+        <div className="flex items-center">
+          <button
             onClick={(e) => {
-              setShowLogOut(!showLogOut);
+              history.push("/user/tokens");
             }}
+            className="flex items-center border backdrop-blur-sm px-3 py-0.5 rounded-full border-newBlue mr-5"
           >
+            <Image src={token} alt="Token" className="w-[1.5vw]" />
+            <p className="ml-1 font-semibold text-xl">0</p>
+          </button>
+          {getCookie("token")?.length > 0 ? (
             <div
-              className={`absolute right-0 bg-white top-16 rounded-md ${
-                showLogOut ? "block text-black" : "hidden"
-              }`}
+              className="relative md:block hidden"
+              onClick={(e) => {
+                setShowLogOut(!showLogOut);
+              }}
             >
-              <p
-                onClick={(e) => {
-                  history.push("/user/dashboard");
-                }}
-                className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
+              <div
+                className={`absolute right-0 bg-white top-16 rounded-md ${
+                  showLogOut ? "block text-black" : "hidden"
+                }`}
               >
-                Profile
-              </p>
-              <p
-                onClick={(e) => {
-                  deleteCookie("token");
-                  history.push("/");
-                  window.open(`${URL}logout`, "_self");
-                }}
-                className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
-              >
-                Logout
-              </p>
+                <p
+                  onClick={(e) => {
+                    history.push("/user/dashboard");
+                  }}
+                  className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
+                >
+                  Profile
+                </p>
+                <p
+                  onClick={(e) => {
+                    deleteCookie("token");
+                    history.push("/");
+                    window.open(`${URL}logout`, "_self");
+                  }}
+                  className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
+                >
+                  Logout
+                </p>
+              </div>
+              <Image
+                src={login?.profile}
+                width={10000}
+                height={10000}
+                alt="Profile"
+                className="w-[3.5vw] h-[3.5vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
+              />
             </div>
-            <Image
-              src={login?.profile}
-              width={10000}
-              height={10000}
-              alt="Profile"
-              className="w-[3.5vw] h-[3.5vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
-            />
-          </div>
-        ) : (
-          <div className="hidden md:flex items-center">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsOpen(!modalIsOpen);
-              }}
-              className="font-semibold px-4 bg-white mr-3 text-newBlue py-1 rounded-md"
-            >
-              Login
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsOpen(!modalIsOpen);
-              }}
-              className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md"
-            >
-              Get Started
-            </button>
-          </div>
-        )}
-        <AiOutlineMenu
-          size={22}
-          className="text-[#002689] md:hidden block mr-4"
-          onClick={(e) => {
-            gsap.to("#navbar", { top: 0, duration: 1, ease: Power2.easeInOut });
-          }}
-        />
+          ) : (
+            <div className="hidden md:flex items-center">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(!modalIsOpen);
+                }}
+                className="font-semibold px-4 bg-white mr-3 text-newBlue py-1 rounded-md"
+              >
+                Login
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(!modalIsOpen);
+                }}
+                className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md"
+              >
+                Get Started
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="md:hidden flex items-center">
+          <button
+            onClick={(e) => {
+              history.push("/user/tokens");
+            }}
+            className="flex items-center border backdrop-blur-sm px-3 py-0.5 rounded-full border-newBlue mr-5"
+          >
+            <Image src={token} alt="Token" className="w-[6vw]" />
+            <p className="ml-1 font-semibold text-xl">0</p>
+          </button>
+          <AiOutlineMenu
+            size={22}
+            className="text-[#002689] mr-4"
+            onClick={(e) => {
+              gsap.to("#navbar", {
+                top: 0,
+                duration: 1,
+                ease: Power2.easeInOut,
+              });
+            }}
+          />
+        </div>
         <div
           id="navbar"
           className="absolute p-3 flex flex-col items-center justify-center -top-[100vh] left-0 backdrop-blur-md md:hidden w-[100vw] h-[100vh] z-50"
