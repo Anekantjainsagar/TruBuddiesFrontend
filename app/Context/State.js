@@ -33,30 +33,30 @@ const B2BState = (props) => {
   const [adminTrubuddyConfig, setAdminTrubuddyConfig] = useState("");
 
   const getUser = async () => {
-    axios
-      .get(`${URL}login/sucess`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log("Response");
-        console.log(response);
-        if (response.data.user && response.status == 200) {
-          setLogin(response.data.user);
-          setCookie("token", response.data.jwtToken);
-        } else {
-          axios
-            .post(`${BASE_URL}/login/get-user`, { token: getCookie("token") })
-            .then((res) => {
-              setLogin(res.data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (getCookie("token")) {
+      axios
+        .post(`${BASE_URL}/login/get-user`, { token: getCookie("token") })
+        .then((res) => {
+          setLogin(res.data);
+          if (!res.data._id) {
+            axios
+              .get(`${URL}login/sucess`, {
+                withCredentials: true,
+              })
+              .then((response) => {
+                console.log(response);
+                setLogin(response.data.user);
+                setCookie("token", response.data.jwtToken);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const getTrubuddyLogin = () => {

@@ -103,7 +103,9 @@ const Navbar = () => {
             className="flex items-center border backdrop-blur-sm px-3 py-0.5 rounded-full border-newBlue mr-5"
           >
             <Image src={token} alt="Token" className="w-[1.5vw]" />
-            <p className="ml-1 font-semibold text-xl">0</p>
+            <p className="ml-1 font-semibold text-xl">
+              {login?.tokens ? login?.tokens : 0}
+            </p>
           </button>
           {getCookie("token")?.length > 0 ? (
             <div
@@ -175,7 +177,9 @@ const Navbar = () => {
             className="flex items-center border backdrop-blur-sm px-3 py-0.5 rounded-full border-newBlue mr-5"
           >
             <Image src={token} alt="Token" className="w-[6vw]" />
-            <p className="ml-1 font-semibold text-xl">0</p>
+            <p className="ml-1 font-semibold text-xl">
+              {login?.tokens ? login?.tokens : 0}
+            </p>
           </button>
           <AiOutlineMenu
             size={22}

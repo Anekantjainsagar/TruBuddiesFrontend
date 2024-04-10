@@ -8,6 +8,9 @@ import female from "../../Assets/Home/icons/female.png";
 import token from "../../Assets/token.png";
 import { FaHistory } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { cashfreeProd, cashfreeSandbox } from "cashfree-pg-sdk-javascript";
+import { BASE_URL } from "../../Components/Utils/url";
+import axios from "axios";
 
 const Tokens = () => {
   const { login } = useContext(Context);
@@ -63,7 +66,7 @@ const Tokens = () => {
           />
           <div className="ml-3">
             <p>Current Balance</p>
-            <h1 className="text-xl font-semibold">50 Coins</h1>
+            <h1 className="text-xl font-semibold">{login?.tokens} Coins</h1>
           </div>
         </div>
       </div>
@@ -117,6 +120,36 @@ const DealBlock = () => {
 
 const Block = ({ coin, type }) => {
   const [coins, setCoins] = useState(1);
+  const { login } = useContext(Context);
+
+  const checkout = () => {
+    if (typeof document != undefined) {
+      axios
+        .post(`${BASE_URL}/token/place`, {
+          amount: type ? coins : coin,
+          user_id: login?._id,
+        })
+        .then((res) => {
+          if (res.data?.payment_session_id) {
+            let cashfree = new cashfreeSandbox.Cashfree(
+              // let cashfree = new cashfreeProd.Cashfree(
+              res?.data?.payment_session_id
+            );
+            cashfree.redirect();
+            const cfCheckout = cashfree.elements();
+            cfCheckout.elements({
+              type: "upi-collect",
+            });
+            cfCheckout.pay("upi-collect");
+          }
+        })
+        .catch((err) => {});
+    } else {
+      setTimeout(() => {
+        history.push("/");
+      }, 1000);
+    }
+  };
 
   return (
     <div className="w-11/12 md:w-9/12 flex justify-between items-center">
@@ -141,14 +174,17 @@ const Block = ({ coin, type }) => {
                 className="bg-green-500 rounded-full text-center shadow-md shadow-gray-400 outline-none border-none text-white px-1 md:px-4 mr-2 md:mr-4 w-[12vw] md:w-[5vw]"
               />
             )}
-            <button className="text-white bg-newDarkBlue px-3 shadow-md shadow-gray-400 md:px-4 rounded-full">
+            <button
+              onClick={checkout}
+              className="text-white bg-newDarkBlue px-3 shadow-md shadow-gray-400 md:px-4 rounded-full"
+            >
               Buy Now
             </button>
           </div>
         </div>
       </div>
       <h1 className="font-medium text-lg md:text-2xl">
-        ₹{type ? coins * 50 : coin * 50}
+        ₹{type ? coins : coin}
       </h1>
     </div>
   );

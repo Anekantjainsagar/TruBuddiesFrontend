@@ -9,24 +9,22 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
 
   return (
-    <html lang="en">
-      <div className="fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer">
-        <Image
-          src={logo}
-          alt="Logo"
-          className={`bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw] ${
-            pathname.includes("/trubuddy/buddies/") ||
-            pathname.includes("/trubuddy/community/") ||
-            pathname.includes("/trubuddy/login")
-              ? "hidden"
-              : "block"
-          }`}
-          onClick={(e) => {
-            history.push("/trubuddy/buddies");
-          }}
-        />
-      </div>
-      <body className={`${maliFont.className}`}>{children}</body>
-    </html>
+    <div className="fixed bottom-5 md:bottom-10 right-5 md:right-10 z-50 cursor-pointer">
+      <Image
+        src={logo}
+        alt="Logo"
+        className={`bg-[#ffda56] rounded-full p-1.5 w-[13vw] md:w-[3.5vw] ${
+          pathname.includes("/trubuddy/buddies/") ||
+          pathname.includes("/trubuddy/community/") ||
+          pathname.includes("/trubuddy/login")
+            ? "hidden"
+            : "block"
+        }`}
+        onClick={(e) => {
+          history.push("/trubuddy/buddies");
+        }}
+      />
+      <div className={`${maliFont.className}`}>{children}</div>
+    </div>
   );
 }

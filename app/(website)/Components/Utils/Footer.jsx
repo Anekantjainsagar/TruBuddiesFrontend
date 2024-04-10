@@ -42,10 +42,14 @@ const Footer = () => {
               { name: "Home", route: "/" },
               { name: "About us", route: "/about" },
               { name: "FAQs", route: "/" },
-              { name: "Terms of Service", route: "/" },
-              { name: "Privacy Policy", route: "/" },
+              { name: "Terms & Conditions", route: "/policies/terms" },
+              { name: "Privacy Policy", route: "/policies/privacy" },
               { name: "Community Guidelines", route: "/" },
-            ].map((e) => {
+              {
+                name: "Cancellation & Refund Policy",
+                route: "/policies/cancellation",
+              },
+            ].map((e, i) => {
               return (
                 <p
                   onClick={(el) => {
@@ -58,7 +62,7 @@ const Footer = () => {
                       element?.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
-                  key={e?.name}
+                  key={i}
                   className="md:mb-0 mb-0.5 cursor-pointer"
                 >
                   {e?.name}
@@ -140,11 +144,10 @@ const Footer = () => {
                 name: "Cancellation & Refund Policy",
                 route: "/policies/cancellation",
               },
-              { name: "Privacy Policy", route: "/policies/privacy" },
-            ].map((e) => {
+            ].map((e, i) => {
               return (
                 <p
-                  key={e?.name}
+                  key={i}
                   onClick={() => {
                     history.push(e?.route);
                   }}
