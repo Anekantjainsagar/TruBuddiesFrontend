@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { cashfreeProd, cashfreeSandbox } from "cashfree-pg-sdk-javascript";
 import axios from "axios";
 import { BASE_URL } from "../../Components/Utils/url";
+import Image from "next/image";
 
 const BlockElement = ({ coin, type }) => {
   const [coins, setCoins] = useState(1);
