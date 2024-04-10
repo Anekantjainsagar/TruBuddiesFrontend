@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { cashfreeProd, cashfreeSandbox } from "cashfree-pg-sdk-javascript";
 import axios from "axios";
 import { BASE_URL } from "../../Components/Utils/url";
 import Image from "next/image";
+import Context from "../../../Context/Context";
 
 const BlockElement = ({ coin, type }) => {
   const [coins, setCoins] = useState(1);
