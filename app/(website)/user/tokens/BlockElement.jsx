@@ -5,6 +5,7 @@ import axios from "axios";
 import { BASE_URL } from "../../Components/Utils/url";
 import Image from "next/image";
 import Context from "../../../Context/Context";
+import token from "../../Assets/token.png";
 
 const BlockElement = ({ coin, type }) => {
   const [coins, setCoins] = useState(1);
