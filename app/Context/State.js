@@ -38,23 +38,22 @@ const B2BState = (props) => {
         .post(`${BASE_URL}/login/get-user`, { token: getCookie("token") })
         .then((res) => {
           setLogin(res.data);
-          if (!res.data._id) {
-            axios
-              .get(`${URL}login/sucess`, {
-                withCredentials: true,
-              })
-              .then((response) => {
-                console.log(response);
-                setLogin(response.data.user);
-                setCookie("token", response.data.jwtToken);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
         })
         .catch((error) => {
           console.log(error);
+        });
+    } else {
+      axios
+        .get(`${URL}login/sucess`, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          console.log(response);
+          setLogin(response.data.user);
+          setCookie("token", response.data.jwtToken);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   };
