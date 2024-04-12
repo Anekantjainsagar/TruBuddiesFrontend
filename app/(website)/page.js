@@ -188,7 +188,7 @@ const App = () => {
                     setIsOpen(!modalIsOpen);
                   }
                 }}
-                className="bg-newYellow h-[9.5vw] md:h-[3vw] w-[65vw] md:w-fit rounded-xl -ml-7 pl-10 pr-7 flex justify-center items-center text-lg md:text-xl font-bold"
+                className="bg-newYellow h-[9.5vw] md:h-[3vw] w-[65vw] whitespace-nowrap line-clamp-1 md:w-fit rounded-xl -ml-7 pl-10 pr-7 flex justify-center items-center text-lg md:text-xl font-bold"
                 style={{ textShadow: "0px 3px 3px rgba(56, 56, 56,0.5)" }}
               >
                 Chat With TruBuddies

@@ -9,6 +9,7 @@ import male from "../../(website)/Assets/Home/icons/male white.png";
 import female from "../../(website)/Assets/Home/icons/female.png";
 import { usePathname, useRouter } from "next/navigation";
 import UpperTrubuddyBlock from "../../(website)/user/dashboard/UpperTrubuddyBlock";
+import token from "../Assets/token.png";
 
 const RightBar = () => {
   const history = useRouter();
@@ -45,6 +46,15 @@ const RightBar = () => {
           } border-2 shadow-md shadow-gray-400 rounded-full px-3 border-newBlue ml-3`}
         >
           Community
+        </p>
+        <p
+          onClick={(e) => {
+            history.push("/user/tokens");
+          }}
+          className={`bg-white text-newBlue flex items-center border-2 shadow-md shadow-gray-400 rounded-full px-3 border-newBlue ml-3`}
+        >
+          <Image src={token} alt="Token" className="w-[4vw] mr-1" />
+          TB Coins
         </p>
       </div>
       <div className="border w-full p-[2px] h-full md:h-[48%] bg-gradient-to-tr md:mt-0 from-newBlue to-newOcean shadow-md shadow-gray-600 rounded-3xl">

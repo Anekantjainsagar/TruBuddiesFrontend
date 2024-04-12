@@ -100,7 +100,7 @@ const Navbar = () => {
             onClick={(e) => {
               history.push("/user/tokens");
             }}
-            className="flex items-center border backdrop-blur-sm px-3 py-0.5 rounded-full border-newBlue mr-5"
+            className="md:flex hidden items-center border backdrop-blur-sm px-3 py-0.5 rounded-full border-newBlue mr-5"
           >
             <Image src={token} alt="Token" className="w-[1.5vw]" />
             <p className="ml-1 font-semibold text-xl">
@@ -174,7 +174,7 @@ const Navbar = () => {
             onClick={(e) => {
               history.push("/user/tokens");
             }}
-            className="flex items-center border backdrop-blur-sm px-3 py-0.5 rounded-full border-newBlue mr-5"
+            className="flex md:hidden items-center border backdrop-blur-sm px-3 py-0.5 rounded-full border-newBlue mr-5"
           >
             <Image src={token} alt="Token" className="w-[6vw]" />
             <p className="ml-1 font-semibold text-xl">

@@ -34,25 +34,9 @@ const Tokens = () => {
             width={10000}
             height={10000}
             alt={"client"}
-            className="w-5/12 aspect-squre object-cover border-4 border-newDarkBlue object-center rounded-full"
+            className="w-5/12 aspect-square object-cover border-4 border-newDarkBlue object-center rounded-full"
           />
           <h1 className="text-xl font-semibold mt-2">{login?.anonymous}</h1>
-          <div className="border-2 px-2 md:px-4 py-0.5 flex items-center rounded-lg text-sm bg-white border-newDarkBlue w-fit mt-1">
-            {login?.gender?.toLowerCase() == "male" ? (
-              <Image
-                src={male}
-                alt="Male"
-                className="mr-1.5 md:mr-2 md:w-[1vw]"
-              />
-            ) : (
-              <Image
-                src={female}
-                alt="Male"
-                className="mr-1.5 md:mr-2 md:w-[1vw]"
-              />
-            )}
-            {login?.gender}
-          </div>
         </div>
         <div className="bg-gradient-to-br from-nb1 rounded-2xl shadow-lg to-nb2 flex items-center justify-center md:w-9/12 md:mt-0 md:py-0 py-5 mt-5 md:ml-5">
           <Image

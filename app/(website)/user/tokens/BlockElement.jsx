@@ -20,8 +20,8 @@ const BlockElement = ({ coin, type }) => {
         })
         .then((res) => {
           if (res.data?.payment_session_id) {
-            let cashfree = new cashfreeSandbox.Cashfree(
-              // let cashfree = new cashfreeProd.Cashfree(
+            // let cashfree = new cashfreeSandbox.Cashfree(
+            let cashfree = new cashfreeProd.Cashfree(
               res?.data?.payment_session_id
             );
             cashfree.redirect();
