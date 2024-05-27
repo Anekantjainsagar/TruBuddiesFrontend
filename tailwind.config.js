@@ -22,6 +22,7 @@ module.exports = {
         newDarkGreen: "#077825",
         nb1: "#4C9EFF",
         nb2: "#9CB7FF",
+        newDarkGreen: "#084462",
       },
       screens: {
         mobile: "340px",

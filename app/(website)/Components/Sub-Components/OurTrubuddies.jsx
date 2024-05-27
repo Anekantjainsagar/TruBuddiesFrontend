@@ -36,55 +36,6 @@ const OurTrubuddies = () => {
 
   return (
     <div>
-      <div className="mt-[2vw] md:hidden">
-        <Swiper
-          slidesPerView={1}
-          modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-          pagination={{ clickable: true }}
-          loop={true}
-          autoplay={{
-            interval: 3000,
-            disableOnInteraction: true,
-          }}
-        >
-          {[
-            {
-              title: "Create Your Profile",
-              desc: "Set up your Anonymous Buddies profile – it's your personal mental well-being space.",
-              image:
-                "https://res.cloudinary.com/dpbsogbtr/image/upload/v1701932683/m3wty9plmmd7oj7fed6q.png",
-            },
-            {
-              title: "Choose your TruBuddies",
-              desc: " Explore the Our TruBuddies section and choose supportive companions for your journey.",
-              image:
-                "https://res.cloudinary.com/dpbsogbtr/image/upload/v1701932689/jyvpos0zmttqtgri6dia.png",
-            },
-            {
-              title: "Instant Connect",
-              desc: "Connect instantly with your chosen Trubuddies, share thoughts, get support, and feel better together.",
-              image:
-                "https://res.cloudinary.com/dpbsogbtr/image/upload/v1701932697/ztcrsjiih7peoxvxghi4.png",
-            },
-          ]?.map((e, i) => {
-            return (
-              <SwiperSlide key={i}>
-                <div className="flex flex-col items-center justify-between pb-10">
-                  <h1 className="font-semibold text-xl">{e?.title}</h1>
-                  <p className="w-[80vw] text-center">{e?.desc}</p>
-                  <Image
-                    src={e?.image}
-                    alt={e?.image?.src}
-                    width={10000}
-                    height={10000}
-                    className="w-[70vw] mt-[3vw]"
-                  />
-                </div>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </div>
       <Toaster />
       <div
         className={`uppercase text-center w-fit mx-auto pt-[5vw] text-2xl text-newTomato font-bold ${noto_sans.className} flex items-center`}
@@ -123,6 +74,19 @@ const OurTrubuddies = () => {
                 </SwiperSlide>
               );
             })}
+            <SwiperSlide>
+              <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>
+                <div
+                  onClick={(e) => {
+                    history.push(`/trubuddies`);
+                  }}
+                  className={`bg-white cursor-pointer shadow-md shadow-gray-600 rounded-3xl border md:mx-0 mx-auto w-[90%] h-[40vh] md:h-[23.4vw] py-[3vw] md:py-[1vw] px-[4vw] md:px-[1.5vw] flex flex-col items-center justify-center relative trubuddiesBg`}
+                >
+                  <AiOutlineRight className="text-8xl text-gray-700" />
+                  <h1 className="text-lg">View All..</h1>
+                </div>
+              </Tilt>
+            </SwiperSlide>
           </Swiper>
         </div>
         <RightDots />

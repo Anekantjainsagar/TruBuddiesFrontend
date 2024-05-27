@@ -273,9 +273,9 @@ const App = () => {
           <BlueEffect />
           <ThingsLikeAboutUs />
           <HowItWorks />
+          <OurServices />
           <OurTrubuddies />
           <Tokens />
-          <OurServices />
           <LearnInspire />
           <FAQs />
           {/* <OurTeam /> */}

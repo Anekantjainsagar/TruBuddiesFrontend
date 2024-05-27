@@ -12,7 +12,11 @@ import gsap, { Power2 } from "gsap/all";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { BASE_URL, URL } from "../Components/Utils/url";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+} from "react-icons/ai";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
@@ -171,235 +175,247 @@ const LoginModal = () => {
             <Image src={cartoon} alt="Cartoon" className="w-[90%] md:w-[65%]" />
           </div>
           <div className="w-full md:block hidden md:w-[3px] bg-newBlue h-[1px] md:h-[40vh] md:my-0 my-5 rounded-full"></div>
-          <div
-            className={`md:w-[54%] flex flex-col items-center px-[1vw] ${
-              showLogin ? "hidden" : "block"
-            }`}
-            id="login"
-          >
-            <div className="flex items-center">
-              <Image src={logo} alt="Logo" className="w-[20%] mr-1.5" />
-              <p className="text-2xl text-newBlue font-semibold">TruBuddies</p>
-            </div>
-            <div className="w-full mt-[2vw] px-2">
-              <h1 className="text-xl text-newBlue font-semibold">Sign In</h1>
-              <input
-                type="text"
-                value={login?.email}
-                onChange={(e) => {
-                  setLogin({ ...login, email: e.target.value });
+          {!showLogin && (
+            <div
+              className={`md:w-[54%] flex flex-col items-center px-[1vw] relative`}
+              id="login"
+            >
+              <AiOutlineClose
+                className="text-xl absolute right-0 top-0 md:-top-2 text-newBlue font-semibold cursor-pointer"
+                onClick={(e) => {
+                  closeModal();
                 }}
-                placeholder="Enter Your Mail or Phone no."
-                className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
               />
-              <div className="w-full relative">
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  value={login?.password}
-                  onChange={(e) => {
-                    setLogin({ ...login, password: e.target.value });
-                  }}
-                  placeholder="Password"
-                  className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
-                />
-                {passwordVisible ? (
-                  <AiOutlineEye
-                    size={25}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setPasswordVisible(!passwordVisible);
-                    }}
-                    className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 mt-1.5 cursor-pointer"
-                  />
-                ) : (
-                  <AiOutlineEyeInvisible
-                    size={25}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setPasswordVisible(!passwordVisible);
-                    }}
-                    className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 mt-1.5 cursor-pointer"
-                  />
-                )}
-              </div>
-              <div className="flex md:flex-row flex-col items-center justify-between">
-                <button
-                  onClick={onLogin}
-                  className="px-6 rounded-lg mt-3 font-semibold bg-newBlue text-white py-1"
-                >
-                  Sign In
-                </button>
-                <p className="mt-2 text-sm">
-                  Don’t have an account?
-                  <span
-                    className="text-newBlue font-semibold ml-1 cursor-pointer"
-                    onClick={(e) => {
-                      setShowLogin(!showLogin);
-                    }}
-                  >
-                    Register Now
-                  </span>{" "}
+              <div className="flex items-center">
+                <Image src={logo} alt="Logo" className="w-[20%] mr-1.5" />
+                <p className="text-2xl text-newBlue font-semibold">
+                  TruBuddies
                 </p>
               </div>
-              <p
-                onClick={(e) => {
-                  if (!login?.email) {
-                    toast.error("Please fill the email for the password reset");
-                  } else {
-                    axios
-                      .post(`${BASE_URL}/login/password-reset`, {
-                        email: login?.email,
-                      })
-                      .then((res) => {
-                        if (res.status === 200) {
-                          toast.success(res.data.data);
-                        }
-                      })
-                      .catch((err) => {
-                        toast.error(err.message);
-                      });
-                  }
-                }}
-                className="text-sm text-end text-newBlue font-semibold md:mt-0.5 mt-2 ml-1 cursor-pointer"
-              >
-                Forgot Password
-              </p>
-            </div>
-            <div className="flex items-center justify-end w-full px-2 mt-1">
-              <div className="flex w-fit items-center">
-                <p className="text-sm">Or Login With</p>
-                <Image
-                  src={google}
-                  alt="GOogle"
-                  onClick={(e) => {
-                    window.open(`${URL}auth/google/callback`, "_self");
-                  }}
-                  className="w-4/12 md:w-[1.75vw] ml-1 md:ml-2 cursor-pointer"
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            className={`md:w-[54%] flex flex-col items-center px-[1vw] ${
-              showLogin ? "block" : "hidden"
-            }`}
-            id="register"
-          >
-            <div className="flex items-center">
-              <Image src={logo} alt="Logo" className="w-[20%] mr-1.5" />
-              <p className="text-2xl text-newBlue font-semibold">TruBuddies</p>
-            </div>
-            <div className="w-full mt-[2vw] px-2">
-              <h1 className="text-xl text-newBlue font-semibold">Sign Up</h1>
-              <input
-                type="text"
-                value={register?.name}
-                onChange={(e) => {
-                  setRegister({ ...register, name: e.target.value });
-                }}
-                placeholder="Enter Your Name"
-                className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
-              />
-              <input
-                type="text"
-                value={register?.anonymous}
-                onChange={(e) => {
-                  setRegister({ ...register, anonymous: e.target.value });
-                }}
-                placeholder="Enter Your Anonymous Name"
-                className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
-              />
-              <input
-                type="text"
-                value={register?.gender}
-                onChange={(e) => {
-                  setRegister({ ...register, gender: e.target.value });
-                }}
-                placeholder="Enter Your Gender"
-                className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
-              />
-              <input
-                type="text"
-                disabled={showOtp}
-                value={register?.email}
-                onChange={(e) => {
-                  setRegister({ ...register, email: e.target.value });
-                }}
-                placeholder="Enter Your Email Id"
-                className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
-              />
-              <input
-                type="number"
-                value={register?.phone}
-                onChange={(e) => {
-                  setRegister({ ...register, phone: e.target.value });
-                }}
-                placeholder="Enter Your Phone no."
-                className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
-              />
-              <div className="w-full relative">
+              <div className="w-full mt-[2vw] px-2">
+                <h1 className="text-xl text-newBlue font-semibold">Sign In</h1>
                 <input
-                  type={passwordVisible ? "text" : "password"}
+                  type="text"
+                  value={login?.email}
                   onChange={(e) => {
-                    setRegister({ ...register, password: e.target.value });
+                    setLogin({ ...login, email: e.target.value });
                   }}
-                  value={register?.password}
-                  placeholder="Create your Password"
+                  placeholder="Enter Your Mail or Phone no."
                   className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
                 />
-                {passwordVisible ? (
-                  <AiOutlineEye
-                    size={25}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setPasswordVisible(!passwordVisible);
+                <div className="w-full relative">
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    value={login?.password}
+                    onChange={(e) => {
+                      setLogin({ ...login, password: e.target.value });
                     }}
-                    className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 mt-1.5 cursor-pointer"
+                    placeholder="Password"
+                    className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
                   />
-                ) : (
-                  <AiOutlineEyeInvisible
-                    size={25}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setPasswordVisible(!passwordVisible);
-                    }}
-                    className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 mt-1.5 cursor-pointer"
-                  />
-                )}
+                  {passwordVisible ? (
+                    <AiOutlineEye
+                      size={25}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setPasswordVisible(!passwordVisible);
+                      }}
+                      className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 mt-1.5 cursor-pointer"
+                    />
+                  ) : (
+                    <AiOutlineEyeInvisible
+                      size={25}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setPasswordVisible(!passwordVisible);
+                      }}
+                      className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 mt-1.5 cursor-pointer"
+                    />
+                  )}
+                </div>
+                <div className="flex md:flex-row flex-col items-center justify-between">
+                  <button
+                    onClick={onLogin}
+                    className="px-6 rounded-lg mt-3 font-semibold bg-newBlue text-white py-1"
+                  >
+                    Sign In
+                  </button>
+                  <p className="mt-2 text-sm">
+                    Don’t have an account?
+                    <span
+                      className="text-newBlue font-semibold ml-1 cursor-pointer"
+                      onClick={(e) => {
+                        setShowLogin(!showLogin);
+                      }}
+                    >
+                      Register Now
+                    </span>{" "}
+                  </p>
+                </div>
+                <p
+                  onClick={(e) => {
+                    if (!login?.email) {
+                      toast.error(
+                        "Please fill the email for the password reset"
+                      );
+                    } else {
+                      axios
+                        .post(`${BASE_URL}/login/password-reset`, {
+                          email: login?.email,
+                        })
+                        .then((res) => {
+                          if (res.status === 200) {
+                            toast.success(res.data.data);
+                          }
+                        })
+                        .catch((err) => {
+                          toast.error(err.message);
+                        });
+                    }
+                  }}
+                  className="text-sm text-end text-newBlue font-semibold md:mt-0.5 mt-2 ml-1 cursor-pointer"
+                >
+                  Forgot Password
+                </p>
               </div>
-              {showOtp ? (
+              <div className="flex items-center justify-end w-full px-2 mt-1">
+                <div className="flex w-fit items-center">
+                  <p className="text-sm">Or Login With</p>
+                  <Image
+                    src={google}
+                    alt="GOogle"
+                    onClick={(e) => {
+                      window.open(`${URL}auth/google/callback`, "_self");
+                    }}
+                    className="w-4/12 md:w-[1.75vw] ml-1 md:ml-2 cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+          {showLogin && (
+            <div
+              className={`md:w-[54%] flex flex-col items-center px-[1vw] `}
+              id="register"
+            >
+              <div className="flex items-center">
+                <Image src={logo} alt="Logo" className="w-[20%] mr-1.5" />
+                <p className="text-2xl text-newBlue font-semibold">
+                  TruBuddies
+                </p>
+              </div>
+              <div className="w-full mt-[2vw] px-2">
+                <h1 className="text-xl text-newBlue font-semibold">Sign Up</h1>
+                <input
+                  type="text"
+                  value={register?.name}
+                  onChange={(e) => {
+                    setRegister({ ...register, name: e.target.value });
+                  }}
+                  placeholder="Enter Your Name"
+                  className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
+                />
+                <input
+                  type="text"
+                  value={register?.anonymous}
+                  onChange={(e) => {
+                    setRegister({ ...register, anonymous: e.target.value });
+                  }}
+                  placeholder="Enter Your Anonymous Name"
+                  className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
+                />
+                <input
+                  type="text"
+                  value={register?.gender}
+                  onChange={(e) => {
+                    setRegister({ ...register, gender: e.target.value });
+                  }}
+                  placeholder="Enter Your Gender"
+                  className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
+                />
+                <input
+                  type="text"
+                  disabled={showOtp}
+                  value={register?.email}
+                  onChange={(e) => {
+                    setRegister({ ...register, email: e.target.value });
+                  }}
+                  placeholder="Enter Your Email Id"
+                  className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
+                />
                 <input
                   type="number"
-                  value={register?.otp}
+                  value={register?.phone}
                   onChange={(e) => {
-                    setRegister({ ...register, otp: e.target.value });
+                    setRegister({ ...register, phone: e.target.value });
                   }}
-                  placeholder="Enter Otp"
+                  placeholder="Enter Your Phone no."
                   className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
                 />
-              ) : null}
-              <div className="flex md:flex-row flex-col items-center justify-between">
-                <button
-                  onClick={!showOtp ? onGetOtp : onRegister}
-                  className="px-6 rounded-lg mt-3 font-semibold bg-newBlue text-white py-1"
-                >
-                  {showOtp ? "Sign Up" : "Get Otp"}
-                </button>
-                <p className="mt-2 text-sm">
-                  Already have an account?
-                  <span
-                    className="text-newBlue ml-1 font-semibold cursor-pointer"
-                    onClick={(e) => {
-                      setShowLogin(!showLogin);
+                <div className="w-full relative">
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    onChange={(e) => {
+                      setRegister({ ...register, password: e.target.value });
                     }}
+                    value={register?.password}
+                    placeholder="Create your Password"
+                    className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
+                  />
+                  {passwordVisible ? (
+                    <AiOutlineEye
+                      size={25}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setPasswordVisible(!passwordVisible);
+                      }}
+                      className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 mt-1.5 cursor-pointer"
+                    />
+                  ) : (
+                    <AiOutlineEyeInvisible
+                      size={25}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setPasswordVisible(!passwordVisible);
+                      }}
+                      className="absolute right-2 top-1/2 text-gray-500 -translate-y-1/2 mt-1.5 cursor-pointer"
+                    />
+                  )}
+                </div>
+                {showOtp ? (
+                  <input
+                    type="number"
+                    value={register?.otp}
+                    onChange={(e) => {
+                      setRegister({ ...register, otp: e.target.value });
+                    }}
+                    placeholder="Enter Otp"
+                    className="w-full outline-none bg-[#e5f1ff] px-4 py-1.5 mt-3 rounded-lg"
+                  />
+                ) : null}
+                <div className="flex md:flex-row flex-col items-center justify-between">
+                  <button
+                    onClick={!showOtp ? onGetOtp : onRegister}
+                    className="px-6 rounded-lg mt-3 font-semibold bg-newBlue text-white py-1"
                   >
-                    Login now
-                  </span>{" "}
-                </p>
+                    {showOtp ? "Sign Up" : "Get Otp"}
+                  </button>
+                  <p className="mt-2 text-sm">
+                    Already have an account?
+                    <span
+                      className="text-newBlue ml-1 font-semibold cursor-pointer"
+                      onClick={(e) => {
+                        setShowLogin(!showLogin);
+                      }}
+                    >
+                      Login now
+                    </span>{" "}
+                  </p>
+                </div>
               </div>
+              <div className="flex items-center justify-end w-full px-2 mt-1"></div>
             </div>
-            <div className="flex items-center justify-end w-full px-2 mt-1"></div>
-          </div>
+          )}
         </div>
       </Modal>
     </div>

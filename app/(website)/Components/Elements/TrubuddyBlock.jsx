@@ -13,14 +13,8 @@ import Image from "next/image";
 
 const TrubuddyBlock = ({ data, big }) => {
   const history = useRouter();
-  const {
-    getUser,
-    clickedUser,
-    setClickedUser,
-    login,
-    modalIsOpen,
-    setIsOpen,
-  } = useContext(Context);
+  const { getUser, setClickedUser, login, modalIsOpen, setIsOpen } =
+    useContext(Context);
 
   return (
     <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10}>

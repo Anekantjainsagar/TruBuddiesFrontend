@@ -50,7 +50,7 @@ const Navbar = () => {
       <LoginModal />
       <SupportUs />
       <div
-        className={`flex items-center justify-between md:px-[2vw] py-2 z-50 w-full fixed top-0 left-0`}
+        className={`flex items-center backdrop-blur-sm justify-between md:px-[2vw] py-2 z-50 w-full fixed top-0 left-0`}
       >
         <div
           className="flex items-center md:pl-0 pl-3 cursor-pointer"
@@ -193,113 +193,113 @@ const Navbar = () => {
             }}
           />
         </div>
-        <div
-          id="navbar"
-          className="absolute p-3 flex flex-col items-center justify-center -top-[100vh] left-0 backdrop-blur-md md:hidden w-[100vw] h-[100vh] z-50"
-        >
-          <div className="absolute top-5 right-5">
-            <AiOutlineClose
-              size={25}
-              className="block"
+      </div>
+      <div
+        id="navbar"
+        className="absolute p-3 bgFilter flex flex-col items-center justify-center -top-[100vh] left-0 md:hidden w-[100vw] h-[100vh] z-50"
+      >
+        <div className="absolute top-5 right-5">
+          <AiOutlineClose
+            size={25}
+            className="block"
+            onClick={(e) => {
+              closeNav();
+            }}
+          />
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          {routes?.map((e, i) => {
+            return (
+              <p
+                key={i}
+                onClick={(el) => {
+                  if (pathname !== e?.route) {
+                    setScrollTo(e?.name?.toLowerCase().replaceAll(" ", ""));
+                    history.push(e?.route);
+                  } else {
+                    let id = e?.name?.toLowerCase().replaceAll(" ", "");
+                    let element = document.getElementById(id);
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                  closeNav();
+                }}
+                className="uppercase cursor-pointer mb-4 font-semibold"
+              >
+                {e.name}
+              </p>
+            );
+          })}
+          <p
+            className="uppercase cursor-pointer mb-4 font-semibold"
+            onClick={(el) => {
+              setShowSupportUs(!showSupportUs);
+            }}
+          >
+            Support Us
+          </p>
+          {getCookie("token") ? (
+            <div
+              className="relative"
               onClick={(e) => {
-                closeNav();
-              }}
-            />
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            {routes?.map((e, i) => {
-              return (
-                <p
-                  key={i}
-                  onClick={(el) => {
-                    if (pathname !== e?.route) {
-                      setScrollTo(e?.name?.toLowerCase().replaceAll(" ", ""));
-                      history.push(e?.route);
-                    } else {
-                      let id = e?.name?.toLowerCase().replaceAll(" ", "");
-                      let element = document.getElementById(id);
-                      element.scrollIntoView({ behavior: "smooth" });
-                    }
-                    closeNav();
-                  }}
-                  className="uppercase cursor-pointer mb-4 font-semibold"
-                >
-                  {e.name}
-                </p>
-              );
-            })}
-            <p
-              className="uppercase cursor-pointer mb-4 font-semibold"
-              onClick={(el) => {
-                setShowSupportUs(!showSupportUs);
+                setShowLogOut(!showLogOut);
               }}
             >
-              Support Us
-            </p>
-            {getCookie("token") ? (
               <div
-                className="relative"
-                onClick={(e) => {
-                  setShowLogOut(!showLogOut);
-                }}
+                className={`absolute left-1/2 -translate-x-1/2 bg-white top-14 rounded-md ${
+                  showLogOut ? "block text-black" : "hidden"
+                }`}
               >
-                <div
-                  className={`absolute left-1/2 -translate-x-1/2 bg-white top-14 rounded-md ${
-                    showLogOut ? "block text-black" : "hidden"
-                  }`}
-                >
-                  <p
-                    onClick={(e) => {
-                      history.push("/user/dashboard");
-                      closeNav();
-                    }}
-                    className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
-                  >
-                    Profile
-                  </p>
-                  <p
-                    onClick={(e) => {
-                      deleteCookie("token");
-                      history.push("/");
-                      closeNav();
-                      window.open(`${URL}logout`, "_self");
-                    }}
-                    className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
-                  >
-                    Logout
-                  </p>
-                </div>
-                <Image
-                  src={login?.profile}
-                  width={10000}
-                  height={10000}
-                  alt="Profile"
-                  className="w-[13vw] h-[13vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
-                />
-              </div>
-            ) : (
-              <div className="flex flex-col items-center">
-                <button
+                <p
                   onClick={(e) => {
-                    e.preventDefault();
-                    setIsOpen(!modalIsOpen);
+                    history.push("/user/dashboard");
+                    closeNav();
                   }}
-                  className="font-semibold px-4 bg-white mb-4 text-newBlue py-1 rounded-md"
+                  className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
                 >
-                  Login
-                </button>
-                <button
+                  Profile
+                </p>
+                <p
                   onClick={(e) => {
-                    e.preventDefault();
-                    setIsOpen(!modalIsOpen);
+                    deleteCookie("token");
+                    history.push("/");
+                    closeNav();
+                    window.open(`${URL}logout`, "_self");
                   }}
-                  className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md"
+                  className="cursor-pointer py-0.5 px-4 transition-all rounded-md hover:bg-gray-100"
                 >
-                  Get Started
-                </button>
+                  Logout
+                </p>
               </div>
-            )}
-          </div>
+              <Image
+                src={login?.profile}
+                width={10000}
+                height={10000}
+                alt="Profile"
+                className="w-[13vw] h-[13vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
+              />
+            </div>
+          ) : (
+            <div className="flex flex-col items-center">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(!modalIsOpen);
+                }}
+                className="font-semibold px-4 bg-white mb-4 text-newBlue py-1 rounded-md"
+              >
+                Login
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(!modalIsOpen);
+                }}
+                className="font-semibold px-4 bg-newBlue text-white py-1 rounded-md"
+              >
+                Get Started
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>

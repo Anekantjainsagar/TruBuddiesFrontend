@@ -146,7 +146,7 @@ const SeprateTrubuddy = ({ params }) => {
               setIsOpen(!modalIsOpen);
             }
           }}
-          className={`bg-newBlue text-white ${noto_sans.className} md:mb-0 -mb-6 mt-0 md:mt-4 px-5 md:text-lg py-0.5 md:py-1 rounded-full font-medium`}
+          className={`bg-newBlue text-white ${noto_sans.className} md:mb-0 -mb-6 mt-0 md:mt-4 px-6 md:border-0 border-2 border-white text-lg md:text-lg py-1 md:py-1 rounded-full font-medium`}
         >
           Start Chat
         </button>
@@ -295,7 +295,7 @@ const SeprateTrubuddy = ({ params }) => {
             <h1 className="text-xl md:text-2xl font-semibold md:text-start text-center">
               Bio
             </h1>
-            <p className="font-light overflow-y-auto h-[16vh] mt-0.5 md:mt-1 md:text-base text-sm md:text-start text-center">
+            <p className="font-light overflow-y-auto max-h-[16vh] mt-0.5 md:mt-1 md:text-base text-sm md:text-start text-center">
               {user?.bio}
             </p>
           </div>

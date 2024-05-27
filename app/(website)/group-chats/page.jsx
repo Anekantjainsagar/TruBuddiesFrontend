@@ -141,7 +141,10 @@ const ChatBlock = ({ data, setIsOpen, modalIsOpen }) => {
         <p className="font-medium ml-2 text-white">{data?.name}</p>
       </div>
       <p className="text-white">{data?.message}</p>
-      <p className="text-end text-white text-xs mt-0.5">{format(data?.time)}</p>
+      <div className="flex text-white text-xs items-end justify-between w-full mt-1">
+        <p className="w-6/12 text-start">{format(data?.time)}</p>
+        <p className="text-gray-100">Reply now..</p>
+      </div>
     </div>
   );
 };

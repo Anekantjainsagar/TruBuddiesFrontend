@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+.noto_sans {
+  font-family: "Noto Sans", sans-serif;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -204,4 +210,16 @@ input[type="number"] {
   100% {
     width: 5%;
   }
+}
+
+.bgFilter {
+  backdrop-filter: blur(10px);
+}
+
+/* Services  */
+/* YOGA */
+.bg_hero_img {
+  background-image: url("./Images/Services/yoga/Hero\ bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
