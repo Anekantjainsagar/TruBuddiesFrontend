@@ -1,11 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { maliFont, noto_sans } from "../../../(website)/Components/Utils/font";
 import axios from "axios";
 import { BASE_URL } from "../../../(website)/Components/Utils/url";
 import toast, { Toaster } from "react-hot-toast";
+import Context from "../../../Context/Context";
 
 const TruBuddiesSocial = () => {
+  const { socialMedia } = useContext(Context);
   const [social, setSocial] = useState({
     facebook: "",
     instagram: "",
@@ -15,22 +17,14 @@ const TruBuddiesSocial = () => {
   });
 
   useEffect(() => {
-    axios
-      .post(`${BASE_URL}/admin/get-social/6568a501578c5ea6034f21cd`)
-      .then((response) => {
-        const obj = response.data;
-        setSocial({
-          facebook: obj.facebook,
-          instagram: obj.instagram,
-          whatsapp: obj.whatsapp,
-          linkedin: obj.linkedin,
-          telegram: obj.telegram,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    setSocial({
+      facebook: socialMedia?.facebook,
+      instagram: socialMedia?.instagram,
+      whatsapp: socialMedia?.whatsapp,
+      linkedin: socialMedia?.linkedin,
+      telegram: socialMedia?.telegram,
+    });
+  }, [socialMedia]);
 
   return (
     <div className={`h-[100vh] ${noto_sans.className} px-5`}>

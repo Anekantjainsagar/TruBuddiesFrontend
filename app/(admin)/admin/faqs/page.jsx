@@ -50,7 +50,7 @@ const FAQs = () => {
       </div>
       <div>
         <div
-          className="grid mt-5 font-semibold text-lg"
+          className="grid mt-5 font-semibold text-lg p-1"
           style={{ gridTemplateColumns: "20% 80%" }}
         >
           <p className="text-center">Question</p>
@@ -58,18 +58,25 @@ const FAQs = () => {
         </div>
       </div>
       <div className="mt-3 h-[80vh] overflow-scroll">
-        {faq?.map((e, i) => {
-          return (
-            <div
-              key={i}
-              className="grid py-1 mb-1"
-              style={{ gridTemplateColumns: "20% 80%" }}
-            >
-              <p className="text-center">{e?.question}</p>
-              <p className="text-center">{e?.answer}</p>
-            </div>
-          );
-        })}
+        {faq
+          ?.filter((e) => {
+            if (search) {
+              return e?.question?.toLowerCase().includes(search.toLowerCase());
+            }
+            return e;
+          })
+          ?.map((e, i) => {
+            return (
+              <div
+                key={i}
+                className="grid py-1 mb-2 rounded-md items-center border p-1 cursor-pointer"
+                style={{ gridTemplateColumns: "20% 80%" }}
+              >
+                <p className="text-center">{e?.question}</p>
+                <p className="text-center px-10">{e?.answer}</p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

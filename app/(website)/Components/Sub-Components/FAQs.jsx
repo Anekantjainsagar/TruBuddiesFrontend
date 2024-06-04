@@ -1,53 +1,28 @@
 "use client";
-import React, { useState } from "react";
-import faq from "../../Assets/Home/Images/FAQs.png";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { noto_sans } from "../Utils/font";
 
 import FAQComponent from "./FAQComponent";
-
-import bg from "../../Assets/Home/Faq bg.png";
+import faq_img from "../../Assets/Home/Images/FAQs.png";
 
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import axios from "axios";
+import { BASE_URL } from "../Utils/url";
 
 const FAQs = () => {
-  const faqs = [
-    {
-      title: "Is it free to use?",
-      value: "For now it is free to use.",
-    },
-    {
-      title: "Can children under 16 years of age use TruBuddies?",
-      value:
-        "Children of Age group below 16 are suggested to join under parental guidance and agree to Terms and Conditions of Kids Rules.",
-    },
-    {
-      title: "Is my data and Information safe with TruBuddies?",
-      value:
-        "Yes your data is completely safe with us none of the information is used by us. All information provided to us are kept private.",
-    },
-    {
-      title: "Is calling safe here with TruBuddies?",
-      value:
-        "All your chats and calling are done anonymously are no personal information reaches to any TruBuddy.",
-    },
-    {
-      title: "I having done payment still I am facing payment issues?",
-      value:
-        "We will try to resolve your problem under 3-7 days for refund or completion of your payment if the problem still is not resolved you can take help of customer support.",
-    },
-    {
-      title: "Can i become a TruBuddies?",
-      value:
-        "Yes you can join us as a TruBuddy and can enjoy benefits of being of a Trubuddy. In order to become a TruBuddy contact us directly.",
-    },
-    {
-      title:
-        "What happens if I get a message that makes me uncomfortable or seems is taking my privacy?",
-      value:
-        "All TruBuddies are trusted and ensured people we ensure that nothing like such happens if any Trubuddy is found to do anything like such they will be permanently banned.",
-    },
-  ];
+  const [faq, setFaq] = useState([]);
+
+  useEffect(() => {
+    axios
+      .post(`${BASE_URL}/admin/get-faqs`)
+      .then((response) => {
+        setFaq(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div
@@ -60,10 +35,10 @@ const FAQs = () => {
         >
           FAQ&apos;s
         </h1>
-        <Image src={faq} className="w-[25vw] md:block hidden" alt="FAQ" />
+        <Image src={faq_img} className="w-[25vw] md:block hidden" alt="FAQ" />
       </div>
       <div className="w-full md:w-[36vw] flex flex-col py-2 items-center justify-start border-black h-[57vh] md:h-fit overflow-y-scroll">
-        {faqs?.map((e, i) => {
+        {faq?.map((e, i) => {
           return <Block key={i} data={e} />;
         })}
       </div>
@@ -97,7 +72,7 @@ const Block = ({ data }) => {
           setView(!view);
         }}
       >
-        <p className="font-medium h-full mb-0 block">{data?.title}</p>
+        <p className="font-medium h-full mb-0 block">{data?.question}</p>
         <div className="flex items-center justify-center">
           {view ? <AiOutlineUp /> : <AiOutlineDown />}
         </div>

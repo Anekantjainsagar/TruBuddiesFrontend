@@ -19,15 +19,12 @@ const Navbar = () => {
         {[
           { title: "Uses's Data", routes: "/admin/user" },
           { title: "Trubuddies Profile", routes: "/admin/trubuddy" },
-          { title: "Our Team", routes: "/admin/team" },
           {
             title: "Social Media and Contact Links",
             routes: "/admin/social-media",
           },
           { title: "FAQ's Question", routes: "/admin/faqs" },
           { title: "Popup", routes: "/admin/popup" },
-          { title: "Articles", routes: "/admin/user" },
-          { title: "About Us Content", routes: "/admin/user" },
         ].map((e, i) => {
           return (
             <p
@@ -44,7 +41,7 @@ const Navbar = () => {
           );
         })}
         <p
-          className={`text-white text-start py-1 hover:pl-9 hover:bg-[#407BFF] transition-all cursor-pointer mb-2`}
+          className={`text-white text-start py-1 pl-4 hover:pl-9 hover:bg-[#407BFF] transition-all cursor-pointer mb-2`}
           onClick={(event) => {
             deleteCookie("admin_token");
             history.push("/admin/login");

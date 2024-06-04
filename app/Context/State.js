@@ -31,6 +31,7 @@ const B2BState = (props) => {
   const [adminTrubuddies, setAdminTrubuddies] = useState([]);
   const [popup, setPopup] = useState();
   const [adminTrubuddyConfig, setAdminTrubuddyConfig] = useState("");
+  const [socialMedia, setSocialMedia] = useState();
 
   const getUser = async () => {
     if (getCookie("token")) {
@@ -72,6 +73,18 @@ const B2BState = (props) => {
         });
     }
   };
+
+  useEffect(() => {
+    axios
+      .post(`${BASE_URL}/admin/get-social/6568a501578c5ea6034f21cd`)
+      .then((response) => {
+        const obj = response.data;
+        setSocialMedia(obj);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   useEffect(() => {
     getUser();
@@ -198,6 +211,8 @@ const B2BState = (props) => {
         communityClicked,
         setCommunityClicked,
         popups,
+        setSocialMedia,
+        socialMedia,
       }}
     >
       {props.children}

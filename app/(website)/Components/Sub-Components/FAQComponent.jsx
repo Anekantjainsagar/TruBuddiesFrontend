@@ -32,8 +32,8 @@ const FAQComponent = ({ showComingSoon, setShowComingSoon, data }) => {
       >
         <div className="bg-gradient-to-br from-newBlue md:w-[30vw] bg-white to-newOceanGreen rounded-xl p-1">
           <div className="bg-white rounded-xl md:px-5 px-[5vw] py-3">
-            <h1 className="text-xl font-semibold">{data?.title}</h1>
-            <p className="mt-1">{data?.value}</p>
+            <h1 className="text-xl font-semibold">{data?.question}</h1>
+            <p className="mt-1">{data?.answer}</p>
           </div>
         </div>
       </Modal>

@@ -22,7 +22,7 @@ const Footer = () => {
     phone: "",
     message: "",
   });
-  const { setScrollTo } = useContext(Context);
+  const { setScrollTo, socialMedia } = useContext(Context);
   const pathname = usePathname();
   const history = useRouter();
 
@@ -80,49 +80,45 @@ const Footer = () => {
               <IoIosMail size={25} className="mr-2" />
               trubuddiesofficial@gmail.com
             </Link>
-            <div className="flex items-center">
-              <Link
-                href={"https://whatsapp.com/channel/0029VaDcspe6hENjNsq3jU3u"}
-                target="__blank"
-                className="flex items-center mb-3"
-              >
-                <BsWhatsapp size={25} className="mr-2" />
-              </Link>
-              <Link
-                href={
-                  "https://www.facebook.com/profile.php?id=100089422935878&mibextid=ZbWKwL"
-                }
-                target="__blank"
-                className="flex items-center mb-3"
-              >
-                <FaFacebook size={25} className="mr-2" />
-              </Link>
-              <Link
-                href={
-                  "https://instagram.com/trubuddies?igshid=OGQ5ZDc2ODk2ZA=="
-                }
-                target="__blank"
-                className="flex items-center mb-3"
-              >
-                <FaInstagram size={25} className="mr-2" />
-              </Link>
-              <Link
-                href={
-                  "https://www.linkedin.com/in/trubuddies-894b03293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                }
-                target="__blank"
-                className="flex items-center mb-3"
-              >
-                <BsLinkedin size={25} className="mr-2" />
-              </Link>
-              <Link
-                href={"https://t.me/trubuddiescommunity"}
-                target="__blank"
-                className="flex items-center mb-3"
-              >
-                <FaTelegram size={25} className="mr-2" />
-              </Link>
-            </div>
+            {socialMedia && (
+              <div className="flex items-center">
+                <Link
+                  href={socialMedia?.whatsapp}
+                  target="__blank"
+                  className="flex items-center mb-3"
+                >
+                  <BsWhatsapp size={25} className="mr-3" />
+                </Link>
+                <Link
+                  href={socialMedia?.facebook}
+                  target="__blank"
+                  className="flex items-center mb-3"
+                >
+                  <FaFacebook size={25} className="mr-3" />
+                </Link>
+                <Link
+                  href={socialMedia?.instagram}
+                  target="__blank"
+                  className="flex items-center mb-3"
+                >
+                  <FaInstagram size={25} className="mr-3" />
+                </Link>
+                <Link
+                  href={socialMedia?.linkedin}
+                  target="__blank"
+                  className="flex items-center mb-3"
+                >
+                  <BsLinkedin size={25} className="mr-3" />
+                </Link>
+                <Link
+                  href={socialMedia?.telegram}
+                  target="__blank"
+                  className="flex items-center mb-3"
+                >
+                  <FaTelegram size={25} className="mr-3" />
+                </Link>
+              </div>
+            )}
           </div>
           <div className="mb-5 md:mb-0 flex flex-col items-center md:items-start">
             <h1 className="font-semibold mb-1 text-lg">
