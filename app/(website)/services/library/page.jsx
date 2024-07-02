@@ -138,7 +138,7 @@ const Library = () => {
           </div>
         </div>
         <div className="py-[10vh] flex flex-col items-center">
-          <h1 className="text-3xl font-semibold">It's Story Time!</h1>
+          <h1 className="text-3xl font-semibold">It&apos;s Story Time!</h1>
           <div className="w-[95vw] mt-10 px-5">
             <Swiper
               slidesPerView={
