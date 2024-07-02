@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <State>
-        <Loader />
+        {/* <Loader /> */}
         <body className={`${maliFont.className}`}>{children}</body>
       </State>
     </html>

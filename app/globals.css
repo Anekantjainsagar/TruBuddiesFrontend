@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 .noto_sans {
   font-family: "Noto Sans", sans-serif;
+}
+
+.maliFont {
+  font-family: "Mali", cursive;
 }
 
 * {
@@ -81,6 +86,18 @@ input[type="number"] {
   background-image: url("./(website)/Assets/Login/bg.png");
   background-size: cover;
   background-position: center;
+}
+
+.libraryBg {
+  background-image: url("./Images/Services/library/bg.png");
+  background-size: cover;
+  background-position: bottom;
+}
+
+.libraryBg2 {
+  background-image: url("./Images/Services/library/bg 2.png");
+  background-size: cover;
+  background-position: bottom;
 }
 
 ::-webkit-scrollbar {
@@ -222,4 +239,13 @@ input[type="number"] {
   background-image: url("./Images/Services/yoga/Hero\ bg.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.react-pdf__Document {
+  display: inline-block;
+}
+
+.react-pdf__Page {
+  width: 300px;
+  height: 424px;
 }

@@ -143,7 +143,7 @@ const OurServices = () => {
                   image: animation3,
                   title: "Library",
                   upcoming: true,
-                  route: "/",
+                  route: "/services/library",
                 },
               ].map((e) => {
                 return <Block key={e?.title} data={e} />;
