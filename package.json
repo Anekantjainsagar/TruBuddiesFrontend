@@ -17,6 +17,7 @@
     "cashfree-pg-sdk-javascript": "^2.0.8",
     "cookies-next": "^4.0.0",
     "gsap": "^3.12.2",
+    "html-react-parser": "^5.1.10",
     "next": "^14.0.0",
     "qr-code-styling": "^1.6.0-rc.1",
     "react": "^18",

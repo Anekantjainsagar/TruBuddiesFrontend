@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Book from "./Book";
 import Image from "next/image";
 
 import hero_img from "../../../Images/Services/library/hero.png";
@@ -30,6 +29,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { useRouter } from "next/navigation";
 
 const Library = () => {
   return (
@@ -203,8 +203,15 @@ const Library = () => {
 };
 
 const Block = ({ e }) => {
+  const history = useRouter();
+
   return (
-    <div className="flex flex-col items-center">
+    <div
+      className="flex flex-col items-center cursor-pointer"
+      onClick={(e) => {
+        history.push("/services/library/1");
+      }}
+    >
       <Image src={e} alt={e.src} className="w-9/12" />
     </div>
   );
