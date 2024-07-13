@@ -3,6 +3,7 @@ import { maliFont } from "./(website)/Components/Utils/font";
 import State from "./Context/State";
 import Head from "next/head";
 import Loader from "./(website)/loading";
+import ServiceState from "./Context/ServiceState";
 
 export const metadata = {
   title: "TruBuddies",
@@ -13,8 +14,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <State>
-        {/* <Loader /> */}
-        <body className={`${maliFont.className}`}>{children}</body>
+        <ServiceState>
+          {/* <Loader /> */}
+          <body className={`${maliFont.className}`}>{children}</body>
+        </ServiceState>
       </State>
     </html>
   );

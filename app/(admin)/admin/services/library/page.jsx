@@ -1,0 +1,62 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import {
+  maliFont,
+  noto_sans,
+} from "../../../../(website)/Components/Utils/font";
+import axios from "axios";
+import { BASE_URL } from "../../../../(website)/Components/Utils/url";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import toast from "react-hot-toast";
+
+const Library = () => {
+  const [search, setSearch] = useState("");
+  const [faq, setFaq] = useState([]);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const getFaqs = () => {
+    axios
+      .post(`${BASE_URL}/admin/get-faqs/`, { question: search })
+      .then((response) => {
+        setFaq(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getFaqs();
+  }, []);
+
+  return (
+    <div className={`h-[100vh] ${noto_sans.className} px-5`}>
+      <div className="flex items-center justify-between py-3">
+        <h1 className="text-2xl font-semibold">Books</h1>
+        <div className="flex items-center">
+          <p className="mr-2">Filter</p>
+          <input
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            type="search"
+            className="outline-none rounded-md border px-2 py-0.5"
+            placeholder="Search Here"
+          />
+          <button
+            onClick={(e) => {
+              setIsOpen(!modalIsOpen);
+            }}
+            className="text-white bg-newBlue px-3 ml-3 py-1 rounded-md"
+          >
+            + Add New
+          </button>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  );
+};
+
+export default Library;
