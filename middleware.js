@@ -7,6 +7,11 @@ import { NextRequest } from "next/server";
 export function middleware(request) {
   const { pathname, searchParams } = request.nextUrl;
 
+  // Allow access to /admin/login
+  if (pathname === "/admin/login") {
+    return NextResponse.next();
+  }
+
   // Check if the path includes 'admin'
   if (pathname.includes("/admin")) {
     const adminToken = searchParams.get("admin_token");
