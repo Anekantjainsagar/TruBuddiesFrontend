@@ -1,5 +1,5 @@
 "use client";
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 
 import image from "../../../Images/trubuddy/rafiki.png";
