@@ -27,7 +27,7 @@ const Book = () => {
 
   const splitContentIntoPages = (content) => {
     const words = content.split(" ");
-    const wordsPerPage = 85; // Adjust this number to fit the content on the page appropriately
+    const wordsPerPage = 120; // Adjust this number to fit the content on the page appropriately
     let pages = [];
 
     for (let i = 0; i < words.length; i += wordsPerPage) {
@@ -37,17 +37,19 @@ const Book = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
-      <HTMLFlipBook ref={bookRef} width={500} height={600}>
+    <div className="flex flex-col justify-center items-center mt-10 h-screen bg-gray-100">
+      <HTMLFlipBook ref={bookRef} width={600} height={750}>
         <div className="bg-transparent"></div>
         <div className="flex flex-col justify-center items-center bg-blue-500 text-white p-8 shadow-xl shadow-gray-500">
           <h2 className="text-2xl">{blog?.title}</h2>
         </div>
         {pages.reduce((acc, pageContent, index, array) => {
-          if (index <= array.length - 1) {
+          {
+            /* if (index <= array.length - 1) {
             acc.push(
               <div key={`spacer-${index}`} className="bg-transparent"></div>
             );
+          } */
           }
           acc.push(
             <div

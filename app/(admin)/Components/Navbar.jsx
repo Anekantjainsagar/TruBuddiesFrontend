@@ -24,6 +24,8 @@ const Navbar = () => {
             routes: "/admin/social-media",
           },
           { title: "FAQ's Question", routes: "/admin/faqs" },
+          { title: "Queries", routes: "/admin/queries" },
+          { title: "Support", routes: "/admin/support" },
           { title: "Popup", routes: "/admin/popup" },
         ].map((e, i) => {
           return (

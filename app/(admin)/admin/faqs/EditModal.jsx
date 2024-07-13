@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Modal from "react-modal";
 import axios from "axios";
@@ -20,11 +20,15 @@ const customStyles = {
   },
 };
 
-const FaqAdd = ({ modalIsOpen, setIsOpen, getFaqs }) => {
+const EditModal = ({ modalIsOpen, setIsOpen, data, getFaqs }) => {
   const [user, setUser] = useState({
-    question: "",
-    answer: "",
+    question: data?.question,
+    answer: data?.answer,
   });
+
+  useEffect(() => {
+    setUser({ question: data?.question, answer: data?.answer });
+  }, [data]);
 
   return (
     <div className="">
@@ -38,7 +42,7 @@ const FaqAdd = ({ modalIsOpen, setIsOpen, getFaqs }) => {
       >
         <div>
           <h1 className="font-semibold text-newBlue text-center mb-4 text-xl">
-            Add New Question
+            Update Question
           </h1>
           <div className="flex flex-col justify-center">
             <input
@@ -65,11 +69,14 @@ const FaqAdd = ({ modalIsOpen, setIsOpen, getFaqs }) => {
                   toast.error("Please fill all the details");
                 } else {
                   axios
-                    .post(`${BASE_URL}/admin/add-faq`, { ...user })
+                    .post(`${BASE_URL}/admin/update-faq`, {
+                      id: data?._id,
+                      ...user,
+                    })
                     .then((res) => {
                       if (res.status == 200) {
                         getFaqs();
-                        toast.success("Question added successfully");
+                        toast.success("Question updated successfully");
                         setIsOpen(false);
                       }
                     })
@@ -80,7 +87,7 @@ const FaqAdd = ({ modalIsOpen, setIsOpen, getFaqs }) => {
               }}
               className="bg-newBlue py-1 text-white rounded-md font-semibold"
             >
-              Add
+              Update
             </button>
           </div>
         </div>
@@ -89,4 +96,4 @@ const FaqAdd = ({ modalIsOpen, setIsOpen, getFaqs }) => {
   );
 };
 
-export default FaqAdd;
+export default EditModal;

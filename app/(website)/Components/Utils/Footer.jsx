@@ -226,7 +226,7 @@ const Footer = () => {
               toast.error("Please fill all the details");
             } else {
               axios
-                .post(`${BASE_URL}/support/`, { ...query })
+                .post(`${BASE_URL}/support/query`, { ...query })
                 .then((res) => {
                   if (res.status === 200) {
                     toast.success("Submitted Successful");

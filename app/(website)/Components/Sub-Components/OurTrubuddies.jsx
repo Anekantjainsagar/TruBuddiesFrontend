@@ -5,7 +5,6 @@ import logo from "../../Assets/Home/Logo Image.png";
 import Image from "next/image";
 import LeftDots from "../Elements/LeftDots";
 import RightDots from "../Elements/RightDots";
-import bg from "../../Assets/Home/trubuddies bg.png";
 import { useRouter } from "next/navigation";
 import Tilt from "react-parallax-tilt";
 
@@ -18,7 +17,6 @@ import {
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

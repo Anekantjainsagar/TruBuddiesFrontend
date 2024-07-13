@@ -38,9 +38,7 @@ const SupportUs = () => {
   const { showSupportUs, setShowSupportUs } = useContext(Context);
 
   const onLogin = () => {
-    if (!login?.email || !login?.phone || !login?.name || !login?.amount) {
-      toast.error("Please fill all the details");
-    } else {
+    if (login?.email && login?.phone && login?.name && login?.amount) {
       axios
         .post(`${BASE_URL}/support/`, { ...login })
         .then((res) => {
@@ -53,6 +51,8 @@ const SupportUs = () => {
         .catch((err) => {
           toast.error(err.message);
         });
+    } else {
+      toast.error("Please fill all the details");
     }
   };
 
