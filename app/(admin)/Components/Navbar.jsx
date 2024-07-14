@@ -79,7 +79,7 @@ const Block = ({ e }) => {
       </p>
       {e?.adds && opened && (
         <div>
-          {e?.adds.map((ev) => {
+          {e?.adds.map((ev, i) => {
             return (
               <p
                 className={`text-white flex items-center justify-between text-start py-1 hover:pl-20 hover:bg-[#407BFF]/40 transition-all cursor-pointer mb-2 ${
@@ -88,6 +88,7 @@ const Block = ({ e }) => {
                 onClick={(event) => {
                   history.push(ev?.routes);
                 }}
+                key={i}
               >
                 {ev?.title}
               </p>
