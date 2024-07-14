@@ -92,7 +92,7 @@ const Category = () => {
                                 (category) => category._id !== e?._id
                               )
                             );
-                            toast.success("Question deleted successfully");
+                            toast.success("Book Category deleted successfully");
                           }
                         }
                       }}

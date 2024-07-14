@@ -6,6 +6,7 @@ import { BASE_URL, URL } from "../(website)/Components/Utils/url";
 
 const ServiceState = (props) => {
   const [bookCategory, setBookCategory] = useState([]);
+  const [books, setBooks] = useState([]);
 
   const getBookCategory = () => {
     axios
@@ -18,13 +19,32 @@ const ServiceState = (props) => {
       });
   };
 
+  const getBooks = () => {
+    axios
+      .get(`${BASE_URL}/services/library/get-books/`)
+      .then((response) => {
+        setBooks(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getBookCategory();
+    getBooks();
   }, []);
 
   return (
     <ServiceContext.Provider
-      value={{ getBookCategory, bookCategory, setBookCategory }}
+      value={{
+        getBookCategory,
+        bookCategory,
+        setBookCategory,
+        books,
+        setBooks,
+        getBooks,
+      }}
     >
       {props.children}
     </ServiceContext.Provider>

@@ -1,36 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import {
-  maliFont,
-  noto_sans,
-} from "../../../../(website)/Components/Utils/font";
-import axios from "axios";
-import { BASE_URL } from "../../../../(website)/Components/Utils/url";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
-import toast from "react-hot-toast";
+import React, { useContext, useState } from "react";
+import { noto_sans } from "../../../../(website)/Components/Utils/font";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import ServiceContext from "../../../../Context/ServiceContext";
 
 const Library = () => {
   const [search, setSearch] = useState("");
-  const [faq, setFaq] = useState([]);
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  const getFaqs = () => {
-    axios
-      .post(`${BASE_URL}/admin/get-faqs/`, { question: search })
-      .then((response) => {
-        setFaq(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    getFaqs();
-  }, []);
+  const history = useRouter();
+  const context = useContext(ServiceContext);
 
   return (
-    <div className={`h-[100vh] ${noto_sans.className} px-5`}>
+    <div className={`h-[100vh] ${noto_sans.className} px-5 overflow-y-auto`}>
       <div className="flex items-center justify-between py-3">
         <h1 className="text-2xl font-semibold">Books</h1>
         <div className="flex items-center">
@@ -46,7 +27,7 @@ const Library = () => {
           />
           <button
             onClick={(e) => {
-              setIsOpen(!modalIsOpen);
+              history.push("/admin/services/library/add-new");
             }}
             className="text-white bg-newBlue px-3 ml-3 py-1 rounded-md"
           >
@@ -54,7 +35,45 @@ const Library = () => {
           </button>
         </div>
       </div>
-      <div></div>
+      <div className="grid mt-5 grid-cols-5 gap-x-5 pb-5 gap-y-5">
+        {context?.books
+          ?.filter((e) => {
+            if (search) {
+              return e?.title?.toLowerCase()?.includes(search?.toLowerCase());
+            }
+            return e;
+          })
+          ?.map((e, i) => {
+            return <Block key={i} data={e} />;
+          })}
+      </div>
+    </div>
+  );
+};
+
+const Block = ({ data }) => {
+  const history = useRouter();
+
+  return (
+    <div
+      onClick={(e) => {
+        history.push(`/admin/services/library/update/${data?._id}`);
+      }}
+      className="py-3 px-3 relative flex flex-col items-center justify-center cursor-pointer rounded-lg bg-gray-200 hover:scale-105 transition-all"
+    >
+      <p className="absolute top-3 right-3 text-black border border-black bg-gray-200 px-2 rounded-md">
+        {data?.category?.title}
+      </p>
+      <Image
+        src={data?.thumbnail}
+        width={1000}
+        height={1000}
+        alt={data?.thumbnail?.src}
+        className="w-[20vw]"
+      />
+      <p className="noto_sans mt-3 text-lg font-medium text-center">
+        {data?.title}
+      </p>
     </div>
   );
 };

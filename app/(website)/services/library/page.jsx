@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 
 import hero_img from "../../../Images/Services/library/hero.png";
@@ -10,11 +10,8 @@ import why1 from "../../../Images/Services/library/why/why (1).png";
 import why2 from "../../../Images/Services/library/why/why (2).png";
 import why3 from "../../../Images/Services/library/why/why (3).png";
 
-import book1 from "../../../Images/Services/library/books/book (1).png";
 import book2 from "../../../Images/Services/library/books/book (2).png";
-import book3 from "../../../Images/Services/library/books/book (3).png";
 import book4 from "../../../Images/Services/library/books/book (4).png";
-import book5 from "../../../Images/Services/library/books/book (5).png";
 
 import {
   Navigation,
@@ -30,8 +27,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { useRouter } from "next/navigation";
+import ServiceContext from "../../../Context/ServiceContext";
 
 const Library = () => {
+  const context = useContext(ServiceContext);
+
   return (
     <div className={`bg-gradient-to-t from-[#b2e1f8] to-[#AAEEEA]/0`}>
       <div className="libraryBg flex flex-col h-[100vh] items-center maliFont justify-center">
@@ -88,8 +88,8 @@ const Library = () => {
           <h1 className="text-3xl font-semibold w-2/12 text-center mx-auto">
             What&apos;s inside our books
           </h1>
-          <div className="w-[60vw] mt-10 rounded-xl flex items-center justify-evenly">
-            <Image src={croc} alt={croc.src} className="w-6/12" />
+          <div className="w-[60vw] rounded-xl flex items-center justify-evenly">
+            <Image src={croc} alt={croc.src} className="w-8/12" />
             <div>
               {[
                 "Graphics for better visualisation",
@@ -107,112 +107,72 @@ const Library = () => {
             </div>
           </div>
         </div>
-        <div className="py-[10vh] flex flex-col items-center">
-          <h1 className="text-3xl font-semibold">Solutions to your problems</h1>
-          <div className="w-[95vw] mt-10 px-5">
-            <Swiper
-              slidesPerView={
-                typeof window != "undefined"
-                  ? window.innerWidth < 500
-                    ? 1
-                    : 4
-                  : 1
-              }
-              modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-              loop={false}
-              autoplay={{
-                interval: 3000,
-                disableOnInteraction: true,
-              }}
-            >
-              {[book2, book4, book2, book4, book2, book4, book2, book4]?.map(
-                (e, i) => {
-                  return (
-                    <SwiperSlide key={i}>
-                      <Block e={e} />
-                    </SwiperSlide>
-                  );
-                }
-              )}
-            </Swiper>
-          </div>
-        </div>
-        <div className="py-[10vh] flex flex-col items-center">
-          <h1 className="text-3xl font-semibold">It&apos;s Story Time!</h1>
-          <div className="w-[95vw] mt-10 px-5">
-            <Swiper
-              slidesPerView={
-                typeof window != "undefined"
-                  ? window.innerWidth < 500
-                    ? 1
-                    : 4
-                  : 1
-              }
-              modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-              loop={false}
-              autoplay={{
-                interval: 3000,
-                disableOnInteraction: true,
-              }}
-            >
-              {[book1, book3, book1, book3, book1, book3, book1, book3]?.map(
-                (e, i) => {
-                  return (
-                    <SwiperSlide key={i}>
-                      <Block e={e} />
-                    </SwiperSlide>
-                  );
-                }
-              )}
-            </Swiper>
-          </div>
-        </div>
-        <div className="py-[10vh] flex flex-col items-center">
-          <h1 className="text-3xl font-semibold">Get, Set, Yoga!</h1>
-          <div className="w-[95vw] mt-10 px-5">
-            <Swiper
-              slidesPerView={
-                typeof window != "undefined"
-                  ? window.innerWidth < 500
-                    ? 1
-                    : 4
-                  : 1
-              }
-              modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-              loop={false}
-              autoplay={{
-                interval: 3000,
-                disableOnInteraction: true,
-              }}
-            >
-              {[book5, book5, book5, book5, book5, book5, book5, book5]?.map(
-                (e, i) => {
-                  return (
-                    <SwiperSlide key={i}>
-                      <Block e={e} />
-                    </SwiperSlide>
-                  );
-                }
-              )}
-            </Swiper>
-          </div>
-        </div>
+        <>
+          {context?.bookCategory?.map((category, i) => {
+            return (
+              <div key={i} className="py-[10vh] flex flex-col items-center">
+                <h1 className="text-3xl font-semibold">{category?.title}</h1>
+                <div className="w-[95vw] mt-10 px-5">
+                  <Swiper
+                    slidesPerView={
+                      typeof window != "undefined"
+                        ? window.innerWidth < 500
+                          ? 1
+                          : 4
+                        : 1
+                    }
+                    modules={[
+                      Navigation,
+                      Pagination,
+                      Scrollbar,
+                      A11y,
+                      Autoplay,
+                    ]}
+                    loop={false}
+                    autoplay={{
+                      interval: 3000,
+                      disableOnInteraction: true,
+                    }}
+                  >
+                    {context?.books
+                      ?.filter((book) => {
+                        return book?.category?._id === category?._id;
+                      })
+                      ?.map((e, i) => {
+                        return (
+                          <SwiperSlide key={i}>
+                            <Block data={e} />
+                          </SwiperSlide>
+                        );
+                      })}
+                  </Swiper>
+                </div>
+              </div>
+            );
+          })}
+        </>
       </div>
     </div>
   );
 };
 
-const Block = ({ e }) => {
+const Block = ({ data }) => {
   const history = useRouter();
 
   return (
     <div
       className="flex flex-col items-center cursor-pointer"
       onClick={(e) => {
-        history.push("/services/library/1");
+        history.push(`/services/library/${data?._id}`);
       }}
     >
-      <Image src={e} alt={e.src} className="w-9/12" />
+      <Image
+        src={data?.thumbnail}
+        alt={data?.thumbnail.src}
+        width={1000}
+        height={1000}
+        className="w-9/12"
+      />
     </div>
   );
 };

@@ -1,45 +1,57 @@
 "use client";
 import React, { useState, useEffect, useRef, useContext } from "react";
-import {
-  maliFont,
-  noto_sans,
-} from "../../../../../(website)/Components/Utils/font";
+import { noto_sans } from "../../../../../../(website)/Components/Utils/font";
 import axios from "axios";
-import { BASE_URL } from "../../../../../(website)/Components/Utils/url";
 import { Editor } from "@tinymce/tinymce-react";
-import ServiceContext from "../../../../../Context/ServiceContext";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import ServiceContext from "../../../../../../Context/ServiceContext";
+import { BASE_URL } from "../../../../../../(website)/Components/Utils/url";
+import { AiOutlineDelete } from "react-icons/ai";
 
-const Library = () => {
+const Library = ({ params }) => {
+  let { id } = params;
   const editorRef = useRef(null);
   const [thumbnail, setThumbnail] = useState("");
   const history = useRouter();
   const [data, setData] = useState({
     title: "",
     category: "",
+    content: "",
   });
   const context = useContext(ServiceContext);
 
   useEffect(() => {
-    if (context?.bookCategory?.length > 0) {
-      const id = context?.bookCategory[0]?._id;
-      setData({ ...data, category: id });
+    if (context?.books) {
+      let book = context?.books?.filter((e) => {
+        return e?._id === id;
+      });
+      if (book) {
+        book = book[0];
+      }
+      setThumbnail(book?.thumbnail);
+      setData({
+        title: book?.title,
+        category: book?.category?._id,
+        content: book?.content,
+      });
     }
-  }, [context?.bookCategory]);
+  }, [context?.books, id]);
 
   const saveBook = () => {
     axios
-      .post(`${BASE_URL}/services/library/add-book`, {
+      .put(`${BASE_URL}/services/library/update-book/${id}`, {
         content: editorRef.current.getContent(),
         ...data,
         thumbnail,
       })
       .then((res) => {
         if (res.status === 200) {
-          toast.success("Book added successfully");
-          context?.setBooks([...context?.books, res.data]);
+          toast.success("Book updated successfully");
+          context?.setBooks(
+            context?.books.map((book) => (book._id === id ? res.data : book))
+          );
           history.push("/admin/services/library");
         }
       });
@@ -48,7 +60,25 @@ const Library = () => {
   return (
     <div className={`h-[100vh] ${noto_sans.className} px-5 overflow-y-auto`}>
       <div className="flex items-center justify-between py-3">
-        <h1 className="text-2xl font-semibold">Add New Book</h1>
+        <h1 className="text-2xl font-semibold">Update Book</h1>
+        <AiOutlineDelete
+          onClick={async () => {
+            let bool = window.confirm("Delete the item?");
+            if (bool) {
+              const res = await axios.delete(
+                `${BASE_URL}/services/library/delete-book/${id}`
+              );
+              if (res.status == 200) {
+                context?.setBooks(
+                  context?.books.filter((book) => book._id !== id)
+                );
+                history.push("/admin/service/library");
+                toast.success("Book deleted successfully");
+              }
+            }
+          }}
+          className="bg-red-400 hover:bg-transparent cursor-pointer hover:text-red-400 border-transparent border hover:border-red-400 text-white p-1.5 text-4xl ml-2 rounded-full"
+        />
       </div>
       <div className="flex items-start justify-between mt-5 px-2">
         <div className="w-[31%] flex flex-col items-center">
@@ -111,6 +141,7 @@ const Library = () => {
           <Editor
             apiKey="ikwsxyoq6c9y383gsmjsmqxon32gj0eqrawckjpqsq5sa5wm"
             onInit={(evt, editor) => (editorRef.current = editor)}
+            initialValue={data?.content}
             init={{
               height: 800,
               menubar: false,
