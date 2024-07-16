@@ -10,9 +10,6 @@ import why1 from "../../../Images/Services/library/why/why (1).png";
 import why2 from "../../../Images/Services/library/why/why (2).png";
 import why3 from "../../../Images/Services/library/why/why (3).png";
 
-import book2 from "../../../Images/Services/library/books/book (2).png";
-import book4 from "../../../Images/Services/library/books/book (4).png";
-
 import {
   Navigation,
   Pagination,

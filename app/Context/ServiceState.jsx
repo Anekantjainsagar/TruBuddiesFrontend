@@ -9,6 +9,8 @@ const ServiceState = (props) => {
   const [books, setBooks] = useState([]);
   const [yogas, setYogas] = useState([]);
   const [meditations, setMeditations] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [eventCategory, setEventCategory] = useState([]);
 
   const getBookCategory = () => {
     axios
@@ -54,11 +56,35 @@ const ServiceState = (props) => {
       });
   };
 
+  const getEventCategory = () => {
+    axios
+      .get(`${BASE_URL}/services/social-support/get-category/`)
+      .then((response) => {
+        setEventCategory(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getEvents = () => {
+    axios
+      .get(`${BASE_URL}/services/social-support/get-supports/`)
+      .then((response) => {
+        setEvents(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getBookCategory();
     getBooks();
     getYogas();
     getMeditations();
+    getEvents();
+    getEventCategory();
   }, []);
 
   return (
@@ -76,6 +102,12 @@ const ServiceState = (props) => {
         meditations,
         setMeditations,
         getMeditations,
+        events,
+        setEvents,
+        getEvents,
+        eventCategory,
+        setEventCategory,
+        getEventCategory,
       }}
     >
       {props.children}

@@ -42,6 +42,16 @@ const Navbar = () => {
               },
             ],
           },
+          {
+            title: "Service: Social Support",
+            adds: [
+              { title: "Events", routes: "/admin/services/social-support" },
+              {
+                title: "Event Categories",
+                routes: "/admin/services/social-support/categories",
+              },
+            ],
+          },
           { title: "Queries", routes: "/admin/queries" },
           { title: "Support", routes: "/admin/support" },
           { title: "Popup", routes: "/admin/popup" },
