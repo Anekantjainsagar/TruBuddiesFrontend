@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import {
   Navigation,
   Pagination,
@@ -14,16 +14,16 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "next/image";
-
 import { FaArrowRight } from "react-icons/fa";
-
 import elements from "../../../Images/Services/yoga/element 2.png";
 import thumb from "../../../Images/Services/yoga/yoga thumbnail.png";
 import { useRouter } from "next/navigation";
 import Block from "./Block";
+import ServiceContext from "../../../Context/ServiceContext";
 
 const MainComponent = () => {
   const history = useRouter();
+  const context = useContext(ServiceContext);
 
   return (
     <div className="flex items-center justify-center relative h-[30vw]">
@@ -54,10 +54,10 @@ const MainComponent = () => {
               disableOnInteraction: true,
             }}
           >
-            {["a", "b", "c", "d"]?.map((e, i) => {
+            {context?.meditations?.map((e, i) => {
               return (
                 <SwiperSlide key={i}>
-                  <Block />
+                  <Block data={e} />
                 </SwiperSlide>
               );
             })}

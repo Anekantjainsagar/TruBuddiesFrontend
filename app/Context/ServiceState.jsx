@@ -2,11 +2,13 @@
 import React, { useEffect, useState } from "react";
 import ServiceContext from "./ServiceContext";
 import axios from "axios";
-import { BASE_URL, URL } from "../(website)/Components/Utils/url";
+import { BASE_URL } from "../(website)/Components/Utils/url";
 
 const ServiceState = (props) => {
   const [bookCategory, setBookCategory] = useState([]);
   const [books, setBooks] = useState([]);
+  const [yogas, setYogas] = useState([]);
+  const [meditations, setMeditations] = useState([]);
 
   const getBookCategory = () => {
     axios
@@ -30,9 +32,33 @@ const ServiceState = (props) => {
       });
   };
 
+  const getYogas = () => {
+    axios
+      .get(`${BASE_URL}/services/yoga/`)
+      .then((response) => {
+        setYogas(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getMeditations = () => {
+    axios
+      .get(`${BASE_URL}/services/meditation/`)
+      .then((response) => {
+        setMeditations(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getBookCategory();
     getBooks();
+    getYogas();
+    getMeditations();
   }, []);
 
   return (
@@ -44,6 +70,12 @@ const ServiceState = (props) => {
         books,
         setBooks,
         getBooks,
+        yogas,
+        setYogas,
+        getYogas,
+        meditations,
+        setMeditations,
+        getMeditations,
       }}
     >
       {props.children}

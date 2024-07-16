@@ -25,6 +25,14 @@ const Navbar = () => {
           },
           { title: "FAQ's Question", routes: "/admin/faqs" },
           {
+            title: "Service: Yoga",
+            routes: "/admin/services/yoga",
+          },
+          {
+            title: "Service: Meditation",
+            routes: "/admin/services/meditation",
+          },
+          {
             title: "Service: Library",
             adds: [
               { title: "Books", routes: "/admin/services/library" },

@@ -72,7 +72,7 @@ const Library = ({ params }) => {
                 context?.setBooks(
                   context?.books.filter((book) => book._id !== id)
                 );
-                history.push("/admin/service/library");
+                history.push("/admin/services/library");
                 toast.success("Book deleted successfully");
               }
             }

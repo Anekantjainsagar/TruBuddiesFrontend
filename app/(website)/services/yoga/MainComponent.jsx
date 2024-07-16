@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import {
   Navigation,
   Pagination,
@@ -21,8 +21,10 @@ import elements from "../../../Images/Services/yoga/element 2.png";
 import thumb from "../../../Images/Services/yoga/yoga thumbnail.png";
 import { useRouter } from "next/navigation";
 import Block from "./Block";
+import ServiceContext from "../../../Context/ServiceContext";
 
 const MainComponent = () => {
+  const context = useContext(ServiceContext);
   const history = useRouter();
 
   return (
@@ -54,10 +56,10 @@ const MainComponent = () => {
               disableOnInteraction: true,
             }}
           >
-            {["a", "b", "c", "d"]?.map((e, i) => {
+            {context?.yogas?.map((e, i) => {
               return (
                 <SwiperSlide key={i}>
-                  <Block />
+                  <Block data={e} />
                 </SwiperSlide>
               );
             })}

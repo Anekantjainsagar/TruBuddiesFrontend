@@ -143,7 +143,7 @@ const Navbar = () => {
                 width={10000}
                 height={10000}
                 alt="Profile"
-                className="w-[3.5vw] h-[3.5vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
+                className="w-7/12 h-7/12 object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
               />
             </div>
           ) : (
@@ -275,7 +275,7 @@ const Navbar = () => {
                 width={10000}
                 height={10000}
                 alt="Profile"
-                className="w-[13vw] h-[13vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
+                className="w-[12vw] h-[12vw] object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
               />
             </div>
           ) : (

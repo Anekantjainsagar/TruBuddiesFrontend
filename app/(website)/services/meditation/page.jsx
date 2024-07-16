@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import MainComponent from "./MainComponent";
 
@@ -8,6 +8,8 @@ import ract from "../../../Images/Services/yoga/ractangle (2).png";
 import element from "../../../Images/Services/yoga/Group 198.png";
 import butterfly from "../../../Images/Services/yoga/flower 2 1.png";
 import thumbnail from "../../../Images/Services/yoga/thumbnail.png";
+
+import ServiceContext from "../../../Context/ServiceContext";
 
 const Meditation = () => {
   return (

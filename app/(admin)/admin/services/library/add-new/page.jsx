@@ -30,19 +30,23 @@ const Library = () => {
   }, [context?.bookCategory]);
 
   const saveBook = () => {
-    axios
-      .post(`${BASE_URL}/services/library/add-book`, {
-        content: editorRef.current.getContent(),
-        ...data,
-        thumbnail,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          toast.success("Book added successfully");
-          context?.setBooks([...context?.books, res.data]);
-          history.push("/admin/services/library");
-        }
-      });
+    if (data?.title && data?.category && thumbnail) {
+      axios
+        .post(`${BASE_URL}/services/library/add-book`, {
+          content: editorRef.current.getContent(),
+          ...data,
+          thumbnail,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            toast.success("Book added successfully");
+            context?.setBooks([...context?.books, res.data]);
+            history.push("/admin/services/library");
+          }
+        });
+    } else {
+      toast.error("Please fill all the details");
+    }
   };
 
   return (
