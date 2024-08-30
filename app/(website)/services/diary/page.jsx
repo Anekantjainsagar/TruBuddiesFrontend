@@ -34,9 +34,9 @@ const Diary = () => {
           Why is Journaling important?
         </h4>
         <div className="w-10/12 mx-auto flex items-start justify-between gap-x-5">
-          {[1, 2, 3].map((e) => {
+          {[1, 2, 3].map((e,i) => {
             return (
-              <div key={e} className="w-[25vw] rounded-xl bg-white">
+              <div key={i} className="w-[25vw] rounded-xl bg-white">
                 <Image src={whyImage} className="Why" />
                 <h4 className="text-2xl mt-2 font-semibold px-5">
                   Releases built in thougts
@@ -73,7 +73,7 @@ const Diary = () => {
           </p>{" "}
           <div className="flex items-start gap-x-16 px-[5vw] mt-5">
             {[1, 2, 3]?.map((item, i) => (
-              <div className="w-[22vw] mb-10 h-[46vh] bg-gray-300 rounded-md"></div>
+              <div key={i} className="w-[22vw] mb-10 h-[46vh] bg-gray-300 rounded-md"></div>
             ))}
           </div>
           <button className="text-white text-xl bg-gradient-to-r from-[#376EFF] to-[#030154] px-8 py-2 font-medium rounded-2xl">
