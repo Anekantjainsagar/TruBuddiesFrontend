@@ -1,14 +1,12 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 
-import hero_img from "../../../Images/Services/library/hero.png";
-import about from "../../../Images/Services/library/about.png";
-import croc from "../../../Images/Services/library/croc.png";
-import books from "../../../Images/Services/library/books.png";
-import why1 from "../../../Images/Services/library/why/why (1).png";
-import why2 from "../../../Images/Services/library/why/why (2).png";
-import why3 from "../../../Images/Services/library/why/why (3).png";
+import why from "../../../Images/Services/library/why.png";
+import main1 from "../../../Images/Services/library/1.png";
+import main2 from "../../../Images/Services/library/2.png";
+import main3 from "../../../Images/Services/library/3.png";
+import video from "../../../Images/Services/library/video.png";
 
 import {
   Navigation,
@@ -30,125 +28,152 @@ const Library = () => {
   const context = useContext(ServiceContext);
 
   return (
-    <div className={`bg-gradient-to-t from-[#b2e1f8] to-[#AAEEEA]/0`}>
-      <div className="libraryBg flex flex-col h-[100vh] items-center maliFont justify-center">
-        <h1 className={`text-8xl noto_sans font-semibold`}>Library</h1>
-        <h4 className={`text-3xl text-gray-400`}>
-          That&apos;s always open for you
-        </h4>
-        <Image src={hero_img} alt="Hero img" />
-        <div>
-          <button className="cursor-pointer bg-newBlue text-white px-9 py-1.5 noto_sans rounded-full mx-5 text-lg">
-            Get Started
-          </button>
-          <button className="cursor-pointer bg-newBlue text-white px-9 py-1.5 noto_sans rounded-full mx-5 text-lg">
-            Categories
-          </button>
-        </div>
-      </div>
-      <div className="bg-white flex flex-col items-center justify-center py-16">
-        <h1 className="text-3xl font-semibold">Why should you read?</h1>
-        <div className="grid mt-5 grid-cols-3 gap-x-[4vw] w-[65vw] mx-auto">
-          {[
-            { img: why3, title: "Provides a healthy escape" },
-            { img: why1, title: "Combats loneliness" },
-            { img: why2, title: "Reduces distress" },
-          ].map((e, i) => {
-            return (
-              <div
-                key={i}
-                className="bg-gradient-to-b rounded-2xl from-newOcean to-newBlue p-1"
-              >
-                <div className="bg-white rounded-2xl py-5 w-full h-full flex flex-col items-center justify-center">
-                  <Image
-                    src={e?.img}
-                    alt={e?.img?.src}
-                    className="h-[20vh] aspect-square object-contain"
-                  />
-                  <p className="noto_sans font-semibold mt-3 text-2xl">
-                    {e?.title}
-                  </p>
-                </div>
+    <>
+      <div className={`libraryBg`}>
+        <div className="flex h-[100vh] items-center maliFont justify-center px-[5vw]">
+          <div className="noto_sans w-6/12 flex flex-col items-center">
+            <div className="flex flex-col w-[14vw] h-[32vh] items-center justify-center relative z-10 text-xl pb-3 bg-white border border-[#1052FF] rounded-[30px]">
+              <Image
+                src={main1}
+                alt="Main img"
+                className="px-4 aspect-square object-contain"
+              />
+              <h4 className="mt-3 text-center px-4 text-gray-800/90">
+                Stories
+              </h4>
+            </div>
+            <div className="flex items-start gap-x-10 relative z-0 -mt-10">
+              <div className="flex flex-col w-[14vw] h-[32vh] items-center justify-center text-xl pb-3 bg-white border border-[#1052FF] rounded-[30px]">
+                <Image
+                  src={main2}
+                  alt="Main img"
+                  className="px-4 aspect-square object-contain"
+                />
+                <h4 className="mt-3 text-center px-4 text-gray-800/90">
+                  Tips and tricks to better mental health
+                </h4>
               </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className="libraryBg2">
-        <div className="py-[10vh] flex flex-col items-center">
-          <h1 className="text-3xl font-semibold">About Our Library</h1>
-          <div className="w-[70vw] bg-white mt-5 rounded-xl px-5">
-            <Image src={about} alt={about.src} />
-          </div>
-        </div>
-        <div className="py-[10vh] flex flex-col items-center">
-          <h1 className="text-3xl font-semibold w-2/12 text-center mx-auto">
-            What&apos;s inside our books
-          </h1>
-          <div className="w-[60vw] rounded-xl flex items-center justify-evenly">
-            <Image src={croc} alt={croc.src} className="w-8/12" />
-            <div>
-              {[
-                "Graphics for better visualisation",
-                "Stories",
-                "Tips and tricks to better mental health",
-                "Exercises guide",
-              ].map((e, i) => {
-                return (
-                  <div key={i} className="flex items-center mb-2">
-                    <Image src={books} alt="Books" className="w-[2vw]" />
-                    <p className="text-xl ml-5 font-medium">{e}</p>
-                  </div>
-                );
-              })}
+              <div className="flex flex-col w-[14vw] h-[32vh] items-center justify-center text-xl pb-3 bg-white border border-[#1052FF] rounded-[30px]">
+                <Image
+                  src={main3}
+                  alt="Main img"
+                  className="px-4 aspect-square object-contain"
+                />
+                <h4 className="mt-3 text-center px-4 text-gray-800/90">
+                  Graphics for better visualisation
+                </h4>
+              </div>
             </div>
           </div>
+          <div className="w-6/12 flex flex-col items-end">
+            <h1 className={`text-8xl noto_sans`}>My Library</h1>
+            <input
+              type="text"
+              className="outline-none border noto_sans bg-transparent w-[22vw] border-gray-500/40 rounded-full mt-5 px-4 py-1.5 shadow-inner shadow-gray-400"
+              placeholder="Search Books or Author Name"
+            />
+          </div>
         </div>
-        <>
-          {context?.bookCategory?.map((category, i) => {
-            return (
-              <div key={i} className="py-[10vh] flex flex-col items-center">
-                <h1 className="text-3xl font-semibold">{category?.title}</h1>
-                <div className="w-[95vw] mt-10 px-5">
-                  <Swiper
-                    slidesPerView={
-                      typeof window != "undefined"
-                        ? window.innerWidth < 500
-                          ? 1
-                          : 4
-                        : 1
-                    }
-                    modules={[
-                      Navigation,
-                      Pagination,
-                      Scrollbar,
-                      A11y,
-                      Autoplay,
-                    ]}
-                    loop={false}
-                    autoplay={{
-                      interval: 3000,
-                      disableOnInteraction: true,
-                    }}
-                  >
-                    {context?.books
-                      ?.filter((book) => {
-                        return book?.category?._id === category?._id;
-                      })
-                      ?.map((e, i) => {
-                        return (
-                          <SwiperSlide key={i}>
-                            <Block data={e} />
-                          </SwiperSlide>
-                        );
-                      })}
-                  </Swiper>
+        <div className="flex flex-col items-center justify-center py-16 relative">
+          <h1 className="text-2xl shadow-inner shadow-gray-400 font-semibold text-[#407BFF] border px-5 py-1.5 border-[#407BFF] rounded-full">
+            Why should you read?
+          </h1>
+          <div className="absolute w-6/12 h-[50vh] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center justify-between">
+            <div className="bg-gradient-to-b from-newOceanGreen p-[4px] to-newBlue w-[8vw] text-lg rounded-full aspect-square">
+              <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-center">
+                Provides a healthy escape
+              </div>
+            </div>
+            <div className="flex flex-col items-center justify-between h-full">
+              <div className="bg-gradient-to-b from-newOceanGreen p-[4px] to-newBlue w-[8vw] text-lg rounded-full aspect-square">
+                <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-center">
+                  Combats loneliness
                 </div>
               </div>
-            );
-          })}
-        </>
+              <div className="bg-gradient-to-b from-newOceanGreen p-[4px] to-newBlue w-[8vw] text-lg rounded-full aspect-square">
+                <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-center">
+                  Reduces distress
+                </div>
+              </div>
+            </div>
+          </div>
+          <Image src={why} alt="Why" />
+        </div>
       </div>
+      <Image src={video} alt="Video" />
+      <div className="py-16 noto_sans w-full">
+        <h4 className="bg-[#FF725E] text-white font-medium text-3xl w-8/12 py-2 rounded-xl shadow-inner shadow-gray-800 text-center mx-auto">
+          Categories Available
+        </h4>
+        <CategoryCode />
+      </div>{" "}
+      <div className="py-16 noto_sans">
+        <h4 className="bg-[#FFDA56] text-black font-medium text-3xl w-8/12 py-2 rounded-xl shadow-inner shadow-gray-800 text-center mx-auto">
+          Explore Our Books
+        </h4>
+        <div className="py-[5vh]">
+          <Swiper
+            slidesPerView={
+              typeof window != "undefined"
+                ? window.innerWidth < 500
+                  ? 1
+                  : 4
+                : 1
+            }
+            modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+            loop={false}
+            autoplay={{
+              interval: 3000,
+              disableOnInteraction: true,
+            }}
+          >
+            {context?.books?.map((data, i) => {
+              return (
+                <SwiperSlide key={i}>
+                  <Block data={data} />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+        <div className="flex items-center justify-center">
+          <button className="px-5 py-2 bg-newBlue text-white rounded-lg text-xl font-medium shadow-lg shadow-gray-400">
+            Visit Library
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const CategoryCode = () => {
+  const [selected, setSelected] = useState();
+  let data = ["Novel", "Mystery", "Stories", "Self Awareness", "Biography"];
+
+  useEffect(() => {
+    setSelected(data[0]);
+  }, []);
+
+  return (
+    <div className="border rounded-xl border-newLightBlue w-11/12 mx-auto my-5">
+      <div className="bg-newLightBlue p-1 flex items-center rounded-t-xl text-white">
+        {data.map((e, i) => {
+          return (
+            <div
+              key={i}
+              className={`px-4 py-1 text-lg font-medium cursor-pointer flex items-center justify-center ${
+                selected == e
+                  ? "bg-white text-black shadow-inner shadow-gray-500"
+                  : ""
+              } ${selected == data[0] ? "rounded-ss-xl" : ""}`}
+              onClick={() => setSelected(e)}
+            >
+              {e}
+            </div>
+          );
+        })}
+      </div>
+    
     </div>
   );
 };

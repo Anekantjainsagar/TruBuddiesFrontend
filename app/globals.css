@@ -1,12 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url("https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 .noto_sans {
   font-family: "Noto Sans", sans-serif;
+}
+
+.amaranth {
+  font-family: "Amaranth", sans-serif;
 }
 
 .maliFont {
@@ -94,8 +98,14 @@ input[type="number"] {
   background-position: bottom;
 }
 
-.libraryBg2 {
-  background-image: url("./Images/Services/library/bg 2.png");
+.diaryBg {
+  background-image: url("./Images/Services/diary/Group\ 1.png");
+  background-size: cover;
+  background-position: bottom;
+}
+
+.diaryBg2 {
+  background-image: url("./Images/Services/diary/Group\ 2.png");
   background-size: cover;
   background-position: bottom;
 }

@@ -23,6 +23,10 @@ module.exports = {
         nb1: "#4C9EFF",
         nb2: "#9CB7FF",
         newDarkGreen: "#084462",
+        diaryBlue: "#070243",
+        diaryPink: "#FFCCDB",
+        newSlate: "#34506b",
+        newBgSlate: "#95bbe0",
       },
       screens: {
         mobile: "340px",

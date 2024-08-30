@@ -102,7 +102,11 @@ const Navbar = () => {
             }}
             className="md:flex hidden items-center border backdrop-blur-sm px-3 py-0.5 rounded-full border-newBlue mr-5"
           >
-            <Image src={token} alt="Token" className="w-[1.5vw]" />
+            <Image
+              src={token}
+              alt="Token"
+              className="w-[1.5vw] aspect-square"
+            />
             <p className="ml-1 font-semibold text-xl">
               {login?.tokens ? login?.tokens : 0}
             </p>
@@ -143,7 +147,7 @@ const Navbar = () => {
                 width={10000}
                 height={10000}
                 alt="Profile"
-                className="w-7/12 h-7/12 object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
+                className="w-[2.5vw] aspect-squre object-cover object-center cursor-pointer shadow-md shadow-gray-500 rounded-full"
               />
             </div>
           ) : (
