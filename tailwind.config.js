@@ -27,6 +27,8 @@ module.exports = {
         diaryPink: "#FFCCDB",
         newSlate: "#34506b",
         newBgSlate: "#95bbe0",
+        newDarkPurple: "#4b2a69",
+        newLightPurple: "#d8b2fb",
       },
       screens: {
         mobile: "340px",
